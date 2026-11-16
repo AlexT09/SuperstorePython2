@@ -15,7 +15,7 @@ kernelspec:
 
 ## Código y datos
 
-- **Repositorio:** https://github.com/AlexT09/SuperstorePython (licencia MIT; forma de citarlo en
+- **Repositorio:** https://github.com/AlexT09/SuperstorePython2 (licencia MIT; forma de citarlo en
   `CITATION.cff`).
 - **Datos:** `data/raw/Sample - Superstore.csv` (conjunto de ejemplo de Tableau) y los tres conjuntos
   adicionales en `data/adicionales/`, descargados de Zenodo por `experiments/datos_adicionales.py`.

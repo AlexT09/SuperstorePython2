@@ -102,4 +102,4 @@ meses seguidos queda fuera del intervalo del 90 % o si cambia el calendario come
 
 ## Cómo citar
 
-Ver `CITATION.cff`. Repositorio: https://github.com/AlexT09/SuperstorePython
+Ver `CITATION.cff`. Repositorio: https://github.com/AlexT09/SuperstorePython2

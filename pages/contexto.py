@@ -91,9 +91,9 @@ def _limitaciones():
             dbc.Col(soft_card("Autores y versión", html.Ul([
                 html.Li("Alex Teran y David Estrada."),
                 html.Li(f"Versión {VERSION}. Última actualización: {ACTUALIZADO}."),
-                html.Li(["Código: ", html.A("github.com/AlexT09/SuperstorePython", href="https://github.com/AlexT09/SuperstorePython",
+                html.Li(["Código: ", html.A("github.com/AlexT09/SuperstorePython2", href="https://github.com/AlexT09/SuperstorePython2",
                                             target="_blank")]),
-                html.Li(["Informe: ", html.A("alext09.github.io/SuperstorePython", href="https://alext09.github.io/SuperstorePython/",
+                html.Li(["Informe: ", html.A("alext09.github.io/SuperstorePython2", href="https://alext09.github.io/SuperstorePython2/",
                                              target="_blank")]),
             ], className="mb-0")), md=5, className="mb-3"),
             dbc.Col(soft_card("Referencias", html.Ol([html.Li(r) for r in REFERENCIAS], className="mb-0 small")),

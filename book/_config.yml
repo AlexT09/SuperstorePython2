@@ -22,7 +22,7 @@ html:
   home_page_in_navbar: true
 
 repository:
-  url: https://github.com/AlexT09/SuperstorePython
+  url: https://github.com/AlexT09/SuperstorePython2
   path_to_book: book
   branch: main
 
