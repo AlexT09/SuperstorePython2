@@ -2,7 +2,7 @@
 
 *El producto: una aplicación web para explorar los datos y usar los modelos*
 
-El tablero está publicado en **https://superstorepython.onrender.com**. Se construyó con Dash y
+El tablero está publicado en **https://superstorepython2.onrender.com**. Se construyó con Dash y
 Plotly y no entrena nada: carga los modelos ya guardados y las tablas de los experimentos.
 
 ## Arquitectura

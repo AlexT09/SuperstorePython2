@@ -6,7 +6,7 @@ modelo propio, comparados con validación anidada y pruebas de hipótesis regist
 
 **Autores:** Alex Teran y David Estrada · **Licencia:** MIT · **Cómo citarlo:** `CITATION.cff`
 
-- **Tablero (Dash):** https://superstorepython.onrender.com
+- **Tablero (Dash):** https://superstorepython2.onrender.com
 - **Informe (Jupyter Book):** https://alext09.github.io/SuperstorePython2/
 
 ## Resultados en una tabla

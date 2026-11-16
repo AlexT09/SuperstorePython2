@@ -5,7 +5,7 @@ honesta*
 
 **Alex Teran y David Estrada**
 
-Tablero interactivo: **https://superstorepython.onrender.com** ·
+Tablero interactivo: **https://superstorepython2.onrender.com** ·
 Código: **https://github.com/AlexT09/SuperstorePython2**
 
 ## Resumen
