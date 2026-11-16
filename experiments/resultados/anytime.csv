@@ -1,0 +1,516 @@
+modelo,optimizador,evaluacion,mejor_MAE_interno
+HistGradientBoosting,bayes,1,0.7129400000000001
+HistGradientBoosting,bayes,2,0.6988145000000001
+HistGradientBoosting,bayes,3,0.6895497916666667
+HistGradientBoosting,bayes,4,0.6891400833333332
+HistGradientBoosting,bayes,5,0.6891400833333332
+HistGradientBoosting,bayes,6,0.6853281666666667
+HistGradientBoosting,bayes,7,0.6801931250000001
+HistGradientBoosting,bayes,8,0.6760539166666666
+HistGradientBoosting,bayes,9,0.6760539166666666
+HistGradientBoosting,bayes,10,0.6760539166666666
+HistGradientBoosting,bayes,11,0.669113125
+HistGradientBoosting,bayes,12,0.6676003333333332
+HistGradientBoosting,bayes,13,0.66660625
+HistGradientBoosting,bayes,14,0.665836625
+HistGradientBoosting,bayes,15,0.665836625
+HistGradientBoosting,bayes,16,0.665836625
+KNN,bayes,1,0.6511123333333332
+KNN,bayes,2,0.6484211249999999
+KNN,bayes,3,0.6478640416666667
+KNN,bayes,4,0.6478640416666667
+KNN,bayes,5,0.6475863749999999
+KNN,bayes,6,0.6475863749999999
+KNN,bayes,7,0.6475526249999999
+KNN,bayes,8,0.646351625
+KNN,bayes,9,0.6449353333333332
+KNN,bayes,10,0.6448143749999998
+KNN,bayes,11,0.6448143749999998
+KNN,bayes,12,0.6442030416666665
+KNN,bayes,13,0.6426077499999999
+KNN,bayes,14,0.6425632083333332
+KNN,bayes,15,0.6422915416666666
+KNN,bayes,16,0.642139375
+KNN,genetico,1,0.6579049166666665
+KNN,genetico,2,0.656184125
+KNN,genetico,3,0.6557438333333333
+KNN,genetico,4,0.65431
+KNN,genetico,5,0.65431
+KNN,genetico,6,0.65431
+KNN,genetico,7,0.6542459166666665
+KNN,genetico,8,0.6542138749999998
+KNN,genetico,9,0.6542138749999998
+KNN,genetico,10,0.6542138749999998
+KNN,genetico,11,0.6540679166666666
+KNN,genetico,12,0.6538884166666665
+KNN,genetico,13,0.6538884166666665
+KNN,genetico,14,0.6538884166666665
+KNN,genetico,15,0.6538884166666665
+KNN,genetico,16,0.6538884166666665
+KNN,grid,1,0.7110988333333336
+KNN,grid,2,0.7107702083333335
+KNN,grid,3,0.6831032499999999
+KNN,grid,4,0.6828411666666665
+KNN,grid,5,0.6526787500000001
+KNN,grid,6,0.6524337499999999
+KNN,grid,7,0.6429959583333332
+KNN,grid,8,0.6426155416666666
+KNN,grid,9,0.6425345416666666
+KNN,grid,10,0.6425345416666666
+KNN,grid,11,0.6425345416666666
+KNN,grid,12,0.6425345416666666
+KNN,random,1,0.6579049166666665
+KNN,random,2,0.656184125
+KNN,random,3,0.6557438333333333
+KNN,random,4,0.65431
+KNN,random,5,0.65397175
+KNN,random,6,0.6475312916666666
+KNN,random,7,0.6474945
+KNN,random,8,0.6434377083333332
+KNN,random,9,0.6428465833333333
+KNN,random,10,0.6428465833333333
+KNN,random,11,0.6428465833333333
+KNN,random,12,0.6428465833333333
+KNN,random,13,0.6428465833333333
+KNN,random,14,0.64272075
+KNN,random,15,0.64272075
+KNN,random,16,0.64272075
+Lasso,bayes,1,0.7276575833333333
+Lasso,bayes,2,0.6863187916666668
+Lasso,bayes,3,0.6842937083333335
+Lasso,bayes,4,0.6842684583333334
+Lasso,bayes,5,0.6842684583333334
+Lasso,bayes,6,0.6842684583333334
+Lasso,bayes,7,0.6838578333333335
+Lasso,bayes,8,0.6836002083333335
+Lasso,bayes,9,0.6836002083333335
+Lasso,bayes,10,0.6836002083333335
+Lasso,bayes,11,0.6836002083333335
+Lasso,bayes,12,0.6832748333333334
+Lasso,bayes,13,0.6820979583333332
+Lasso,bayes,14,0.6820142499999999
+Lasso,bayes,15,0.6820095416666666
+Lasso,bayes,16,0.6820095416666666
+Lasso,genetico,1,0.7028505833333333
+Lasso,genetico,2,0.7028505833333333
+Lasso,genetico,3,0.6917943333333332
+Lasso,genetico,4,0.6917943333333332
+Lasso,genetico,5,0.6917943333333332
+Lasso,genetico,6,0.6889721666666667
+Lasso,genetico,7,0.6889721666666667
+Lasso,genetico,8,0.6889721666666667
+Lasso,genetico,9,0.6889698749999998
+Lasso,genetico,10,0.6828166249999997
+Lasso,genetico,11,0.6828166249999997
+Lasso,genetico,12,0.6828166249999997
+Lasso,genetico,13,0.6828166249999997
+Lasso,genetico,14,0.6828166249999997
+Lasso,genetico,15,0.6828166249999997
+Lasso,genetico,16,0.6828166249999997
+Lasso,grid,1,0.7295225
+Lasso,grid,2,0.7281463333333331
+Lasso,grid,3,0.715659875
+Lasso,grid,4,0.6857932083333332
+Lasso,random,1,0.7028505833333333
+Lasso,random,2,0.7028505833333333
+Lasso,random,3,0.6917943333333332
+Lasso,random,4,0.6917943333333332
+Lasso,random,5,0.6917943333333332
+Lasso,random,6,0.6828728749999998
+Lasso,random,7,0.6828721666666665
+Lasso,random,8,0.6828315833333334
+Lasso,random,9,0.6828315833333334
+Lasso,random,10,0.6828315833333334
+Lasso,random,11,0.6828315833333334
+Lasso,random,12,0.6824213333333334
+Lasso,random,13,0.682411875
+Lasso,random,14,0.6823290000000001
+Lasso,random,15,0.6823290000000001
+Lasso,random,16,0.6823290000000001
+Perfil jerárquico (original),bayes,1,0.6285594166666667
+Perfil jerárquico (original),bayes,2,0.6240055
+Perfil jerárquico (original),bayes,3,0.6238080416666666
+Perfil jerárquico (original),bayes,4,0.6235499166666666
+Perfil jerárquico (original),bayes,5,0.6235282083333332
+Perfil jerárquico (original),bayes,6,0.6235282083333332
+Perfil jerárquico (original),bayes,7,0.6232342083333332
+Perfil jerárquico (original),bayes,8,0.6232321666666667
+Perfil jerárquico (original),bayes,9,0.6231766249999999
+Perfil jerárquico (original),bayes,10,0.623176125
+Perfil jerárquico (original),bayes,11,0.623176125
+Perfil jerárquico (original),bayes,12,0.6231717500000001
+Perfil jerárquico (original),bayes,13,0.6231622916666667
+Perfil jerárquico (original),bayes,14,0.6231617916666666
+Perfil jerárquico (original),bayes,15,0.6231617916666666
+Perfil jerárquico (original),bayes,16,0.6231617916666666
+Perfil jerárquico (original),genetico,1,0.6261437500000001
+Perfil jerárquico (original),genetico,2,0.62377475
+Perfil jerárquico (original),genetico,3,0.6235563333333334
+Perfil jerárquico (original),genetico,4,0.6234790833333334
+Perfil jerárquico (original),genetico,5,0.6234790416666668
+Perfil jerárquico (original),genetico,6,0.6234180416666667
+Perfil jerárquico (original),genetico,7,0.62334575
+Perfil jerárquico (original),genetico,8,0.62334575
+Perfil jerárquico (original),genetico,9,0.6233065000000001
+Perfil jerárquico (original),genetico,10,0.6232347083333333
+Perfil jerárquico (original),genetico,11,0.6232347083333333
+Perfil jerárquico (original),genetico,12,0.6232347083333333
+Perfil jerárquico (original),genetico,13,0.6232347083333333
+Perfil jerárquico (original),genetico,14,0.6232347083333333
+Perfil jerárquico (original),genetico,15,0.6232347083333333
+Perfil jerárquico (original),genetico,16,0.6232347083333333
+Perfil jerárquico (original),grid,1,0.6303140833333334
+Perfil jerárquico (original),grid,2,0.6302679166666667
+Perfil jerárquico (original),grid,3,0.6301388749999999
+Perfil jerárquico (original),grid,4,0.6297485
+Perfil jerárquico (original),grid,5,0.6286942916666667
+Perfil jerárquico (original),grid,6,0.6272295833333333
+Perfil jerárquico (original),grid,7,0.6259277916666667
+Perfil jerárquico (original),grid,8,0.624620125
+Perfil jerárquico (original),grid,9,0.6237139166666666
+Perfil jerárquico (original),grid,10,0.6233189583333335
+Perfil jerárquico (original),grid,11,0.6231965
+Perfil jerárquico (original),grid,12,0.6231549166666667
+Perfil jerárquico (original),random,1,0.6261437500000001
+Perfil jerárquico (original),random,2,0.62377475
+Perfil jerárquico (original),random,3,0.6235563333333334
+Perfil jerárquico (original),random,4,0.6234790833333334
+Perfil jerárquico (original),random,5,0.6234181666666667
+Perfil jerárquico (original),random,6,0.62333475
+Perfil jerárquico (original),random,7,0.62333475
+Perfil jerárquico (original),random,8,0.62333475
+Perfil jerárquico (original),random,9,0.62333475
+Perfil jerárquico (original),random,10,0.6232747500000001
+Perfil jerárquico (original),random,11,0.6232747500000001
+Perfil jerárquico (original),random,12,0.6232747500000001
+Perfil jerárquico (original),random,13,0.6232377916666668
+Perfil jerárquico (original),random,14,0.6232377916666668
+Perfil jerárquico (original),random,15,0.6232377916666668
+Perfil jerárquico (original),random,16,0.6232377916666668
+Random Forest,bayes,1,0.6640449583333331
+Random Forest,bayes,2,0.6602984583333333
+Random Forest,bayes,3,0.6599670416666666
+Random Forest,bayes,4,0.6591693333333334
+Random Forest,bayes,5,0.65857025
+Random Forest,bayes,6,0.6578472916666667
+Random Forest,bayes,7,0.6577399166666668
+Random Forest,bayes,8,0.6577032500000001
+Random Forest,bayes,9,0.6573202499999999
+Random Forest,bayes,10,0.6567884166666665
+Random Forest,bayes,11,0.656289875
+Random Forest,bayes,12,0.6561648333333333
+Random Forest,bayes,13,0.6555752499999999
+Random Forest,bayes,14,0.65504825
+Random Forest,bayes,15,0.65504825
+Random Forest,bayes,16,0.6548365000000002
+Random Forest,genetico,1,0.6676178333333334
+Random Forest,genetico,2,0.6652008333333334
+Random Forest,genetico,3,0.6604958333333335
+Random Forest,genetico,4,0.6593599166666668
+Random Forest,genetico,5,0.6593527083333335
+Random Forest,genetico,6,0.6593527083333335
+Random Forest,genetico,7,0.6593527083333335
+Random Forest,genetico,8,0.6593527083333335
+Random Forest,genetico,9,0.65895925
+Random Forest,genetico,10,0.65895925
+Random Forest,genetico,11,0.658740375
+Random Forest,genetico,12,0.658740375
+Random Forest,genetico,13,0.6584021666666667
+Random Forest,genetico,14,0.6584021666666667
+Random Forest,genetico,15,0.6584021666666667
+Random Forest,genetico,16,0.6584021666666667
+Random Forest,grid,1,0.6666793333333333
+Random Forest,grid,2,0.6635806666666667
+Random Forest,grid,3,0.6626980416666666
+Random Forest,grid,4,0.6602181666666667
+Random Forest,grid,5,0.6595822916666668
+Random Forest,grid,6,0.6592738333333333
+Random Forest,grid,7,0.6582481666666666
+Random Forest,grid,8,0.6579925
+Random Forest,grid,9,0.6579925
+Random Forest,grid,10,0.657204625
+Random Forest,grid,11,0.6569509583333334
+Random Forest,grid,12,0.6554044583333333
+Random Forest,grid,13,0.6553980833333332
+Random Forest,grid,14,0.6553617499999999
+Random Forest,grid,15,0.6553617499999999
+Random Forest,grid,16,0.6552950833333332
+Random Forest,grid,17,0.6552950833333332
+Random Forest,grid,18,0.6552950833333332
+Random Forest,grid,19,0.6552950833333332
+Random Forest,grid,20,0.6552950833333332
+Random Forest,grid,21,0.6552950833333332
+Random Forest,grid,22,0.6552214999999999
+Random Forest,grid,23,0.6552214999999999
+Random Forest,grid,24,0.6552145416666665
+Random Forest,random,1,0.6676178333333334
+Random Forest,random,2,0.6652008333333334
+Random Forest,random,3,0.6604958333333335
+Random Forest,random,4,0.6593599166666668
+Random Forest,random,5,0.6587935000000001
+Random Forest,random,6,0.6587134583333335
+Random Forest,random,7,0.6586468333333334
+Random Forest,random,8,0.6586413333333334
+Random Forest,random,9,0.6586413333333334
+Random Forest,random,10,0.6586413333333334
+Random Forest,random,11,0.6581398333333334
+Random Forest,random,12,0.6564016666666667
+Random Forest,random,13,0.6561853333333333
+Random Forest,random,14,0.6561853333333333
+Random Forest,random,15,0.6561775416666666
+Random Forest,random,16,0.6561339583333333
+Ridge,bayes,1,0.728849
+Ridge,bayes,2,0.6914414583333333
+Ridge,bayes,3,0.6914155416666666
+Ridge,bayes,4,0.6914155416666666
+Ridge,bayes,5,0.6914155416666666
+Ridge,bayes,6,0.6914155416666666
+Ridge,bayes,7,0.6901027083333333
+Ridge,bayes,8,0.6900387916666667
+Ridge,bayes,9,0.6900387916666667
+Ridge,bayes,10,0.6900387916666667
+Ridge,bayes,11,0.6900387916666667
+Ridge,bayes,12,0.6900387083333333
+Ridge,bayes,13,0.6891710416666667
+Ridge,bayes,14,0.6891654583333334
+Ridge,bayes,15,0.6891633333333332
+Ridge,bayes,16,0.6891633333333332
+Ridge,genetico,1,0.710263875
+Ridge,genetico,2,0.710263875
+Ridge,genetico,3,0.7006173333333333
+Ridge,genetico,4,0.7006173333333333
+Ridge,genetico,5,0.7006173333333333
+Ridge,genetico,6,0.6981948333333333
+Ridge,genetico,7,0.6981948333333333
+Ridge,genetico,8,0.6981948333333333
+Ridge,genetico,9,0.6981948333333333
+Ridge,genetico,10,0.6887505833333334
+Ridge,genetico,11,0.6887505833333334
+Ridge,genetico,12,0.6887505833333334
+Ridge,genetico,13,0.6887505833333334
+Ridge,genetico,14,0.6887505833333334
+Ridge,genetico,15,0.6887505833333334
+Ridge,genetico,16,0.6887505833333334
+Ridge,grid,1,0.7296540416666666
+Ridge,grid,2,0.7294138750000001
+Ridge,grid,3,0.7271251666666666
+Ridge,grid,4,0.7127565416666668
+Ridge,grid,5,0.6889334583333334
+Ridge,random,1,0.710263875
+Ridge,random,2,0.710263875
+Ridge,random,3,0.7006173333333333
+Ridge,random,4,0.7006173333333333
+Ridge,random,5,0.7006173333333333
+Ridge,random,6,0.6897698333333334
+Ridge,random,7,0.6897698333333334
+Ridge,random,8,0.6897698333333334
+Ridge,random,9,0.6897698333333334
+Ridge,random,10,0.6897698333333334
+Ridge,random,11,0.6897698333333334
+Ridge,random,12,0.6897551666666666
+Ridge,random,13,0.6897551666666666
+Ridge,random,14,0.6897551666666666
+Ridge,random,15,0.6897551666666666
+Ridge,random,16,0.6897551666666666
+SVR,bayes,1,0.6706677083333332
+SVR,bayes,2,0.6706677083333332
+SVR,bayes,3,0.6705437499999999
+SVR,bayes,4,0.6677417916666667
+SVR,bayes,5,0.6677417916666667
+SVR,bayes,6,0.6677417916666667
+SVR,bayes,7,0.6662033749999999
+SVR,bayes,8,0.65778975
+SVR,bayes,9,0.6575926666666666
+SVR,bayes,10,0.6575926666666666
+SVR,bayes,11,0.6575926666666666
+SVR,bayes,12,0.6569115
+SVR,bayes,13,0.6569115
+SVR,bayes,14,0.6559878333333332
+SVR,bayes,15,0.6555488749999999
+SVR,bayes,16,0.6552815
+SVR,genetico,1,0.7050882916666666
+SVR,genetico,2,0.6983182083333334
+SVR,genetico,3,0.6767477916666667
+SVR,genetico,4,0.6702236250000001
+SVR,genetico,5,0.6702236250000001
+SVR,genetico,6,0.66915625
+SVR,genetico,7,0.6667619583333334
+SVR,genetico,8,0.6667420833333333
+SVR,genetico,9,0.6646759583333333
+SVR,genetico,10,0.6644849166666666
+SVR,genetico,11,0.6630608750000001
+SVR,genetico,12,0.6630608750000001
+SVR,genetico,13,0.6629150416666667
+SVR,genetico,14,0.6629150416666667
+SVR,genetico,15,0.6629150416666667
+SVR,genetico,16,0.6629150416666667
+SVR,grid,1,0.6900883333333333
+SVR,grid,2,0.689912375
+SVR,grid,3,0.6880700833333333
+SVR,grid,4,0.6880700833333333
+SVR,grid,5,0.6839459999999998
+SVR,grid,6,0.6839459999999998
+SVR,grid,7,0.6780209999999999
+SVR,grid,8,0.6775843749999999
+SVR,grid,9,0.6741237083333332
+SVR,grid,10,0.6734202499999999
+SVR,grid,11,0.6638711249999999
+SVR,grid,12,0.662422125
+SVR,grid,13,0.662422125
+SVR,grid,14,0.6611170416666666
+SVR,grid,15,0.6611170416666666
+SVR,grid,16,0.6598691250000001
+SVR,grid,17,0.6598691250000001
+SVR,grid,18,0.6580710000000001
+SVR,random,1,0.7050882916666666
+SVR,random,2,0.6983182083333334
+SVR,random,3,0.6767477916666667
+SVR,random,4,0.6702236250000001
+SVR,random,5,0.6682253333333333
+SVR,random,6,0.6682253333333333
+SVR,random,7,0.6665510833333333
+SVR,random,8,0.6601346250000001
+SVR,random,9,0.6601346250000001
+SVR,random,10,0.6601346250000001
+SVR,random,11,0.6595252500000001
+SVR,random,12,0.6595252500000001
+SVR,random,13,0.6595252500000001
+SVR,random,14,0.65868525
+SVR,random,15,0.65868525
+SVR,random,16,0.65868525
+XGBoost,bayes,1,0.7604086666666667
+XGBoost,bayes,2,0.6979103333333332
+XGBoost,bayes,3,0.6979103333333332
+XGBoost,bayes,4,0.6931232916666666
+XGBoost,bayes,5,0.6931232916666666
+XGBoost,bayes,6,0.6922079166666665
+XGBoost,bayes,7,0.6899762916666666
+XGBoost,bayes,8,0.6837562083333332
+XGBoost,bayes,9,0.6819641249999999
+XGBoost,bayes,10,0.6813757916666666
+XGBoost,bayes,11,0.681101625
+XGBoost,bayes,12,0.6797846249999999
+XGBoost,bayes,13,0.6791270833333333
+XGBoost,bayes,14,0.6787409999999999
+XGBoost,bayes,15,0.6786958333333333
+XGBoost,bayes,16,0.6783371666666667
+XGBoost,genetico,1,0.7212935833333333
+XGBoost,genetico,2,0.7212935833333333
+XGBoost,genetico,3,0.7082887916666666
+XGBoost,genetico,4,0.7074905
+XGBoost,genetico,5,0.7067675833333333
+XGBoost,genetico,6,0.7025734583333332
+XGBoost,genetico,7,0.7025734583333332
+XGBoost,genetico,8,0.7025734583333332
+XGBoost,genetico,9,0.7022332083333332
+XGBoost,genetico,10,0.7013345416666666
+XGBoost,genetico,11,0.6995109166666665
+XGBoost,genetico,12,0.6995109166666665
+XGBoost,genetico,13,0.6995109166666665
+XGBoost,genetico,14,0.6992234999999999
+XGBoost,genetico,15,0.6967692083333331
+XGBoost,genetico,16,0.6965992499999999
+XGBoost,grid,1,0.6994005833333333
+XGBoost,grid,2,0.6954078333333333
+XGBoost,grid,3,0.6823560416666666
+XGBoost,grid,4,0.6823560416666666
+XGBoost,grid,5,0.6823560416666666
+XGBoost,grid,6,0.6823560416666666
+XGBoost,grid,7,0.6823560416666666
+XGBoost,grid,8,0.6823560416666666
+XGBoost,grid,9,0.6813673749999999
+XGBoost,grid,10,0.6813354583333333
+XGBoost,grid,11,0.6790821666666665
+XGBoost,grid,12,0.6770385833333333
+XGBoost,grid,13,0.6769385416666668
+XGBoost,grid,14,0.6769385416666668
+XGBoost,grid,15,0.6769385416666668
+XGBoost,grid,16,0.6769385416666668
+XGBoost,grid,17,0.6769383333333333
+XGBoost,grid,18,0.6769383333333333
+XGBoost,grid,19,0.6744862083333333
+XGBoost,grid,20,0.6744862083333333
+XGBoost,grid,21,0.6744862083333333
+XGBoost,grid,22,0.6744862083333333
+XGBoost,grid,23,0.6741369166666668
+XGBoost,grid,24,0.6741369166666668
+XGBoost,random,1,0.7212935833333333
+XGBoost,random,2,0.7212935833333333
+XGBoost,random,3,0.7082887916666666
+XGBoost,random,4,0.7074905
+XGBoost,random,5,0.6954660416666667
+XGBoost,random,6,0.6952532083333334
+XGBoost,random,7,0.6905509166666667
+XGBoost,random,8,0.6905509166666667
+XGBoost,random,9,0.6897532916666668
+XGBoost,random,10,0.6895381250000002
+XGBoost,random,11,0.6895381250000002
+XGBoost,random,12,0.6884578333333334
+XGBoost,random,13,0.6884578333333334
+XGBoost,random,14,0.6884578333333334
+XGBoost,random,15,0.6884578333333334
+XGBoost,random,16,0.6884578333333334
+Árbol de decisión,bayes,1,0.6851877916666668
+Árbol de decisión,bayes,2,0.6851877916666668
+Árbol de decisión,bayes,3,0.6736732916666667
+Árbol de decisión,bayes,4,0.6687919166666666
+Árbol de decisión,bayes,5,0.6666176249999999
+Árbol de decisión,bayes,6,0.6666176249999999
+Árbol de decisión,bayes,7,0.6666176249999999
+Árbol de decisión,bayes,8,0.6663443333333332
+Árbol de decisión,bayes,9,0.6663443333333332
+Árbol de decisión,bayes,10,0.6662406249999998
+Árbol de decisión,bayes,11,0.6658083333333332
+Árbol de decisión,bayes,12,0.6654595833333332
+Árbol de decisión,bayes,13,0.66541325
+Árbol de decisión,bayes,14,0.6645272083333335
+Árbol de decisión,bayes,15,0.6644503333333334
+Árbol de decisión,bayes,16,0.6644143750000001
+Árbol de decisión,genetico,1,0.7294002083333332
+Árbol de decisión,genetico,2,0.70832975
+Árbol de decisión,genetico,3,0.6688154583333333
+Árbol de decisión,genetico,4,0.6673405
+Árbol de decisión,genetico,5,0.66632825
+Árbol de decisión,genetico,6,0.6662844583333333
+Árbol de decisión,genetico,7,0.6662844583333333
+Árbol de decisión,genetico,8,0.6662844583333333
+Árbol de decisión,genetico,9,0.6662844583333333
+Árbol de decisión,genetico,10,0.6662844583333333
+Árbol de decisión,genetico,11,0.6662844583333333
+Árbol de decisión,genetico,12,0.6662844583333333
+Árbol de decisión,genetico,13,0.6662844583333333
+Árbol de decisión,genetico,14,0.6662844583333333
+Árbol de decisión,genetico,15,0.6662844583333333
+Árbol de decisión,genetico,16,0.6662844583333333
+Árbol de decisión,grid,1,0.6829068333333334
+Árbol de decisión,grid,2,0.6829068333333334
+Árbol de decisión,grid,3,0.6789096666666666
+Árbol de decisión,grid,4,0.6692713333333334
+Árbol de decisión,grid,5,0.6688701666666668
+Árbol de decisión,grid,6,0.6685924583333334
+Árbol de decisión,grid,7,0.6685924583333334
+Árbol de decisión,grid,8,0.6681917083333332
+Árbol de decisión,grid,9,0.6681708333333333
+Árbol de decisión,grid,10,0.667498875
+Árbol de decisión,grid,11,0.667498875
+Árbol de decisión,grid,12,0.6674525416666667
+Árbol de decisión,grid,13,0.6671792500000001
+Árbol de decisión,grid,14,0.6671792500000001
+Árbol de decisión,grid,15,0.6671792500000001
+Árbol de decisión,grid,16,0.6671581666666667
+Árbol de decisión,random,1,0.7294002083333332
+Árbol de decisión,random,2,0.70832975
+Árbol de decisión,random,3,0.6688154583333333
+Árbol de decisión,random,4,0.6673405
+Árbol de decisión,random,5,0.6671572499999999
+Árbol de decisión,random,6,0.6656584166666665
+Árbol de decisión,random,7,0.6652088333333331
+Árbol de decisión,random,8,0.6639385833333332
+Árbol de decisión,random,9,0.6628882083333332
+Árbol de decisión,random,10,0.6628882083333332
+Árbol de decisión,random,11,0.6624075833333333
+Árbol de decisión,random,12,0.6624075833333333
+Árbol de decisión,random,13,0.6618944999999999
+Árbol de decisión,random,14,0.6618944999999999
+Árbol de decisión,random,15,0.6617540416666666
+Árbol de decisión,random,16,0.661474375

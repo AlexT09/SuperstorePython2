@@ -23,11 +23,13 @@ planificación comercial.
 1. Preparar los datos (ETL) y construir la tabla de ventas mensuales por categoría × región.
 2. Analizar la distribución de `Sales` y cómo varía según `Category`, `Region`, `Segment` y el
    tiempo (EDA).
-3. Entrenar y ajustar 7 modelos de regresión (Ridge, Lasso, KNN, Árbol de decisión, Random Forest,
-   XGBoost y SVR).
-4. Compararlos entre sí y contra una referencia simple (vender lo mismo que el mismo mes del año
-   anterior) con MAE, RMSE y R².
-5. Proyectar las ventas de 2018 con el mejor modelo y traducirlas en recomendaciones para el negocio.
+3. Entrenar 7 modelos de regresión (KNN, Ridge, Lasso, Árbol de decisión, Random Forest, XGBoost y
+   SVR), cada uno con cuatro métodos de optimización de hiperparámetros.
+4. Proponer y programar un modelo propio que aproveche lo que muestra el análisis exploratorio: un
+   patrón estacional común a todas las series.
+5. Comparar todos los modelos con validación anidada y pruebas de hipótesis fijadas de antemano,
+   también en tres conjuntos de datos adicionales.
+6. Proyectar las ventas de 2018 y traducirlas en recomendaciones para el negocio.
 
 ## Justificación
 

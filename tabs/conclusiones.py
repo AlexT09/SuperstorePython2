@@ -10,16 +10,22 @@ def _modelo():
     if not modelo_listo():
         return html.P("Entrene el modelo (python model/train_model.py) para ver sus conclusiones.", className="mb-0")
     r = load_artifact("resumen.json")
-    p, rf, rec = r["prueba"], r["referencia"], r["prueba_recursiva"]
+    rf, rec = r["referencia"], r["prueba_recursiva"]
+    res = load_artifact("resultados_modelos.csv").sort_values("MAE").reset_index(drop=True)
+    mejor, segundo = res.iloc[0], res.iloc[1]
+    ingenuo = res[res.modelo.str.startswith("Referencia")].iloc[0]
     return html.Ul([
-        html.Li(f"{r['mejor_modelo']} fue el mejor modelo por validación cruzada. En 2017 —un año que no vio— "
-                f"su error medio por serie fue de {usd(p['MAE'])}, un {(1 - p['MAE'] / rf['MAE']) * 100:.0f} % "
-                f"menor que repetir el año anterior ({usd(rf['MAE'])})."),
+        html.Li(f"El modelo propio ({r['mejor_modelo']}) tuvo el menor error al pronosticar, uno a uno, los 24 meses "
+                f"de 2016 y 2017: {usd(mejor.MAE)} por serie y mes, un {(1 - mejor.MAE / ingenuo.MAE) * 100:.0f} % "
+                f"menos que repetir el año anterior ({usd(ingenuo.MAE)})."),
+        html.Li(f"La ventaja frente al segundo modelo ({segundo.modelo}, {usd(segundo.MAE)}) es pequeña y no es "
+                "estadísticamente significativa: con 24 meses de evaluación no se puede afirmar que sea mejor, solo "
+                "que es igual de preciso con un modelo mucho más simple."),
         html.Li(f"Al proyectar 2017 completo solo con datos hasta 2016, el total anual quedó a "
-                f"{rec['total_desvio_total_pct']:+.1f} % del real (la referencia, a "
+                f"{rec['total_desvio_total_pct']:+.1f} % del real (repetir el año anterior, a "
                 f"{rf['total_desvio_total_pct']:+.1f} %), con un error típico mensual de ±{rec['total_MAE_pct']:.0f} %."),
-        html.Li("Las variables más importantes son el mes del año y las ventas del mismo mes del año anterior: "
-                "el modelo confirma que la estacionalidad es el principal motor de las ventas."),
+        html.Li("Lo que explica el resultado es el patrón estacional común a todas las series: estimarlo con las "
+                "12 series juntas es lo que reduce el error. El peso propio de cada serie aporta poco."),
         html.Li(f"Para 2018 se proyectan {usd(r['proyeccion_2018'])}, "
                 f"{(r['proyeccion_2018'] / r['ventas_2017'] - 1) * 100:+.0f} % frente a 2017, con el pico entre "
                 f"septiembre y diciembre."),

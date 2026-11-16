@@ -68,3 +68,8 @@ def preprocesador() -> ColumnTransformer:
 def a_ventas(indice, filas: pd.DataFrame) -> np.ndarray:
     """Convierte el índice predicho en ventas (USD); nunca negativas."""
     return np.clip(np.asarray(indice) * filas.prom_12m.to_numpy(), 0, None)
+
+
+def a_denso(X):
+    """Convierte a matriz densa (con muchas series el one-hot sale disperso y algunos modelos no lo aceptan)."""
+    return X.toarray() if hasattr(X, "toarray") else X

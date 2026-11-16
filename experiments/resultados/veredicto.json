@@ -1,0 +1,26 @@
+{
+  "mejor_referencia": "SVR (grid)",
+  "c1_menor_MAE_que_todas": true,
+  "c2_tres_pruebas": false,
+  "rechazos": {
+    "MCS": false,
+    "Giacomini-White": false,
+    "Diebold-Mariano": false,
+    "Wilcoxon": false
+  },
+  "c3_efecto": false,
+  "d_cohen": -0.1005511425707169,
+  "delta_cliff": -0.0034722222222222654,
+  "c4_consistencia": false,
+  "gana_en": {
+    "turismo": false,
+    "hospital": false,
+    "m3": false
+  },
+  "significativamente_peor_en": {
+    "turismo": false,
+    "hospital": false,
+    "m3": true
+  },
+  "superior": false
+}

@@ -1,0 +1,276 @@
+{
+  "semilla": 42,
+  "python": "3.10.11",
+  "librerias": {
+    "scikit-learn": "1.7.2",
+    "xgboost": "3.2.0",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "joblib": "1.5.3"
+  },
+  "entrenamiento": [
+    "2015-01-01",
+    "2017-12-01"
+  ],
+  "filas": 432,
+  "objetivo": "indice = ventas del mes / promedio de los 12 meses anteriores; ventas = indice * prom_12m",
+  "esquema": {
+    "Category": {
+      "tipo": "categórica",
+      "valores": [
+        "Furniture",
+        "Office Supplies",
+        "Technology"
+      ]
+    },
+    "Region": {
+      "tipo": "categórica",
+      "valores": [
+        "Central",
+        "East",
+        "South",
+        "West"
+      ]
+    },
+    "r_lag_12": {
+      "tipo": "numérica",
+      "min": 0.0,
+      "max": 7.251648740132644
+    },
+    "r_lag_1": {
+      "tipo": "numérica",
+      "min": 0.0,
+      "max": 4.500701663478362
+    },
+    "r_prom_3m": {
+      "tipo": "numérica",
+      "min": 0.08278650524671301,
+      "max": 2.615365460022335
+    },
+    "mes_sin": {
+      "tipo": "numérica",
+      "min": -1.0,
+      "max": 1.0
+    },
+    "mes_cos": {
+      "tipo": "numérica",
+      "min": -1.0,
+      "max": 1.0
+    },
+    "prom_12m": {
+      "tipo": "numérica",
+      "min": 1333.5725,
+      "max": 8289.994166666667
+    }
+  },
+  "modelos": {
+    "KNN": {
+      "archivo": "knn.joblib",
+      "tamano_kB": 31.7,
+      "optimizador": "random",
+      "hiperparametros": {
+        "n_neighbors": 15,
+        "weights": "uniform"
+      },
+      "evaluaciones": 16,
+      "bucle_externo": {
+        "MAE": 2436.1964,
+        "MAE_sd": 915.792,
+        "RMSE": 3465.8088,
+        "MASE": 1.0503,
+        "WAPE": 52.2656,
+        "desvio_total_pct": -5.5335,
+        "inferencia_ms": 8.609
+      },
+      "radio_conforme_indice": {
+        "0.8": 0.8815738160371884,
+        "0.9": 1.2398745316208293
+      },
+      "cobertura_verificada": {},
+      "ida_y_vuelta": true
+    },
+    "Ridge": {
+      "archivo": "ridge.joblib",
+      "tamano_kB": 1.7,
+      "optimizador": "random",
+      "hiperparametros": {
+        "alpha": 79.88944545350398
+      },
+      "evaluaciones": 16,
+      "bucle_externo": {
+        "MAE": 2514.121,
+        "MAE_sd": 873.695,
+        "RMSE": 3508.5933,
+        "MASE": 1.0838,
+        "WAPE": 53.9374,
+        "desvio_total_pct": -6.3535,
+        "inferencia_ms": 7.1059
+      },
+      "radio_conforme_indice": {
+        "0.8": 0.8956206261432516,
+        "0.9": 1.333003665868259
+      },
+      "cobertura_verificada": {},
+      "ida_y_vuelta": true
+    },
+    "Lasso": {
+      "archivo": "lasso.joblib",
+      "tamano_kB": 1.7,
+      "optimizador": "genetico",
+      "hiperparametros": {
+        "alpha": 0.020983027299866144
+      },
+      "evaluaciones": 16,
+      "bucle_externo": {
+        "MAE": 2500.9148,
+        "MAE_sd": 858.0843,
+        "RMSE": 3474.3314,
+        "MASE": 1.0782,
+        "WAPE": 53.6541,
+        "desvio_total_pct": -6.0564,
+        "inferencia_ms": 7.8837
+      },
+      "radio_conforme_indice": {
+        "0.8": 0.8878870470755095,
+        "0.9": 1.2247744381656909
+      },
+      "cobertura_verificada": {},
+      "ida_y_vuelta": true
+    },
+    "Árbol de decisión": {
+      "archivo": "arbol_de_decision.joblib",
+      "tamano_kB": 2.1,
+      "optimizador": "bayes",
+      "hiperparametros": {
+        "max_depth": 2,
+        "min_samples_leaf": 18
+      },
+      "evaluaciones": 16,
+      "bucle_externo": {
+        "MAE": 2479.8264,
+        "MAE_sd": 837.1407,
+        "RMSE": 3586.2434,
+        "MASE": 1.0691,
+        "WAPE": 53.2016,
+        "desvio_total_pct": -6.8481,
+        "inferencia_ms": 7.3112
+      },
+      "radio_conforme_indice": {
+        "0.8": 0.8374217943526063,
+        "0.9": 1.2416509595666931
+      },
+      "cobertura_verificada": {},
+      "ida_y_vuelta": true
+    },
+    "Random Forest": {
+      "archivo": "random_forest.joblib",
+      "tamano_kB": 296.9,
+      "optimizador": "random",
+      "hiperparametros": {
+        "max_depth": 7,
+        "min_samples_leaf": 10,
+        "max_features": 0.5954952148828911
+      },
+      "evaluaciones": 16,
+      "bucle_externo": {
+        "MAE": 2389.5269,
+        "MAE_sd": 774.4511,
+        "RMSE": 3441.1158,
+        "MASE": 1.0301,
+        "WAPE": 51.2644,
+        "desvio_total_pct": -4.9223,
+        "inferencia_ms": 32.3579
+      },
+      "radio_conforme_indice": {
+        "0.8": 0.8279441435587538,
+        "0.9": 1.1803919957371953
+      },
+      "cobertura_verificada": {},
+      "ida_y_vuelta": true
+    },
+    "XGBoost": {
+      "archivo": "xgboost.joblib",
+      "tamano_kB": 30.7,
+      "optimizador": "bayes",
+      "hiperparametros": {
+        "max_depth": 2,
+        "learning_rate": 0.02051565546238636,
+        "subsample": 0.8211184706791279,
+        "min_child_weight": 5
+      },
+      "evaluaciones": 16,
+      "bucle_externo": {
+        "MAE": 2480.9069,
+        "MAE_sd": 795.7902,
+        "RMSE": 3560.2666,
+        "MASE": 1.0695,
+        "WAPE": 53.2248,
+        "desvio_total_pct": -4.821,
+        "inferencia_ms": 8.9762
+      },
+      "radio_conforme_indice": {
+        "0.8": 0.9180146567831802,
+        "0.9": 1.266153833627649
+      },
+      "cobertura_verificada": {},
+      "ida_y_vuelta": true
+    },
+    "SVR": {
+      "archivo": "svr.joblib",
+      "tamano_kB": 12.7,
+      "optimizador": "grid",
+      "hiperparametros": {
+        "C": 1,
+        "epsilon": 0.2,
+        "gamma": 0.05
+      },
+      "evaluaciones": 18,
+      "bucle_externo": {
+        "MAE": 2365.7374,
+        "MAE_sd": 913.1334,
+        "RMSE": 3530.5976,
+        "MASE": 1.0199,
+        "WAPE": 50.754,
+        "desvio_total_pct": -18.2087,
+        "inferencia_ms": 9.0585
+      },
+      "radio_conforme_indice": {
+        "0.8": 0.917229934621001,
+        "0.9": 1.33618845071636
+      },
+      "cobertura_verificada": {
+        "0.8": 0.84,
+        "0.9": 0.924
+      },
+      "ida_y_vuelta": true
+    },
+    "Perfil jerárquico (original)": {
+      "archivo": "perfil_jerarquico_original.joblib",
+      "tamano_kB": 1.0,
+      "optimizador": "bayes",
+      "hiperparametros": {
+        "lam": 135.47144568112577
+      },
+      "evaluaciones": 16,
+      "bucle_externo": {
+        "MAE": 2310.2824,
+        "MAE_sd": 851.7652,
+        "RMSE": 3445.3119,
+        "MASE": 0.996,
+        "WAPE": 49.5643,
+        "desvio_total_pct": -5.1257,
+        "inferencia_ms": 2.1732
+      },
+      "radio_conforme_indice": {
+        "0.8": 0.8063506847347983,
+        "0.9": 1.1844923289519302
+      },
+      "cobertura_verificada": {
+        "0.8": 0.806,
+        "0.9": 0.882
+      },
+      "ida_y_vuelta": true
+    }
+  },
+  "ventas_ultimo_anio": 733215.27
+}

@@ -1,0 +1,1153 @@
+Category,Region,Mes,Proyeccion,modelo
+Furniture,Central,2018-01-01,4169.75,KNN
+Furniture,East,2018-01-01,1987.19,KNN
+Furniture,South,2018-01-01,2269.89,KNN
+Furniture,West,2018-01-01,3062.13,KNN
+Office Supplies,Central,2018-01-01,7617.26,KNN
+Office Supplies,East,2018-01-01,4651.37,KNN
+Office Supplies,South,2018-01-01,2505.53,KNN
+Office Supplies,West,2018-01-01,6386.14,KNN
+Technology,Central,2018-01-01,5962.51,KNN
+Technology,East,2018-01-01,2873.89,KNN
+Technology,South,2018-01-01,3956.93,KNN
+Technology,West,2018-01-01,12719.13,KNN
+Furniture,Central,2018-02-01,1251.07,KNN
+Furniture,East,2018-02-01,2103.37,KNN
+Furniture,South,2018-02-01,1569.36,KNN
+Furniture,West,2018-02-01,2371.61,KNN
+Office Supplies,Central,2018-02-01,3531.58,KNN
+Office Supplies,East,2018-02-01,3950.39,KNN
+Office Supplies,South,2018-02-01,1528.4,KNN
+Office Supplies,West,2018-02-01,5046.15,KNN
+Technology,Central,2018-02-01,2403.28,KNN
+Technology,East,2018-02-01,3596.94,KNN
+Technology,South,2018-02-01,1730.48,KNN
+Technology,West,2018-02-01,9853.99,KNN
+Furniture,Central,2018-03-01,5107.24,KNN
+Furniture,East,2018-03-01,3321.35,KNN
+Furniture,South,2018-03-01,4552.71,KNN
+Furniture,West,2018-03-01,4882.45,KNN
+Office Supplies,Central,2018-03-01,3123.36,KNN
+Office Supplies,East,2018-03-01,5161.04,KNN
+Office Supplies,South,2018-03-01,4181.69,KNN
+Office Supplies,West,2018-03-01,6648.48,KNN
+Technology,Central,2018-03-01,4459.59,KNN
+Technology,East,2018-03-01,7474.44,KNN
+Technology,South,2018-03-01,7575.65,KNN
+Technology,West,2018-03-01,10982.05,KNN
+Furniture,Central,2018-04-01,2588.98,KNN
+Furniture,East,2018-04-01,4016.03,KNN
+Furniture,South,2018-04-01,3838.54,KNN
+Furniture,West,2018-04-01,4150.32,KNN
+Office Supplies,Central,2018-04-01,4612.45,KNN
+Office Supplies,East,2018-04-01,5802.14,KNN
+Office Supplies,South,2018-04-01,4821.77,KNN
+Office Supplies,West,2018-04-01,6400.95,KNN
+Technology,Central,2018-04-01,2836.76,KNN
+Technology,East,2018-04-01,6198.64,KNN
+Technology,South,2018-04-01,5996.07,KNN
+Technology,West,2018-04-01,11299.01,KNN
+Furniture,Central,2018-05-01,3671.47,KNN
+Furniture,East,2018-05-01,4907.87,KNN
+Furniture,South,2018-05-01,4207.54,KNN
+Furniture,West,2018-05-01,6027.61,KNN
+Office Supplies,Central,2018-05-01,4456.44,KNN
+Office Supplies,East,2018-05-01,5335.31,KNN
+Office Supplies,South,2018-05-01,2947.84,KNN
+Office Supplies,West,2018-05-01,5775.88,KNN
+Technology,Central,2018-05-01,2956.02,KNN
+Technology,East,2018-05-01,8056.37,KNN
+Technology,South,2018-05-01,4503.51,KNN
+Technology,West,2018-05-01,11624.27,KNN
+Furniture,Central,2018-06-01,3035.71,KNN
+Furniture,East,2018-06-01,4281.62,KNN
+Furniture,South,2018-06-01,3787.32,KNN
+Furniture,West,2018-06-01,5937.12,KNN
+Office Supplies,Central,2018-06-01,4335.76,KNN
+Office Supplies,East,2018-06-01,6024.52,KNN
+Office Supplies,South,2018-06-01,4013.69,KNN
+Office Supplies,West,2018-06-01,6913.58,KNN
+Technology,Central,2018-06-01,3144.54,KNN
+Technology,East,2018-06-01,10472.65,KNN
+Technology,South,2018-06-01,4960.12,KNN
+Technology,West,2018-06-01,9873.46,KNN
+Furniture,Central,2018-07-01,2651.8,KNN
+Furniture,East,2018-07-01,4463.72,KNN
+Furniture,South,2018-07-01,2959.24,KNN
+Furniture,West,2018-07-01,5946.38,KNN
+Office Supplies,Central,2018-07-01,3329.55,KNN
+Office Supplies,East,2018-07-01,6465.51,KNN
+Office Supplies,South,2018-07-01,2817.23,KNN
+Office Supplies,West,2018-07-01,6578.27,KNN
+Technology,Central,2018-07-01,3337.65,KNN
+Technology,East,2018-07-01,7032.17,KNN
+Technology,South,2018-07-01,5000.7,KNN
+Technology,West,2018-07-01,9325.81,KNN
+Furniture,Central,2018-08-01,3702.15,KNN
+Furniture,East,2018-08-01,6902.09,KNN
+Furniture,South,2018-08-01,4464.88,KNN
+Furniture,West,2018-08-01,7480.25,KNN
+Office Supplies,Central,2018-08-01,4660.5,KNN
+Office Supplies,East,2018-08-01,10420.34,KNN
+Office Supplies,South,2018-08-01,5467.1,KNN
+Office Supplies,West,2018-08-01,9114.33,KNN
+Technology,Central,2018-08-01,5594.97,KNN
+Technology,East,2018-08-01,10288.57,KNN
+Technology,South,2018-08-01,6558.24,KNN
+Technology,West,2018-08-01,9295.6,KNN
+Furniture,Central,2018-09-01,4379.85,KNN
+Furniture,East,2018-09-01,11088.4,KNN
+Furniture,South,2018-09-01,4823.78,KNN
+Furniture,West,2018-09-01,9555.67,KNN
+Office Supplies,Central,2018-09-01,6601.04,KNN
+Office Supplies,East,2018-09-01,10404.44,KNN
+Office Supplies,South,2018-09-01,7046.18,KNN
+Office Supplies,West,2018-09-01,12675.74,KNN
+Technology,Central,2018-09-01,6183.74,KNN
+Technology,East,2018-09-01,16245.92,KNN
+Technology,South,2018-09-01,7950.38,KNN
+Technology,West,2018-09-01,14371.21,KNN
+Furniture,Central,2018-10-01,5639.69,KNN
+Furniture,East,2018-10-01,7318.65,KNN
+Furniture,South,2018-10-01,7090.89,KNN
+Furniture,West,2018-10-01,9490.43,KNN
+Office Supplies,Central,2018-10-01,7501.09,KNN
+Office Supplies,East,2018-10-01,8582.32,KNN
+Office Supplies,South,2018-10-01,6098.35,KNN
+Office Supplies,West,2018-10-01,11345.01,KNN
+Technology,Central,2018-10-01,7919.74,KNN
+Technology,East,2018-10-01,21037.27,KNN
+Technology,South,2018-10-01,7897.4,KNN
+Technology,West,2018-10-01,13004.56,KNN
+Furniture,Central,2018-11-01,7418.13,KNN
+Furniture,East,2018-11-01,10620.91,KNN
+Furniture,South,2018-11-01,7462.86,KNN
+Furniture,West,2018-11-01,13541.19,KNN
+Office Supplies,Central,2018-11-01,10384.42,KNN
+Office Supplies,East,2018-11-01,13118.25,KNN
+Office Supplies,South,2018-11-01,7035.17,KNN
+Office Supplies,West,2018-11-01,12535.86,KNN
+Technology,Central,2018-11-01,9681.44,KNN
+Technology,East,2018-11-01,19217.86,KNN
+Technology,South,2018-11-01,11921.07,KNN
+Technology,West,2018-11-01,18200.12,KNN
+Furniture,Central,2018-12-01,7835.21,KNN
+Furniture,East,2018-12-01,7618.0,KNN
+Furniture,South,2018-12-01,7632.54,KNN
+Furniture,West,2018-12-01,13264.57,KNN
+Office Supplies,Central,2018-12-01,11496.35,KNN
+Office Supplies,East,2018-12-01,13489.61,KNN
+Office Supplies,South,2018-12-01,7863.4,KNN
+Office Supplies,West,2018-12-01,13720.3,KNN
+Technology,Central,2018-12-01,6934.12,KNN
+Technology,East,2018-12-01,8522.78,KNN
+Technology,South,2018-12-01,7892.22,KNN
+Technology,West,2018-12-01,14281.55,KNN
+Furniture,Central,2018-01-01,3962.22,Ridge
+Furniture,East,2018-01-01,5162.95,Ridge
+Furniture,South,2018-01-01,3186.41,Ridge
+Furniture,West,2018-01-01,6056.6,Ridge
+Office Supplies,Central,2018-01-01,6777.09,Ridge
+Office Supplies,East,2018-01-01,5941.56,Ridge
+Office Supplies,South,2018-01-01,3555.12,Ridge
+Office Supplies,West,2018-01-01,7784.67,Ridge
+Technology,Central,2018-01-01,4754.99,Ridge
+Technology,East,2018-01-01,7086.92,Ridge
+Technology,South,2018-01-01,4391.88,Ridge
+Technology,West,2018-01-01,9410.5,Ridge
+Furniture,Central,2018-02-01,3359.47,Ridge
+Furniture,East,2018-02-01,4807.54,Ridge
+Furniture,South,2018-02-01,3082.71,Ridge
+Furniture,West,2018-02-01,5578.49,Ridge
+Office Supplies,Central,2018-02-01,3875.54,Ridge
+Office Supplies,East,2018-02-01,5077.22,Ridge
+Office Supplies,South,2018-02-01,3424.66,Ridge
+Office Supplies,West,2018-02-01,6800.6,Ridge
+Technology,Central,2018-02-01,3166.5,Ridge
+Technology,East,2018-02-01,7063.09,Ridge
+Technology,South,2018-02-01,3253.71,Ridge
+Technology,West,2018-02-01,8236.18,Ridge
+Furniture,Central,2018-03-01,3925.74,Ridge
+Furniture,East,2018-03-01,4479.87,Ridge
+Furniture,South,2018-03-01,2865.38,Ridge
+Furniture,West,2018-03-01,4994.68,Ridge
+Office Supplies,Central,2018-03-01,3791.5,Ridge
+Office Supplies,East,2018-03-01,4920.28,Ridge
+Office Supplies,South,2018-03-01,3306.83,Ridge
+Office Supplies,West,2018-03-01,6698.65,Ridge
+Technology,Central,2018-03-01,3513.86,Ridge
+Technology,East,2018-03-01,7247.5,Ridge
+Technology,South,2018-03-01,3978.77,Ridge
+Technology,West,2018-03-01,9873.55,Ridge
+Furniture,Central,2018-04-01,2634.03,Ridge
+Furniture,East,2018-04-01,4491.7,Ridge
+Furniture,South,2018-04-01,3207.36,Ridge
+Furniture,West,2018-04-01,5040.09,Ridge
+Office Supplies,Central,2018-04-01,3369.54,Ridge
+Office Supplies,East,2018-04-01,5341.1,Ridge
+Office Supplies,South,2018-04-01,3530.29,Ridge
+Office Supplies,West,2018-04-01,5596.06,Ridge
+Technology,Central,2018-04-01,2567.48,Ridge
+Technology,East,2018-04-01,6418.57,Ridge
+Technology,South,2018-04-01,3373.8,Ridge
+Technology,West,2018-04-01,6792.11,Ridge
+Furniture,Central,2018-05-01,3247.18,Ridge
+Furniture,East,2018-05-01,4590.59,Ridge
+Furniture,South,2018-05-01,3842.49,Ridge
+Furniture,West,2018-05-01,5351.27,Ridge
+Office Supplies,Central,2018-05-01,4175.86,Ridge
+Office Supplies,East,2018-05-01,4724.05,Ridge
+Office Supplies,South,2018-05-01,3117.75,Ridge
+Office Supplies,West,2018-05-01,6037.64,Ridge
+Technology,Central,2018-05-01,2872.49,Ridge
+Technology,East,2018-05-01,6854.02,Ridge
+Technology,South,2018-05-01,3468.71,Ridge
+Technology,West,2018-05-01,6798.85,Ridge
+Furniture,Central,2018-06-01,3574.55,Ridge
+Furniture,East,2018-06-01,5559.95,Ridge
+Furniture,South,2018-06-01,3204.79,Ridge
+Furniture,West,2018-06-01,6586.87,Ridge
+Office Supplies,Central,2018-06-01,4333.59,Ridge
+Office Supplies,East,2018-06-01,5676.48,Ridge
+Office Supplies,South,2018-06-01,3550.17,Ridge
+Office Supplies,West,2018-06-01,7018.36,Ridge
+Technology,Central,2018-06-01,3467.18,Ridge
+Technology,East,2018-06-01,8599.37,Ridge
+Technology,South,2018-06-01,4242.94,Ridge
+Technology,West,2018-06-01,6607.01,Ridge
+Furniture,Central,2018-07-01,3507.15,Ridge
+Furniture,East,2018-07-01,6120.76,Ridge
+Furniture,South,2018-07-01,3692.78,Ridge
+Furniture,West,2018-07-01,7233.99,Ridge
+Office Supplies,Central,2018-07-01,4808.58,Ridge
+Office Supplies,East,2018-07-01,6453.81,Ridge
+Office Supplies,South,2018-07-01,3876.17,Ridge
+Office Supplies,West,2018-07-01,7726.84,Ridge
+Technology,Central,2018-07-01,3965.0,Ridge
+Technology,East,2018-07-01,10046.1,Ridge
+Technology,South,2018-07-01,4313.54,Ridge
+Technology,West,2018-07-01,9321.55,Ridge
+Furniture,Central,2018-08-01,3870.88,Ridge
+Furniture,East,2018-08-01,8187.08,Ridge
+Furniture,South,2018-08-01,4319.59,Ridge
+Furniture,West,2018-08-01,8488.79,Ridge
+Office Supplies,Central,2018-08-01,5270.27,Ridge
+Office Supplies,East,2018-08-01,8603.34,Ridge
+Office Supplies,South,2018-08-01,5153.73,Ridge
+Office Supplies,West,2018-08-01,11192.62,Ridge
+Technology,Central,2018-08-01,4803.5,Ridge
+Technology,East,2018-08-01,11190.42,Ridge
+Technology,South,2018-08-01,6003.18,Ridge
+Technology,West,2018-08-01,8896.88,Ridge
+Furniture,Central,2018-09-01,5336.03,Ridge
+Furniture,East,2018-09-01,9172.7,Ridge
+Furniture,South,2018-09-01,5077.99,Ridge
+Furniture,West,2018-09-01,10766.62,Ridge
+Office Supplies,Central,2018-09-01,6471.31,Ridge
+Office Supplies,East,2018-09-01,9147.35,Ridge
+Office Supplies,South,2018-09-01,6428.21,Ridge
+Office Supplies,West,2018-09-01,11223.49,Ridge
+Technology,Central,2018-09-01,6023.91,Ridge
+Technology,East,2018-09-01,14767.35,Ridge
+Technology,South,2018-09-01,5992.35,Ridge
+Technology,West,2018-09-01,9902.44,Ridge
+Furniture,Central,2018-10-01,5377.02,Ridge
+Furniture,East,2018-10-01,8599.45,Ridge
+Furniture,South,2018-10-01,6581.64,Ridge
+Furniture,West,2018-10-01,10249.93,Ridge
+Office Supplies,Central,2018-10-01,6994.58,Ridge
+Office Supplies,East,2018-10-01,8832.12,Ridge
+Office Supplies,South,2018-10-01,6053.01,Ridge
+Office Supplies,West,2018-10-01,11662.65,Ridge
+Technology,Central,2018-10-01,5550.59,Ridge
+Technology,East,2018-10-01,17087.72,Ridge
+Technology,South,2018-10-01,6750.25,Ridge
+Technology,West,2018-10-01,10863.77,Ridge
+Furniture,Central,2018-11-01,5776.11,Ridge
+Furniture,East,2018-11-01,9543.31,Ridge
+Furniture,South,2018-11-01,6402.52,Ridge
+Furniture,West,2018-11-01,11870.68,Ridge
+Office Supplies,Central,2018-11-01,7379.57,Ridge
+Office Supplies,East,2018-11-01,10560.11,Ridge
+Office Supplies,South,2018-11-01,6574.01,Ridge
+Office Supplies,West,2018-11-01,11038.11,Ridge
+Technology,Central,2018-11-01,5637.25,Ridge
+Technology,East,2018-11-01,16145.2,Ridge
+Technology,South,2018-11-01,9375.26,Ridge
+Technology,West,2018-11-01,11963.51,Ridge
+Furniture,Central,2018-12-01,5674.68,Ridge
+Furniture,East,2018-12-01,8301.31,Ridge
+Furniture,South,2018-12-01,5753.04,Ridge
+Furniture,West,2018-12-01,10663.58,Ridge
+Office Supplies,Central,2018-12-01,7315.3,Ridge
+Office Supplies,East,2018-12-01,9233.87,Ridge
+Office Supplies,South,2018-12-01,6048.72,Ridge
+Office Supplies,West,2018-12-01,11161.55,Ridge
+Technology,Central,2018-12-01,5524.5,Ridge
+Technology,East,2018-12-01,11974.8,Ridge
+Technology,South,2018-12-01,6632.95,Ridge
+Technology,West,2018-12-01,11702.5,Ridge
+Furniture,Central,2018-01-01,4139.87,Lasso
+Furniture,East,2018-01-01,5341.46,Lasso
+Furniture,South,2018-01-01,3244.46,Lasso
+Furniture,West,2018-01-01,6313.39,Lasso
+Office Supplies,Central,2018-01-01,6895.2,Lasso
+Office Supplies,East,2018-01-01,5976.19,Lasso
+Office Supplies,South,2018-01-01,3462.33,Lasso
+Office Supplies,West,2018-01-01,7804.09,Lasso
+Technology,Central,2018-01-01,4764.41,Lasso
+Technology,East,2018-01-01,7304.58,Lasso
+Technology,South,2018-01-01,4289.47,Lasso
+Technology,West,2018-01-01,9140.68,Lasso
+Furniture,Central,2018-02-01,3561.69,Lasso
+Furniture,East,2018-02-01,4978.29,Lasso
+Furniture,South,2018-02-01,3080.05,Lasso
+Furniture,West,2018-02-01,5877.38,Lasso
+Office Supplies,Central,2018-02-01,4019.24,Lasso
+Office Supplies,East,2018-02-01,5133.6,Lasso
+Office Supplies,South,2018-02-01,3302.32,Lasso
+Office Supplies,West,2018-02-01,6750.52,Lasso
+Technology,Central,2018-02-01,3170.37,Lasso
+Technology,East,2018-02-01,6993.99,Lasso
+Technology,South,2018-02-01,3170.85,Lasso
+Technology,West,2018-02-01,7960.61,Lasso
+Furniture,Central,2018-03-01,4127.9,Lasso
+Furniture,East,2018-03-01,4566.03,Lasso
+Furniture,South,2018-03-01,2794.55,Lasso
+Furniture,West,2018-03-01,5178.65,Lasso
+Office Supplies,Central,2018-03-01,3928.96,Lasso
+Office Supplies,East,2018-03-01,4869.56,Lasso
+Office Supplies,South,2018-03-01,3125.43,Lasso
+Office Supplies,West,2018-03-01,6644.65,Lasso
+Technology,Central,2018-03-01,3515.26,Lasso
+Technology,East,2018-03-01,6921.21,Lasso
+Technology,South,2018-03-01,3702.43,Lasso
+Technology,West,2018-03-01,9608.94,Lasso
+Furniture,Central,2018-04-01,2804.02,Lasso
+Furniture,East,2018-04-01,4561.76,Lasso
+Furniture,South,2018-04-01,3099.18,Lasso
+Furniture,West,2018-04-01,5142.94,Lasso
+Office Supplies,Central,2018-04-01,3464.17,Lasso
+Office Supplies,East,2018-04-01,5257.52,Lasso
+Office Supplies,South,2018-04-01,3324.94,Lasso
+Office Supplies,West,2018-04-01,5522.07,Lasso
+Technology,Central,2018-04-01,2561.89,Lasso
+Technology,East,2018-04-01,6114.15,Lasso
+Technology,South,2018-04-01,3085.22,Lasso
+Technology,West,2018-04-01,6598.59,Lasso
+Furniture,Central,2018-05-01,3445.41,Lasso
+Furniture,East,2018-05-01,4686.74,Lasso
+Furniture,South,2018-05-01,3755.64,Lasso
+Furniture,West,2018-05-01,5483.6,Lasso
+Office Supplies,Central,2018-05-01,4260.47,Lasso
+Office Supplies,East,2018-05-01,4655.82,Lasso
+Office Supplies,South,2018-05-01,2922.72,Lasso
+Office Supplies,West,2018-05-01,5969.14,Lasso
+Technology,Central,2018-05-01,2856.58,Lasso
+Technology,East,2018-05-01,6555.67,Lasso
+Technology,South,2018-05-01,3165.16,Lasso
+Technology,West,2018-05-01,6626.55,Lasso
+Furniture,Central,2018-06-01,3810.12,Lasso
+Furniture,East,2018-06-01,5703.4,Lasso
+Furniture,South,2018-06-01,3147.03,Lasso
+Furniture,West,2018-06-01,6779.66,Lasso
+Office Supplies,Central,2018-06-01,4457.16,Lasso
+Office Supplies,East,2018-06-01,5638.17,Lasso
+Office Supplies,South,2018-06-01,3354.57,Lasso
+Office Supplies,West,2018-06-01,6973.85,Lasso
+Technology,Central,2018-06-01,3466.16,Lasso
+Technology,East,2018-06-01,8313.82,Lasso
+Technology,South,2018-06-01,3936.49,Lasso
+Technology,West,2018-06-01,6440.84,Lasso
+Furniture,Central,2018-07-01,3775.81,Lasso
+Furniture,East,2018-07-01,6318.95,Lasso
+Furniture,South,2018-07-01,3651.68,Lasso
+Furniture,West,2018-07-01,7502.07,Lasso
+Office Supplies,Central,2018-07-01,4979.1,Lasso
+Office Supplies,East,2018-07-01,6442.58,Lasso
+Office Supplies,South,2018-07-01,3667.03,Lasso
+Office Supplies,West,2018-07-01,7704.39,Lasso
+Technology,Central,2018-07-01,3976.84,Lasso
+Technology,East,2018-07-01,9774.21,Lasso
+Technology,South,2018-07-01,3984.35,Lasso
+Technology,West,2018-07-01,9127.47,Lasso
+Furniture,Central,2018-08-01,4199.96,Lasso
+Furniture,East,2018-08-01,8458.76,Lasso
+Furniture,South,2018-08-01,4277.42,Lasso
+Furniture,West,2018-08-01,8841.3,Lasso
+Office Supplies,Central,2018-08-01,5491.51,Lasso
+Office Supplies,East,2018-08-01,8620.81,Lasso
+Office Supplies,South,2018-08-01,4913.58,Lasso
+Office Supplies,West,2018-08-01,11223.23,Lasso
+Technology,Central,2018-08-01,4842.81,Lasso
+Technology,East,2018-08-01,10926.68,Lasso
+Technology,South,2018-08-01,5635.36,Lasso
+Technology,West,2018-08-01,8710.59,Lasso
+Furniture,Central,2018-09-01,5732.22,Lasso
+Furniture,East,2018-09-01,9520.33,Lasso
+Furniture,South,2018-09-01,5018.78,Lasso
+Furniture,West,2018-09-01,11214.6,Lasso
+Office Supplies,Central,2018-09-01,6736.69,Lasso
+Office Supplies,East,2018-09-01,9204.03,Lasso
+Office Supplies,South,2018-09-01,6167.96,Lasso
+Office Supplies,West,2018-09-01,11302.81,Lasso
+Technology,Central,2018-09-01,6092.83,Lasso
+Technology,East,2018-09-01,14497.46,Lasso
+Technology,South,2018-09-01,5582.56,Lasso
+Technology,West,2018-09-01,9698.78,Lasso
+Furniture,Central,2018-10-01,5824.07,Lasso
+Furniture,East,2018-10-01,9004.48,Lasso
+Furniture,South,2018-10-01,6519.45,Lasso
+Furniture,West,2018-10-01,10761.84,Lasso
+Office Supplies,Central,2018-10-01,7298.2,Lasso
+Office Supplies,East,2018-10-01,8906.38,Lasso
+Office Supplies,South,2018-10-01,5774.39,Lasso
+Office Supplies,West,2018-10-01,11780.15,Lasso
+Technology,Central,2018-10-01,5638.4,Lasso
+Technology,East,2018-10-01,16818.53,Lasso
+Technology,South,2018-10-01,6261.55,Lasso
+Technology,West,2018-10-01,10623.05,Lasso
+Furniture,Central,2018-11-01,6277.55,Lasso
+Furniture,East,2018-11-01,9999.6,Lasso
+Furniture,South,2018-11-01,6344.16,Lasso
+Furniture,West,2018-11-01,12449.71,Lasso
+Office Supplies,Central,2018-11-01,7713.28,Lasso
+Office Supplies,East,2018-11-01,10640.51,Lasso
+Office Supplies,South,2018-11-01,6268.83,Lasso
+Office Supplies,West,2018-11-01,11166.49,Lasso
+Technology,Central,2018-11-01,5733.69,Lasso
+Technology,East,2018-11-01,15901.97,Lasso
+Technology,South,2018-11-01,8823.23,Lasso
+Technology,West,2018-11-01,11647.65,Lasso
+Furniture,Central,2018-12-01,6208.78,Lasso
+Furniture,East,2018-12-01,8755.44,Lasso
+Furniture,South,2018-12-01,5697.35,Lasso
+Furniture,West,2018-12-01,11268.02,Lasso
+Office Supplies,Central,2018-12-01,7666.51,Lasso
+Office Supplies,East,2018-12-01,9293.4,Lasso
+Office Supplies,South,2018-12-01,5712.83,Lasso
+Office Supplies,West,2018-12-01,11243.31,Lasso
+Technology,Central,2018-12-01,5610.56,Lasso
+Technology,East,2018-12-01,11736.85,Lasso
+Technology,South,2018-12-01,6075.41,Lasso
+Technology,West,2018-12-01,11335.56,Lasso
+Furniture,Central,2018-01-01,2197.47,Árbol de decisión
+Furniture,East,2018-01-01,3003.54,Árbol de decisión
+Furniture,South,2018-01-01,1890.62,Árbol de decisión
+Furniture,West,2018-01-01,3539.15,Árbol de decisión
+Office Supplies,Central,2018-01-01,2900.71,Árbol de decisión
+Office Supplies,East,2018-01-01,3212.65,Árbol de decisión
+Office Supplies,South,2018-01-01,1963.03,Árbol de decisión
+Office Supplies,West,2018-01-01,4070.11,Árbol de decisión
+Technology,Central,2018-01-01,2162.08,Árbol de decisión
+Technology,East,2018-01-01,4300.85,Árbol de decisión
+Technology,South,2018-01-01,2212.55,Árbol de decisión
+Technology,West,2018-01-01,4736.21,Árbol de decisión
+Furniture,Central,2018-02-01,2195.86,Árbol de decisión
+Furniture,East,2018-02-01,3091.88,Árbol de decisión
+Furniture,South,2018-02-01,1960.16,Árbol de decisión
+Furniture,West,2018-02-01,3613.21,Árbol de decisión
+Office Supplies,Central,2018-02-01,2416.84,Árbol de decisión
+Office Supplies,East,2018-02-01,3224.51,Árbol de decisión
+Office Supplies,South,2018-02-01,2031.38,Árbol de decisión
+Office Supplies,West,2018-02-01,4023.25,Árbol de decisión
+Technology,Central,2018-02-01,1935.32,Árbol de decisión
+Technology,East,2018-02-01,4454.02,Árbol de decisión
+Technology,South,2018-02-01,2136.39,Árbol de decisión
+Technology,West,2018-02-01,4722.02,Árbol de decisión
+Furniture,Central,2018-03-01,3711.43,Árbol de decisión
+Furniture,East,2018-03-01,5219.52,Árbol de decisión
+Furniture,South,2018-03-01,3336.43,Árbol de decisión
+Furniture,West,2018-03-01,6015.85,Árbol de decisión
+Office Supplies,Central,2018-03-01,4079.58,Árbol de decisión
+Office Supplies,East,2018-03-01,5470.78,Árbol de decisión
+Office Supplies,South,2018-03-01,3412.97,Árbol de decisión
+Office Supplies,West,2018-03-01,6724.21,Árbol de decisión
+Technology,Central,2018-03-01,3297.39,Árbol de decisión
+Technology,East,2018-03-01,7590.47,Árbol de decisión
+Technology,South,2018-03-01,3704.17,Árbol de decisión
+Technology,West,2018-03-01,7900.44,Árbol de decisión
+Furniture,Central,2018-04-01,3419.67,Árbol de decisión
+Furniture,East,2018-04-01,5516.58,Árbol de decisión
+Furniture,South,2018-04-01,3579.88,Árbol de decisión
+Furniture,West,2018-04-01,6370.14,Árbol de decisión
+Office Supplies,Central,2018-04-01,4148.4,Árbol de decisión
+Office Supplies,East,2018-04-01,5733.07,Árbol de decisión
+Office Supplies,South,2018-04-01,3523.43,Árbol de decisión
+Office Supplies,West,2018-04-01,6701.86,Árbol de decisión
+Technology,Central,2018-04-01,3159.96,Árbol de decisión
+Technology,East,2018-04-01,7894.55,Árbol de decisión
+Technology,South,2018-04-01,3661.17,Árbol de decisión
+Technology,West,2018-04-01,6884.37,Árbol de decisión
+Furniture,Central,2018-05-01,3602.51,Árbol de decisión
+Furniture,East,2018-05-01,5742.74,Árbol de decisión
+Furniture,South,2018-05-01,3639.69,Árbol de decisión
+Furniture,West,2018-05-01,6702.71,Árbol de decisión
+Office Supplies,Central,2018-05-01,4362.79,Árbol de decisión
+Office Supplies,East,2018-05-01,5684.48,Árbol de decisión
+Office Supplies,South,2018-05-01,3439.34,Árbol de decisión
+Office Supplies,West,2018-05-01,7030.98,Árbol de decisión
+Technology,Central,2018-05-01,3362.09,Árbol de decisión
+Technology,East,2018-05-01,8444.33,Árbol de decisión
+Technology,South,2018-05-01,3792.9,Árbol de decisión
+Technology,West,2018-05-01,6752.83,Árbol de decisión
+Furniture,Central,2018-06-01,3524.38,Árbol de decisión
+Furniture,East,2018-06-01,6013.93,Árbol de decisión
+Furniture,South,2018-06-01,3360.85,Árbol de decisión
+Furniture,West,2018-06-01,7011.27,Árbol de decisión
+Office Supplies,Central,2018-06-01,4265.44,Árbol de decisión
+Office Supplies,East,2018-06-01,5967.32,Árbol de decisión
+Office Supplies,South,2018-06-01,3549.91,Árbol de decisión
+Office Supplies,West,2018-06-01,7288.26,Árbol de decisión
+Technology,Central,2018-06-01,3516.24,Árbol de decisión
+Technology,East,2018-06-01,9012.54,Árbol de decisión
+Technology,South,2018-06-01,3955.3,Árbol de decisión
+Technology,West,2018-06-01,6585.01,Árbol de decisión
+Furniture,Central,2018-07-01,3057.44,Árbol de decisión
+Furniture,East,2018-07-01,5533.51,Árbol de decisión
+Furniture,South,2018-07-01,3121.83,Árbol de decisión
+Furniture,West,2018-07-01,6384.72,Árbol de decisión
+Office Supplies,Central,2018-07-01,3825.07,Árbol de decisión
+Office Supplies,East,2018-07-01,5528.72,Árbol de decisión
+Office Supplies,South,2018-07-01,3292.55,Árbol de decisión
+Office Supplies,West,2018-07-01,6742.8,Árbol de decisión
+Technology,Central,2018-07-01,3233.52,Árbol de decisión
+Technology,East,2018-07-01,8380.73,Árbol de decisión
+Technology,South,2018-07-01,3568.69,Árbol de decisión
+Technology,West,2018-07-01,6152.38,Árbol de decisión
+Furniture,Central,2018-08-01,3113.28,Árbol de decisión
+Furniture,East,2018-08-01,5733.93,Árbol de decisión
+Furniture,South,2018-08-01,3204.52,Árbol de decisión
+Furniture,West,2018-08-01,6510.19,Árbol de decisión
+Office Supplies,Central,2018-08-01,3800.84,Árbol de decisión
+Office Supplies,East,2018-08-01,5698.83,Árbol de decisión
+Office Supplies,South,2018-08-01,3487.7,Árbol de decisión
+Office Supplies,West,2018-08-01,7077.79,Árbol de decisión
+Technology,Central,2018-08-01,3293.76,Árbol de decisión
+Technology,East,2018-08-01,8536.46,Árbol de decisión
+Technology,South,2018-08-01,3784.58,Árbol de decisión
+Technology,West,2018-08-01,5581.98,Árbol de decisión
+Furniture,Central,2018-09-01,6078.62,Árbol de decisión
+Furniture,East,2018-09-01,10109.57,Árbol de decisión
+Furniture,South,2018-09-01,6119.47,Árbol de decisión
+Furniture,West,2018-09-01,12211.09,Árbol de decisión
+Office Supplies,Central,2018-09-01,7179.15,Árbol de decisión
+Office Supplies,East,2018-09-01,9944.17,Árbol de decisión
+Office Supplies,South,2018-09-01,6432.06,Árbol de decisión
+Office Supplies,West,2018-09-01,11944.32,Árbol de decisión
+Technology,Central,2018-09-01,6029.3,Árbol de decisión
+Technology,East,2018-09-01,16519.33,Árbol de decisión
+Technology,South,2018-09-01,6706.93,Árbol de decisión
+Technology,West,2018-09-01,10165.12,Árbol de decisión
+Furniture,Central,2018-10-01,6220.38,Árbol de decisión
+Furniture,East,2018-10-01,9989.56,Árbol de decisión
+Furniture,South,2018-10-01,6772.43,Árbol de decisión
+Furniture,West,2018-10-01,12281.69,Árbol de decisión
+Office Supplies,Central,2018-10-01,7533.0,Árbol de decisión
+Office Supplies,East,2018-10-01,10104.67,Árbol de decisión
+Office Supplies,South,2018-10-01,6301.88,Árbol de decisión
+Office Supplies,West,2018-10-01,12049.36,Árbol de decisión
+Technology,Central,2018-10-01,5797.59,Árbol de decisión
+Technology,East,2018-10-01,17043.12,Árbol de decisión
+Technology,South,2018-10-01,7413.7,Árbol de decisión
+Technology,West,2018-10-01,10860.08,Árbol de decisión
+Furniture,Central,2018-11-01,6609.92,Árbol de decisión
+Furniture,East,2018-11-01,10559.79,Árbol de decisión
+Furniture,South,2018-11-01,6722.22,Árbol de decisión
+Furniture,West,2018-11-01,13188.38,Árbol de decisión
+Office Supplies,Central,2018-11-01,7927.28,Árbol de decisión
+Office Supplies,East,2018-11-01,10990.81,Árbol de decisión
+Office Supplies,South,2018-11-01,6631.47,Árbol de decisión
+Office Supplies,West,2018-11-01,12197.44,Árbol de decisión
+Technology,Central,2018-11-01,6022.15,Árbol de decisión
+Technology,East,2018-11-01,16242.69,Árbol de decisión
+Technology,South,2018-11-01,8267.92,Árbol de decisión
+Technology,West,2018-11-01,11702.81,Árbol de decisión
+Furniture,Central,2018-12-01,6819.15,Árbol de decisión
+Furniture,East,2018-12-01,10515.91,Árbol de decisión
+Furniture,South,2018-12-01,6691.22,Árbol de decisión
+Furniture,West,2018-12-01,13057.21,Árbol de decisión
+Office Supplies,Central,2018-12-01,8186.63,Árbol de decisión
+Office Supplies,East,2018-12-01,10831.23,Árbol de decisión
+Office Supplies,South,2018-12-01,6675.07,Árbol de decisión
+Office Supplies,West,2018-12-01,12905.82,Árbol de decisión
+Technology,Central,2018-12-01,6287.17,Árbol de decisión
+Technology,East,2018-12-01,15381.87,Árbol de decisión
+Technology,South,2018-12-01,7292.11,Árbol de decisión
+Technology,West,2018-12-01,12231.48,Árbol de decisión
+Furniture,Central,2018-01-01,2821.96,Random Forest
+Furniture,East,2018-01-01,2713.06,Random Forest
+Furniture,South,2018-01-01,2122.98,Random Forest
+Furniture,West,2018-01-01,3812.5,Random Forest
+Office Supplies,Central,2018-01-01,4980.22,Random Forest
+Office Supplies,East,2018-01-01,3916.64,Random Forest
+Office Supplies,South,2018-01-01,2064.22,Random Forest
+Office Supplies,West,2018-01-01,5207.31,Random Forest
+Technology,Central,2018-01-01,4088.66,Random Forest
+Technology,East,2018-01-01,4113.62,Random Forest
+Technology,South,2018-01-01,3150.11,Random Forest
+Technology,West,2018-01-01,6876.04,Random Forest
+Furniture,Central,2018-02-01,1910.75,Random Forest
+Furniture,East,2018-02-01,2458.55,Random Forest
+Furniture,South,2018-02-01,1743.04,Random Forest
+Furniture,West,2018-02-01,3272.67,Random Forest
+Office Supplies,Central,2018-02-01,2031.97,Random Forest
+Office Supplies,East,2018-02-01,2383.6,Random Forest
+Office Supplies,South,2018-02-01,2255.91,Random Forest
+Office Supplies,West,2018-02-01,4791.42,Random Forest
+Technology,Central,2018-02-01,1976.63,Random Forest
+Technology,East,2018-02-01,3354.37,Random Forest
+Technology,South,2018-02-01,2327.7,Random Forest
+Technology,West,2018-02-01,5892.9,Random Forest
+Furniture,Central,2018-03-01,4876.08,Random Forest
+Furniture,East,2018-03-01,4711.01,Random Forest
+Furniture,South,2018-03-01,3169.89,Random Forest
+Furniture,West,2018-03-01,5361.6,Random Forest
+Office Supplies,Central,2018-03-01,4306.1,Random Forest
+Office Supplies,East,2018-03-01,5557.93,Random Forest
+Office Supplies,South,2018-03-01,3963.71,Random Forest
+Office Supplies,West,2018-03-01,7051.43,Random Forest
+Technology,Central,2018-03-01,4382.9,Random Forest
+Technology,East,2018-03-01,8366.96,Random Forest
+Technology,South,2018-03-01,4398.2,Random Forest
+Technology,West,2018-03-01,9558.14,Random Forest
+Furniture,Central,2018-04-01,2597.37,Random Forest
+Furniture,East,2018-04-01,4894.81,Random Forest
+Furniture,South,2018-04-01,4052.33,Random Forest
+Furniture,West,2018-04-01,5632.03,Random Forest
+Office Supplies,Central,2018-04-01,3528.07,Random Forest
+Office Supplies,East,2018-04-01,5186.55,Random Forest
+Office Supplies,South,2018-04-01,3645.37,Random Forest
+Office Supplies,West,2018-04-01,5901.92,Random Forest
+Technology,Central,2018-04-01,2712.2,Random Forest
+Technology,East,2018-04-01,7323.31,Random Forest
+Technology,South,2018-04-01,4072.51,Random Forest
+Technology,West,2018-04-01,7192.62,Random Forest
+Furniture,Central,2018-05-01,3468.51,Random Forest
+Furniture,East,2018-05-01,5120.25,Random Forest
+Furniture,South,2018-05-01,3758.97,Random Forest
+Furniture,West,2018-05-01,6231.18,Random Forest
+Office Supplies,Central,2018-05-01,4138.54,Random Forest
+Office Supplies,East,2018-05-01,4898.93,Random Forest
+Office Supplies,South,2018-05-01,3743.34,Random Forest
+Office Supplies,West,2018-05-01,6721.14,Random Forest
+Technology,Central,2018-05-01,3051.51,Random Forest
+Technology,East,2018-05-01,7244.85,Random Forest
+Technology,South,2018-05-01,4117.63,Random Forest
+Technology,West,2018-05-01,7414.82,Random Forest
+Furniture,Central,2018-06-01,3600.67,Random Forest
+Furniture,East,2018-06-01,5281.75,Random Forest
+Furniture,South,2018-06-01,3702.69,Random Forest
+Furniture,West,2018-06-01,5888.58,Random Forest
+Office Supplies,Central,2018-06-01,3691.74,Random Forest
+Office Supplies,East,2018-06-01,5260.09,Random Forest
+Office Supplies,South,2018-06-01,4015.23,Random Forest
+Office Supplies,West,2018-06-01,6648.29,Random Forest
+Technology,Central,2018-06-01,3273.11,Random Forest
+Technology,East,2018-06-01,8198.8,Random Forest
+Technology,South,2018-06-01,4413.4,Random Forest
+Technology,West,2018-06-01,8122.36,Random Forest
+Furniture,Central,2018-07-01,2858.59,Random Forest
+Furniture,East,2018-07-01,4913.68,Random Forest
+Furniture,South,2018-07-01,3363.81,Random Forest
+Furniture,West,2018-07-01,6088.38,Random Forest
+Office Supplies,Central,2018-07-01,3773.18,Random Forest
+Office Supplies,East,2018-07-01,5350.57,Random Forest
+Office Supplies,South,2018-07-01,3039.33,Random Forest
+Office Supplies,West,2018-07-01,6705.76,Random Forest
+Technology,Central,2018-07-01,3283.38,Random Forest
+Technology,East,2018-07-01,8166.5,Random Forest
+Technology,South,2018-07-01,3418.21,Random Forest
+Technology,West,2018-07-01,10417.0,Random Forest
+Furniture,Central,2018-08-01,2869.91,Random Forest
+Furniture,East,2018-08-01,6933.11,Random Forest
+Furniture,South,2018-08-01,3201.12,Random Forest
+Furniture,West,2018-08-01,6725.44,Random Forest
+Office Supplies,Central,2018-08-01,3781.59,Random Forest
+Office Supplies,East,2018-08-01,6832.34,Random Forest
+Office Supplies,South,2018-08-01,4328.17,Random Forest
+Office Supplies,West,2018-08-01,9224.99,Random Forest
+Technology,Central,2018-08-01,3722.2,Random Forest
+Technology,East,2018-08-01,8844.99,Random Forest
+Technology,South,2018-08-01,4969.56,Random Forest
+Technology,West,2018-08-01,7971.32,Random Forest
+Furniture,Central,2018-09-01,5692.32,Random Forest
+Furniture,East,2018-09-01,10810.32,Random Forest
+Furniture,South,2018-09-01,5266.91,Random Forest
+Furniture,West,2018-09-01,11572.23,Random Forest
+Office Supplies,Central,2018-09-01,6393.13,Random Forest
+Office Supplies,East,2018-09-01,10644.12,Random Forest
+Office Supplies,South,2018-09-01,6621.8,Random Forest
+Office Supplies,West,2018-09-01,13690.55,Random Forest
+Technology,Central,2018-09-01,6081.61,Random Forest
+Technology,East,2018-09-01,16188.0,Random Forest
+Technology,South,2018-09-01,5988.6,Random Forest
+Technology,West,2018-09-01,10634.57,Random Forest
+Furniture,Central,2018-10-01,5152.02,Random Forest
+Furniture,East,2018-10-01,7227.76,Random Forest
+Furniture,South,2018-10-01,6773.97,Random Forest
+Furniture,West,2018-10-01,8600.37,Random Forest
+Office Supplies,Central,2018-10-01,6439.87,Random Forest
+Office Supplies,East,2018-10-01,7134.19,Random Forest
+Office Supplies,South,2018-10-01,4823.43,Random Forest
+Office Supplies,West,2018-10-01,12095.24,Random Forest
+Technology,Central,2018-10-01,5546.02,Random Forest
+Technology,East,2018-10-01,17636.79,Random Forest
+Technology,South,2018-10-01,5350.23,Random Forest
+Technology,West,2018-10-01,9826.2,Random Forest
+Furniture,Central,2018-11-01,6799.17,Random Forest
+Furniture,East,2018-11-01,12301.73,Random Forest
+Furniture,South,2018-11-01,7766.22,Random Forest
+Furniture,West,2018-11-01,14750.59,Random Forest
+Office Supplies,Central,2018-11-01,8109.44,Random Forest
+Office Supplies,East,2018-11-01,12892.19,Random Forest
+Office Supplies,South,2018-11-01,7128.54,Random Forest
+Office Supplies,West,2018-11-01,11717.32,Random Forest
+Technology,Central,2018-11-01,6168.43,Random Forest
+Technology,East,2018-11-01,19140.92,Random Forest
+Technology,South,2018-11-01,10032.49,Random Forest
+Technology,West,2018-11-01,12782.91,Random Forest
+Furniture,Central,2018-12-01,7433.82,Random Forest
+Furniture,East,2018-12-01,10391.89,Random Forest
+Furniture,South,2018-12-01,7303.32,Random Forest
+Furniture,West,2018-12-01,14226.79,Random Forest
+Office Supplies,Central,2018-12-01,8834.6,Random Forest
+Office Supplies,East,2018-12-01,11434.87,Random Forest
+Office Supplies,South,2018-12-01,7005.7,Random Forest
+Office Supplies,West,2018-12-01,13619.1,Random Forest
+Technology,Central,2018-12-01,6912.08,Random Forest
+Technology,East,2018-12-01,12803.06,Random Forest
+Technology,South,2018-12-01,7119.05,Random Forest
+Technology,West,2018-12-01,13591.21,Random Forest
+Furniture,Central,2018-01-01,3129.83,XGBoost
+Furniture,East,2018-01-01,3222.05,XGBoost
+Furniture,South,2018-01-01,1573.44,XGBoost
+Furniture,West,2018-01-01,4040.42,XGBoost
+Office Supplies,Central,2018-01-01,5431.37,XGBoost
+Office Supplies,East,2018-01-01,4317.57,XGBoost
+Office Supplies,South,2018-01-01,2065.17,XGBoost
+Office Supplies,West,2018-01-01,6020.97,XGBoost
+Technology,Central,2018-01-01,4925.11,XGBoost
+Technology,East,2018-01-01,3948.51,XGBoost
+Technology,South,2018-01-01,2866.65,XGBoost
+Technology,West,2018-01-01,7293.45,XGBoost
+Furniture,Central,2018-02-01,2551.43,XGBoost
+Furniture,East,2018-02-01,3643.06,XGBoost
+Furniture,South,2018-02-01,2085.7,XGBoost
+Furniture,West,2018-02-01,4132.16,XGBoost
+Office Supplies,Central,2018-02-01,2737.98,XGBoost
+Office Supplies,East,2018-02-01,3309.1,XGBoost
+Office Supplies,South,2018-02-01,2721.69,XGBoost
+Office Supplies,West,2018-02-01,5509.2,XGBoost
+Technology,Central,2018-02-01,2199.09,XGBoost
+Technology,East,2018-02-01,6402.27,XGBoost
+Technology,South,2018-02-01,4694.19,XGBoost
+Technology,West,2018-02-01,6527.44,XGBoost
+Furniture,Central,2018-03-01,5635.85,XGBoost
+Furniture,East,2018-03-01,4616.63,XGBoost
+Furniture,South,2018-03-01,2637.48,XGBoost
+Furniture,West,2018-03-01,5237.16,XGBoost
+Office Supplies,Central,2018-03-01,4226.36,XGBoost
+Office Supplies,East,2018-03-01,5368.78,XGBoost
+Office Supplies,South,2018-03-01,3589.18,XGBoost
+Office Supplies,West,2018-03-01,7195.7,XGBoost
+Technology,Central,2018-03-01,4753.46,XGBoost
+Technology,East,2018-03-01,7851.43,XGBoost
+Technology,South,2018-03-01,4633.77,XGBoost
+Technology,West,2018-03-01,10114.88,XGBoost
+Furniture,Central,2018-04-01,3096.29,XGBoost
+Furniture,East,2018-04-01,5136.3,XGBoost
+Furniture,South,2018-04-01,3599.16,XGBoost
+Furniture,West,2018-04-01,5892.77,XGBoost
+Office Supplies,Central,2018-04-01,3725.32,XGBoost
+Office Supplies,East,2018-04-01,5310.64,XGBoost
+Office Supplies,South,2018-04-01,3583.23,XGBoost
+Office Supplies,West,2018-04-01,6003.19,XGBoost
+Technology,Central,2018-04-01,2914.53,XGBoost
+Technology,East,2018-04-01,5879.35,XGBoost
+Technology,South,2018-04-01,4169.56,XGBoost
+Technology,West,2018-04-01,7761.4,XGBoost
+Furniture,Central,2018-05-01,3859.45,XGBoost
+Furniture,East,2018-05-01,4969.0,XGBoost
+Furniture,South,2018-05-01,4245.53,XGBoost
+Furniture,West,2018-05-01,5789.61,XGBoost
+Office Supplies,Central,2018-05-01,4478.46,XGBoost
+Office Supplies,East,2018-05-01,5044.79,XGBoost
+Office Supplies,South,2018-05-01,3398.07,XGBoost
+Office Supplies,West,2018-05-01,6572.11,XGBoost
+Technology,Central,2018-05-01,3242.63,XGBoost
+Technology,East,2018-05-01,6909.96,XGBoost
+Technology,South,2018-05-01,4028.62,XGBoost
+Technology,West,2018-05-01,8133.51,XGBoost
+Furniture,Central,2018-06-01,4063.22,XGBoost
+Furniture,East,2018-06-01,5497.3,XGBoost
+Furniture,South,2018-06-01,3439.53,XGBoost
+Furniture,West,2018-06-01,6171.31,XGBoost
+Office Supplies,Central,2018-06-01,4135.65,XGBoost
+Office Supplies,East,2018-06-01,5564.34,XGBoost
+Office Supplies,South,2018-06-01,3582.04,XGBoost
+Office Supplies,West,2018-06-01,6972.13,XGBoost
+Technology,Central,2018-06-01,3579.8,XGBoost
+Technology,East,2018-06-01,8242.67,XGBoost
+Technology,South,2018-06-01,4330.54,XGBoost
+Technology,West,2018-06-01,6865.14,XGBoost
+Furniture,Central,2018-07-01,3741.28,XGBoost
+Furniture,East,2018-07-01,5253.13,XGBoost
+Furniture,South,2018-07-01,3607.06,XGBoost
+Furniture,West,2018-07-01,6429.31,XGBoost
+Office Supplies,Central,2018-07-01,4190.25,XGBoost
+Office Supplies,East,2018-07-01,5604.19,XGBoost
+Office Supplies,South,2018-07-01,3116.01,XGBoost
+Office Supplies,West,2018-07-01,6556.99,XGBoost
+Technology,Central,2018-07-01,3671.38,XGBoost
+Technology,East,2018-07-01,8534.09,XGBoost
+Technology,South,2018-07-01,3492.72,XGBoost
+Technology,West,2018-07-01,10285.25,XGBoost
+Furniture,Central,2018-08-01,2925.26,XGBoost
+Furniture,East,2018-08-01,6427.42,XGBoost
+Furniture,South,2018-08-01,3469.37,XGBoost
+Furniture,West,2018-08-01,6668.19,XGBoost
+Office Supplies,Central,2018-08-01,4203.13,XGBoost
+Office Supplies,East,2018-08-01,6723.45,XGBoost
+Office Supplies,South,2018-08-01,4003.63,XGBoost
+Office Supplies,West,2018-08-01,9925.0,XGBoost
+Technology,Central,2018-08-01,3910.63,XGBoost
+Technology,East,2018-08-01,8177.81,XGBoost
+Technology,South,2018-08-01,5091.98,XGBoost
+Technology,West,2018-08-01,7760.4,XGBoost
+Furniture,Central,2018-09-01,6313.42,XGBoost
+Furniture,East,2018-09-01,10868.7,XGBoost
+Furniture,South,2018-09-01,5393.29,XGBoost
+Furniture,West,2018-09-01,11771.17,XGBoost
+Office Supplies,Central,2018-09-01,6846.0,XGBoost
+Office Supplies,East,2018-09-01,9982.19,XGBoost
+Office Supplies,South,2018-09-01,7067.33,XGBoost
+Office Supplies,West,2018-09-01,12753.37,XGBoost
+Technology,Central,2018-09-01,7181.1,XGBoost
+Technology,East,2018-09-01,15509.85,XGBoost
+Technology,South,2018-09-01,6741.45,XGBoost
+Technology,West,2018-09-01,11607.92,XGBoost
+Furniture,Central,2018-10-01,5393.25,XGBoost
+Furniture,East,2018-10-01,7686.94,XGBoost
+Furniture,South,2018-10-01,6924.01,XGBoost
+Furniture,West,2018-10-01,9103.09,XGBoost
+Office Supplies,Central,2018-10-01,6171.6,XGBoost
+Office Supplies,East,2018-10-01,7754.16,XGBoost
+Office Supplies,South,2018-10-01,5089.04,XGBoost
+Office Supplies,West,2018-10-01,11856.44,XGBoost
+Technology,Central,2018-10-01,5227.38,XGBoost
+Technology,East,2018-10-01,16242.62,XGBoost
+Technology,South,2018-10-01,5903.27,XGBoost
+Technology,West,2018-10-01,10075.57,XGBoost
+Furniture,Central,2018-11-01,7317.59,XGBoost
+Furniture,East,2018-11-01,11665.52,XGBoost
+Furniture,South,2018-11-01,7570.64,XGBoost
+Furniture,West,2018-11-01,14753.12,XGBoost
+Office Supplies,Central,2018-11-01,8327.76,XGBoost
+Office Supplies,East,2018-11-01,12852.18,XGBoost
+Office Supplies,South,2018-11-01,7189.5,XGBoost
+Office Supplies,West,2018-11-01,11273.62,XGBoost
+Technology,Central,2018-11-01,6305.1,XGBoost
+Technology,East,2018-11-01,19331.7,XGBoost
+Technology,South,2018-11-01,9514.9,XGBoost
+Technology,West,2018-11-01,12775.88,XGBoost
+Furniture,Central,2018-12-01,8659.52,XGBoost
+Furniture,East,2018-12-01,9575.62,XGBoost
+Furniture,South,2018-12-01,6829.26,XGBoost
+Furniture,West,2018-12-01,13881.04,XGBoost
+Office Supplies,Central,2018-12-01,9965.39,XGBoost
+Office Supplies,East,2018-12-01,11052.35,XGBoost
+Office Supplies,South,2018-12-01,6919.18,XGBoost
+Office Supplies,West,2018-12-01,13085.58,XGBoost
+Technology,Central,2018-12-01,6654.55,XGBoost
+Technology,East,2018-12-01,13501.48,XGBoost
+Technology,South,2018-12-01,7485.72,XGBoost
+Technology,West,2018-12-01,14134.46,XGBoost
+Furniture,Central,2018-01-01,2632.33,SVR
+Furniture,East,2018-01-01,2095.99,SVR
+Furniture,South,2018-01-01,1408.45,SVR
+Furniture,West,2018-01-01,3331.44,SVR
+Office Supplies,Central,2018-01-01,6094.56,SVR
+Office Supplies,East,2018-01-01,3556.6,SVR
+Office Supplies,South,2018-01-01,1961.39,SVR
+Office Supplies,West,2018-01-01,5668.71,SVR
+Technology,Central,2018-01-01,4013.13,SVR
+Technology,East,2018-01-01,1484.68,SVR
+Technology,South,2018-01-01,2666.1,SVR
+Technology,West,2018-01-01,6174.73,SVR
+Furniture,Central,2018-02-01,1855.23,SVR
+Furniture,East,2018-02-01,2350.29,SVR
+Furniture,South,2018-02-01,1506.95,SVR
+Furniture,West,2018-02-01,2791.98,SVR
+Office Supplies,Central,2018-02-01,1878.85,SVR
+Office Supplies,East,2018-02-01,2290.75,SVR
+Office Supplies,South,2018-02-01,2013.47,SVR
+Office Supplies,West,2018-02-01,4142.75,SVR
+Technology,Central,2018-02-01,1374.74,SVR
+Technology,East,2018-02-01,3281.02,SVR
+Technology,South,2018-02-01,620.07,SVR
+Technology,West,2018-02-01,5056.63,SVR
+Furniture,Central,2018-03-01,3471.49,SVR
+Furniture,East,2018-03-01,3294.93,SVR
+Furniture,South,2018-03-01,2275.89,SVR
+Furniture,West,2018-03-01,3633.41,SVR
+Office Supplies,Central,2018-03-01,3100.12,SVR
+Office Supplies,East,2018-03-01,4137.38,SVR
+Office Supplies,South,2018-03-01,2878.64,SVR
+Office Supplies,West,2018-03-01,5879.37,SVR
+Technology,Central,2018-03-01,2994.41,SVR
+Technology,East,2018-03-01,6028.35,SVR
+Technology,South,2018-03-01,3537.69,SVR
+Technology,West,2018-03-01,7237.82,SVR
+Furniture,Central,2018-04-01,2485.19,SVR
+Furniture,East,2018-04-01,4073.34,SVR
+Furniture,South,2018-04-01,3011.14,SVR
+Furniture,West,2018-04-01,4904.63,SVR
+Office Supplies,Central,2018-04-01,3589.16,SVR
+Office Supplies,East,2018-04-01,5252.59,SVR
+Office Supplies,South,2018-04-01,3264.39,SVR
+Office Supplies,West,2018-04-01,5878.77,SVR
+Technology,Central,2018-04-01,2490.01,SVR
+Technology,East,2018-04-01,6286.4,SVR
+Technology,South,2018-04-01,3265.02,SVR
+Technology,West,2018-04-01,6587.79,SVR
+Furniture,Central,2018-05-01,3114.88,SVR
+Furniture,East,2018-05-01,4263.97,SVR
+Furniture,South,2018-05-01,2622.18,SVR
+Furniture,West,2018-05-01,5223.6,SVR
+Office Supplies,Central,2018-05-01,3862.92,SVR
+Office Supplies,East,2018-05-01,5045.61,SVR
+Office Supplies,South,2018-05-01,3159.03,SVR
+Office Supplies,West,2018-05-01,6566.94,SVR
+Technology,Central,2018-05-01,2965.84,SVR
+Technology,East,2018-05-01,7015.71,SVR
+Technology,South,2018-05-01,3440.47,SVR
+Technology,West,2018-05-01,6625.54,SVR
+Furniture,Central,2018-06-01,2876.56,SVR
+Furniture,East,2018-06-01,4589.34,SVR
+Furniture,South,2018-06-01,2548.72,SVR
+Furniture,West,2018-06-01,5538.95,SVR
+Office Supplies,Central,2018-06-01,3523.5,SVR
+Office Supplies,East,2018-06-01,5342.37,SVR
+Office Supplies,South,2018-06-01,3061.72,SVR
+Office Supplies,West,2018-06-01,6513.45,SVR
+Technology,Central,2018-06-01,2837.97,SVR
+Technology,East,2018-06-01,7462.86,SVR
+Technology,South,2018-06-01,3318.69,SVR
+Technology,West,2018-06-01,5853.34,SVR
+Furniture,Central,2018-07-01,2577.61,SVR
+Furniture,East,2018-07-01,4420.03,SVR
+Furniture,South,2018-07-01,2554.75,SVR
+Furniture,West,2018-07-01,5441.81,SVR
+Office Supplies,Central,2018-07-01,3419.73,SVR
+Office Supplies,East,2018-07-01,5225.62,SVR
+Office Supplies,South,2018-07-01,2827.75,SVR
+Office Supplies,West,2018-07-01,6031.51,SVR
+Technology,Central,2018-07-01,2699.36,SVR
+Technology,East,2018-07-01,7453.87,SVR
+Technology,South,2018-07-01,2847.98,SVR
+Technology,West,2018-07-01,6327.46,SVR
+Furniture,Central,2018-08-01,2628.76,SVR
+Furniture,East,2018-08-01,6744.44,SVR
+Furniture,South,2018-08-01,2861.62,SVR
+Furniture,West,2018-08-01,6293.51,SVR
+Office Supplies,Central,2018-08-01,3631.48,SVR
+Office Supplies,East,2018-08-01,7266.1,SVR
+Office Supplies,South,2018-08-01,3756.16,SVR
+Office Supplies,West,2018-08-01,8532.2,SVR
+Technology,Central,2018-08-01,3215.34,SVR
+Technology,East,2018-08-01,7341.4,SVR
+Technology,South,2018-08-01,4087.19,SVR
+Technology,West,2018-08-01,6106.8,SVR
+Furniture,Central,2018-09-01,4607.94,SVR
+Furniture,East,2018-09-01,8795.06,SVR
+Furniture,South,2018-09-01,3546.09,SVR
+Furniture,West,2018-09-01,9849.0,SVR
+Office Supplies,Central,2018-09-01,5037.46,SVR
+Office Supplies,East,2018-09-01,8677.01,SVR
+Office Supplies,South,2018-09-01,5296.77,SVR
+Office Supplies,West,2018-09-01,10188.18,SVR
+Technology,Central,2018-09-01,4385.94,SVR
+Technology,East,2018-09-01,12439.21,SVR
+Technology,South,2018-09-01,3753.92,SVR
+Technology,West,2018-09-01,6890.69,SVR
+Furniture,Central,2018-10-01,4699.17,SVR
+Furniture,East,2018-10-01,7854.76,SVR
+Furniture,South,2018-10-01,6081.13,SVR
+Furniture,West,2018-10-01,8810.32,SVR
+Office Supplies,Central,2018-10-01,5930.19,SVR
+Office Supplies,East,2018-10-01,7379.09,SVR
+Office Supplies,South,2018-10-01,5375.38,SVR
+Office Supplies,West,2018-10-01,11929.79,SVR
+Technology,Central,2018-10-01,4428.13,SVR
+Technology,East,2018-10-01,15833.69,SVR
+Technology,South,2018-10-01,4482.36,SVR
+Technology,West,2018-10-01,7683.36,SVR
+Furniture,Central,2018-11-01,5715.35,SVR
+Furniture,East,2018-11-01,10442.09,SVR
+Furniture,South,2018-11-01,6298.64,SVR
+Furniture,West,2018-11-01,13073.51,SVR
+Office Supplies,Central,2018-11-01,6676.18,SVR
+Office Supplies,East,2018-11-01,11319.91,SVR
+Office Supplies,South,2018-11-01,6544.15,SVR
+Office Supplies,West,2018-11-01,10401.3,SVR
+Technology,Central,2018-11-01,4529.71,SVR
+Technology,East,2018-11-01,15560.37,SVR
+Technology,South,2018-11-01,6004.31,SVR
+Technology,West,2018-11-01,9355.89,SVR
+Furniture,Central,2018-12-01,5568.0,SVR
+Furniture,East,2018-12-01,7142.7,SVR
+Furniture,South,2018-12-01,5200.76,SVR
+Furniture,West,2018-12-01,11243.98,SVR
+Office Supplies,Central,2018-12-01,6524.82,SVR
+Office Supplies,East,2018-12-01,8408.53,SVR
+Office Supplies,South,2018-12-01,5409.47,SVR
+Office Supplies,West,2018-12-01,10230.27,SVR
+Technology,Central,2018-12-01,4099.44,SVR
+Technology,East,2018-12-01,6105.83,SVR
+Technology,South,2018-12-01,4561.97,SVR
+Technology,West,2018-12-01,8390.86,SVR
+Furniture,Central,2018-01-01,2360.1,Perfil jerárquico (original)
+Furniture,East,2018-01-01,3186.48,Perfil jerárquico (original)
+Furniture,South,2018-01-01,2004.78,Perfil jerárquico (original)
+Furniture,West,2018-01-01,3754.09,Perfil jerárquico (original)
+Office Supplies,Central,2018-01-01,3117.43,Perfil jerárquico (original)
+Office Supplies,East,2018-01-01,3440.72,Perfil jerárquico (original)
+Office Supplies,South,2018-01-01,2109.7,Perfil jerárquico (original)
+Office Supplies,West,2018-01-01,4376.14,Perfil jerárquico (original)
+Technology,Central,2018-01-01,2323.61,Perfil jerárquico (original)
+Technology,East,2018-01-01,4559.46,Perfil jerárquico (original)
+Technology,South,2018-01-01,2377.85,Perfil jerárquico (original)
+Technology,West,2018-01-01,5087.68,Perfil jerárquico (original)
+Furniture,Central,2018-02-01,2029.44,Perfil jerárquico (original)
+Furniture,East,2018-02-01,2846.69,Perfil jerárquico (original)
+Furniture,South,2018-02-01,1800.92,Perfil jerárquico (original)
+Furniture,West,2018-02-01,3345.97,Perfil jerárquico (original)
+Office Supplies,Central,2018-02-01,2246.17,Perfil jerárquico (original)
+Office Supplies,East,2018-02-01,2957.23,Perfil jerárquico (original)
+Office Supplies,South,2018-02-01,1886.31,Perfil jerárquico (original)
+Office Supplies,West,2018-02-01,3734.84,Perfil jerárquico (original)
+Technology,Central,2018-02-01,1798.11,Perfil jerárquico (original)
+Technology,East,2018-02-01,4088.14,Perfil jerárquico (original)
+Technology,South,2018-02-01,1984.33,Perfil jerárquico (original)
+Technology,West,2018-02-01,4356.3,Perfil jerárquico (original)
+Furniture,Central,2018-03-01,4339.42,Perfil jerárquico (original)
+Furniture,East,2018-03-01,5956.13,Perfil jerárquico (original)
+Furniture,South,2018-03-01,3804.18,Perfil jerárquico (original)
+Furniture,West,2018-03-01,6824.18,Perfil jerárquico (original)
+Office Supplies,Central,2018-03-01,4736.15,Perfil jerárquico (original)
+Office Supplies,East,2018-03-01,6240.09,Perfil jerárquico (original)
+Office Supplies,South,2018-03-01,3958.77,Perfil jerárquico (original)
+Office Supplies,West,2018-03-01,7798.49,Perfil jerárquico (original)
+Technology,Central,2018-03-01,3826.86,Perfil jerárquico (original)
+Technology,East,2018-03-01,8703.56,Perfil jerárquico (original)
+Technology,South,2018-03-01,4297.63,Perfil jerárquico (original)
+Technology,West,2018-03-01,9564.35,Perfil jerárquico (original)
+Furniture,Central,2018-04-01,2986.87,Perfil jerárquico (original)
+Furniture,East,2018-04-01,4786.58,Perfil jerárquico (original)
+Furniture,South,2018-04-01,3127.94,Perfil jerárquico (original)
+Furniture,West,2018-04-01,5483.17,Perfil jerárquico (original)
+Office Supplies,Central,2018-04-01,3645.53,Perfil jerárquico (original)
+Office Supplies,East,2018-04-01,5053.59,Perfil jerárquico (original)
+Office Supplies,South,2018-04-01,3092.83,Perfil jerárquico (original)
+Office Supplies,West,2018-04-01,5876.73,Perfil jerárquico (original)
+Technology,Central,2018-04-01,2778.22,Perfil jerárquico (original)
+Technology,East,2018-04-01,6808.72,Perfil jerárquico (original)
+Technology,South,2018-04-01,3216.41,Perfil jerárquico (original)
+Technology,West,2018-04-01,6170.76,Perfil jerárquico (original)
+Furniture,Central,2018-05-01,3769.54,Perfil jerárquico (original)
+Furniture,East,2018-05-01,5890.54,Perfil jerárquico (original)
+Furniture,South,2018-05-01,3837.35,Perfil jerárquico (original)
+Furniture,West,2018-05-01,6841.7,Perfil jerárquico (original)
+Office Supplies,Central,2018-05-01,4551.01,Perfil jerárquico (original)
+Office Supplies,East,2018-05-01,5820.07,Perfil jerárquico (original)
+Office Supplies,South,2018-05-01,3584.26,Perfil jerárquico (original)
+Office Supplies,West,2018-05-01,7319.24,Perfil jerárquico (original)
+Technology,Central,2018-05-01,3508.67,Perfil jerárquico (original)
+Technology,East,2018-05-01,8635.59,Perfil jerárquico (original)
+Technology,South,2018-05-01,3955.53,Perfil jerárquico (original)
+Technology,West,2018-05-01,7158.84,Perfil jerárquico (original)
+Furniture,Central,2018-06-01,3343.04,Perfil jerárquico (original)
+Furniture,East,2018-06-01,5608.16,Perfil jerárquico (original)
+Furniture,South,2018-06-01,3137.25,Perfil jerárquico (original)
+Furniture,West,2018-06-01,6549.16,Perfil jerárquico (original)
+Office Supplies,Central,2018-06-01,4013.79,Perfil jerárquico (original)
+Office Supplies,East,2018-06-01,5555.53,Perfil jerárquico (original)
+Office Supplies,South,2018-06-01,3335.81,Perfil jerárquico (original)
+Office Supplies,West,2018-06-01,6845.56,Perfil jerárquico (original)
+Technology,Central,2018-06-01,3308.7,Perfil jerárquico (original)
+Technology,East,2018-06-01,8383.27,Perfil jerárquico (original)
+Technology,South,2018-06-01,3719.26,Perfil jerárquico (original)
+Technology,West,2018-06-01,6173.15,Perfil jerárquico (original)
+Furniture,Central,2018-07-01,2779.67,Perfil jerárquico (original)
+Furniture,East,2018-07-01,4953.76,Perfil jerárquico (original)
+Furniture,South,2018-07-01,2813.77,Perfil jerárquico (original)
+Furniture,West,2018-07-01,5731.18,Perfil jerárquico (original)
+Office Supplies,Central,2018-07-01,3478.95,Perfil jerárquico (original)
+Office Supplies,East,2018-07-01,4956.01,Perfil jerárquico (original)
+Office Supplies,South,2018-07-01,2989.94,Perfil jerárquico (original)
+Office Supplies,West,2018-07-01,6112.31,Perfil jerárquico (original)
+Technology,Central,2018-07-01,2940.65,Perfil jerárquico (original)
+Technology,East,2018-07-01,7543.94,Perfil jerárquico (original)
+Technology,South,2018-07-01,3243.18,Perfil jerárquico (original)
+Technology,West,2018-07-01,5939.05,Perfil jerárquico (original)
+Furniture,Central,2018-08-01,3359.9,Perfil jerárquico (original)
+Furniture,East,2018-08-01,6248.94,Perfil jerárquico (original)
+Furniture,South,2018-08-01,3438.08,Perfil jerárquico (original)
+Furniture,West,2018-08-01,6958.71,Perfil jerárquico (original)
+Office Supplies,Central,2018-08-01,4136.9,Perfil jerárquico (original)
+Office Supplies,East,2018-08-01,6248.03,Perfil jerárquico (original)
+Office Supplies,South,2018-08-01,3791.03,Perfil jerárquico (original)
+Office Supplies,West,2018-08-01,7714.85,Perfil jerárquico (original)
+Technology,Central,2018-08-01,3585.0,Perfil jerárquico (original)
+Technology,East,2018-08-01,9094.14,Perfil jerárquico (original)
+Technology,South,2018-08-01,4116.94,Perfil jerárquico (original)
+Technology,West,2018-08-01,6160.92,Perfil jerárquico (original)
+Furniture,Central,2018-09-01,6205.93,Perfil jerárquico (original)
+Furniture,East,2018-09-01,10273.57,Perfil jerárquico (original)
+Furniture,South,2018-09-01,6137.44,Perfil jerárquico (original)
+Furniture,West,2018-09-01,12344.1,Perfil jerárquico (original)
+Office Supplies,Central,2018-09-01,7339.55,Perfil jerárquico (original)
+Office Supplies,East,2018-09-01,10074.17,Perfil jerárquico (original)
+Office Supplies,South,2018-09-01,6566.79,Perfil jerárquico (original)
+Office Supplies,West,2018-09-01,12195.46,Perfil jerárquico (original)
+Technology,Central,2018-09-01,6164.48,Perfil jerárquico (original)
+Technology,East,2018-09-01,16663.15,Perfil jerárquico (original)
+Technology,South,2018-09-01,6853.65,Perfil jerárquico (original)
+Technology,West,2018-09-01,10349.14,Perfil jerárquico (original)
+Furniture,Central,2018-10-01,4482.66,Perfil jerárquico (original)
+Furniture,East,2018-10-01,7128.61,Perfil jerárquico (original)
+Furniture,South,2018-10-01,4895.18,Perfil jerárquico (original)
+Furniture,West,2018-10-01,8684.41,Perfil jerárquico (original)
+Office Supplies,Central,2018-10-01,5440.55,Perfil jerárquico (original)
+Office Supplies,East,2018-10-01,7157.43,Perfil jerárquico (original)
+Office Supplies,South,2018-10-01,4545.86,Perfil jerárquico (original)
+Office Supplies,West,2018-10-01,8700.57,Perfil jerárquico (original)
+Technology,Central,2018-10-01,4189.53,Perfil jerárquico (original)
+Technology,East,2018-10-01,12379.05,Perfil jerárquico (original)
+Technology,South,2018-10-01,5350.48,Perfil jerárquico (original)
+Technology,West,2018-10-01,7829.03,Perfil jerárquico (original)
+Furniture,Central,2018-11-01,7594.82,Perfil jerárquico (original)
+Furniture,East,2018-11-01,12038.09,Perfil jerárquico (original)
+Furniture,South,2018-11-01,7661.04,Perfil jerárquico (original)
+Furniture,West,2018-11-01,14995.14,Perfil jerárquico (original)
+Office Supplies,Central,2018-11-01,9136.45,Perfil jerárquico (original)
+Office Supplies,East,2018-11-01,12566.23,Perfil jerárquico (original)
+Office Supplies,South,2018-11-01,7632.93,Perfil jerárquico (original)
+Office Supplies,West,2018-11-01,14004.44,Perfil jerárquico (original)
+Technology,Central,2018-11-01,6942.08,Perfil jerárquico (original)
+Technology,East,2018-11-01,18534.66,Perfil jerárquico (original)
+Technology,South,2018-11-01,9539.1,Perfil jerárquico (original)
+Technology,West,2018-11-01,13457.2,Perfil jerárquico (original)
+Furniture,Central,2018-12-01,7233.51,Perfil jerárquico (original)
+Furniture,East,2018-12-01,10959.3,Perfil jerárquico (original)
+Furniture,South,2018-12-01,6996.82,Perfil jerárquico (original)
+Furniture,West,2018-12-01,13627.18,Perfil jerárquico (original)
+Office Supplies,Central,2018-12-01,8691.43,Perfil jerárquico (original)
+Office Supplies,East,2018-12-01,11318.26,Perfil jerárquico (original)
+Office Supplies,South,2018-12-01,7074.29,Perfil jerárquico (original)
+Office Supplies,West,2018-12-01,13654.58,Perfil jerárquico (original)
+Technology,Central,2018-12-01,6676.98,Perfil jerárquico (original)
+Technology,East,2018-12-01,15848.85,Perfil jerárquico (original)
+Technology,South,2018-12-01,7739.05,Perfil jerárquico (original)
+Technology,West,2018-12-01,12962.39,Perfil jerárquico (original)

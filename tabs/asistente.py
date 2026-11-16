@@ -65,7 +65,7 @@ PESTANAS = {
                     "¿Qué categoría vendió más en 2017?"]),
     "eda": ("EDA", ["¿En qué meses se concentran las ventas?",
                     "¿Qué segmento de cliente compra más y cómo ha cambiado?"]),
-    "modelos": ("Modelos y resultados", ["¿Por qué se eligió Random Forest?",
+    "modelos": ("Modelos y resultados", ["¿Qué modelo pronostica mejor y con qué certeza?",
                                          "¿Qué modelo quedó en segundo lugar?"]),
     "proyeccion": ("Proyección y predicción", ["¿Qué región crece más en 2018?",
                                                "¿Cómo interpreto el índice de la predicción?"]),

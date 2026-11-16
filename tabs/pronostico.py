@@ -58,7 +58,7 @@ def layout():
         html.Div([
             html.Div([
                 html.H2("Pronóstico de ventas 2018", className="pron-titulo"),
-                html.P("Random Forest, proyección recursiva mes a mes. Elige un filtro y presiona Predecir.",
+                html.P("Perfil estacional jerárquico, proyección recursiva mes a mes. Elige un filtro y presiona Predecir.",
                        className="pron-sub"),
             ]),
             html.Div([

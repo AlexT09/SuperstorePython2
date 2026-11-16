@@ -210,7 +210,8 @@ def base_conocimiento() -> str:
     datos = f"""\
 DATOS DEL PROYECTO
 
-MODELO: {r['mejor_modelo']} (mejor de 7 modelos por validación cruzada temporal {r['validacion']}). \
+MODELO: {r['mejor_modelo']} (modelo propio; menor error de 11 modelos en {r['validacion']}, aunque la \
+diferencia frente al segundo, SVR, no es estadísticamente significativa). \
 Entrenado con {r['entrenamiento']}, probado proyectando {r['prueba_periodo']} sin conocerlo, y reentrenado con \
 2015-2017 para proyectar 2018. Error de la proyección a 12 meses en la prueba 2017: {error_total:.1f} % mensual \
 para el total de la empresa; el total anual 2017 quedó a {r['prueba_recursiva']['total_desvio_total_pct']:+.1f} % \
@@ -253,10 +254,10 @@ B5) Pedidos, clientes y venta promedio por pedido por año:
 
 C. MODELOS
 
-C1) Comparación en la prueba 2017 (MAE_pct = error por serie, total_MAE_pct = error del total; \
+C1) Comparación en 24 meses de origen móvil, 2016-2017 (MAE_pct = error por serie, total_MAE_pct = error del total; \
 "{REFERENCIA}" es la regla simple de vender lo mismo que el año anterior):
 {_csv(res, 1)}
-C2) Importancia de las variables (caída del desempeño al desordenar cada variable):
+C2) Importancia de las variables en el modelo elegido (valor absoluto medio de Shapley, en unidades del índice):
 {_csv(imp, 4)}
 
 D. DATOS SECUNDARIOS: RENTABILIDAD (histórica; el modelo no la proyecta; usar solo si la piden)

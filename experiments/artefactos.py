@@ -55,6 +55,59 @@ def proyectar(predecir, panel, meses):
     return hist[hist.Mes.isin(meses)].rename(columns={"Sales": "Proyeccion"})
 
 
+def puente(panel, datos, pred, mejores, proy_original, shap):
+    """Resumen del modelo original en el formato que leen las secciones de proyección y el asistente.
+
+    Además de la evaluación de origen móvil, mide el caso de uso real: proyectar un año completo
+    (el último, 2017) solo con la historia anterior, igual que se proyecta 2018.
+    """
+    from model.evaluate import metricas, metricas_total
+    from model.features import NOMBRES
+    LEG = C.ROOT / "model" / "artifacts"
+    anio = int(datos.Mes.dt.year.max())
+    train, test = datos[datos.Mes.dt.year < anio], datos[datos.Mes.dt.year == anio]
+    r = optimizar("bayes", PerfilEstacionalJerarquico(), None, C.ESPACIO_ORIGINAL, train, train[TARGET], cv_interna(train),
+                  n=C.PRESUPUESTO, semilla=C.SEMILLA)
+    m = PerfilEstacionalJerarquico(**r["params"]).fit(train, train[TARGET])
+    un_paso = a_ventas(m.predict(test), test)
+    meses = pd.date_range(f"{anio}-01-01", periods=12, freq="MS")
+    rec = proyectar(lambda f: a_ventas(m.predict(f), f), panel[panel.Mes.dt.year < anio], meses)
+    rec = rec.merge(panel, on=["Category", "Region", "Mes"])
+    rec.round(2).to_csv(LEG / "prueba_recursiva_2017.csv", index=False)
+    proy_original[["Category", "Region", "Mes", "Proyeccion"]].round(2).to_csv(LEG / "proyeccion_2018.csv", index=False)
+
+    claves = ["MAE", "RMSE", "R2", "MAE_pct", "total_MAE", "total_MAE_pct", "total_R2", "total_desvio_total_pct"]
+    limpio = lambda d: {k: round(float(d[k]), 4) for k in claves}                      # noqa: E731
+    resumen = {
+        "mejor_modelo": "Perfil estacional jerárquico",
+        "hiperparametros": r["params"],
+        "prueba": limpio({**metricas(test.Sales, un_paso), **metricas_total(test, un_paso)}),
+        "referencia": limpio({**metricas(test.Sales, test.lag_12), **metricas_total(test, test.lag_12)}),
+        "prueba_recursiva": {k: round(float(v), 4) for k, v in
+                             {**metricas(rec.Sales, rec.Proyeccion), **metricas_total(rec, rec.Proyeccion)}.items()},
+        "entrenamiento": f"{train.Mes.min():%Y-%m} a {train.Mes.max():%Y-%m}",
+        "prueba_periodo": f"{test.Mes.min():%Y-%m} a {test.Mes.max():%Y-%m}",
+        "filas": {"entrenamiento": len(train), "prueba": len(test)},
+        "validacion": "origen móvil de 24 meses con validación cruzada temporal anidada",
+        "ventas_2017": round(float(panel[panel.Mes.dt.year == anio].Sales.sum()), 2),
+        "proyeccion_2018": round(float(proy_original.Proyeccion.sum()), 2),
+        "semilla": C.SEMILLA,
+    }
+    (LEG / "resumen.json").write_text(json.dumps(resumen, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    # Resultados del bucle externo por modelo (mejor combinación), con el nombre de referencia que usa la app
+    filas = []
+    for f in mejores.reset_index().itertuples():
+        p = pred[f.columna]
+        nombre = "Referencia (año anterior)" if f.modelo == C.INGENUO else f.modelo
+        filas.append({"modelo": nombre, "optimizador": f.optimizador, **metricas(pred.Sales, p), **metricas_total(pred, p)})
+    pd.DataFrame(filas).round(4).to_csv(LEG / "resultados_modelos.csv", index=False)
+    imp = pd.DataFrame(shap)
+    imp = imp[imp.modelo == C.ORIGINAL].assign(nombre=lambda d: d.variable.map(NOMBRES))
+    imp[["variable", "importancia", "nombre"]].sort_values("importancia", ascending=False).to_csv(LEG / "importancia.csv", index=False)
+    print("Proyección de 2017 solo con historia previa:", resumen["prueba_recursiva"])
+
+
 def main():
     warnings.filterwarnings("ignore")
     ART.mkdir(exist_ok=True)
@@ -124,6 +177,7 @@ def main():
               f"2018: {p.Proyeccion.sum():,.0f}", flush=True)
 
     meta["ventas_ultimo_anio"] = float(panel[panel.Mes.dt.year == panel.Mes.dt.year.max()].Sales.sum())
+    puente(panel, datos, pred, mejores, proy[-1], shap)
     pd.concat(proy).round(2).to_csv(ART / "proyeccion_2018.csv", index=False)
     pd.DataFrame(shap).to_csv(ART / "shapley_global.csv", index=False)
     (ART / "metadata.json").write_text(json.dumps(meta, indent=2, ensure_ascii=False, default=str), encoding="utf-8")

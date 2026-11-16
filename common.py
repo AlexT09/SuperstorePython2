@@ -15,7 +15,7 @@ from dash import html
 ROOT = Path(__file__).resolve().parent
 DATA_PATH = ROOT / "data" / "superstore_transformado.csv"
 MENSUAL_PATH = ROOT / "data" / "ventas_mensuales.csv"
-ART = ROOT / "model" / "artifacts"  # salidas de model/train_model.py
+ART = ROOT / "model" / "artifacts"  # resumen y proyección del modelo elegido (experiments/artefactos.py)
 
 # ---------------------------------------------------------------- colores
 # Tema oscuro: fondo azul petróleo, tarjetas de vidrio y texto blanco.
@@ -185,3 +185,18 @@ def insight(children):
     return html.P(children, className="insight-text")
 
 
+
+
+def tabla_datos(df, id_=None, filtro=False, pagina=None, condicional=None):
+    """Tabla ordenable (dash_table.DataTable) con el estilo de la app. `df` ya viene con el texto final."""
+    from dash import dash_table
+    return dash_table.DataTable(
+        df.to_dict("records"), [{"name": c, "id": c} for c in df.columns], **({"id": id_} if id_ else {}),
+        sort_action="native", filter_action="native" if filtro else "none", page_size=pagina or len(df) or 1,
+        style_as_list_view=True, style_table={"overflowX": "auto"},
+        style_cell={"fontFamily": "Inter, sans-serif", "fontSize": "13px", "padding": "7px", "color": TEXT,
+                    "textAlign": "left", "backgroundColor": "rgba(0,0,0,0)", "border": "none",
+                    "borderBottom": "1px solid rgba(255,255,255,.12)", "whiteSpace": "normal", "height": "auto"},
+        style_header={"backgroundColor": BRAND_LIGHT, "fontWeight": "600", "color": TEXT},
+        style_filter={"backgroundColor": "rgba(255,255,255,.06)", "color": TEXT},
+        style_data_conditional=condicional or [])

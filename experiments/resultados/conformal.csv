@@ -1,0 +1,17 @@
+conjunto,modelo,columna,nivel,cobertura,ancho_medio,n
+superstore,original,Perfil jerárquico (original)|bayes,0.8,0.8055555555555556,7301.712933610921,144
+superstore,original,Perfil jerárquico (original)|bayes,0.9,0.8819444444444444,10244.643503262367,144
+superstore,mejor referencia,SVR|grid,0.8,0.8402777777777778,8548.789303577829,144
+superstore,mejor referencia,SVR|grid,0.9,0.9236111111111112,12122.549375927192,144
+turismo,original,Perfil jerárquico (original)|bayes,0.8,0.8090277777777778,2951.1818603100164,288
+turismo,original,Perfil jerárquico (original)|bayes,0.9,0.9305555555555556,4441.536748831372,288
+turismo,mejor referencia,KNN|bayes,0.8,0.8506944444444444,3178.315142445355,288
+turismo,mejor referencia,KNN|bayes,0.9,0.9409722222222222,4545.58263085947,288
+hospital,original,Perfil jerárquico (original)|bayes,0.8,0.7673611111111112,173.26174149558204,288
+hospital,original,Perfil jerárquico (original)|bayes,0.9,0.9027777777777778,268.6781972746696,288
+hospital,mejor referencia,SVR|bayes,0.8,0.7604166666666666,176.9083795208777,288
+hospital,mejor referencia,SVR|bayes,0.9,0.8993055555555556,257.7782561629001,288
+m3,original,Perfil jerárquico (original)|bayes,0.8,0.8298611111111112,669.6180147771515,288
+m3,original,Perfil jerárquico (original)|bayes,0.9,0.9201388888888888,1134.9025971410842,288
+m3,mejor referencia,Theta|-,0.8,0.8090277777777778,376.5421867248222,288
+m3,mejor referencia,Theta|-,0.9,0.8888888888888888,763.1559642295001,288

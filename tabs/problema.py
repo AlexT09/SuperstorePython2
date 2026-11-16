@@ -30,12 +30,13 @@ def layout():
                 html.Li(["Analizar la distribución de ", html.Code("Sales"), " y cómo varía según ",
                          html.Code("Category"), ", ", html.Code("Region"), ", ", html.Code("Segment"),
                          " y el tiempo (EDA)."]),
-                html.Li("Entrenar y ajustar 7 modelos de regresión (Ridge, Lasso, KNN, Árbol de "
-                        "decisión, Random Forest, XGBoost y SVR)."),
-                html.Li("Compararlos entre sí y contra una referencia simple (vender lo mismo que el mismo "
-                        "mes del año anterior) con MAE, RMSE y R²."),
-                html.Li("Proyectar las ventas de 2018 con el mejor modelo y traducirlas en "
-                        "recomendaciones para el negocio."),
+                html.Li("Entrenar 7 modelos de regresión (KNN, Ridge, Lasso, Árbol de decisión, Random Forest, "
+                        "XGBoost y SVR), cada uno con cuatro métodos de optimización de hiperparámetros."),
+                html.Li("Proponer y programar un modelo propio que aproveche lo que el análisis exploratorio "
+                        "muestra: un patrón estacional común a todas las series."),
+                html.Li("Comparar todos los modelos con validación anidada y pruebas de hipótesis fijadas de "
+                        "antemano, también en tres conjuntos de datos adicionales."),
+                html.Li("Proyectar las ventas de 2018 y traducirlas en recomendaciones para el negocio."),
             ], className="mb-0"), "blue"), md=7, className="mb-3"),
             dbc.Col(soft_card("Justificación", html.P(
                 "Las ventas tienen un patrón estacional claro (suben hacia fin de año) y una tendencia de "

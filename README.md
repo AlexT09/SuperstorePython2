@@ -1,190 +1,153 @@
-# Proyección de ventas Sample Superstore
+# Pronóstico de ventas Sample Superstore
 
-Análisis y proyección de ventas del dataset **Sample Superstore** (2014–2017), en dos partes:
+Pronóstico mensual de ventas por categoría y región con el conjunto **Sample Superstore** (2014–2017):
+siete modelos de aprendizaje automático, cuatro métodos de optimización de hiperparámetros y un
+modelo propio, comparados con validación anidada y pruebas de hipótesis registradas de antemano.
 
-1. **EDA:** ¿qué factores (categoría, región, segmento, tiempo) explican el nivel de ventas?
-2. **Machine learning:** ¿cuánto venderá cada categoría en cada región, mes a mes, durante 2018?
+**Autores:** Alex Teran y David Estrada · **Licencia:** MIT · **Cómo citarlo:** `CITATION.cff`
 
-## Contenido
+- **Tablero (Dash):** https://superstorepython.onrender.com
+- **Informe (Jupyter Book):** https://alext09.github.io/SuperstorePython/
 
-El proyecto se presenta de dos formas, con los mismos datos y el mismo modelo:
+## Resultados en una tabla
 
-- **App Dash** (`app.py`): panel interactivo. Publicada en **https://superstorepython.onrender.com**
-  (también se puede correr en local, ver [Cómo correr el proyecto](#cómo-correr-el-proyecto)).
-- **Libro Jupyter Book** (`libro/`): el trabajo en notebooks, con el código comentado y el
-  entrenamiento de los modelos a la vista. Publicado en **https://alext09.github.io/SuperstorePython/**
-  (ver [Libro (Jupyter Book)](#libro-jupyter-book)).
+24 meses (2016–2017) pronosticados uno a uno, reentrenando cada mes; 288 pronósticos por modelo.
 
-### App Dash
+| Modelo (mejor combinación) | MAE por serie y mes (USD) | Desvío del total |
+|---|---|---|
+| **Perfil estacional jerárquico (modelo propio)** | **2.310** | −5,1 % |
+| SVR (Grid Search) | 2.366 | −18,2 % |
+| Random Forest (Random Search) | 2.390 | −4,9 % |
+| KNN (Random Search) | 2.436 | −5,5 % |
+| HistGradientBoosting (bayesiana) | 2.439 | −4,1 % |
+| Árbol de decisión (bayesiana) | 2.480 | −6,8 % |
+| XGBoost (bayesiana) | 2.481 | −4,8 % |
+| Lasso (genética) | 2.501 | −6,1 % |
+| Ridge (Random Search) | 2.514 | −6,4 % |
+| Ingenuo estacional (repetir el año anterior) | 2.728 | −19,6 % |
+| Theta | 2.756 | −0,2 % |
 
-Una pestaña por etapa del proyecto:
+**Veredicto: el modelo propio no es superior.** Tiene el menor error, pero la diferencia frente a SVR
+(−55 USD, intervalo del 95 % [−218, +134]) no es estadísticamente significativa, su ventaja viene
+toda de 2016 y no se repite en los tres conjuntos adicionales (tercero en turismo, noveno en
+hospital, décimo en M3). Es significativamente mejor que repetir el año anterior. Detalle en el
+informe y en `MODEL_CARD.md`.
 
-| Pestaña | Qué muestra |
+**Proyección 2018:** 886.866 USD (+21 % frente a 2017).
+
+## El modelo propio
+
+`src/original_model.py` — un perfil estacional común, estimado con todas las series, que cada serie
+corrige con sus ventas del mismo mes del año anterior mediante un peso propio. Los pesos se aprenden
+minimizando el error con una penalización que los acerca a un peso común; las reglas de
+actualización se derivan del objetivo y convergen al mínimo (demostración en el capítulo 5 del
+informe). Solo usa `numpy` y es compatible con scikit-learn. Pruebas: `tests/test_original_model.py`.
+
+## Tablero
+
+Tres secciones, cada una con sus pestañas:
+
+| Sección | Contenido |
 |---|---|
-| Introducción · Problema y objetivos · Marco teórico · Metodología | Planteamiento, modelos, variables y flujo |
-| ETL | Del CSV crudo a la tabla mensual que usa el modelo |
-| EDA | Distribución de las ventas, factores, estacionalidad, tendencia, atípicos, relación con el mes del año anterior, mapas por estado (ventas totales y venta mediana por línea), correlación de Sales con cantidad y descuento, contenedores 2D (descuento vs. ventas) y burbujas por subcategoría |
-| Modelos y resultados | 7 modelos evaluados en 2017, ranking frente a la referencia, rejillas de Grid Search, sobreajuste (entrenamiento vs. prueba), importancia de variables y prueba de la proyección a 12 meses; al final, el entrenamiento del modelo: elige uno de los 7 modelos, lo entrena al presionar un botón (Grid Search con validación cruzada temporal y evaluación en 2017) y permite descargarlo como `.pkl` |
-| Proyección y predicción | Proyección 2018 por categoría, región y mes, con su error típico, y al final la predicción interactiva: formulario que carga `model.pkl` y predice las ventas de un mes en tiempo real |
-| Conclusiones | Hallazgos, recomendaciones y limitaciones |
+| **Contexto** (`/`) | Resumen, problema y objetivos, datos y diccionario, metodología, marco teórico, limitaciones y ética, conclusiones |
+| **EDA** (`/eda`) | Explorador con filtros globales (categoría, región, fechas, descuento): distribución, correlación, explorador de ejes, faltantes y atípicos, descomposición, ACF/PACF y Dickey–Fuller. Análisis exploratorio completo y ETL |
+| **Modelos** (`/modelos`) | Tabla de líderes, las 28 combinaciones y los optimizadores; predicción en vivo con intervalo y explicación; diagnóstico; Model Confidence Set y pruebas; el modelo propio; ficha del modelo; proyección 2018 y pronóstico animado |
 
-Además, en todas las pestañas hay un **Asistente IA** (botón 💬 abajo a la derecha).
+El tablero no entrena nada: carga los modelos de `artifacts/` y las tablas de `experiments/resultados/`.
 
-## Asistente IA
+Hay además un **Asistente IA** flotante (botón 💬) que traduce la proyección en metas, inventario,
+alertas y presupuesto. Usa la librería `openai` con Google Gemini por defecto. Para activarlo, copia
+`.env.example` como `.env` y pon tu clave (gratis en [Google AI Studio](https://aistudio.google.com)).
+El archivo `.env` no se sube al repositorio. Sin clave, el tablero funciona igual.
 
-Asistente de IA de apoyo a la toma de decisiones que traduce la proyección de ventas 2018 en recomendaciones para el
-negocio (objetivo específico 5): **metas** por región, **inventario**, **alertas** y **presupuesto**
-por trimestre, con rangos basados en el error medido al proyectar 2017. También explica qué factores
-explican las ventas (EDA) y cómo se eligió el modelo.
+## Cómo correr el tablero
 
-- Responde con los datos y resultados del proyecto.
-- Atajos de decisión, sugerencias según la pestaña abierta, calificación 👍/👎 de cada respuesta
-  (`logs/chat_feedback.csv`) y descarga de la conversación.
-- Usa la librería `openai`, compatible con varios proveedores. Por defecto, **Google Gemini** (nivel
-  gratuito).
-
-Para activarlo, copia `.env.example` como `.env` y pon tu clave (se crea gratis en
-[Google AI Studio](https://aistudio.google.com) → *Get API key*). El archivo `.env` está en
-`.gitignore`: la clave nunca se sube al repositorio. Sin clave, la app funciona igual y el asistente
-avisa que no puede responder.
-
-## Modelo
-
-- **Qué predice:** las ventas del mes de cada categoría × región (12 series × 48 meses).
-- **Variables:** categoría, región, mes del año y el historial de ventas (mismo mes del año anterior,
-  mes anterior, promedio de 3 meses), todas conocidas antes de empezar el mes.
-- **Objetivo:** un índice, ventas del mes ÷ promedio de los 12 meses anteriores. Se convierte a
-  dólares al final, así la misma regla sirve para series grandes y pequeñas.
-- **Modelos (scikit-learn / XGBoost):** Ridge, Lasso, KNN, Árbol de decisión, Random Forest,
-  XGBoost y SVR, dentro de un `Pipeline` con `OneHotEncoder` y `StandardScaler`.
-- **Ajuste:** `GridSearchCV` con `TimeSeriesSplit` (4 pliegues).
-- **Evaluación:** entrenamiento 2015–2016, prueba 2017, contra la referencia "repetir el mismo mes
-  del año anterior". El mejor modelo se elige por validación cruzada, no por la prueba.
-- **Proyección 2018:** recursivo, mes a mes. Se valida igual: proyectando 2017 completo solo con
-  datos hasta 2016.
-
-Resultado actual: Random Forest, MAE por serie de $2.634 frente a $2.912 de la referencia. En la
-prueba a 12 meses el total anual quedó a +3,4 % del real (la referencia, a −16,9 %), con un error
-típico mensual de ±18 % para el total de la empresa.
-
-## Requisitos
-
-- **Python** 3.10 o superior
-
-## Cómo correr el proyecto
+Requiere Python 3.10.
 
 ```powershell
 python -m venv .venv
 .venv\Scripts\activate       # en macOS/Linux: source .venv/bin/activate
 pip install -r requirements.txt
-copy .env.example .env       # opcional, para el Asistente IA: luego pon tu clave en .env
+copy .env.example .env       # opcional, para el Asistente IA
 python app.py
 ```
 
-Después abre **http://127.0.0.1:8060** en el navegador.
+Después abre **http://127.0.0.1:8060**. En producción (Render): `gunicorn app:server`, con la
+configuración de `render.yaml`.
 
-Los datos procesados y los resultados del modelo ya vienen en el repositorio, así que no hace falta
-regenerarlos. Si cambias el CSV original o el modelo, ejecuta los pasos en este orden:
+## Cómo repetir los experimentos
+
+Los resultados ya vienen en el repositorio. Para recalcularlos, desde la raíz:
 
 ```powershell
-python data/generate_data.py         # CSV crudo -> superstore_transformado.csv y ventas_mensuales.csv
-python model/train_model.py          # entrena y compara (~30 s) -> model/artifacts/
+pip install -r requirements-dev.txt
+python data/generate_data.py              # CSV crudo -> tabla mensual
+python experiments/datos_adicionales.py   # descarga los tres conjuntos adicionales (Zenodo)
+python experiments/ejecutar.py            # validación anidada de todos los modelos (~2 h)
+python experiments/analizar.py            # tablas, pruebas y veredicto
+python experiments/robustez.py            # ruido, menos datos, semillas, escalabilidad
+python experiments/artefactos.py          # modelos finales, metadata.json y proyección 2018
+python -m pytest -q tests                 # pruebas del modelo propio (también en GitHub Actions)
 ```
 
-## Libro (Jupyter Book)
+El protocolo se registró antes de ejecutar los experimentos: `experiments/protocolo.md`, etiqueta de
+Git `protocolo-v1`. Semilla global: 42.
 
-El mismo proyecto en notebooks, en la carpeta `libro/`. Usa los datos (`data/`) y el modelo
-(`model/`) de la raíz del repositorio, así que muestra las mismas cifras que la app. Publicado en
-**https://alext09.github.io/SuperstorePython/**.
+## Informe (Jupyter Book)
 
-| Capítulo | Archivo | Pestaña de la app |
-|---|---|---|
-| Introducción · Problema y objetivos · Marco teórico · Metodología | `intro.md`, `problema.md`, `marco_teorico.md`, `metodologia.md` | Las mismas |
-| ETL | `etl.ipynb` | ETL |
-| EDA | `eda.ipynb` | EDA |
-| Modelos y resultados | `modelos.ipynb` | Modelos y resultados |
-| Proyección 2018 | `proyeccion.ipynb` | Proyección y predicción |
-| Conclusiones | `conclusiones.ipynb` | Conclusiones |
-
-*Modelos y resultados* empieza entrenando los 7 modelos con el código a la vista: división en el
-tiempo, rejillas de hiperparámetros, `GridSearchCV` con `TimeSeriesSplit` y evaluación en 2017.
-Al final comprueba que llega a los mismos resultados guardados en `model/artifacts/`. Todo el código
-de los notebooks está comentado; en el libro se despliega con el botón *Mostrar código*.
-
-La predicción interactiva, el entrenamiento con botón y el Asistente IA son solo de la app
-(https://superstorepython.onrender.com): necesitan un servidor de Python, y GitHub Pages solo sirve
-páginas estáticas.
-
-### Cómo construir el libro
+En la carpeta `book/`. Once capítulos: introducción; planteamiento; datos (ETL y EDA); modelos de
+referencia; literatura y novedad; modelo original; validación estadística; evaluación ampliada;
+dashboard; conclusiones; reproducibilidad y bibliografía.
 
 ```powershell
-pip install -r libro/requirements.txt   # las dependencias de la app más Jupyter Book
-cd libro
-jupyter-book build .                    # ejecuta los notebooks (~1 min) -> libro/_build/html/
+jupyter-book build book/        # -> book/_build/html/index.html
 ```
 
-Ábrelo con doble clic en `libro/_build/html/index.html`. Las gráficas son de Plotly: el libro carga
-plotly.js una sola vez (`_config.yml` → `html_js_files`), por eso en Jupyter los notebooks no las
-muestran y en el libro construido sí.
-
-### Cómo publicarlo
-
-El libro publicado se sirve desde la rama `gh-pages`, que contiene solo el HTML de
-`libro/_build/html/` más un archivo `.nojekyll` (sin él GitHub no sirve las carpetas que empiezan
-con `_`). Para actualizarlo, construye el libro y reemplaza el contenido de esa rama:
+**Publicarlo.** El informe se sirve desde la rama `gh-pages`, que solo contiene el HTML más un
+archivo `.nojekyll`:
 
 ```powershell
-git worktree add ..\gh-pages gh-pages        # la rama en una carpeta aparte
+git worktree add ..\gh-pages gh-pages
 cd ..\gh-pages
 git rm -r -q .
-Copy-Item -Recurse ..\SuperstorePython\libro\_build\html\* .
+Copy-Item -Recurse ..\SuperstorePython\book\_build\html\* .
 New-Item .nojekyll -ItemType File -Force
 git add -A; git commit -m "Publica el libro"; git push origin gh-pages
 cd ..\SuperstorePython; git worktree remove ..\gh-pages
 ```
 
-En GitHub, *Settings → Pages* debe tener como origen la rama `gh-pages` (carpeta `/`).
-
 ## Estructura
 
 ```
-├── app.py                    # Punto de entrada de la app Dash
-├── common.py                 # Rutas, carga de datos y resultados, estilos y componentes compartidos
-├── requirements.txt          # Dependencias con versiones exactas
-├── .env.example              # Plantilla de configuración del Asistente IA (copiar como .env)
-├── data/
-│   ├── raw/                  # Dataset original
-│   ├── generate_data.py      # ETL
-│   ├── superstore_transformado.csv
-│   └── ventas_mensuales.csv  # Categoría × región × mes (entrada del modelo)
-├── model/
-│   ├── features.py           # Variables y preprocesamiento (compartidos)
-│   ├── evaluate.py           # Métricas e importancia de variables
-│   ├── train_model.py        # Entrena, compara, proyecta 2018
-│   └── artifacts/            # model.pkl, resultados, predicciones y proyección (generados)
-├── tabs/                     # Una pestaña por archivo, cada una expone layout()
-│   ├── asistente.py          # Asistente IA: widget flotante, atajos y conexión con el modelo de IA
-│   └── asistente_contexto.py # Lo que sabe el asistente: instrucciones y resúmenes de datos
-├── assets/                   # Estilos (style.css, chat.css) y efectos interactivos (ui.js)
-└── libro/                    # Jupyter Book: el proyecto en notebooks
-    ├── _config.yml           # Configuración del libro
-    ├── _toc.yml              # Tabla de contenidos (mismo orden que las pestañas de la app)
-    ├── common.py             # Rutas a data/ y model/, carga de resultados, paleta y show() para las figuras
-    ├── requirements.txt      # Dependencias de la app + Jupyter Book
-    ├── intro.md … metodologia.md       # Capítulos de texto
-    └── etl.ipynb … conclusiones.ipynb  # Capítulos con código y gráficas
+├── app.py                    # Tablero Dash (use_pages=True); expone server para gunicorn
+├── pages/                    # contexto.py, eda.py, modelos.py: una página por sección
+├── tabs/                     # contenidos reutilizados por las páginas y el Asistente IA
+├── src/
+│   ├── original_model.py     # modelo propio
+│   ├── estadistica.py        # Diebold–Mariano, Giacomini–White, MCS, bootstrap estacionario, Holm…
+│   ├── optimizacion.py       # Grid, Random, bayesiana (Optuna) y genética (DEAP)
+│   ├── explicacion.py        # valores de Shapley exactos y sustituto local tipo LIME
+│   ├── data.py · plots.py    # carga de resultados y figuras del tablero
+├── experiments/
+│   ├── protocolo.md          # protocolo registrado
+│   ├── config.py · ejecutar.py · analizar.py · robustez.py · artefactos.py
+│   ├── datos_adicionales.py  # turismo, hospital y M3 (Monash, Zenodo)
+│   ├── literatura/           # búsqueda bibliográfica documentada
+│   └── resultados/           # predicciones, tabla maestra, pruebas, veredicto
+├── artifacts/                # 8 modelos (.joblib) y metadata.json
+├── model/                    # variables (features.py), métricas y resumen para el tablero
+├── data/                     # datos crudos, procesados, adicionales y DATA_STATEMENT.md
+├── tests/                    # pruebas unitarias del modelo propio
+├── book/                     # informe (Jupyter Book)
+├── paper/                    # artículo (plantilla Springer)
+├── assets/                   # estilos y efectos de la interfaz
+├── MODEL_CARD.md · CITATION.cff · LICENSE · render.yaml
+├── requirements.txt          # dependencias del tablero (versiones exactas)
+└── requirements-dev.txt      # + experimentos, pruebas y libro
 ```
 
-## Problemas comunes
+## Datos
 
-- **Las pestañas del modelo dicen "Modelo no entrenado":** ejecuta `python model/train_model.py`.
-- **`python` no se reconoce en Windows:** prueba con `py app.py` y `py -m pip install -r requirements.txt`.
-- **El puerto 8060 está ocupado:** usa otro con `SUPERSTORE_PORT=8070 python app.py` (o `$env:SUPERSTORE_PORT=8070` en PowerShell).
-- **`No module named 'openai'`:** instala las dependencias con el mismo Python con el que corres la app
-  (`python -m pip install -r requirements.txt`).
-- **El asistente responde con un error:** revisa la clave en `.env`; si el error es 404, cambia
-  `OPENAI_MODEL` por un modelo vigente (la lista está en Google AI Studio).
-
----
-
-Proyecto: Alex Teran y David Estrada
+Sample Superstore es un conjunto de ejemplo que Tableau distribuye con su software; se usa con fines
+académicos. Los conjuntos adicionales provienen del Monash Time Series Forecasting Repository
+(licencia CC BY 4.0). Procedencia, licencias y sesgos en `data/DATA_STATEMENT.md`.

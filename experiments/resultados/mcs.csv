@@ -1,0 +1,69 @@
+conjunto,columna,modelo,optimizador,MAE,p_mcs,en_conjunto
+superstore,Ingenuo estacional|-,Ingenuo estacional,-,2727.7289236111114,0.0008,False
+superstore,Theta|-,Theta,-,2755.5935812499997,0.0484,False
+superstore,KNN|grid,KNN,grid,2452.790576388889,0.5842,True
+superstore,Ridge|grid,Ridge,grid,2516.785915277778,0.4372,True
+superstore,Lasso|grid,Lasso,grid,2528.2478423611115,0.4372,True
+superstore,Árbol de decisión|grid,Árbol de decisión,grid,2529.321441319444,0.0732,False
+superstore,Random Forest|grid,Random Forest,grid,2422.91964375,0.377,True
+superstore,XGBoost|grid,XGBoost,grid,2522.785873263889,0.077,False
+superstore,SVR|grid,SVR,grid,2365.7373996527776,0.8054,True
+superstore,Perfil jerárquico (original)|grid,Perfil jerárquico (original),grid,2308.9662270833333,1.0,True
+superstore,KNN|random,KNN,random,2436.1963993055556,0.5842,True
+superstore,Ridge|random,Ridge,random,2514.121019097222,0.4372,True
+superstore,Lasso|random,Lasso,random,2513.2109531250003,0.4372,True
+superstore,Árbol de decisión|random,Árbol de decisión,random,2612.5538006944444,0.1484,True
+superstore,Random Forest|random,Random Forest,random,2389.5269447916667,0.5312,True
+superstore,XGBoost|random,XGBoost,random,2561.525866319444,0.134,True
+superstore,SVR|random,SVR,random,2373.289087152778,0.8054,True
+superstore,Perfil jerárquico (original)|random,Perfil jerárquico (original),random,2313.4908767361107,0.5842,True
+superstore,KNN|bayes,KNN,bayes,2489.9257836805555,0.4106,True
+superstore,Ridge|bayes,Ridge,bayes,2514.8583624999997,0.4372,True
+superstore,Lasso|bayes,Lasso,bayes,2515.0460253472224,0.4372,True
+superstore,Árbol de decisión|bayes,Árbol de decisión,bayes,2479.8263861111113,0.4372,True
+superstore,Random Forest|bayes,Random Forest,bayes,2406.673034722222,0.4372,True
+superstore,XGBoost|bayes,XGBoost,bayes,2480.906876736111,0.2138,True
+superstore,SVR|bayes,SVR,bayes,2416.2196388888888,0.5842,True
+superstore,Perfil jerárquico (original)|bayes,Perfil jerárquico (original),bayes,2310.282384027778,0.4306,True
+superstore,KNN|genetico,KNN,genetico,2450.3564291666667,0.4372,True
+superstore,Ridge|genetico,Ridge,genetico,2516.262623263889,0.4372,True
+superstore,Lasso|genetico,Lasso,genetico,2500.914843402778,0.4408,True
+superstore,Árbol de decisión|genetico,Árbol de decisión,genetico,2520.4308913194445,0.235,True
+superstore,Random Forest|genetico,Random Forest,genetico,2392.7268864583334,0.5094,True
+superstore,XGBoost|genetico,XGBoost,genetico,2547.9162680555555,0.0088,False
+superstore,SVR|genetico,SVR,genetico,2432.802465625,0.4306,True
+superstore,Perfil jerárquico (original)|genetico,Perfil jerárquico (original),genetico,2309.402088194445,0.838,True
+superstore,HistGradientBoosting|bayes,HistGradientBoosting,bayes,2438.9021559027774,0.4306,True
+turismo,Ingenuo estacional|-,Ingenuo estacional,-,348.8854166666667,0.9706,True
+turismo,Theta|-,Theta,-,357.37605694444443,0.9144,True
+turismo,KNN|bayes,KNN,bayes,344.9458515625001,1.0,True
+turismo,Ridge|bayes,Ridge,bayes,448.58562170138885,0.0284,False
+turismo,Lasso|bayes,Lasso,bayes,466.7548357638889,0.0052,False
+turismo,Árbol de decisión|bayes,Árbol de decisión,bayes,671.268003298611,0.0,False
+turismo,Random Forest|bayes,Random Forest,bayes,429.46536336805553,0.015,False
+turismo,XGBoost|bayes,XGBoost,bayes,445.491878125,0.0128,False
+turismo,SVR|bayes,SVR,bayes,387.4262390625,0.2346,True
+turismo,Perfil jerárquico (original)|bayes,Perfil jerárquico (original),bayes,350.59352395833326,0.9706,True
+turismo,HistGradientBoosting|bayes,HistGradientBoosting,bayes,465.1237428819445,0.0052,False
+hospital,Ingenuo estacional|-,Ingenuo estacional,-,21.956597222222225,0.1402,True
+hospital,Theta|-,Theta,-,18.925147222222222,0.3536,True
+hospital,KNN|bayes,KNN,bayes,17.82827065972222,0.8962,True
+hospital,Ridge|bayes,Ridge,bayes,17.82770798611111,0.5088,True
+hospital,Lasso|bayes,Lasso,bayes,17.42799583333333,0.8962,True
+hospital,Árbol de decisión|bayes,Árbol de decisión,bayes,18.211436631944448,0.8962,True
+hospital,Random Forest|bayes,Random Forest,bayes,17.93135364583333,0.8962,True
+hospital,XGBoost|bayes,XGBoost,bayes,17.273555381944444,0.8962,True
+hospital,SVR|bayes,SVR,bayes,16.83147517361111,1.0,True
+hospital,Perfil jerárquico (original)|bayes,Perfil jerárquico (original),bayes,18.82228038194444,0.8962,True
+hospital,HistGradientBoosting|bayes,HistGradientBoosting,bayes,17.505734375000003,0.8962,True
+m3,Ingenuo estacional|-,Ingenuo estacional,-,262.64140625,0.0,False
+m3,Theta|-,Theta,-,109.12125815972223,1.0,True
+m3,KNN|bayes,KNN,bayes,127.88768697916665,0.0,False
+m3,Ridge|bayes,Ridge,bayes,142.18176302083336,0.0,False
+m3,Lasso|bayes,Lasso,bayes,143.1027635416667,0.0,False
+m3,Árbol de decisión|bayes,Árbol de decisión,bayes,140.72993350694446,0.0,False
+m3,Random Forest|bayes,Random Forest,bayes,120.15337135416671,0.0002,False
+m3,XGBoost|bayes,XGBoost,bayes,119.89525902777778,0.0066,False
+m3,SVR|bayes,SVR,bayes,160.3076847222222,0.0,False
+m3,Perfil jerárquico (original)|bayes,Perfil jerárquico (original),bayes,195.241596875,0.0,False
+m3,HistGradientBoosting|bayes,HistGradientBoosting,bayes,123.2838421875,0.002,False

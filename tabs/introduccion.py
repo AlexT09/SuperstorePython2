@@ -15,10 +15,8 @@ MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "
 # accesos rápidos: (ruta, icono, título, descripción, color)
 ACCESOS = [
     ("/eda", "bi-bar-chart-line", "Explorar los datos", "Distribuciones, tiempo, atípicos y mapa.", "#4a93e6"),
-    ("/modelos", "bi-cpu", "Comparar modelos", "7 regresores evaluados en 2017.", "#b89cf0"),
-    ("/proyeccion", "bi-graph-up-arrow", "Ver la proyección 2018", "Mes a mes, por categoría y región.", "#f0b851"),
-    ("/conclusiones", "bi-check2-circle", "Leer las conclusiones", "Hallazgos, recomendaciones y límites.",
-     "#5fc4b8"),
+    ("/modelos", "bi-cpu", "Comparar modelos", "7 modelos, 4 optimizadores y un modelo propio.", "#b89cf0"),
+    ("/modelos", "bi-graph-up-arrow", "Predecir y proyectar 2018", "Predicción en vivo y proyección mes a mes.", "#f0b851"),
 ]
 
 
@@ -94,7 +92,7 @@ def _hero():
                "las ventas y proyectar cuánto venderá cada categoría y región, mes a mes." + proy,
                className="hero-texto"),
         html.Div([
-            dcc.Link([html.I(className="bi bi-graph-up-arrow"), "Ver la proyección"], href="/proyeccion",
+            dcc.Link([html.I(className="bi bi-graph-up-arrow"), "Ver la proyección"], href="/modelos",
                      className="btn-brillo"),
             dcc.Link([html.I(className="bi bi-compass"), "Empezar por el EDA"], href="/eda", className="btn-vidrio"),
         ], className="hero-acciones"),
@@ -106,7 +104,7 @@ def _accesos():
         dbc.Col(dcc.Link([
             html.I(className=f"bi {icono} principal", style={"--c": color}),
             html.B(titulo), html.Small(texto), html.I(className="bi bi-arrow-up-right flecha"),
-        ], href=href, className="nav-card"), md=6, xl=3, className="mb-3")
+        ], href=href, className="nav-card"), md=4, className="mb-3")
         for href, icono, titulo, texto, color in ACCESOS
     ])
 
@@ -148,8 +146,8 @@ def layout():
                         html.Code("Sales"), ")?"], className="fw-bold"),
                 html.P("2. ¿Cuánto venderá cada categoría en cada región, mes a mes, durante 2018?",
                        className="fw-bold"),
-                html.P("Las secciones siguen el flujo del proyecto: planteamiento, datos (ETL y EDA), "
-                       "modelos y resultados, proyección y predicción, y conclusiones.", className="text-muted mb-0"),
+                html.P("El tablero tiene tres secciones: Contexto (planteamiento y método), EDA (los datos) y "
+                       "Modelos (comparación, predicción en vivo y proyección).", className="text-muted mb-0"),
             ], "lavender"), md=5, className="mb-3"),
         ]),
         dbc.Row([

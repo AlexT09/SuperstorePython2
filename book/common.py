@@ -19,7 +19,7 @@ if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))  # para "from model.features import ..." en los notebooks
 DATA_PATH = ROOT / "data" / "superstore_transformado.csv"
 MENSUAL_PATH = ROOT / "data" / "ventas_mensuales.csv"
-ART = ROOT / "model" / "artifacts"  # salidas de model/train_model.py
+ART = ROOT / "model" / "artifacts"  # resumen y proyección del modelo elegido (experiments/artefactos.py)
 
 # ---------------------------------------------------------------- colores
 # Cada color tiene una función fija en todo el libro (los mismos papeles que en la app Dash).
@@ -210,3 +210,48 @@ def show(fig, height=None):
     if height is not None:
         style_fig(fig, height)
     display(HTML(fig.to_html(include_plotlyjs=False, full_html=False, config={"displayModeBar": False})))
+
+
+# ---------------------------------------------------------------- resultados de los experimentos
+RES = ROOT / "experiments" / "resultados"   # tablas de experiments/analizar.py y robustez.py
+ARTN = ROOT / "artifacts"                   # modelos guardados y metadata.json (experiments/artefactos.py)
+ORIGINAL = "Perfil jerárquico (original)"
+OPT = {"grid": "Grid Search", "random": "Random Search", "bayes": "Bayesiana (Optuna)", "genetico": "Genética (DEAP)",
+       "-": "sin ajuste"}
+CONJUNTOS = {"superstore": "Sample Superstore", "turismo": "Tourism Monthly", "hospital": "Hospital", "m3": "M3 Monthly"}
+
+
+@lru_cache(maxsize=None)
+def res(nombre: str):
+    """Lee un archivo de experiments/resultados/ o de artifacts/ (CSV como DataFrame, JSON como dict)."""
+    ruta = RES / nombre if (RES / nombre).exists() else ARTN / nombre
+    if ruta.suffix == ".json":
+        return json.loads(ruta.read_text(encoding="utf-8"))
+    df = pd.read_csv(ruta)
+    for col in ("Mes", "origen"):
+        if col in df:
+            df[col] = pd.to_datetime(df[col])
+    return df
+
+
+def lineas(x, series: dict, titulo, eje_x, eje_y, log_x=False, alto=340, referencia=None):
+    """Figura de líneas con el estilo del libro. series: nombre -> valores."""
+    import plotly.graph_objects as go
+    fig = go.Figure()
+    for nombre, y in series.items():
+        fig.add_trace(go.Scatter(x=list(x), y=list(y), name=nombre, mode="lines+markers"))
+    if referencia is not None:
+        fig.add_hline(y=referencia[1], line_dash="dot", line_color=REF, annotation_text=referencia[0])
+    fig.update_xaxes(title=eje_x, type="log" if log_x else "linear")
+    fig.update_yaxes(title=eje_y)
+    return style_fig(fig, alto, titulo)
+
+
+def barras(nombres, valores, titulo, eje, alto=320, horizontal=True):
+    """Barras ordenadas con el estilo del libro."""
+    import plotly.graph_objects as go
+    orden = sorted(range(len(valores)), key=lambda i: valores[i])
+    n, v = [nombres[i] for i in orden], [valores[i] for i in orden]
+    fig = go.Figure(go.Bar(x=v, y=n, orientation="h", marker_color=REAL) if horizontal else go.Bar(x=n, y=v, marker_color=REAL))
+    (fig.update_xaxes if horizontal else fig.update_yaxes)(title=eje)
+    return style_fig(fig, alto, titulo).update_layout(margin=dict(l=220 if horizontal else 40))

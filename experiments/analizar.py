@@ -102,7 +102,8 @@ def main():
     N = {"protocolo": {"tag": "protocolo-v1", "origenes": C.N_ORIGENES, "presupuesto": C.PRESUPUESTO, "semilla": C.SEMILLA}}
     lideres, mejores, pruebas, mcs_filas, abl, sens, conf, resid, rangos_bayes = [], [], [], [], [], [], [], [], {}
 
-    for conjunto in C.CONJUNTOS:
+    conjuntos = [c for c in C.CONJUNTOS if (C.RES / f"pred_{c}.csv").exists()]     # los que ya se ejecutaron
+    for conjunto in conjuntos:
         p = pd.read_csv(C.RES / f"pred_{conjunto}.csv", parse_dates=["Mes"])
         escala = escala_mase(conjunto, p.Mes.min())
         cols = [c for c in p.columns if c not in META and not c.startswith(("abl|", "lam|"))]
@@ -210,13 +211,15 @@ def main():
     pd.DataFrame(resid).to_csv(C.RES / "residuos.csv", index=False)
 
     # Entre conjuntos: Friedman–Iman–Davenport sobre el MASE y Wilcoxon–Holm del original contra cada modelo
-    ec = pd.DataFrame(rangos_bayes).T                       # conjuntos x modelos
-    fid = E.friedman_iman_davenport(ec.to_numpy())
-    ec.to_csv(C.RES / "entre_conjuntos.csv")
-    otros = [m for m in ec.columns if m != C.ORIGINAL]
-    pw = [float(stats.wilcoxon(ec[C.ORIGINAL], ec[m]).pvalue) for m in otros]
-    N["entre_conjuntos"] = {"rango_medio": dict(zip(ec.columns, map(float, fid["rangos"]))), "F": fid["F"], "p": fid["p"],
-                            "wilcoxon": dict(zip(otros, pw)), "wilcoxon_holm": dict(zip(otros, map(float, E.holm(pw))))}
+    if len(conjuntos) > 1:
+        ec = pd.DataFrame(rangos_bayes).T                       # conjuntos x modelos
+        fid = E.friedman_iman_davenport(ec.to_numpy())
+        ec.to_csv(C.RES / "entre_conjuntos.csv")
+        otros = [m for m in ec.columns if m != C.ORIGINAL]
+        pw = [float(stats.wilcoxon(ec[C.ORIGINAL], ec[m]).pvalue) for m in otros]
+        N["entre_conjuntos"] = {"rango_medio": dict(zip(ec.columns, map(float, fid["rangos"]))), "F": fid["F"], "p": fid["p"],
+                                "wilcoxon": dict(zip(otros, pw)), "wilcoxon_holm": dict(zip(otros, map(float, E.holm(pw))))}
+
 
     # Veredicto (regla de decisión del protocolo, sección 8)
     ps = pruebas[pruebas.conjunto == C.PRINCIPAL]
@@ -224,7 +227,7 @@ def main():
     n = N[C.PRINCIPAL]
     rechazos = {"MCS": not n["mejor_ref_en_mcs"] and n["original_en_mcs"], "Giacomini-White": bool(mejor.p_GW_holm < C.ALFA),
                 "Diebold-Mariano": bool(mejor.p_DM_holm < C.ALFA), "Wilcoxon": bool(mejor.p_wilcoxon_holm < C.ALFA)}
-    adicionales = [c for c in C.CONJUNTOS if c != C.PRINCIPAL]
+    adicionales = [c for c in conjuntos if c != C.PRINCIPAL]
     gana = {c: N[c]["MAE_original"] < N[c]["MAE_mejor_referencia"] for c in adicionales}
     peor = {}
     for c in adicionales:
@@ -234,7 +237,7 @@ def main():
     c1 = bool((ps.dif < 0).all())
     c2 = sum(rechazos.values()) >= 3
     c3 = bool(abs(mejor.d_cohen) >= 0.2 or abs(mejor.delta_cliff) >= 0.147)
-    c4 = sum(gana.values()) >= 2 and not any(peor.values())
+    c4 = len(adicionales) == 3 and sum(gana.values()) >= 2 and not any(peor.values())
     veredicto = {"mejor_referencia": f"{mejor.referencia} ({mejor.optimizador})",
                  "c1_menor_MAE_que_todas": c1, "c2_tres_pruebas": c2, "rechazos": rechazos,
                  "c3_efecto": c3, "d_cohen": float(mejor.d_cohen), "delta_cliff": float(mejor.delta_cliff),

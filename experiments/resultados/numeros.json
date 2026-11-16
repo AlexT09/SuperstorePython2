@@ -1,0 +1,129 @@
+{
+  "protocolo": {
+    "tag": "protocolo-v1",
+    "origenes": 24,
+    "presupuesto": 16,
+    "semilla": 42
+  },
+  "superstore": {
+    "series": 12,
+    "pronosticos": 288,
+    "meses": [
+      "2016-01-01",
+      "2017-12-01"
+    ],
+    "escala_mase": 2319.630277777778,
+    "MAE_original": 2310.2823840277774,
+    "mejor_referencia": "SVR (grid)",
+    "MAE_mejor_referencia": 2365.737399652778,
+    "columna_mejor_referencia": "SVR|grid",
+    "posicion_original": 1,
+    "mcs_tamano": 30,
+    "mcs_total": 35,
+    "original_en_mcs": true,
+    "p_mcs_original": 0.4306,
+    "mejor_ref_en_mcs": true
+  },
+  "errores": {
+    "series_mejor_que_ref": 7,
+    "series": 12
+  },
+  "turismo": {
+    "series": 24,
+    "pronosticos": 576,
+    "meses": [
+      "2005-10-01",
+      "2007-09-01"
+    ],
+    "escala_mase": 430.9583333333333,
+    "MAE_original": 350.5935239583333,
+    "mejor_referencia": "KNN (bayes)",
+    "MAE_mejor_referencia": 344.9458515625,
+    "columna_mejor_referencia": "KNN|bayes",
+    "posicion_original": 3,
+    "mcs_tamano": 5,
+    "mcs_total": 11,
+    "original_en_mcs": true,
+    "p_mcs_original": 0.9706,
+    "mejor_ref_en_mcs": true
+  },
+  "hospital": {
+    "series": 24,
+    "pronosticos": 576,
+    "meses": [
+      "2005-01-01",
+      "2006-12-01"
+    ],
+    "escala_mase": 35.0625,
+    "MAE_original": 18.822280381944445,
+    "mejor_referencia": "SVR (bayes)",
+    "MAE_mejor_referencia": 16.83147517361111,
+    "columna_mejor_referencia": "SVR|bayes",
+    "posicion_original": 9,
+    "mcs_tamano": 11,
+    "mcs_total": 11,
+    "original_en_mcs": true,
+    "p_mcs_original": 0.8962,
+    "mejor_ref_en_mcs": true
+  },
+  "m3": {
+    "series": 24,
+    "pronosticos": 576,
+    "meses": [
+      "1992-03-01",
+      "1994-02-01"
+    ],
+    "escala_mase": 224.74652777777774,
+    "MAE_original": 195.241596875,
+    "mejor_referencia": "Theta (-)",
+    "MAE_mejor_referencia": 109.12125815972223,
+    "columna_mejor_referencia": "Theta|-",
+    "posicion_original": 10,
+    "mcs_tamano": 1,
+    "mcs_total": 11,
+    "original_en_mcs": false,
+    "p_mcs_original": 0.0,
+    "mejor_ref_en_mcs": true
+  },
+  "entre_conjuntos": {
+    "rango_medio": {
+      "Ingenuo estacional": 8.5,
+      "Theta": 6.5,
+      "KNN": 4.75,
+      "Ridge": 7.0,
+      "Lasso": 7.5,
+      "Árbol de decisión": 7.5,
+      "Random Forest": 4.5,
+      "XGBoost": 4.25,
+      "SVR": 4.5,
+      "Perfil jerárquico (original)": 5.75,
+      "HistGradientBoosting": 5.25
+    },
+    "F": 0.7393767705382436,
+    "p": 0.6825590730350365,
+    "wilcoxon": {
+      "Ingenuo estacional": 0.25,
+      "Theta": 0.875,
+      "KNN": 0.625,
+      "Ridge": 1.0,
+      "Lasso": 0.875,
+      "Árbol de decisión": 0.875,
+      "Random Forest": 1.0,
+      "XGBoost": 1.0,
+      "SVR": 0.875,
+      "HistGradientBoosting": 1.0
+    },
+    "wilcoxon_holm": {
+      "Ingenuo estacional": 1.0,
+      "Theta": 1.0,
+      "KNN": 1.0,
+      "Ridge": 1.0,
+      "Lasso": 1.0,
+      "Árbol de decisión": 1.0,
+      "Random Forest": 1.0,
+      "XGBoost": 1.0,
+      "SVR": 1.0,
+      "HistGradientBoosting": 1.0
+    }
+  }
+}

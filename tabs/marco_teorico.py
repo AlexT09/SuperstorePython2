@@ -37,6 +37,7 @@ MODELOS = [
     ("Random Forest", "Promedia cientos de árboles entrenados con muestras distintas: más estable que un solo árbol."),
     ("XGBoost", "Encadena árboles pequeños donde cada uno corrige el error de los anteriores (boosting)."),
     ("SVR", "Busca una función que deje la mayoría de los puntos dentro de un margen de error ε, con kernels para relaciones no lineales."),
+    ("Perfil estacional jerárquico (modelo propio)", "Estima un patrón estacional común con todas las series y lo combina con lo que hizo cada serie un año antes, con un peso por serie que se acerca al peso del grupo cuando la serie tiene poca evidencia."),
 ]
 
 
@@ -63,9 +64,9 @@ def layout():
                 "que empiece: categoría, región, mes del año e historial de ventas.", className="mb-0"),
                 "lavender"), md=4, className="mb-3"),
             dbc.Col(soft_card("Generalización y sobreajuste", html.P(
-                "Un modelo sirve si acierta en datos que no vio. Por eso se ajusta con validación cruzada y "
-                "se evalúa una sola vez en un periodo reservado (2017). Con datos en el tiempo, el modelo "
-                "nunca debe entrenar con meses posteriores a los que valida.", className="mb-0"), "peach"),
+                "Un modelo sirve si acierta en datos que no vio. Por eso los hiperparámetros se eligen con "
+                "validación cruzada y el error se mide aparte, pronosticando 24 meses uno a uno. Con datos "
+                "en el tiempo, el modelo nunca debe entrenar con meses posteriores a los que pronostica.", className="mb-0"), "peach"),
                 md=4, className="mb-3"),
         ]),
         html.H4("Modelos de regresión utilizados", className="section-title"),
@@ -78,9 +79,9 @@ def layout():
             dbc.Col(soft_card("RMSE", html.P("Raíz del error cuadrático medio: castiga más los errores grandes "
                                              "(un mes muy mal proyectado pesa más).", className="mb-0"),
                               "lavender"), md=4, className="mb-3"),
-            dbc.Col(soft_card("R²", html.P("Proporción de la variación de las ventas que el modelo explica "
-                                           "(1 = perfecto, 0 = igual que usar el promedio).", className="mb-0"),
-                              "peach"), md=4, className="mb-3"),
+            dbc.Col(soft_card("MASE", html.P("Error del modelo dividido por el del ingenuo estacional. Menor "
+                                             "que 1: mejora a repetir el año anterior. No depende de la escala.",
+                                             className="mb-0"), "peach"), md=4, className="mb-3"),
         ]),
         html.H4("Operacionalización de variables", className="section-title"),
         soft_card("Variables del dataset", _tabla(VARIABLES_DATASET, enc), "green", height_full=False),

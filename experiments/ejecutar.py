@@ -29,9 +29,10 @@ from joblib import Parallel, delayed
 from sklearn.base import clone
 from sklearn.model_selection import TimeSeriesSplit
 from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import FunctionTransformer
 
 import config as C
-from model.features import FEATURES, TARGET, a_ventas, agregar_variables, preprocesador
+from model.features import FEATURES, TARGET, a_denso, a_ventas, agregar_variables, preprocesador
 from src.optimizacion import optimizar
 from src.original_model import PerfilEstacionalJerarquico
 
@@ -55,7 +56,7 @@ def cv_interna(tr):
 
 def con_pipeline(est):
     """Preprocesamiento (one-hot + estandarización) dentro del Pipeline: se ajusta en cada pliegue."""
-    return Pipeline([("pre", preprocesador()), ("modelo", est)])
+    return Pipeline([("pre", preprocesador()), ("denso", FunctionTransformer(a_denso)), ("modelo", est)])
 
 
 def prefijo(d):

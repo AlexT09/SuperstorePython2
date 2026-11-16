@@ -5,7 +5,6 @@ import pandas as pd
 import plotly.graph_objects as go
 from dash import Input, Output, callback, dash_table, dcc, html
 
-from tabs import prediccion
 from common import (BRAND_LIGHT, NEG, POS, PROY, REAL, TEXT, aviso_sin_modelo, insight, kpi, load_artifact,
                     load_mensual, modelo_listo, page_header, soft_card, style_fig, usd)
 
@@ -64,8 +63,8 @@ def layout():
     sel = lambda id_, opts: dcc.Dropdown([TODAS] + opts, TODAS, id=id_, clearable=False)  # noqa: E731
 
     return html.Div([
-        page_header("Proyección y predicción", f"Ventas esperadas en 2018 por mes con {resumen['mejor_modelo']}, "
-                    "reentrenado con 2015–2017, y simulador de un mes"),
+        page_header("Proyección 2018", f"Ventas esperadas en 2018 por mes con {resumen['mejor_modelo']}, "
+                    "reentrenado con 2015–2017"),
         dbc.Row([
             dbc.Col([html.Label("Categoría", className="small fw-bold"),
                      sel("proy-cat", ["Furniture", "Office Supplies", "Technology"])], md=3),
@@ -89,7 +88,8 @@ def layout():
             dbc.Col(soft_card("Lectura para el negocio", html.Ul([
                 html.Li(f"Se proyectan {usd(resumen['proyeccion_2018'])} en 2018, "
                         f"{(resumen['proyeccion_2018'] / resumen['ventas_2017'] - 1) * 100:+.0f} % frente a 2017 "
-                        f"({usd(resumen['ventas_2017'])}). El modelo extiende el crecimiento de 2016–2017."),
+                        f"({usd(resumen['ventas_2017'])}). El modelo aplica el patrón estacional al nivel de ventas "
+                        "de los últimos 12 meses, que venía creciendo."),
                 html.Li(f"La temporada alta (septiembre a diciembre) concentra el {temporada:.0f} % de las ventas "
                         f"del año en solo 4 meses: es el periodo para asegurar inventario y personal."),
                 html.Li(f"Mayor crecimiento esperado: {top.Category} en {top.Region} ({top.crec:+.0f} %)."),
@@ -100,7 +100,6 @@ def layout():
                         "el modelo no conoce: campañas, precios y competencia."),
             ], className="mb-0"), "peach"), lg=5, className="mb-3"),
         ]),
-        prediccion.simulador(),
     ])
 
 

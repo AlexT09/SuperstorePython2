@@ -12,9 +12,14 @@ entran al modelo.
 numérico (y) a partir de ejemplos conocidos. Aquí y son las ventas de un mes y X lo que se sabe antes
 de que empiece: categoría, región, mes del año e historial de ventas.
 
-**Generalización y sobreajuste.** Un modelo sirve si acierta en datos que no vio. Por eso se ajusta
-con validación cruzada y se evalúa una sola vez en un periodo reservado (2017). Con datos en el
-tiempo, el modelo nunca debe entrenar con meses posteriores a los que valida.
+**Generalización y sobreajuste.** Un modelo sirve si acierta en datos que no vio. Por eso los
+hiperparámetros se eligen con validación cruzada y el error se mide aparte, pronosticando 24 meses
+uno a uno (validación anidada). Con datos en el tiempo, el modelo nunca debe entrenar con meses
+posteriores a los que pronostica.
+
+**Estacionalidad compartida.** Cuando varias series siguen el mismo calendario, su patrón estacional
+se puede estimar con todas juntas: cada serie aporta pocas observaciones de cada mes, pero el grupo
+aporta muchas. Es la idea del modelo original (capítulo 5).
 
 ## Modelos de regresión utilizados
 
@@ -26,6 +31,7 @@ tiempo, el modelo nunca debe entrenar con meses posteriores a los que valida.
 | **Random Forest** | Promedia cientos de árboles entrenados con muestras distintas: más estable que un solo árbol. |
 | **XGBoost** | Encadena árboles pequeños donde cada uno corrige el error de los anteriores (boosting). |
 | **SVR** | Busca una función que deje la mayoría de los puntos dentro de un margen de error ε, con kernels para relaciones no lineales. |
+| **Perfil estacional jerárquico (modelo propio)** | Estima un patrón estacional común con todas las series y lo combina con lo que hizo cada serie un año antes, con un peso por serie que se acerca al peso del grupo cuando la serie tiene poca evidencia. |
 
 ## Métricas de evaluación
 
@@ -33,8 +39,10 @@ tiempo, el modelo nunca debe entrenar con meses posteriores a los que valida.
   métrica principal porque se lee en dólares.
 - **RMSE:** raíz del error cuadrático medio: castiga más los errores grandes (un mes muy mal
   proyectado pesa más).
-- **R²:** proporción de la variación de las ventas que el modelo explica (1 = perfecto, 0 = igual
-  que usar el promedio).
+- **MASE:** error del modelo dividido por el del ingenuo estacional (repetir el año anterior). Menor
+  que 1 significa que el modelo lo mejora. No depende de la escala, por eso permite comparar conjuntos.
+- **Desvío del total:** suma pronosticada ÷ suma real − 1. Indica si el modelo se queda corto o se pasa
+  en el total, que es lo que importa para un presupuesto.
 
 ## Operacionalización de variables
 
