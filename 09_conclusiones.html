@@ -1,0 +1,684 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Conclusiones y limitaciones &#8212; Pronóstico de ventas Sample Superstore</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '09_conclusiones';</script>
+    <script src="https://cdn.plot.ly/plotly-4.1.1.min.js"></script>
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Reproducibilidad y bibliografía" href="10_reproducibilidad.html" />
+    <link rel="prev" title="Proyección 2018" href="proyeccion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Pronóstico de ventas Sample Superstore</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Búsqueda</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introducción
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Planteamiento</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="problema.html">Problema y objetivos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="marco_teorico.html">Marco teórico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metodologia.html">Metodología</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Datos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="etl.html">ETL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eda.html">EDA</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3–7. Modelos y evaluación</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="03_benchmarks.html">Modelos de referencia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_literatura.html">Revisión de literatura y novedad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_modelo_original.html">Modelo original</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_validacion.html">Protocolo y validación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_evaluacion_ampliada.html">Evaluación ampliada y robustez</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8–10. Producto y cierre</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="08_dashboard.html">Dashboard y despliegue</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="proyeccion.html">Proyección 2018</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Conclusiones y limitaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_reproducibilidad.html">Reproducibilidad y bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AlexT09/SuperstorePython2" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Repositorio de origen"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/09_conclusiones.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="claro/oscuro" aria-label="claro/oscuro" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Conclusiones y limitaciones</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgos">Hallazgos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#veredicto-sobre-el-modelo-original">Veredicto sobre el modelo original</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proyeccion-2018">Proyección 2018</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recomendaciones-para-el-negocio">Recomendaciones para el negocio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones">Limitaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trabajo-futuro">Trabajo futuro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaracion-de-autoria-y-uso-de-herramientas">Declaración de autoría y uso de herramientas</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="conclusiones-y-limitaciones">
+<h1>Conclusiones y limitaciones<a class="headerlink" href="#conclusiones-y-limitaciones" title="Link to this heading">#</a></h1>
+<p><em>Lo que se encontró, lo que no, y qué hacer con ello</em></p>
+<section id="hallazgos">
+<h2>Hallazgos<a class="headerlink" href="#hallazgos" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Las ventas de Sample Superstore son sobre todo estacionalidad.</strong> Septiembre a diciembre
+concentran cerca de la mitad de las ventas del año, y en todos los modelos la predicción depende
+casi solo del mes del año y de las ventas del mismo mes del año anterior.</p></li>
+<li><p><strong>Los siete modelos del curso rinden de forma parecida.</strong> Con la mejor combinación de cada uno, el
+MAE va de 2.366 (SVR) a 2.514 USD (Ridge) por serie y mes, y el Model Confidence Set no separa a la
+mayoría. Todos mejoran al ingenuo estacional (2.728).</p></li>
+<li><p><strong>Los cuatro métodos de optimización llegan a lo mismo.</strong> Con espacios de uno a cuatro
+hiperparámetros y 16 evaluaciones, la búsqueda bayesiana obtiene el menor error medio por un
+margen de pocos dólares; la genética cuesta ocho veces más sin mejorar.</p></li>
+<li><p><strong>El modelo original es tan preciso como los mejores, con mucho menos.</strong> Obtiene el menor MAE en
+Sample Superstore (2.310 USD), con un modelo de un kilobyte que se ajusta en milisegundos. La
+ventaja frente a SVR, 55 USD, no es estadísticamente significativa, y viene toda de 2016: en 2017
+SVR tiene menor error.</p></li>
+<li><p><strong>Lo que funciona es el perfil común, no los pesos por serie.</strong> Estimar la estacionalidad con las
+12 series juntas es lo decisivo; aprender un peso distinto por serie no mejora a un peso único en
+este conjunto, aunque sí ayuda en el de turismo.</p></li>
+<li><p><strong>Fuera de Sample Superstore no gana.</strong> Tercero en turismo, noveno en hospital y décimo en M3,
+donde es significativamente peor que Theta porque las series no comparten estacionalidad.</p></li>
+</ol>
+</section>
+<section id="veredicto-sobre-el-modelo-original">
+<h2>Veredicto sobre el modelo original<a class="headerlink" href="#veredicto-sobre-el-modelo-original" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Pregunta</p></th>
+<th class="head"><p>Respuesta</p></th>
+<th class="head"><p>Evidencia</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>¿Es nuevo para este problema?</p></td>
+<td><p><strong>Parcialmente.</strong> No se encontró la regla de pesos por serie con agrupamiento parcial ni su uso en Sample Superstore; pero los índices estacionales de grupo y su contracción son conocidos</p></td>
+<td><p>Capítulo 4</p></td>
+</tr>
+<tr class="row-odd"><td><p>¿Está implementado por los autores?</p></td>
+<td><p><strong>Sí.</strong> Clase propia con <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, reglas de actualización derivadas, demostración de convergencia y 11 pruebas unitarias</p></td>
+<td><p>Capítulo 5</p></td>
+</tr>
+<tr class="row-even"><td><p>¿Es superior a las referencias?</p></td>
+<td><p><strong>No.</strong> Menor error en el conjunto principal, pero sin significancia estadística, con un efecto despreciable y sin repetirse en los conjuntos adicionales</p></td>
+<td><p>Capítulos 6 y 7</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="proyeccion-2018">
+<h2>Proyección 2018<a class="headerlink" href="#proyeccion-2018" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">common</span><span class="w"> </span><span class="kn">import</span> <span class="n">hallazgos</span><span class="p">,</span> <span class="n">load_artifact</span><span class="p">,</span> <span class="n">load_data</span><span class="p">,</span> <span class="n">md</span><span class="p">,</span> <span class="n">usd</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">load_artifact</span><span class="p">(</span><span class="s2">&quot;resumen.json&quot;</span><span class="p">)</span>
+<span class="n">rec</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;prueba_recursiva&quot;</span><span class="p">]</span>
+<span class="n">md</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Con el modelo original reentrenado con 2015–2017 se proyectan **</span><span class="si">{</span><span class="n">usd</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;proyeccion_2018&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">** para 2018, &quot;</span>
+   <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;proyeccion_2018&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;ventas_2017&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">+.0f</span><span class="si">}</span><span class="s2"> % frente a 2017 (</span><span class="si">{</span><span class="n">usd</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;ventas_2017&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">). &quot;</span>
+   <span class="sa">f</span><span class="s2">&quot;La misma regla, aplicada a 2017 solo con datos hasta 2016, dejó el total anual a &quot;</span>
+   <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rec</span><span class="p">[</span><span class="s1">&#39;total_desvio_total_pct&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">+.1f</span><span class="si">}</span><span class="s2"> % del real, con un error típico mensual de ±</span><span class="si">{</span><span class="n">rec</span><span class="p">[</span><span class="s1">&#39;total_MAE_pct&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> % &quot;</span>
+   <span class="s2">&quot;para el total de la empresa.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<p>Con el modelo original reentrenado con 2015–2017 se proyectan <strong>$886,866</strong> para 2018, +21 % frente a 2017 ($733,215). La misma regla, aplicada a 2017 solo con datos hasta 2016, dejó el total anual a -0.5 % del real, con un error típico mensual de ±20 % para el total de la empresa.</p>
+</div>
+</div>
+</section>
+<section id="recomendaciones-para-el-negocio">
+<h2>Recomendaciones para el negocio<a class="headerlink" href="#recomendaciones-para-el-negocio" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="n">hallazgos</span><span class="p">(</span><span class="n">load_data</span><span class="p">())</span>
+<span class="n">md</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">. **</span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">Factor</span><span class="si">}</span><span class="s2">:** </span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">Recomendación</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">itertuples</span><span class="p">(),</span> <span class="mi">1</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<ol class="arabic simple">
+<li><p><strong>Temporada:</strong> Planificar inventario, personal y campañas para septiembre a diciembre con la proyección mensual. Usar febrero para promociones controladas o para liquidar inventario.</p></li>
+<li><p><strong>Tendencia:</strong> Fijar las metas de 2018 con la proyección como base, que ya incluye el crecimiento, y revisarlas cada mes con las ventas reales.</p></li>
+<li><p><strong>Descuento:</strong> Poner un tope de 20 % al descuento y pedir aprobación por encima de ese valor: es la acción con mayor efecto en la ganancia.</p></li>
+<li><p><strong>Producto:</strong> Revisar precios y descuentos de Tables y Bookcases. Dar prioridad a Office Supplies y Technology en las campañas: cada venta deja más ganancia.</p></li>
+<li><p><strong>Región:</strong> Aplicar primero el tope de descuento en Central, empezando por Texas y Illinois, y replicar ahí la política comercial de West, la región con mejor margen.</p></li>
+<li><p><strong>Pedidos grandes:</strong> Dar atención y seguimiento dedicados a los clientes de pedidos grandes: perder uno pesa más que perder muchos pequeños.</p></li>
+<li><p><strong>Segmento:</strong> Para crecer, sumar clientes en Corporate y Home Office, que gastan lo mismo por cliente pero son menos, en lugar de buscar subir el ticket.</p></li>
+</ol>
+</div>
+</div>
+<p>Salen de los hallazgos del análisis exploratorio, donde está el dato que respalda cada una.</p>
+</section>
+<section id="limitaciones">
+<h2>Limitaciones<a class="headerlink" href="#limitaciones" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Un conjunto de demostración.</strong> Sample Superstore no es una empresa identificada; las conclusiones
+sirven para comparar métodos, no para trasladarlas sin validar.</p></li>
+<li><p><strong>Poca potencia estadística.</strong> 24 meses de evaluación no permiten detectar diferencias del orden de
+1 % del nivel de ventas.</p></li>
+<li><p><strong>Diseño informado por los datos.</strong> El modelo se diseñó después de analizar modelos anteriores en
+este mismo conjunto. Por eso los conjuntos adicionales son la evidencia más limpia, y no son
+favorables.</p></li>
+<li><p><strong>Error alto por serie.</strong> A nivel de una categoría en una región y un mes, el error ronda la mitad
+de la venta: el pronóstico es más útil para totales.</p></li>
+<li><p><strong>Sin variables externas.</strong> Ni precios, ni promociones, ni calendario comercial: ningún modelo
+anticipa los pedidos extraordinarios, que explican los peores errores.</p></li>
+<li><p><strong>El análisis exploratorio es asociativo:</strong> no demuestra causalidad.</p></li>
+</ul>
+</section>
+<section id="trabajo-futuro">
+<h2>Trabajo futuro<a class="headerlink" href="#trabajo-futuro" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Formar grupos de series con estacionalidad parecida en lugar de usar un perfil para todo el panel,
+para que el modelo no falle en paneles heterogéneos como M3.</p></li>
+<li><p>Una versión robusta del perfil (mediana o media recortada) para reducir el efecto de los meses
+atípicos.</p></li>
+<li><p>Evaluar con más historia o más series, donde las pruebas tengan potencia suficiente.</p></li>
+<li><p>Añadir variables de calendario comercial y promociones, si estuvieran disponibles.</p></li>
+</ul>
+</section>
+<section id="declaracion-de-autoria-y-uso-de-herramientas">
+<h2>Declaración de autoría y uso de herramientas<a class="headerlink" href="#declaracion-de-autoria-y-uso-de-herramientas" title="Link to this heading">#</a></h2>
+<p>Este trabajo fue realizado por Alex Teran y David Estrada. Se usaron las siguientes herramientas:</p>
+<ul class="simple">
+<li><p><strong>Python</strong> y las librerías listadas en el capítulo de reproducibilidad, como herramientas de cálculo.</p></li>
+<li><p><strong>Un asistente de inteligencia artificial (Claude, de Anthropic)</strong>, usado para: proponer y programar
+el modelo original y sus pruebas unitarias; programar los experimentos, las pruebas estadísticas y
+los métodos de optimización; construir las páginas nuevas del tablero; hacer la búsqueda
+bibliográfica en bases abiertas; y redactar borradores de este libro, del artículo y de la ficha
+del modelo.</p></li>
+<li><p>Los autores revisaron el código y los resultados, y son responsables de comprender y defender cada
+parte del trabajo entregado.</p></li>
+</ul>
+<p>Firmas:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Nombre</p></th>
+<th class="head"><p>Firma</p></th>
+<th class="head"><p>Fecha</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Alex Teran</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>David Estrada</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="proyeccion.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Proyección 2018</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="10_reproducibilidad.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Reproducibilidad y bibliografía</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgos">Hallazgos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#veredicto-sobre-el-modelo-original">Veredicto sobre el modelo original</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proyeccion-2018">Proyección 2018</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recomendaciones-para-el-negocio">Recomendaciones para el negocio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones">Limitaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trabajo-futuro">Trabajo futuro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaracion-de-autoria-y-uso-de-herramientas">Declaración de autoría y uso de herramientas</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Alex Teran y David Estrada
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

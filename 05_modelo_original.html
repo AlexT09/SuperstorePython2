@@ -1,0 +1,953 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Modelo original &#8212; Pronóstico de ventas Sample Superstore</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '05_modelo_original';</script>
+    <script src="https://cdn.plot.ly/plotly-4.1.1.min.js"></script>
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Protocolo y validación estadística" href="06_validacion.html" />
+    <link rel="prev" title="Revisión de literatura y novedad" href="04_literatura.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Pronóstico de ventas Sample Superstore</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Búsqueda</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introducción
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Planteamiento</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="problema.html">Problema y objetivos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="marco_teorico.html">Marco teórico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metodologia.html">Metodología</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Datos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="etl.html">ETL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eda.html">EDA</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3–7. Modelos y evaluación</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="03_benchmarks.html">Modelos de referencia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_literatura.html">Revisión de literatura y novedad</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Modelo original</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_validacion.html">Protocolo y validación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_evaluacion_ampliada.html">Evaluación ampliada y robustez</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8–10. Producto y cierre</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="08_dashboard.html">Dashboard y despliegue</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="proyeccion.html">Proyección 2018</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="09_conclusiones.html">Conclusiones y limitaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_reproducibilidad.html">Reproducibilidad y bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AlexT09/SuperstorePython2" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Repositorio de origen"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/05_modelo_original.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="claro/oscuro" aria-label="claro/oscuro" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Modelo original</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-limitacion-de-la-que-parte">La limitación de la que parte</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulacion">Formulación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo">Algoritmo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sustento-teorico">Sustento teórico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verificacion-numerica">Verificación numérica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion">Implementación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-unitarias">Pruebas unitarias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pesos-aprendidos">Pesos aprendidos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aporte-de-cada-componente">Aporte de cada componente</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="modelo-original">
+<h1>Modelo original<a class="headerlink" href="#modelo-original" title="Link to this heading">#</a></h1>
+<p><em>Perfil estacional con pesos jerárquicos</em></p>
+<section id="la-limitacion-de-la-que-parte">
+<h2>La limitación de la que parte<a class="headerlink" href="#la-limitacion-de-la-que-parte" title="Link to this heading">#</a></h2>
+<p>Cada serie tiene 48 meses. Descontado el primer año, que solo aporta historia, quedan tres
+observaciones de cada mes del año. Con tres datos, la estacionalidad de una serie individual se
+estima con mucho ruido, y los modelos generales tienen que aprenderla junto con todo lo demás.</p>
+<p>Dos resultados del capítulo anterior lo muestran:</p>
+<ul class="simple">
+<li><p>El ingenuo estacional, que usa solo la historia propia de cada serie, es el peor modelo (MAE de
+2.728 USD).</p></li>
+<li><p>En todos los modelos de referencia, la importancia de las variables se concentra en el mes del año
+y en las ventas del mismo mes del año anterior. Random Forest dedica 300 árboles a aprender algo
+que se puede calcular directamente.</p></li>
+</ul>
+<p>La pregunta de diseño es entonces cuánta información tomar del grupo y cuánta de la propia serie.
+El modelo responde con un peso por serie, y aprende esos pesos de los datos.</p>
+</section>
+<section id="formulacion">
+<h2>Formulación<a class="headerlink" href="#formulacion" title="Link to this heading">#</a></h2>
+<p>Sea <span class="math notranslate nohighlight">\(z_{s,t}\)</span> el índice de la serie <span class="math notranslate nohighlight">\(s\)</span> en el mes <span class="math notranslate nohighlight">\(t\)</span> (ventas del mes divididas por el promedio de
+los 12 meses anteriores), <span class="math notranslate nohighlight">\(m(t)\)</span> el mes del año y <span class="math notranslate nohighlight">\(r_{s,t}=z_{s,t-12}^{*}\)</span> el índice del mismo mes
+del año anterior, medido con el nivel actual.</p>
+<p><strong>Perfil común.</strong> Es la media del índice en cada mes del año, sobre todas las series y años de
+entrenamiento:</p>
+<div class="math notranslate nohighlight" id="equation-eq-perfil">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-perfil" title="Link to this equation">#</a></span>\[
+P_m=\frac{1}{|\{(s,t):m(t)=m\}|}\sum_{(s,t):\,m(t)=m} z_{s,t},\qquad m=1,\dots,12.
+\]</div>
+<p><strong>Pronóstico.</strong> Cada serie corrige el perfil con su propio rezago, con un peso <span class="math notranslate nohighlight">\(w_s\in[0,1]\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-pronostico">
+<span class="eqno">(2)<a class="headerlink" href="#equation-eq-pronostico" title="Link to this equation">#</a></span>\[
+\hat z_{s,t}=P_{m(t)}+w_s\,\bigl(r_{s,t}-P_{m(t)}\bigr),\qquad \hat y_{s,t}=\max(0,\ \hat z_{s,t}\,\ell_{s,t}),
+\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\ell_{s,t}\)</span> es el promedio de los 12 meses anteriores. Con <span class="math notranslate nohighlight">\(w_s=0\)</span> la serie sigue el perfil
+común; con <span class="math notranslate nohighlight">\(w_s=1\)</span> el modelo es el ingenuo estacional.</p>
+<p><strong>Aprendizaje de los pesos.</strong> Con <span class="math notranslate nohighlight">\(a_{s,t}=z_{s,t}-P_{m(t)}\)</span> y <span class="math notranslate nohighlight">\(b_{s,t}=r_{s,t}-P_{m(t)}\)</span>, los pesos
+y un peso común <span class="math notranslate nohighlight">\(w_0\)</span> minimizan</p>
+<div class="math notranslate nohighlight" id="equation-eq-objetivo">
+<span class="eqno">(3)<a class="headerlink" href="#equation-eq-objetivo" title="Link to this equation">#</a></span>\[
+J(w_1,\dots,w_S,w_0)=\sum_{s=1}^{S}\sum_{t}\bigl(a_{s,t}-w_s\,b_{s,t}\bigr)^2+\lambda\sum_{s=1}^{S}(w_s-w_0)^2,
+\qquad 0\le w_s\le 1.
+\]</div>
+<p>El primer término es el error de pronóstico. El segundo acerca cada peso al peso común: es un
+agrupamiento parcial de los pesos. Con <span class="math notranslate nohighlight">\(\lambda\)</span> grande todas las series comparten un peso; con
+<span class="math notranslate nohighlight">\(\lambda=0\)</span> cada serie usa el suyo.</p>
+<p><strong>Reglas de actualización.</strong> Sean <span class="math notranslate nohighlight">\(S_{ab,s}=\sum_t a_{s,t}b_{s,t}\)</span> y <span class="math notranslate nohighlight">\(S_{bb,s}=\sum_t b_{s,t}^2\)</span>.
+Derivando <a class="reference internal" href="#equation-eq-objetivo">(3)</a> respecto de <span class="math notranslate nohighlight">\(w_s\)</span> con <span class="math notranslate nohighlight">\(w_0\)</span> fijo e igualando a cero:</p>
+<div class="math notranslate nohighlight" id="equation-eq-ws">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eq-ws" title="Link to this equation">#</a></span>\[
+-2S_{ab,s}+2w_sS_{bb,s}+2\lambda(w_s-w_0)=0
+\ \Longrightarrow\
+w_s\leftarrow\operatorname{recortar}_{[0,1]}\!\left(\frac{S_{ab,s}+\lambda w_0}{S_{bb,s}+\lambda}\right).
+\]</div>
+<p>Derivando respecto de <span class="math notranslate nohighlight">\(w_0\)</span> con los <span class="math notranslate nohighlight">\(w_s\)</span> fijos:</p>
+<div class="math notranslate nohighlight" id="equation-eq-w0">
+<span class="eqno">(5)<a class="headerlink" href="#equation-eq-w0" title="Link to this equation">#</a></span>\[
+-2\lambda\sum_s(w_s-w_0)=0\ \Longrightarrow\ w_0\leftarrow\frac{1}{S}\sum_{s=1}^{S}w_s.
+\]</div>
+<p>La regla <a class="reference internal" href="#equation-eq-ws">(4)</a> se lee así: el peso de una serie es un promedio entre su propio peso de mínimos
+cuadrados, <span class="math notranslate nohighlight">\(S_{ab,s}/S_{bb,s}\)</span>, y el peso común, y la evidencia de la serie, <span class="math notranslate nohighlight">\(S_{bb,s}\)</span>, decide cuál
+domina.</p>
+</section>
+<section id="algoritmo">
+<h2>Algoritmo<a class="headerlink" href="#algoritmo" title="Link to this heading">#</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Entrada: índices z(s,t), rezagos r(s,t), mes m(t), fuerza de agrupamiento lam, tolerancia tol
+Salida:  perfil P[1..12], pesos w_s de cada serie, peso común w0
+
+ 1. P[m]  &lt;- media de z(s,t) en los meses con m(t) = m, sobre todas las series      (ecuación del perfil)
+ 2. a_st  &lt;- z(s,t) - P[m(t)]          b_st &lt;- r(s,t) - P[m(t)]
+ 3. S_ab[s] &lt;- suma_t a_st * b_st      S_bb[s] &lt;- suma_t b_st^2
+ 4. w0 &lt;- recortar( suma_s S_ab[s] / suma_s S_bb[s] )      w_s &lt;- w0
+ 5. repetir
+ 6.     w_s &lt;- recortar( (S_ab[s] + lam * w0) / (S_bb[s] + lam) )   para cada serie s
+ 7.     w0  &lt;- promedio de los w_s
+ 8. hasta que J baje menos de tol * (1 + J)            (criterio de parada)
+ 9. devolver P, w, w0
+</pre></div>
+</div>
+</section>
+<section id="sustento-teorico">
+<h2>Sustento teórico<a class="headerlink" href="#sustento-teorico" title="Link to this heading">#</a></h2>
+<p><strong>Proposición 1 (descenso monótono y convergencia).</strong> Si <span class="math notranslate nohighlight">\(\lambda&gt;0\)</span> y alguna serie tiene
+<span class="math notranslate nohighlight">\(S_{bb,s}&gt;0\)</span>, el algoritmo produce una sucesión de valores de <span class="math notranslate nohighlight">\(J\)</span> que no aumenta y converge al único
+mínimo de <a class="reference internal" href="#equation-eq-objetivo">(3)</a>.</p>
+<p><em>Demostración.</em> (a) <em>Cada paso es un mínimo exacto.</em> Con <span class="math notranslate nohighlight">\(w_0\)</span> fijo, <span class="math notranslate nohighlight">\(J\)</span> es una suma de funciones
+cuadráticas de una variable, una por serie, con coeficiente principal <span class="math notranslate nohighlight">\(S_{bb,s}+\lambda&gt;0\)</span>. El mínimo
+de una cuadrática convexa en un intervalo es su mínimo libre recortado al intervalo, que es
+<a class="reference internal" href="#equation-eq-ws">(4)</a>. Con los <span class="math notranslate nohighlight">\(w_s\)</span> fijos, <span class="math notranslate nohighlight">\(J\)</span> es cuadrática convexa en <span class="math notranslate nohighlight">\(w_0\)</span> y su mínimo es <a class="reference internal" href="#equation-eq-w0">(5)</a>, que
+cae en <span class="math notranslate nohighlight">\([0,1]\)</span> por ser un promedio. Como cada paso minimiza <span class="math notranslate nohighlight">\(J\)</span> en un bloque dejando el otro fijo,
+<span class="math notranslate nohighlight">\(J\)</span> no puede aumentar. (b) <em>El mínimo es único.</em> <span class="math notranslate nohighlight">\(J\)</span> es una forma cuadrática. Su parte de segundo
+orden es <span class="math notranslate nohighlight">\(\sum_s S_{bb,s}w_s^2+\lambda\sum_s(w_s-w_0)^2\)</span>, que solo se anula si <span class="math notranslate nohighlight">\(w_s=w_0\)</span> para todo
+<span class="math notranslate nohighlight">\(s\)</span> y <span class="math notranslate nohighlight">\(S_{bb,s}w_s^2=0\)</span> para todo <span class="math notranslate nohighlight">\(s\)</span>; con algún <span class="math notranslate nohighlight">\(S_{bb,s}&gt;0\)</span> eso obliga a <span class="math notranslate nohighlight">\(w_0=0\)</span> y a todos los
+<span class="math notranslate nohighlight">\(w_s=0\)</span>. Luego <span class="math notranslate nohighlight">\(J\)</span> es estrictamente convexa, y sobre el conjunto convexo y cerrado
+<span class="math notranslate nohighlight">\([0,1]^S\times\mathbb{R}\)</span> tiene un único mínimo. (c) <em>Convergencia.</em> <span class="math notranslate nohighlight">\(J\ge0\)</span> y no aumenta, así que
+converge. Para una función estrictamente convexa y diferenciable con restricciones separables por
+bloque, el descenso por bloques con minimización exacta converge al mínimo global (Tseng, 2001
+<span class="bibtex-citation" id="id1">[<a class="reference internal" href="10_reproducibilidad.html#id10" title="Paul Tseng. Convergence of a block coordinate descent method for nondifferentiable minimization. Journal of Optimization Theory and Applications, 109(3):475–494, 2001. doi:10.1023/A:1017501703105.">Tse01</a>]</span>). <span class="math notranslate nohighlight">\(\blacksquare\)</span></p>
+<p><strong>Proposición 2 (casos límite).</strong> Cuando <span class="math notranslate nohighlight">\(\lambda\to\infty\)</span>, todos los pesos tienden a un mismo
+valor, el peso de mínimos cuadrados del panel, <span class="math notranslate nohighlight">\(\sum_sS_{ab,s}/\sum_sS_{bb,s}\)</span> recortado a <span class="math notranslate nohighlight">\([0,1]\)</span>.
+Cuando <span class="math notranslate nohighlight">\(\lambda=0\)</span>, <span class="math notranslate nohighlight">\(w_s=\operatorname{recortar}(S_{ab,s}/S_{bb,s})\)</span>: mínimos cuadrados por serie.</p>
+<p><em>Demostración.</em> En <a class="reference internal" href="#equation-eq-ws">(4)</a>, al crecer <span class="math notranslate nohighlight">\(\lambda\)</span> el cociente tiende a <span class="math notranslate nohighlight">\(w_0\)</span>, luego <span class="math notranslate nohighlight">\(w_s=w_0\)</span> para
+todo <span class="math notranslate nohighlight">\(s\)</span>; sustituyendo en <a class="reference internal" href="#equation-eq-objetivo">(3)</a> queda <span class="math notranslate nohighlight">\(\sum_s\sum_t(a_{s,t}-w_0b_{s,t})^2\)</span>, cuyo mínimo es
+el indicado. Con <span class="math notranslate nohighlight">\(\lambda=0\)</span> la penalización desaparece y cada serie se resuelve por separado.
+<span class="math notranslate nohighlight">\(\blacksquare\)</span></p>
+<p><strong>Supuestos y su plausibilidad.</strong> El modelo supone que las series comparten el patrón estacional.
+En Sample Superstore es razonable: todas son líneas de una misma cadena con el mismo calendario
+comercial. En un panel de series sin relación entre sí el supuesto falla, y el capítulo 7 muestra
+que entonces el modelo pierde.</p>
+<p><strong>Complejidad.</strong> El ajuste recorre los datos una vez para calcular el perfil y las sumas, <span class="math notranslate nohighlight">\(O(n)\)</span>, y
+cada iteración cuesta <span class="math notranslate nohighlight">\(O(S)\)</span>; en total <span class="math notranslate nohighlight">\(O(n+S\cdot I)\)</span> con <span class="math notranslate nohighlight">\(I\)</span> iteraciones. La memoria es
+<span class="math notranslate nohighlight">\(O(S+12)\)</span>. El pronóstico es una consulta y una combinación lineal: <span class="math notranslate nohighlight">\(O(1)\)</span> por fila.</p>
+</section>
+<section id="verificacion-numerica">
+<h2>Verificación numérica<a class="headerlink" href="#verificacion-numerica" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">common</span><span class="w"> </span><span class="kn">import</span> <span class="n">ORIGINAL</span><span class="p">,</span> <span class="n">barras</span><span class="p">,</span> <span class="n">lineas</span><span class="p">,</span> <span class="n">md</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">show</span><span class="p">,</span> <span class="n">tabla</span><span class="p">,</span> <span class="n">usd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">conv</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;convergencia.csv&quot;</span><span class="p">)</span>
+<span class="n">meta</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;metadata.json&quot;</span><span class="p">)[</span><span class="s2">&quot;modelos&quot;</span><span class="p">][</span><span class="n">ORIGINAL</span><span class="p">]</span>
+<span class="n">show</span><span class="p">(</span><span class="n">lineas</span><span class="p">(</span><span class="n">conv</span><span class="o">.</span><span class="n">iteracion</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;J&quot;</span><span class="p">:</span> <span class="n">conv</span><span class="o">.</span><span class="n">J</span><span class="p">},</span> <span class="s2">&quot;Valor del objetivo en cada iteración&quot;</span><span class="p">,</span> <span class="s2">&quot;Iteración&quot;</span><span class="p">,</span> <span class="s2">&quot;J&quot;</span><span class="p">))</span>
+<span class="n">md</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Con toda la historia (432 filas), el objetivo baja de </span><span class="si">{</span><span class="n">conv</span><span class="o">.</span><span class="n">J</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> a </span><span class="si">{</span><span class="n">conv</span><span class="o">.</span><span class="n">J</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> en &quot;</span>
+   <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">conv</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> iteraciones y nunca aumenta, como establece la proposición 1. &quot;</span>
+   <span class="sa">f</span><span class="s2">&quot;El valor de λ elegido por la búsqueda bayesiana es </span><span class="si">{</span><span class="n">meta</span><span class="p">[</span><span class="s1">&#39;hiperparametros&#39;</span><span class="p">][</span><span class="s1">&#39;lam&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>                            <div id="cd516be3-1e32-4edc-aba9-d5a9ec1bc120" class="plotly-graph-div" style="height:340px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("cd516be3-1e32-4edc-aba9-d5a9ec1bc120")) {                    Plotly.newPlot(                        "cd516be3-1e32-4edc-aba9-d5a9ec1bc120",                        [{"mode":"lines+markers","name":"J","x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],"y":[289.4599640999345,289.244375518635,289.1984558929784,289.1851616638109,289.18106298598934,289.17954717618386,289.178972527981,289.17875467706347,289.17867208910434,289.1786407797527,289.1786289102802,289.1786244105264,289.1786227046558,289.1786220579549,289.1786218127886,289.1786217198453,289.1786216846102,289.1786216712525,289.1786216661886,289.1786216642688,289.17862166354104,289.17862166326506],"type":"scatter"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"xaxis":{"title":{"text":"Iteraci\u00f3n"},"type":"linear","gridcolor":"#EEF0F6","zeroline":false},"yaxis":{"title":{"text":"J"},"gridcolor":"#EEF0F6","zeroline":false},"title":{"font":{"size":15,"color":"#2f3247"},"text":"Valor del objetivo en cada iteraci\u00f3n"},"font":{"family":"Nunito, Segoe UI, sans-serif","color":"#2f3247"},"margin":{"l":40,"r":20,"t":50,"b":40},"legend":{"orientation":"h","y":-0.2},"height":340,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","colorway":["#2E6F95","#2CA58D","#8E6CD8","#E0962B","#63A0BC","#D1574A"]},                        {"displayModeBar": false, "responsive": true}                    )                };                            </script>        </div></div><p>Con toda la historia (432 filas), el objetivo baja de 289.4600 a 289.1786 en 21 iteraciones y nunca aumenta, como establece la proposición 1. El valor de λ elegido por la búsqueda bayesiana es 135.47.</p>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;escalabilidad.csv&quot;</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;filas&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;modelo&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;ajuste_ms&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;filas&quot;</span><span class="p">:</span> <span class="s2">&quot;Filas&quot;</span><span class="p">})</span>
+<span class="n">tabla</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_239db th {
+  padding: 5px 12px;
+  text-align: left;
+}
+#T_239db  td {
+  padding: 5px 12px;
+  text-align: left;
+}
+</style>
+<table id="T_239db">
+  <thead>
+    <tr>
+      <th id="T_239db_level0_col0" class="col_heading level0 col0" >Filas</th>
+      <th id="T_239db_level0_col1" class="col_heading level0 col1" >Perfil jerárquico (original)</th>
+      <th id="T_239db_level0_col2" class="col_heading level0 col2" >Random Forest</th>
+      <th id="T_239db_level0_col3" class="col_heading level0 col3" >Ridge</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_239db_row0_col0" class="data row0 col0" >432</td>
+      <td id="T_239db_row0_col1" class="data row0 col1" >1.970000</td>
+      <td id="T_239db_row0_col2" class="data row0 col2" >682.640000</td>
+      <td id="T_239db_row0_col3" class="data row0 col3" >7.370000</td>
+    </tr>
+    <tr>
+      <td id="T_239db_row1_col0" class="data row1 col0" >1728</td>
+      <td id="T_239db_row1_col1" class="data row1 col1" >2.610000</td>
+      <td id="T_239db_row1_col2" class="data row1 col2" >2189.840000</td>
+      <td id="T_239db_row1_col3" class="data row1 col3" >7.680000</td>
+    </tr>
+    <tr>
+      <td id="T_239db_row2_col0" class="data row2 col0" >6912</td>
+      <td id="T_239db_row2_col1" class="data row2 col1" >9.670000</td>
+      <td id="T_239db_row2_col2" class="data row2 col2" >7924.460000</td>
+      <td id="T_239db_row2_col3" class="data row2 col3" >30.770000</td>
+    </tr>
+    <tr>
+      <td id="T_239db_row3_col0" class="data row3 col0" >27648</td>
+      <td id="T_239db_row3_col1" class="data row3 col1" >41.380000</td>
+      <td id="T_239db_row3_col2" class="data row3 col2" >86705.710000</td>
+      <td id="T_239db_row3_col3" class="data row3 col3" >154.830000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exp</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;modelo&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exponente_ajuste</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+<span class="n">md</span><span class="p">(</span><span class="s2">&quot;Tiempo de ajuste en milisegundos al replicar los datos 1, 4, 16 y 64 veces. El exponente empírico &quot;</span>
+   <span class="s2">&quot;(pendiente en escala log-log) es &quot;</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> para </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">exp</span><span class="o">.</span><span class="n">items</span><span class="p">())</span> <span class="o">+</span>
+   <span class="s2">&quot;. Un exponente igual o menor que 1 es consistente con un costo que crece, como mucho, de forma lineal &quot;</span>
+   <span class="s2">&quot;con el número de filas; queda por debajo de 1 porque con estos tamaños todavía pesa el costo fijo de &quot;</span>
+   <span class="s2">&quot;cada ajuste.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<p>Tiempo de ajuste en milisegundos al replicar los datos 1, 4, 16 y 64 veces. El exponente empírico (pendiente en escala log-log) es 0.75 para Perfil jerárquico (original), 1.14 para Random Forest, 0.76 para Ridge. Un exponente igual o menor que 1 es consistente con un costo que crece, como mucho, de forma lineal con el número de filas; queda por debajo de 1 porque con estos tamaños todavía pesa el costo fijo de cada ajuste.</p>
+</div>
+</div>
+</section>
+<section id="implementacion">
+<h2>Implementación<a class="headerlink" href="#implementacion" title="Link to this heading">#</a></h2>
+<p>La clase está en <code class="docutils literal notranslate"><span class="pre">src/original_model.py</span></code>. Hereda de <code class="docutils literal notranslate"><span class="pre">BaseEstimator</span></code> y <code class="docutils literal notranslate"><span class="pre">RegressorMixin</span></code>, por lo que
+funciona con <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code>, <code class="docutils literal notranslate"><span class="pre">clone</span></code>, <code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code> y <code class="docutils literal notranslate"><span class="pre">cross_val_score</span></code>. Solo usa <code class="docutils literal notranslate"><span class="pre">numpy</span></code>. El núcleo del
+ajuste:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># sumas por serie: lo único que necesita el algoritmo</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">p</span><span class="p">,</span> <span class="n">r</span> <span class="o">-</span> <span class="n">p</span>
+<span class="n">Saa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
+<span class="n">Sab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
+<span class="n">Sbb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">b</span> <span class="o">*</span> <span class="n">b</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
+
+<span class="n">w0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">Sab</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">Sbb</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>      <span class="c1"># peso global de mínimos cuadrados</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">w0</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_iter</span><span class="p">):</span>
+    <span class="c1"># regla de los pesos: mínimo exacto de J en cada w_s con w0 fijo, recortado a [0, 1]</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">((</span><span class="n">Sab</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam</span> <span class="o">*</span> <span class="n">w0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">Sbb</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># regla del peso común: mínimo exacto de J en w0 con los w_s fijos</span>
+    <span class="n">w0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">historial_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objetivo</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">w0</span><span class="p">,</span> <span class="n">Saa</span><span class="p">,</span> <span class="n">Sab</span><span class="p">,</span> <span class="n">Sbb</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lam</span><span class="p">))</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">historial_</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">historial_</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tol</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">historial_</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+<p>El método <code class="docutils literal notranslate"><span class="pre">explicar</span></code> devuelve, para cada pronóstico, tres sumandos exactos: la base (media del
+perfil), lo que aporta el mes del año y lo que aporta el rezago propio. Es la explicación local que
+muestra el tablero.</p>
+</section>
+<section id="pruebas-unitarias">
+<h2>Pruebas unitarias<a class="headerlink" href="#pruebas-unitarias" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">tests/test_original_model.py</span></code> contiene 11 pruebas, que se ejecutan en cada <em>push</em> con GitHub Actions:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Prueba</p></th>
+<th class="head"><p>Qué verifica</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Recupera la solución conocida</p></td>
+<td><p>En datos sintéticos generados con el propio modelo, recupera el perfil y el peso de cada serie</p></td>
+</tr>
+<tr class="row-odd"><td><p>La pérdida no aumenta</p></td>
+<td><p><span class="math notranslate nohighlight">\(J\)</span> es no creciente para cuatro valores de <span class="math notranslate nohighlight">\(\lambda\)</span> (proposición 1)</p></td>
+</tr>
+<tr class="row-even"><td><p>Converge al mínimo</p></td>
+<td><p>El resultado coincide con la solución exacta del sistema lineal de las condiciones de primer orden</p></td>
+</tr>
+<tr class="row-odd"><td><p>Casos límite</p></td>
+<td><p><span class="math notranslate nohighlight">\(\lambda\)</span> grande da un solo peso; <span class="math notranslate nohighlight">\(\lambda=0\)</span> coincide con mínimos cuadrados por serie (proposición 2)</p></td>
+</tr>
+<tr class="row-even"><td><p>Pesos entre 0 y 1</p></td>
+<td><p>El recorte se respeta aunque los datos empujen fuera</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reproducible</p></td>
+<td><p>Dos ajustes dan exactamente el mismo resultado (el algoritmo es determinista)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">clone</span></code></p></td>
+<td><p>Conserva los hiperparámetros</p></td>
+</tr>
+<tr class="row-odd"><td><p>Entrada inválida</p></td>
+<td><p>Rechaza valores faltantes, columnas ausentes, <span class="math notranslate nohighlight">\(\lambda\)</span> negativo y tamaños distintos</p></td>
+</tr>
+<tr class="row-even"><td><p>Serie no vista</p></td>
+<td><p>Usa el peso común</p></td>
+</tr>
+<tr class="row-odd"><td><p>Explicación</p></td>
+<td><p>Los tres sumandos suman la predicción</p></td>
+</tr>
+<tr class="row-even"><td><p>scikit-learn</p></td>
+<td><p>Funciona con <code class="docutils literal notranslate"><span class="pre">cross_val_score</span></code> y <code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="pesos-aprendidos">
+<h2>Pesos aprendidos<a class="headerlink" href="#pesos-aprendidos" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;pesos_original.csv&quot;</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">barras</span><span class="p">([</span><span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="s2">&quot; · &quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">w</span><span class="o">.</span><span class="n">serie</span><span class="p">],</span> <span class="nb">list</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">peso</span><span class="p">),</span> <span class="s2">&quot;Peso del rezago propio en cada serie&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Peso (0 = solo perfil común; 1 = ingenuo estacional)&quot;</span><span class="p">,</span> <span class="n">alto</span><span class="o">=</span><span class="mi">380</span><span class="p">))</span>
+<span class="n">md</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Los pesos van de </span><span class="si">{</span><span class="n">w</span><span class="o">.</span><span class="n">peso</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> a </span><span class="si">{</span><span class="n">w</span><span class="o">.</span><span class="n">peso</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, con media </span><span class="si">{</span><span class="n">w</span><span class="o">.</span><span class="n">peso</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">. Son bajos: &quot;</span>
+   <span class="s2">&quot;las series se pronostican casi por completo con el perfil común.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>                            <div id="2bb3fc99-eea1-444f-a98c-399ba14f33da" class="plotly-graph-div" style="height:380px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("2bb3fc99-eea1-444f-a98c-399ba14f33da")) {                    Plotly.newPlot(                        "2bb3fc99-eea1-444f-a98c-399ba14f33da",                        [{"marker":{"color":"#2E6F95"},"orientation":"h","x":[0.0,0.0,0.0,0.0,0.0030071932000097,0.0117281974901912,0.0174779814850347,0.0183124059630128,0.020578538831316,0.0248726388360853,0.0280270357795219,0.0359426630052292],"y":["Office Supplies \u00b7 Central","Office Supplies \u00b7 South","Technology \u00b7 Central","Technology \u00b7 South","Office Supplies \u00b7 West","Furniture \u00b7 Central","Furniture \u00b7 South","Technology \u00b7 East","Furniture \u00b7 East","Office Supplies \u00b7 East","Furniture \u00b7 West","Technology \u00b7 West"],"type":"bar"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"xaxis":{"title":{"text":"Peso (0 = solo perfil com\u00fan; 1 = ingenuo estacional)"},"gridcolor":"#EEF0F6","zeroline":false},"title":{"font":{"size":15,"color":"#2f3247"},"text":"Peso del rezago propio en cada serie"},"font":{"family":"Nunito, Segoe UI, sans-serif","color":"#2f3247"},"margin":{"l":220,"r":20,"t":50,"b":40},"legend":{"orientation":"h","y":-0.2},"height":380,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","colorway":["#2E6F95","#2CA58D","#8E6CD8","#E0962B","#63A0BC","#D1574A"],"yaxis":{"gridcolor":"#EEF0F6","zeroline":false}},                        {"displayModeBar": false, "responsive": true}                    )                };                            </script>        </div></div><p>Los pesos van de 0.00 a 0.04, con media 0.01. Son bajos: las series se pronostican casi por completo con el perfil común.</p>
+</div>
+</div>
+</section>
+<section id="aporte-de-cada-componente">
+<h2>Aporte de cada componente<a class="headerlink" href="#aporte-de-cada-componente" title="Link to this heading">#</a></h2>
+<p>Cada variante cambia una pieza y mantiene el resto. Se evalúa con el mismo protocolo que el modelo
+completo (24 meses de origen móvil) y las mismas pruebas, con corrección de Holm sobre las seis
+variantes.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;ablacion.csv&quot;</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">conjunto</span> <span class="o">==</span> <span class="s2">&quot;superstore&quot;</span><span class="p">]</span>
+<span class="n">tabla</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Variante&quot;</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">variante</span><span class="p">,</span> <span class="s2">&quot;MAE (USD)&quot;</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">MAE</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:,.0f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span>
+    <span class="s2">&quot;Variante − completo [IC 95 %]&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;—&quot;</span> <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="o">-</span><span class="n">d</span><span class="si">:</span><span class="s2">+,.0f</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="o">-</span><span class="n">hi</span><span class="si">:</span><span class="s2">+,.0f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="o">-</span><span class="n">lo</span><span class="si">:</span><span class="s2">+,.0f</span><span class="si">}</span><span class="s2">]&quot;</span> <span class="k">for</span> <span class="n">d</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">dif</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">ic_lo</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">ic_hi</span><span class="p">)],</span>
+    <span class="s2">&quot;Diebold–Mariano p / p Holm&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;—&quot;</span> <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">h</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">p_DM</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">p_DM_holm</span><span class="p">)],</span>
+    <span class="s2">&quot;Desvío del total&quot;</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">desvio_total_pct</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:+.1f}</span><span class="s2"> %&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">)}))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_b7cc0 th {
+  padding: 5px 12px;
+  text-align: left;
+}
+#T_b7cc0  td {
+  padding: 5px 12px;
+  text-align: left;
+}
+</style>
+<table id="T_b7cc0">
+  <thead>
+    <tr>
+      <th id="T_b7cc0_level0_col0" class="col_heading level0 col0" >Variante</th>
+      <th id="T_b7cc0_level0_col1" class="col_heading level0 col1" >MAE (USD)</th>
+      <th id="T_b7cc0_level0_col2" class="col_heading level0 col2" >Variante − completo [IC 95 %]</th>
+      <th id="T_b7cc0_level0_col3" class="col_heading level0 col3" >Diebold–Mariano p / p Holm</th>
+      <th id="T_b7cc0_level0_col4" class="col_heading level0 col4" >Desvío del total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_b7cc0_row0_col0" class="data row0 col0" >Modelo completo</td>
+      <td id="T_b7cc0_row0_col1" class="data row0 col1" >2,310</td>
+      <td id="T_b7cc0_row0_col2" class="data row0 col2" >—</td>
+      <td id="T_b7cc0_row0_col3" class="data row0 col3" >—</td>
+      <td id="T_b7cc0_row0_col4" class="data row0 col4" >-5.1 %</td>
+    </tr>
+    <tr>
+      <td id="T_b7cc0_row1_col0" class="data row1 col0" >Peso único (lam infinito)</td>
+      <td id="T_b7cc0_row1_col1" class="data row1 col1" >2,280</td>
+      <td id="T_b7cc0_row1_col2" class="data row1 col2" >-31 [-66, -1]</td>
+      <td id="T_b7cc0_row1_col3" class="data row1 col3" >0.156 / 0.779</td>
+      <td id="T_b7cc0_row1_col4" class="data row1 col4" >-4.6 %</td>
+    </tr>
+    <tr>
+      <td id="T_b7cc0_row2_col0" class="data row2 col0" >Pesos sin agrupar (lam = 0)</td>
+      <td id="T_b7cc0_row2_col1" class="data row2 col1" >2,307</td>
+      <td id="T_b7cc0_row2_col2" class="data row2 col2" >-3 [-32, +27]</td>
+      <td id="T_b7cc0_row2_col3" class="data row2 col3" >0.884 / 1.000</td>
+      <td id="T_b7cc0_row2_col4" class="data row2 col4" >-6.0 %</td>
+    </tr>
+    <tr>
+      <td id="T_b7cc0_row3_col0" class="data row3 col0" >Promedio simple (w = 0.5)</td>
+      <td id="T_b7cc0_row3_col1" class="data row3 col1" >2,351</td>
+      <td id="T_b7cc0_row3_col2" class="data row3 col2" >+41 [-77, +146]</td>
+      <td id="T_b7cc0_row3_col3" class="data row3 col3" >0.524 / 1.000</td>
+      <td id="T_b7cc0_row3_col4" class="data row3 col4" >-12.1 %</td>
+    </tr>
+    <tr>
+      <td id="T_b7cc0_row4_col0" class="data row4 col0" >Solo perfil (w = 0)</td>
+      <td id="T_b7cc0_row4_col1" class="data row4 col1" >2,280</td>
+      <td id="T_b7cc0_row4_col2" class="data row4 col2" >-31 [-66, -0]</td>
+      <td id="T_b7cc0_row4_col3" class="data row4 col3" >0.156 / 0.779</td>
+      <td id="T_b7cc0_row4_col4" class="data row4 col4" >-4.6 %</td>
+    </tr>
+    <tr>
+      <td id="T_b7cc0_row5_col0" class="data row5 col0" >Perfil por serie (sin agrupar)</td>
+      <td id="T_b7cc0_row5_col1" class="data row5 col1" >2,960</td>
+      <td id="T_b7cc0_row5_col2" class="data row5 col2" >+650 [+411, +939]</td>
+      <td id="T_b7cc0_row5_col3" class="data row5 col3" >0.000 / 0.001</td>
+      <td id="T_b7cc0_row5_col4" class="data row5 col4" >-3.0 %</td>
+    </tr>
+    <tr>
+      <td id="T_b7cc0_row6_col0" class="data row6 col0" >Sin perfil (constante)</td>
+      <td id="T_b7cc0_row6_col1" class="data row6 col1" >2,407</td>
+      <td id="T_b7cc0_row6_col2" class="data row6 col2" >+96 [-103, +264]</td>
+      <td id="T_b7cc0_row6_col3" class="data row6 col3" >0.374 / 1.000</td>
+      <td id="T_b7cc0_row6_col4" class="data row6 col4" >-13.0 %</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<ul class="simple">
+<li><p><strong>El perfil común es la pieza decisiva.</strong> Con un perfil por serie el MAE sube 650 USD
+(p ajustado = 0,001): es el único efecto significativo.</p></li>
+<li><p><strong>Los pesos por serie no ayudan en este conjunto.</strong> Con un peso único, o sin rezago propio, el MAE
+es 31 USD <em>menor</em> que el del modelo completo. La diferencia no es significativa, pero va en contra
+del mecanismo propuesto: en Superstore, aprender un peso por serie añade ruido.</p></li>
+<li><p><strong>El promedio simple</strong> de los dos pronósticos (peso 0,5) y el modelo <strong>sin perfil</strong> son peores y
+subestiman el total en 12 % y 13 %.</p></li>
+</ul>
+<p>La conclusión es incómoda y se reporta tal cual: lo que funciona es la parte conocida del modelo, el
+perfil estacional común, y no la regla nueva de los pesos. El capítulo 7 muestra que en otros
+conjuntos la regla sí aporta.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="04_literatura.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Revisión de literatura y novedad</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="06_validacion.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Protocolo y validación estadística</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-limitacion-de-la-que-parte">La limitación de la que parte</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulacion">Formulación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo">Algoritmo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sustento-teorico">Sustento teórico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verificacion-numerica">Verificación numérica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion">Implementación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-unitarias">Pruebas unitarias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pesos-aprendidos">Pesos aprendidos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aporte-de-cada-componente">Aporte de cada componente</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Alex Teran y David Estrada
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

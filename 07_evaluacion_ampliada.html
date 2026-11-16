@@ -1,0 +1,1737 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Evaluación ampliada y robustez &#8212; Pronóstico de ventas Sample Superstore</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '07_evaluacion_ampliada';</script>
+    <script src="https://cdn.plot.ly/plotly-4.1.1.min.js"></script>
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Dashboard y despliegue" href="08_dashboard.html" />
+    <link rel="prev" title="Protocolo y validación estadística" href="06_validacion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Pronóstico de ventas Sample Superstore</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Búsqueda</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introducción
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Planteamiento</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="problema.html">Problema y objetivos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="marco_teorico.html">Marco teórico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metodologia.html">Metodología</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Datos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="etl.html">ETL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eda.html">EDA</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3–7. Modelos y evaluación</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="03_benchmarks.html">Modelos de referencia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_literatura.html">Revisión de literatura y novedad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_modelo_original.html">Modelo original</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_validacion.html">Protocolo y validación estadística</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Evaluación ampliada y robustez</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8–10. Producto y cierre</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="08_dashboard.html">Dashboard y despliegue</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="proyeccion.html">Proyección 2018</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="09_conclusiones.html">Conclusiones y limitaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_reproducibilidad.html">Reproducibilidad y bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AlexT09/SuperstorePython2" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Repositorio de origen"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/07_evaluacion_ampliada.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="claro/oscuro" aria-label="claro/oscuro" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Evaluación ampliada y robustez</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conjuntos-de-datos-adicionales">Conjuntos de datos adicionales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aporte-de-los-componentes-en-cada-conjunto">Aporte de los componentes en cada conjunto</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensibilidad-al-hiperparametro">Sensibilidad al hiperparámetro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estabilidad-por-semilla">Estabilidad por semilla</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ruido-y-valores-atipicos">Ruido y valores atípicos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menos-datos">Menos datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cambio-en-el-tiempo">Cambio en el tiempo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incertidumbre-intervalos-de-prediccion">Incertidumbre: intervalos de predicción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#donde-falla-el-modelo">Dónde falla el modelo</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="evaluacion-ampliada-y-robustez">
+<h1>Evaluación ampliada y robustez<a class="headerlink" href="#evaluacion-ampliada-y-robustez" title="Link to this heading">#</a></h1>
+<p><em>¿Se mantiene el resultado fuera del conjunto principal y en condiciones menos favorables?</em></p>
+<p>Un buen resultado en un solo conjunto no basta. Este capítulo evalúa el modelo original y las
+referencias en tres conjuntos adicionales y somete al modelo a ruido, menos datos y otras semillas.
+Todo se fijó en el protocolo antes de experimentar; los estudios de robustez son exploratorios.</p>
+<section id="conjuntos-de-datos-adicionales">
+<h2>Conjuntos de datos adicionales<a class="headerlink" href="#conjuntos-de-datos-adicionales" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Conjunto</p></th>
+<th class="head"><p>Fuente</p></th>
+<th class="head"><p>Series usadas</p></th>
+<th class="head"><p>Periodo</p></th>
+<th class="head"><p>Naturaleza</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Tourism Monthly</p></td>
+<td><p>Monash / Zenodo, doi:10.5281/zenodo.4656096</p></td>
+<td><p>24 de 366</p></td>
+<td><p>oct. 2003 – sep. 2007</p></td>
+<td><p>Demanda turística; estacionalidad muy fuerte</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hospital</p></td>
+<td><p>Monash / Zenodo, doi:10.5281/zenodo.4656014</p></td>
+<td><p>24 de 767</p></td>
+<td><p>ene. 2003 – dic. 2006</p></td>
+<td><p>Conteos de pacientes; estacionalidad débil</p></td>
+</tr>
+<tr class="row-even"><td><p>M3 Monthly</p></td>
+<td><p>Monash / Zenodo, doi:10.5281/zenodo.4656298</p></td>
+<td><p>24 de 1.428</p></td>
+<td><p>mar. 1990 – feb. 1994</p></td>
+<td><p>Series de seis dominios sin relación entre sí</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Provienen del repositorio de Monash <span class="bibtex-citation" id="id1">[<a class="reference internal" href="10_reproducibilidad.html#id16" title="Rakshitha Godahewa, Christoph Bergmeir, Geoffrey I. Webb, Rob J. Hyndman, and Pablo Montero-Manso. Monash time series forecasting archive. In Proceedings of the Neural Information Processing Systems Track on Datasets and Benchmarks. 2021.">GBW+21</a>]</span>, con licencia CC BY 4.0. Se eligieron por
+ser públicos, mensuales, de la misma tarea y de naturaleza distinta, <strong>sin ajustar ningún modelo
+sobre ellos</strong>. M3 se incluyó a propósito como caso adverso: sus series no comparten estacionalidad,
+que es el supuesto del modelo. De cada conjunto se tomaron 24 series al azar (semilla 42) entre las
+que tenían calendario común y los últimos 48 meses completos y positivos; el código está en
+<code class="docutils literal notranslate"><span class="pre">experiments/datos_adicionales.py</span></code>.</p>
+<p>En cada conjunto se aplicó el mismo procedimiento: 24 meses de origen móvil, validación cruzada
+temporal interna y búsqueda bayesiana con 16 evaluaciones para todos los modelos.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">common</span><span class="w"> </span><span class="kn">import</span> <span class="n">CONJUNTOS</span><span class="p">,</span> <span class="n">OPT</span><span class="p">,</span> <span class="n">ORIGINAL</span><span class="p">,</span> <span class="n">barras</span><span class="p">,</span> <span class="n">lineas</span><span class="p">,</span> <span class="n">md</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">show</span><span class="p">,</span> <span class="n">tabla</span><span class="p">,</span> <span class="n">usd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">mej</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;mejores.csv&quot;</span><span class="p">),</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;numeros.json&quot;</span><span class="p">)</span>
+<span class="c1"># MASE de cada modelo en cada conjunto (error dividido por el del ingenuo estacional antes del primer origen)</span>
+<span class="n">piv</span> <span class="o">=</span> <span class="n">mej</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;modelo&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;conjunto&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;MASE&quot;</span><span class="p">)[</span><span class="nb">list</span><span class="p">(</span><span class="n">CONJUNTOS</span><span class="p">)]</span>
+<span class="n">piv</span><span class="p">[</span><span class="s2">&quot;Rango medio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">piv</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">piv</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;Rango medio&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">CONJUNTOS</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;modelo&quot;</span><span class="p">:</span> <span class="s2">&quot;Modelo&quot;</span><span class="p">})</span>
+<span class="n">tabla</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_877ce th {
+  padding: 5px 12px;
+  text-align: left;
+}
+#T_877ce  td {
+  padding: 5px 12px;
+  text-align: left;
+}
+</style>
+<table id="T_877ce">
+  <thead>
+    <tr>
+      <th id="T_877ce_level0_col0" class="col_heading level0 col0" >Modelo</th>
+      <th id="T_877ce_level0_col1" class="col_heading level0 col1" >Sample Superstore</th>
+      <th id="T_877ce_level0_col2" class="col_heading level0 col2" >Tourism Monthly</th>
+      <th id="T_877ce_level0_col3" class="col_heading level0 col3" >Hospital</th>
+      <th id="T_877ce_level0_col4" class="col_heading level0 col4" >M3 Monthly</th>
+      <th id="T_877ce_level0_col5" class="col_heading level0 col5" >Rango medio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_877ce_row0_col0" class="data row0 col0" >KNN</td>
+      <td id="T_877ce_row0_col1" class="data row0 col1" >1.050000</td>
+      <td id="T_877ce_row0_col2" class="data row0 col2" >0.800000</td>
+      <td id="T_877ce_row0_col3" class="data row0 col3" >0.508000</td>
+      <td id="T_877ce_row0_col4" class="data row0 col4" >0.569000</td>
+      <td id="T_877ce_row0_col5" class="data row0 col5" >4.000000</td>
+    </tr>
+    <tr>
+      <td id="T_877ce_row1_col0" class="data row1 col0" >SVR</td>
+      <td id="T_877ce_row1_col1" class="data row1 col1" >1.020000</td>
+      <td id="T_877ce_row1_col2" class="data row1 col2" >0.899000</td>
+      <td id="T_877ce_row1_col3" class="data row1 col3" >0.480000</td>
+      <td id="T_877ce_row1_col4" class="data row1 col4" >0.713000</td>
+      <td id="T_877ce_row1_col5" class="data row1 col5" >4.250000</td>
+    </tr>
+    <tr>
+      <td id="T_877ce_row2_col0" class="data row2 col0" >XGBoost</td>
+      <td id="T_877ce_row2_col1" class="data row2 col1" >1.070000</td>
+      <td id="T_877ce_row2_col2" class="data row2 col2" >1.034000</td>
+      <td id="T_877ce_row2_col3" class="data row2 col3" >0.493000</td>
+      <td id="T_877ce_row2_col4" class="data row2 col4" >0.533000</td>
+      <td id="T_877ce_row2_col5" class="data row2 col5" >4.500000</td>
+    </tr>
+    <tr>
+      <td id="T_877ce_row3_col0" class="data row3 col0" >Random Forest</td>
+      <td id="T_877ce_row3_col1" class="data row3 col1" >1.030000</td>
+      <td id="T_877ce_row3_col2" class="data row3 col2" >0.997000</td>
+      <td id="T_877ce_row3_col3" class="data row3 col3" >0.511000</td>
+      <td id="T_877ce_row3_col4" class="data row3 col4" >0.535000</td>
+      <td id="T_877ce_row3_col5" class="data row3 col5" >4.750000</td>
+    </tr>
+    <tr>
+      <td id="T_877ce_row4_col0" class="data row4 col0" >HistGradientBoosting</td>
+      <td id="T_877ce_row4_col1" class="data row4 col1" >1.051000</td>
+      <td id="T_877ce_row4_col2" class="data row4 col2" >1.079000</td>
+      <td id="T_877ce_row4_col3" class="data row4 col3" >0.499000</td>
+      <td id="T_877ce_row4_col4" class="data row4 col4" >0.549000</td>
+      <td id="T_877ce_row4_col5" class="data row4 col5" >5.500000</td>
+    </tr>
+    <tr>
+      <td id="T_877ce_row5_col0" class="data row5 col0" >Perfil jerárquico (original)</td>
+      <td id="T_877ce_row5_col1" class="data row5 col1" >0.996000</td>
+      <td id="T_877ce_row5_col2" class="data row5 col2" >0.814000</td>
+      <td id="T_877ce_row5_col3" class="data row5 col3" >0.537000</td>
+      <td id="T_877ce_row5_col4" class="data row5 col4" >0.869000</td>
+      <td id="T_877ce_row5_col5" class="data row5 col5" >5.750000</td>
+    </tr>
+    <tr>
+      <td id="T_877ce_row6_col0" class="data row6 col0" >Theta</td>
+      <td id="T_877ce_row6_col1" class="data row6 col1" >1.188000</td>
+      <td id="T_877ce_row6_col2" class="data row6 col2" >0.829000</td>
+      <td id="T_877ce_row6_col3" class="data row6 col3" >0.540000</td>
+      <td id="T_877ce_row6_col4" class="data row6 col4" >0.486000</td>
+      <td id="T_877ce_row6_col5" class="data row6 col5" >6.500000</td>
+    </tr>
+    <tr>
+      <td id="T_877ce_row7_col0" class="data row7 col0" >Lasso</td>
+      <td id="T_877ce_row7_col1" class="data row7 col1" >1.078000</td>
+      <td id="T_877ce_row7_col2" class="data row7 col2" >1.083000</td>
+      <td id="T_877ce_row7_col3" class="data row7 col3" >0.497000</td>
+      <td id="T_877ce_row7_col4" class="data row7 col4" >0.637000</td>
+      <td id="T_877ce_row7_col5" class="data row7 col5" >7.250000</td>
+    </tr>
+    <tr>
+      <td id="T_877ce_row8_col0" class="data row8 col0" >Ridge</td>
+      <td id="T_877ce_row8_col1" class="data row8 col1" >1.084000</td>
+      <td id="T_877ce_row8_col2" class="data row8 col2" >1.041000</td>
+      <td id="T_877ce_row8_col3" class="data row8 col3" >0.508000</td>
+      <td id="T_877ce_row8_col4" class="data row8 col4" >0.633000</td>
+      <td id="T_877ce_row8_col5" class="data row8 col5" >7.250000</td>
+    </tr>
+    <tr>
+      <td id="T_877ce_row9_col0" class="data row9 col0" >Árbol de decisión</td>
+      <td id="T_877ce_row9_col1" class="data row9 col1" >1.069000</td>
+      <td id="T_877ce_row9_col2" class="data row9 col2" >1.558000</td>
+      <td id="T_877ce_row9_col3" class="data row9 col3" >0.519000</td>
+      <td id="T_877ce_row9_col4" class="data row9 col4" >0.626000</td>
+      <td id="T_877ce_row9_col5" class="data row9 col5" >7.750000</td>
+    </tr>
+    <tr>
+      <td id="T_877ce_row10_col0" class="data row10 col0" >Ingenuo estacional</td>
+      <td id="T_877ce_row10_col1" class="data row10 col1" >1.176000</td>
+      <td id="T_877ce_row10_col2" class="data row10 col2" >0.810000</td>
+      <td id="T_877ce_row10_col3" class="data row10 col3" >0.626000</td>
+      <td id="T_877ce_row10_col4" class="data row10 col4" >1.169000</td>
+      <td id="T_877ce_row10_col5" class="data row10 col5" >8.500000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>MASE por conjunto (menor es mejor; por debajo de 1 mejora al ingenuo estacional de referencia). En
+Superstore cada modelo aparece con su mejor método de optimización; en los demás, con la búsqueda
+bayesiana. No se promedian errores de escalas distintas: el rango medio solo ordena.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;pruebas.csv&quot;</span><span class="p">)</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">nombre</span> <span class="ow">in</span> <span class="n">CONJUNTOS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">conjunto</span> <span class="o">==</span> <span class="n">c</span><span class="p">]</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">q</span><span class="o">.</span><span class="n">MAE_referencia</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()]</span>
+    <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;Conjunto&quot;</span><span class="p">:</span> <span class="n">nombre</span><span class="p">,</span> <span class="s2">&quot;Posición del original&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;posicion_original&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> de 11&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;Mejor referencia&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">q</span><span class="o">.</span><span class="n">referencia</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">OPT</span><span class="p">[</span><span class="n">q</span><span class="o">.</span><span class="n">optimizador</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;Original − mejor referencia [IC 95 %]&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">q</span><span class="o">.</span><span class="n">dif</span><span class="si">:</span><span class="s2">+,.1f</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">q</span><span class="o">.</span><span class="n">ic_lo</span><span class="si">:</span><span class="s2">+,.1f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">q</span><span class="o">.</span><span class="n">ic_hi</span><span class="si">:</span><span class="s2">+,.1f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;Diebold–Mariano p / p Holm&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">q</span><span class="o">.</span><span class="n">p_DM</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">q</span><span class="o">.</span><span class="n">p_DM_holm</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;Modelos en el conjunto de confianza&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;mcs_tamano&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> de </span><span class="si">{</span><span class="n">n</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;mcs_total&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;¿El original está?&quot;</span><span class="p">:</span> <span class="s2">&quot;Sí&quot;</span> <span class="k">if</span> <span class="n">n</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s2">&quot;original_en_mcs&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;No&quot;</span><span class="p">})</span>
+<span class="n">tabla</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_ac069 th {
+  padding: 5px 12px;
+  text-align: left;
+}
+#T_ac069  td {
+  padding: 5px 12px;
+  text-align: left;
+}
+</style>
+<table id="T_ac069">
+  <thead>
+    <tr>
+      <th id="T_ac069_level0_col0" class="col_heading level0 col0" >Conjunto</th>
+      <th id="T_ac069_level0_col1" class="col_heading level0 col1" >Posición del original</th>
+      <th id="T_ac069_level0_col2" class="col_heading level0 col2" >Mejor referencia</th>
+      <th id="T_ac069_level0_col3" class="col_heading level0 col3" >Original − mejor referencia [IC 95 %]</th>
+      <th id="T_ac069_level0_col4" class="col_heading level0 col4" >Diebold–Mariano p / p Holm</th>
+      <th id="T_ac069_level0_col5" class="col_heading level0 col5" >Modelos en el conjunto de confianza</th>
+      <th id="T_ac069_level0_col6" class="col_heading level0 col6" >¿El original está?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_ac069_row0_col0" class="data row0 col0" >Sample Superstore</td>
+      <td id="T_ac069_row0_col1" class="data row0 col1" >1 de 11</td>
+      <td id="T_ac069_row0_col2" class="data row0 col2" >SVR (Grid Search)</td>
+      <td id="T_ac069_row0_col3" class="data row0 col3" >-55.5 [-218.1, +134.3]</td>
+      <td id="T_ac069_row0_col4" class="data row0 col4" >0.627 / 0.657</td>
+      <td id="T_ac069_row0_col5" class="data row0 col5" >30 de 35</td>
+      <td id="T_ac069_row0_col6" class="data row0 col6" >Sí</td>
+    </tr>
+    <tr>
+      <td id="T_ac069_row1_col0" class="data row1 col0" >Tourism Monthly</td>
+      <td id="T_ac069_row1_col1" class="data row1 col1" >3 de 11</td>
+      <td id="T_ac069_row1_col2" class="data row1 col2" >KNN (Bayesiana (Optuna))</td>
+      <td id="T_ac069_row1_col3" class="data row1 col3" >+5.6 [-40.6, +53.5]</td>
+      <td id="T_ac069_row1_col4" class="data row1 col4" >0.880 / 1.000</td>
+      <td id="T_ac069_row1_col5" class="data row1 col5" >5 de 11</td>
+      <td id="T_ac069_row1_col6" class="data row1 col6" >Sí</td>
+    </tr>
+    <tr>
+      <td id="T_ac069_row2_col0" class="data row2 col0" >Hospital</td>
+      <td id="T_ac069_row2_col1" class="data row2 col1" >9 de 11</td>
+      <td id="T_ac069_row2_col2" class="data row2 col2" >SVR (Bayesiana (Optuna))</td>
+      <td id="T_ac069_row2_col3" class="data row2 col3" >+2.0 [-1.6, +5.1]</td>
+      <td id="T_ac069_row2_col4" class="data row2 col4" >0.223 / 1.000</td>
+      <td id="T_ac069_row2_col5" class="data row2 col5" >11 de 11</td>
+      <td id="T_ac069_row2_col6" class="data row2 col6" >Sí</td>
+    </tr>
+    <tr>
+      <td id="T_ac069_row3_col0" class="data row3 col0" >M3 Monthly</td>
+      <td id="T_ac069_row3_col1" class="data row3 col1" >10 de 11</td>
+      <td id="T_ac069_row3_col2" class="data row3 col2" >Theta (sin ajuste)</td>
+      <td id="T_ac069_row3_col3" class="data row3 col3" >+86.1 [+67.3, +109.0]</td>
+      <td id="T_ac069_row3_col4" class="data row3 col4" >0.000 / 0.000</td>
+      <td id="T_ac069_row3_col5" class="data row3 col5" >1 de 11</td>
+      <td id="T_ac069_row3_col6" class="data row3 col6" >No</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<ul class="simple">
+<li><p><strong>Tourism Monthly.</strong> El original queda tercero, a 6 unidades del primero y sin diferencia
+significativa. El conjunto de confianza retiene cinco modelos, entre ellos el original, y descarta
+a los ensambles de árboles y a los modelos lineales. Es el tipo de panel para el que el modelo fue
+pensado.</p></li>
+<li><p><strong>Hospital.</strong> Queda noveno. Con estacionalidad débil el perfil común aporta poco, y los modelos que
+usan el mes anterior y el promedio de tres meses lo superan. Aun así, ningún modelo se distingue de
+otro: los once quedan en el conjunto de confianza.</p></li>
+<li><p><strong>M3 Monthly.</strong> Queda décimo y es <strong>significativamente peor</strong> que el método Theta. Las series no
+comparten patrón estacional, de modo que el perfil común es un promedio sin sentido. Es el fallo
+previsto, y confirma el límite del modelo.</p></li>
+</ul>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e</span> <span class="o">=</span> <span class="n">n</span><span class="p">[</span><span class="s2">&quot;entre_conjuntos&quot;</span><span class="p">]</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="s2">&quot;rango_medio&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span>
+<span class="n">md</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;**Prueba entre conjuntos.** Friedman con la corrección de Iman–Davenport sobre el MASE de los 11 modelos &quot;</span>
+   <span class="sa">f</span><span class="s2">&quot;(todos con búsqueda bayesiana) en los 4 conjuntos: F = </span><span class="si">{</span><span class="n">e</span><span class="p">[</span><span class="s1">&#39;F&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, p = </span><span class="si">{</span><span class="n">e</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">. No se rechaza que todos &quot;</span>
+   <span class="sa">f</span><span class="s2">&quot;los modelos rindan igual. El rango medio del modelo original es </span><span class="si">{</span><span class="n">e</span><span class="p">[</span><span class="s1">&#39;rango_medio&#39;</span><span class="p">][</span><span class="n">ORIGINAL</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">; el mejor es &quot;</span>
+   <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">). Wilcoxon del original contra cada modelo, con Holm: ningún p ajustado baja de 1. &quot;</span>
+   <span class="s2">&quot;Con cuatro conjuntos esta prueba casi no tiene potencia; se reporta porque estaba en el protocolo.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<p><strong>Prueba entre conjuntos.</strong> Friedman con la corrección de Iman–Davenport sobre el MASE de los 11 modelos (todos con búsqueda bayesiana) en los 4 conjuntos: F = 0.74, p = 0.68. No se rechaza que todos los modelos rindan igual. El rango medio del modelo original es 5.75; el mejor es XGBoost (4.25). Wilcoxon del original contra cada modelo, con Holm: ningún p ajustado baja de 1. Con cuatro conjuntos esta prueba casi no tiene potencia; se reporta porque estaba en el protocolo.</p>
+</div>
+</div>
+<p><strong>Conclusión de la evaluación ampliada.</strong> El modelo original no tiene el menor error en ninguno de
+los tres conjuntos adicionales. La hipótesis H2 se rechaza.</p>
+</section>
+<section id="aporte-de-los-componentes-en-cada-conjunto">
+<h2>Aporte de los componentes en cada conjunto<a class="headerlink" href="#aporte-de-los-componentes-en-cada-conjunto" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;ablacion.csv&quot;</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;variante&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;conjunto&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;MASE&quot;</span><span class="p">)[</span><span class="nb">list</span><span class="p">(</span><span class="n">CONJUNTOS</span><span class="p">)]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">tabla</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">CONJUNTOS</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;variante&quot;</span><span class="p">:</span> <span class="s2">&quot;Variante&quot;</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_72023 th {
+  padding: 5px 12px;
+  text-align: left;
+}
+#T_72023  td {
+  padding: 5px 12px;
+  text-align: left;
+}
+</style>
+<table id="T_72023">
+  <thead>
+    <tr>
+      <th id="T_72023_level0_col0" class="col_heading level0 col0" >Variante</th>
+      <th id="T_72023_level0_col1" class="col_heading level0 col1" >Sample Superstore</th>
+      <th id="T_72023_level0_col2" class="col_heading level0 col2" >Tourism Monthly</th>
+      <th id="T_72023_level0_col3" class="col_heading level0 col3" >Hospital</th>
+      <th id="T_72023_level0_col4" class="col_heading level0 col4" >M3 Monthly</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_72023_row0_col0" class="data row0 col0" >Modelo completo</td>
+      <td id="T_72023_row0_col1" class="data row0 col1" >0.996000</td>
+      <td id="T_72023_row0_col2" class="data row0 col2" >0.814000</td>
+      <td id="T_72023_row0_col3" class="data row0 col3" >0.537000</td>
+      <td id="T_72023_row0_col4" class="data row0 col4" >0.869000</td>
+    </tr>
+    <tr>
+      <td id="T_72023_row1_col0" class="data row1 col0" >Perfil por serie (sin agrupar)</td>
+      <td id="T_72023_row1_col1" class="data row1 col1" >1.276000</td>
+      <td id="T_72023_row1_col2" class="data row1 col2" >0.754000</td>
+      <td id="T_72023_row1_col3" class="data row1 col3" >0.680000</td>
+      <td id="T_72023_row1_col4" class="data row1 col4" >0.783000</td>
+    </tr>
+    <tr>
+      <td id="T_72023_row2_col0" class="data row2 col0" >Peso único (lam infinito)</td>
+      <td id="T_72023_row2_col1" class="data row2 col1" >0.983000</td>
+      <td id="T_72023_row2_col2" class="data row2 col2" >0.952000</td>
+      <td id="T_72023_row2_col3" class="data row2 col3" >0.536000</td>
+      <td id="T_72023_row2_col4" class="data row2 col4" >0.916000</td>
+    </tr>
+    <tr>
+      <td id="T_72023_row3_col0" class="data row3 col0" >Pesos sin agrupar (lam = 0)</td>
+      <td id="T_72023_row3_col1" class="data row3 col1" >0.995000</td>
+      <td id="T_72023_row3_col2" class="data row3 col2" >0.780000</td>
+      <td id="T_72023_row3_col3" class="data row3 col3" >0.551000</td>
+      <td id="T_72023_row3_col4" class="data row3 col4" >0.866000</td>
+    </tr>
+    <tr>
+      <td id="T_72023_row4_col0" class="data row4 col0" >Promedio simple (w = 0.5)</td>
+      <td id="T_72023_row4_col1" class="data row4 col1" >1.014000</td>
+      <td id="T_72023_row4_col2" class="data row4 col2" >1.212000</td>
+      <td id="T_72023_row4_col3" class="data row4 col3" >0.531000</td>
+      <td id="T_72023_row4_col4" class="data row4 col4" >0.982000</td>
+    </tr>
+    <tr>
+      <td id="T_72023_row5_col0" class="data row5 col0" >Sin perfil (constante)</td>
+      <td id="T_72023_row5_col1" class="data row5 col1" >1.037000</td>
+      <td id="T_72023_row5_col2" class="data row5 col2" >0.799000</td>
+      <td id="T_72023_row5_col3" class="data row5 col3" >0.489000</td>
+      <td id="T_72023_row5_col4" class="data row5 col4" >0.784000</td>
+    </tr>
+    <tr>
+      <td id="T_72023_row6_col0" class="data row6 col0" >Solo perfil (w = 0)</td>
+      <td id="T_72023_row6_col1" class="data row6 col1" >0.983000</td>
+      <td id="T_72023_row6_col2" class="data row6 col2" >2.029000</td>
+      <td id="T_72023_row6_col3" class="data row6 col3" >0.577000</td>
+      <td id="T_72023_row6_col4" class="data row6 col4" >0.919000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>La tabla matiza lo visto en el capítulo 5. En Superstore el peso único es tan bueno como los pesos
+por serie. En <strong>turismo los pesos por serie sí importan</strong>: con un peso único el MASE sube de 0,81 a
+0,95, y sin rezago propio se duplica. En M3 y hospital las variantes sin perfil común son mejores que
+el modelo completo, coherente con que allí no hay estacionalidad compartida que aprovechar.</p>
+</section>
+<section id="sensibilidad-al-hiperparametro">
+<h2>Sensibilidad al hiperparámetro<a class="headerlink" href="#sensibilidad-al-hiperparametro" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;sensibilidad_lam.csv&quot;</span><span class="p">)</span>
+<span class="n">ss</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">conjunto</span> <span class="o">==</span> <span class="s2">&quot;superstore&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;lam&quot;</span><span class="p">)</span>
+<span class="n">show</span><span class="p">(</span><span class="n">lineas</span><span class="p">(</span><span class="n">ss</span><span class="o">.</span><span class="n">lam</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;Modelo original&quot;</span><span class="p">:</span> <span class="n">ss</span><span class="o">.</span><span class="n">MAE</span><span class="p">},</span> <span class="s2">&quot;Sample Superstore: MAE con λ fijo&quot;</span><span class="p">,</span> <span class="s2">&quot;λ (escala logarítmica)&quot;</span><span class="p">,</span> <span class="s2">&quot;MAE (USD)&quot;</span><span class="p">,</span>
+            <span class="n">log_x</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">referencia</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;mejor referencia&quot;</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">ss</span><span class="o">.</span><span class="n">MAE_mejor_referencia</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]))))</span>
+<span class="n">md</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Con λ fijo en 12 valores entre 0,01 y 1000, el MAE va de </span><span class="si">{</span><span class="n">ss</span><span class="o">.</span><span class="n">MAE</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2"> a </span><span class="si">{</span><span class="n">ss</span><span class="o">.</span><span class="n">MAE</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2"> USD: una variación &quot;</span>
+   <span class="sa">f</span><span class="s2">&quot;de </span><span class="si">{</span><span class="p">(</span><span class="n">ss</span><span class="o">.</span><span class="n">MAE</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">ss</span><span class="o">.</span><span class="n">MAE</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> %. El modelo queda por debajo de la mejor referencia &quot;</span>
+   <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">ss</span><span class="o">.</span><span class="n">MAE_mejor_referencia</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">) en todo el rango, así que el resultado no depende de afinar λ. &quot;</span>
+   <span class="s2">&quot;El error baja al crecer λ: los datos prefieren pesos casi iguales para todas las series.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>                            <div id="49d7ae75-8984-4e9a-bb1c-ade079868b8c" class="plotly-graph-div" style="height:340px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("49d7ae75-8984-4e9a-bb1c-ade079868b8c")) {                    Plotly.newPlot(                        "49d7ae75-8984-4e9a-bb1c-ade079868b8c",                        [{"mode":"lines+markers","name":"Modelo original","x":[0.01,0.0284804,0.0811131,0.231013,0.657933,1.87382,5.3367,15.1991,43.2876,123.285,351.119,1000.0],"y":[2307.4223864583337,2307.2914739583334,2306.988371875,2306.204915972222,2304.303767708333,2300.175617361112,2293.6513027777783,2286.8949298611115,2282.0943385416667,2279.9724479166666,2279.7180947916663,2279.74426875],"type":"scatter"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"shapes":[{"line":{"color":"#8A8FA3","dash":"dot"},"type":"line","x0":0,"x1":1,"xref":"x domain","y0":2365.737399652778,"y1":2365.737399652778,"yref":"y"}],"annotations":[{"showarrow":false,"text":"mejor referencia","x":1,"xanchor":"right","xref":"x domain","y":2365.737399652778,"yanchor":"bottom","yref":"y"}],"xaxis":{"title":{"text":"\u03bb (escala logar\u00edtmica)"},"type":"log","gridcolor":"#EEF0F6","zeroline":false},"yaxis":{"title":{"text":"MAE (USD)"},"gridcolor":"#EEF0F6","zeroline":false},"title":{"font":{"size":15,"color":"#2f3247"},"text":"Sample Superstore: MAE con \u03bb fijo"},"font":{"family":"Nunito, Segoe UI, sans-serif","color":"#2f3247"},"margin":{"l":40,"r":20,"t":50,"b":40},"legend":{"orientation":"h","y":-0.2},"height":340,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","colorway":["#2E6F95","#2CA58D","#8E6CD8","#E0962B","#63A0BC","#D1574A"]},                        {"displayModeBar": false, "responsive": true}                    )                };                            </script>        </div></div><p>Con λ fijo en 12 valores entre 0,01 y 1000, el MAE va de 2,280 a 2,307 USD: una variación de 1.2 %. El modelo queda por debajo de la mejor referencia (2,366) en todo el rango, así que el resultado no depende de afinar λ. El error baja al crecer λ: los datos prefieren pesos casi iguales para todas las series.</p>
+</div>
+</div>
+</section>
+<section id="estabilidad-por-semilla">
+<h2>Estabilidad por semilla<a class="headerlink" href="#estabilidad-por-semilla" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;robustez_semillas.csv&quot;</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;modelo&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">MAE</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="s2">&quot;min&quot;</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">g</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Modelo&quot;</span><span class="p">,</span> <span class="s2">&quot;MAE medio (USD)&quot;</span><span class="p">,</span> <span class="s2">&quot;Desviación&quot;</span><span class="p">,</span> <span class="s2">&quot;Mínimo&quot;</span><span class="p">,</span> <span class="s2">&quot;Máximo&quot;</span><span class="p">]</span>
+<span class="n">tabla</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_2e207 th {
+  padding: 5px 12px;
+  text-align: left;
+}
+#T_2e207  td {
+  padding: 5px 12px;
+  text-align: left;
+}
+</style>
+<table id="T_2e207">
+  <thead>
+    <tr>
+      <th id="T_2e207_level0_col0" class="col_heading level0 col0" >Modelo</th>
+      <th id="T_2e207_level0_col1" class="col_heading level0 col1" >MAE medio (USD)</th>
+      <th id="T_2e207_level0_col2" class="col_heading level0 col2" >Desviación</th>
+      <th id="T_2e207_level0_col3" class="col_heading level0 col3" >Mínimo</th>
+      <th id="T_2e207_level0_col4" class="col_heading level0 col4" >Máximo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_2e207_row0_col0" class="data row0 col0" >Random Forest</td>
+      <td id="T_2e207_row0_col1" class="data row0 col1" >2418.800000</td>
+      <td id="T_2e207_row0_col2" class="data row0 col2" >3.800000</td>
+      <td id="T_2e207_row0_col3" class="data row0 col3" >2412.000000</td>
+      <td id="T_2e207_row0_col4" class="data row0 col4" >2424.600000</td>
+    </tr>
+    <tr>
+      <td id="T_2e207_row1_col0" class="data row1 col0" >XGBoost</td>
+      <td id="T_2e207_row1_col1" class="data row1 col1" >2479.800000</td>
+      <td id="T_2e207_row1_col2" class="data row1 col2" >12.000000</td>
+      <td id="T_2e207_row1_col3" class="data row1 col3" >2455.500000</td>
+      <td id="T_2e207_row1_col4" class="data row1 col4" >2494.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Random Forest y XGBoost se repitieron con diez semillas y sus hiperparámetros elegidos. La variación
+por semilla es de unos pocos dólares, mucho menor que la diferencia entre modelos y que la variación
+entre meses (unos 850 USD). El modelo original no usa azar: es determinista y no tiene semilla.</p>
+</section>
+<section id="ruido-y-valores-atipicos">
+<h2>Ruido y valores atípicos<a class="headerlink" href="#ruido-y-valores-atipicos" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;robustez_ruido.csv&quot;</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;nivel&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;modelo&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;MAE&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">&quot;sd = 0.0&quot;</span><span class="p">,</span> <span class="s2">&quot;sd = 0.1&quot;</span><span class="p">,</span> <span class="s2">&quot;sd = 0.2&quot;</span><span class="p">,</span> <span class="s2">&quot;sd = 0.4&quot;</span><span class="p">,</span> <span class="s2">&quot;5 </span><span class="si">% d</span><span class="s2">e atípicos (x3)&quot;</span><span class="p">]]</span>
+<span class="n">tabla</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;nivel&quot;</span><span class="p">:</span> <span class="s2">&quot;Contaminación del entrenamiento&quot;</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_8f90d th {
+  padding: 5px 12px;
+  text-align: left;
+}
+#T_8f90d  td {
+  padding: 5px 12px;
+  text-align: left;
+}
+</style>
+<table id="T_8f90d">
+  <thead>
+    <tr>
+      <th id="T_8f90d_level0_col0" class="col_heading level0 col0" >Contaminación del entrenamiento</th>
+      <th id="T_8f90d_level0_col1" class="col_heading level0 col1" >Perfil jerárquico (original)</th>
+      <th id="T_8f90d_level0_col2" class="col_heading level0 col2" >Random Forest</th>
+      <th id="T_8f90d_level0_col3" class="col_heading level0 col3" >SVR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_8f90d_row0_col0" class="data row0 col0" >sd = 0.0</td>
+      <td id="T_8f90d_row0_col1" class="data row0 col1" >2310</td>
+      <td id="T_8f90d_row0_col2" class="data row0 col2" >2390</td>
+      <td id="T_8f90d_row0_col3" class="data row0 col3" >2366</td>
+    </tr>
+    <tr>
+      <td id="T_8f90d_row1_col0" class="data row1 col0" >sd = 0.1</td>
+      <td id="T_8f90d_row1_col1" class="data row1 col1" >2313</td>
+      <td id="T_8f90d_row1_col2" class="data row1 col2" >2396</td>
+      <td id="T_8f90d_row1_col3" class="data row1 col3" >2385</td>
+    </tr>
+    <tr>
+      <td id="T_8f90d_row2_col0" class="data row2 col0" >sd = 0.2</td>
+      <td id="T_8f90d_row2_col1" class="data row2 col1" >2329</td>
+      <td id="T_8f90d_row2_col2" class="data row2 col2" >2414</td>
+      <td id="T_8f90d_row2_col3" class="data row2 col3" >2391</td>
+    </tr>
+    <tr>
+      <td id="T_8f90d_row3_col0" class="data row3 col0" >sd = 0.4</td>
+      <td id="T_8f90d_row3_col1" class="data row3 col1" >2325</td>
+      <td id="T_8f90d_row3_col2" class="data row3 col2" >2417</td>
+      <td id="T_8f90d_row3_col3" class="data row3 col3" >2423</td>
+    </tr>
+    <tr>
+      <td id="T_8f90d_row4_col0" class="data row4 col0" >5 % de atípicos (x3)</td>
+      <td id="T_8f90d_row4_col1" class="data row4 col1" >2424</td>
+      <td id="T_8f90d_row4_col2" class="data row4 col2" >2525</td>
+      <td id="T_8f90d_row4_col3" class="data row4 col3" >2412</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Se contaminó la variable objetivo de entrenamiento con ruido multiplicativo (desviación 0,1, 0,2 y
+0,4) y con un 5 % de valores multiplicados por 3; se pronostica el mes real. Media de cinco
+repeticiones. Los tres modelos resisten el ruido: con desviación 0,4 el error sube menos de 3 %. Los
+atípicos afectan más al modelo original y a Random Forest, porque la media del perfil es sensible a
+valores extremos; SVR, que ignora los errores grandes, casi no cambia.</p>
+</section>
+<section id="menos-datos">
+<h2>Menos datos<a class="headerlink" href="#menos-datos" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;robustez_muestra.csv&quot;</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">Estudio</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">estudio</span><span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="s2">&quot;meses&quot;</span><span class="p">:</span> <span class="s2">&quot;Meses de entrenamiento&quot;</span><span class="p">,</span> <span class="s2">&quot;series&quot;</span><span class="p">:</span> <span class="s2">&quot;Número de series&quot;</span><span class="p">})</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="n">m</span><span class="o">.</span><span class="n">nivel</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
+<span class="n">orden</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Meses de entrenamiento: </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">24</span><span class="p">)]</span> <span class="o">+</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Número de series: </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">)]</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;Estudio&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;modelo&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;MAE&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">orden</span><span class="p">]</span>
+<span class="n">tabla</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">reset_index</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_5d16c th {
+  padding: 5px 12px;
+  text-align: left;
+}
+#T_5d16c  td {
+  padding: 5px 12px;
+  text-align: left;
+}
+</style>
+<table id="T_5d16c">
+  <thead>
+    <tr>
+      <th id="T_5d16c_level0_col0" class="col_heading level0 col0" >Estudio</th>
+      <th id="T_5d16c_level0_col1" class="col_heading level0 col1" >Perfil jerárquico (original)</th>
+      <th id="T_5d16c_level0_col2" class="col_heading level0 col2" >Random Forest</th>
+      <th id="T_5d16c_level0_col3" class="col_heading level0 col3" >SVR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_5d16c_row0_col0" class="data row0 col0" >Meses de entrenamiento: 12</td>
+      <td id="T_5d16c_row0_col1" class="data row0 col1" >2486</td>
+      <td id="T_5d16c_row0_col2" class="data row0 col2" >2572</td>
+      <td id="T_5d16c_row0_col3" class="data row0 col3" >2510</td>
+    </tr>
+    <tr>
+      <td id="T_5d16c_row1_col0" class="data row1 col0" >Meses de entrenamiento: 18</td>
+      <td id="T_5d16c_row1_col1" class="data row1 col1" >2476</td>
+      <td id="T_5d16c_row1_col2" class="data row1 col2" >2520</td>
+      <td id="T_5d16c_row1_col3" class="data row1 col3" >2446</td>
+    </tr>
+    <tr>
+      <td id="T_5d16c_row2_col0" class="data row2 col0" >Meses de entrenamiento: 24</td>
+      <td id="T_5d16c_row2_col1" class="data row2 col1" >2310</td>
+      <td id="T_5d16c_row2_col2" class="data row2 col2" >2434</td>
+      <td id="T_5d16c_row2_col3" class="data row2 col3" >2418</td>
+    </tr>
+    <tr>
+      <td id="T_5d16c_row3_col0" class="data row3 col0" >Número de series: 3</td>
+      <td id="T_5d16c_row3_col1" class="data row3 col1" >3233</td>
+      <td id="T_5d16c_row3_col2" class="data row3 col2" >3241</td>
+      <td id="T_5d16c_row3_col3" class="data row3 col3" >3098</td>
+    </tr>
+    <tr>
+      <td id="T_5d16c_row4_col0" class="data row4 col0" >Número de series: 6</td>
+      <td id="T_5d16c_row4_col1" class="data row4 col1" >2529</td>
+      <td id="T_5d16c_row4_col2" class="data row4 col2" >2684</td>
+      <td id="T_5d16c_row4_col3" class="data row4 col3" >2552</td>
+    </tr>
+    <tr>
+      <td id="T_5d16c_row5_col0" class="data row5 col0" >Número de series: 12</td>
+      <td id="T_5d16c_row5_col1" class="data row5 col1" >2310</td>
+      <td id="T_5d16c_row5_col2" class="data row5 col2" >2390</td>
+      <td id="T_5d16c_row5_col3" class="data row5 col3" >2366</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Con solo 12 meses de entrenamiento todos los modelos pierden entre 5 % y 8 %. El número de series
+importa más para el modelo original: con 3 series su error es mayor que el de SVR, porque el perfil
+común se estima con una cuarta parte de los datos; a partir de 6 series ya es el mejor de los tres.</p>
+<p><strong>Escalabilidad.</strong> El tiempo de ajuste al replicar los datos hasta 64 veces está en el capítulo 5:
+crece, como mucho, de forma lineal con el número de filas.</p>
+</section>
+<section id="cambio-en-el-tiempo">
+<h2>Cambio en el tiempo<a class="headerlink" href="#cambio-en-el-tiempo" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ms</span> <span class="o">=</span> <span class="n">mej</span><span class="p">[</span><span class="n">mej</span><span class="o">.</span><span class="n">conjunto</span> <span class="o">==</span> <span class="s2">&quot;superstore&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;MAE&quot;</span><span class="p">)</span>
+<span class="n">tabla</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Modelo&quot;</span><span class="p">:</span> <span class="n">ms</span><span class="o">.</span><span class="n">modelo</span><span class="p">,</span> <span class="s2">&quot;MAE en 2016 (USD)&quot;</span><span class="p">:</span> <span class="n">ms</span><span class="o">.</span><span class="n">MAE_primera_mitad</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:,.0f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span>
+                    <span class="s2">&quot;MAE en 2017 (USD)&quot;</span><span class="p">:</span> <span class="n">ms</span><span class="o">.</span><span class="n">MAE_segunda_mitad</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:,.0f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span>
+                    <span class="s2">&quot;Cambio&quot;</span><span class="p">:</span> <span class="p">((</span><span class="n">ms</span><span class="o">.</span><span class="n">MAE_segunda_mitad</span> <span class="o">/</span> <span class="n">ms</span><span class="o">.</span><span class="n">MAE_primera_mitad</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:+.0f}</span><span class="s2"> %&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">)}))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_6d126 th {
+  padding: 5px 12px;
+  text-align: left;
+}
+#T_6d126  td {
+  padding: 5px 12px;
+  text-align: left;
+}
+</style>
+<table id="T_6d126">
+  <thead>
+    <tr>
+      <th id="T_6d126_level0_col0" class="col_heading level0 col0" >Modelo</th>
+      <th id="T_6d126_level0_col1" class="col_heading level0 col1" >MAE en 2016 (USD)</th>
+      <th id="T_6d126_level0_col2" class="col_heading level0 col2" >MAE en 2017 (USD)</th>
+      <th id="T_6d126_level0_col3" class="col_heading level0 col3" >Cambio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_6d126_row0_col0" class="data row0 col0" >Perfil jerárquico (original)</td>
+      <td id="T_6d126_row0_col1" class="data row0 col1" >2,053</td>
+      <td id="T_6d126_row0_col2" class="data row0 col2" >2,567</td>
+      <td id="T_6d126_row0_col3" class="data row0 col3" >+25 %</td>
+    </tr>
+    <tr>
+      <td id="T_6d126_row1_col0" class="data row1 col0" >SVR</td>
+      <td id="T_6d126_row1_col1" class="data row1 col1" >2,288</td>
+      <td id="T_6d126_row1_col2" class="data row1 col2" >2,444</td>
+      <td id="T_6d126_row1_col3" class="data row1 col3" >+7 %</td>
+    </tr>
+    <tr>
+      <td id="T_6d126_row2_col0" class="data row2 col0" >Random Forest</td>
+      <td id="T_6d126_row2_col1" class="data row2 col1" >2,179</td>
+      <td id="T_6d126_row2_col2" class="data row2 col2" >2,600</td>
+      <td id="T_6d126_row2_col3" class="data row2 col3" >+19 %</td>
+    </tr>
+    <tr>
+      <td id="T_6d126_row3_col0" class="data row3 col0" >KNN</td>
+      <td id="T_6d126_row3_col1" class="data row3 col1" >2,237</td>
+      <td id="T_6d126_row3_col2" class="data row3 col2" >2,636</td>
+      <td id="T_6d126_row3_col3" class="data row3 col3" >+18 %</td>
+    </tr>
+    <tr>
+      <td id="T_6d126_row4_col0" class="data row4 col0" >HistGradientBoosting</td>
+      <td id="T_6d126_row4_col1" class="data row4 col1" >2,259</td>
+      <td id="T_6d126_row4_col2" class="data row4 col2" >2,619</td>
+      <td id="T_6d126_row4_col3" class="data row4 col3" >+16 %</td>
+    </tr>
+    <tr>
+      <td id="T_6d126_row5_col0" class="data row5 col0" >Árbol de decisión</td>
+      <td id="T_6d126_row5_col1" class="data row5 col1" >2,251</td>
+      <td id="T_6d126_row5_col2" class="data row5 col2" >2,709</td>
+      <td id="T_6d126_row5_col3" class="data row5 col3" >+20 %</td>
+    </tr>
+    <tr>
+      <td id="T_6d126_row6_col0" class="data row6 col0" >XGBoost</td>
+      <td id="T_6d126_row6_col1" class="data row6 col1" >2,249</td>
+      <td id="T_6d126_row6_col2" class="data row6 col2" >2,713</td>
+      <td id="T_6d126_row6_col3" class="data row6 col3" >+21 %</td>
+    </tr>
+    <tr>
+      <td id="T_6d126_row7_col0" class="data row7 col0" >Lasso</td>
+      <td id="T_6d126_row7_col1" class="data row7 col1" >2,306</td>
+      <td id="T_6d126_row7_col2" class="data row7 col2" >2,696</td>
+      <td id="T_6d126_row7_col3" class="data row7 col3" >+17 %</td>
+    </tr>
+    <tr>
+      <td id="T_6d126_row8_col0" class="data row8 col0" >Ridge</td>
+      <td id="T_6d126_row8_col1" class="data row8 col1" >2,324</td>
+      <td id="T_6d126_row8_col2" class="data row8 col2" >2,705</td>
+      <td id="T_6d126_row8_col3" class="data row8 col3" >+16 %</td>
+    </tr>
+    <tr>
+      <td id="T_6d126_row9_col0" class="data row9 col0" >Ingenuo estacional</td>
+      <td id="T_6d126_row9_col1" class="data row9 col1" >2,543</td>
+      <td id="T_6d126_row9_col2" class="data row9 col2" >2,912</td>
+      <td id="T_6d126_row9_col3" class="data row9 col3" >+14 %</td>
+    </tr>
+    <tr>
+      <td id="T_6d126_row10_col0" class="data row10 col0" >Theta</td>
+      <td id="T_6d126_row10_col1" class="data row10 col1" >2,743</td>
+      <td id="T_6d126_row10_col2" class="data row10 col2" >2,768</td>
+      <td id="T_6d126_row10_col3" class="data row10 col3" >+1 %</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">o</span> <span class="o">=</span> <span class="n">ms</span><span class="p">[</span><span class="n">ms</span><span class="o">.</span><span class="n">modelo</span> <span class="o">==</span> <span class="n">ORIGINAL</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">otros</span> <span class="o">=</span> <span class="n">ms</span><span class="p">[</span><span class="n">ms</span><span class="o">.</span><span class="n">modelo</span> <span class="o">!=</span> <span class="n">ORIGINAL</span><span class="p">]</span>
+<span class="n">m17</span> <span class="o">=</span> <span class="n">otros</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">otros</span><span class="o">.</span><span class="n">MAE_segunda_mitad</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()]</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">)</span>    <span class="c1"># miles con punto</span>
+<span class="n">md</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;El error se separa por mitades de la evaluación. En 2017 las ventas son mayores y todos los modelos se &quot;</span>
+   <span class="sa">f</span><span class="s2">&quot;equivocan más en dólares, pero el modelo original es el que más empeora (</span><span class="si">{</span><span class="n">f</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">MAE_primera_mitad</span><span class="p">)</span><span class="si">}</span><span class="s2"> → &quot;</span>
+   <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">f</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">MAE_segunda_mitad</span><span class="p">)</span><span class="si">}</span><span class="s2">). **Su ventaja viene de 2016: en 2017 </span><span class="si">{</span><span class="n">m17</span><span class="o">.</span><span class="n">modelo</span><span class="si">}</span><span class="s2"> tiene menor error &quot;</span>
+   <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">f</span><span class="p">(</span><span class="n">m17</span><span class="o">.</span><span class="n">MAE_segunda_mitad</span><span class="p">)</span><span class="si">}</span><span class="s2"> frente a </span><span class="si">{</span><span class="n">f</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">MAE_segunda_mitad</span><span class="p">)</span><span class="si">}</span><span class="s2">).** El resultado global depende, por tanto, &quot;</span>
+   <span class="s2">&quot;del periodo evaluado.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<p>El error se separa por mitades de la evaluación. En 2017 las ventas son mayores y todos los modelos se equivocan más en dólares, pero el modelo original es el que más empeora (2.053 → 2.567). <strong>Su ventaja viene de 2016: en 2017 SVR tiene menor error (2.444 frente a 2.567).</strong> El resultado global depende, por tanto, del periodo evaluado.</p>
+</div>
+</div>
+<p>Los tres conjuntos adicionales, de otros dominios y otras épocas, hacen de validación externa:
+ninguna decisión de diseño se tomó con ellos.</p>
+</section>
+<section id="incertidumbre-intervalos-de-prediccion">
+<h2>Incertidumbre: intervalos de predicción<a class="headerlink" href="#incertidumbre-intervalos-de-prediccion" title="Link to this heading">#</a></h2>
+<p>Los intervalos son conformes <span class="bibtex-citation" id="id2">[<a class="reference internal" href="10_reproducibilidad.html#id17" title="Anastasios N. Angelopoulos and Stephen Bates. Conformal prediction: a gentle introduction. Foundations and Trends in Machine Learning, 16(4):494–591, 2023. doi:10.1561/2200000101.">AB23</a>]</span>. Para pronosticar un mes, el radio es el
+cuantil de los errores absolutos del índice en los meses evaluados <strong>anteriores</strong>, multiplicado por
+el nivel de la serie. La cobertura se mide en los últimos 12 meses.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;conformal.csv&quot;</span><span class="p">)</span>
+<span class="n">tabla</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Conjunto&quot;</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">conjunto</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">CONJUNTOS</span><span class="p">),</span> <span class="s2">&quot;Modelo&quot;</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">modelo</span><span class="p">,</span> <span class="s2">&quot;Nivel nominal&quot;</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">nivel</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.0%}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span>
+                    <span class="s2">&quot;Cobertura medida&quot;</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">cobertura</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.1%}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span> <span class="s2">&quot;Ancho medio&quot;</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">ancho_medio</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:,.0f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span>
+                    <span class="s2">&quot;Pronósticos&quot;</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">n</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_4d3e2 th {
+  padding: 5px 12px;
+  text-align: left;
+}
+#T_4d3e2  td {
+  padding: 5px 12px;
+  text-align: left;
+}
+</style>
+<table id="T_4d3e2">
+  <thead>
+    <tr>
+      <th id="T_4d3e2_level0_col0" class="col_heading level0 col0" >Conjunto</th>
+      <th id="T_4d3e2_level0_col1" class="col_heading level0 col1" >Modelo</th>
+      <th id="T_4d3e2_level0_col2" class="col_heading level0 col2" >Nivel nominal</th>
+      <th id="T_4d3e2_level0_col3" class="col_heading level0 col3" >Cobertura medida</th>
+      <th id="T_4d3e2_level0_col4" class="col_heading level0 col4" >Ancho medio</th>
+      <th id="T_4d3e2_level0_col5" class="col_heading level0 col5" >Pronósticos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_4d3e2_row0_col0" class="data row0 col0" >Sample Superstore</td>
+      <td id="T_4d3e2_row0_col1" class="data row0 col1" >original</td>
+      <td id="T_4d3e2_row0_col2" class="data row0 col2" >80%</td>
+      <td id="T_4d3e2_row0_col3" class="data row0 col3" >80.6%</td>
+      <td id="T_4d3e2_row0_col4" class="data row0 col4" >7,302</td>
+      <td id="T_4d3e2_row0_col5" class="data row0 col5" >144</td>
+    </tr>
+    <tr>
+      <td id="T_4d3e2_row1_col0" class="data row1 col0" >Sample Superstore</td>
+      <td id="T_4d3e2_row1_col1" class="data row1 col1" >original</td>
+      <td id="T_4d3e2_row1_col2" class="data row1 col2" >90%</td>
+      <td id="T_4d3e2_row1_col3" class="data row1 col3" >88.2%</td>
+      <td id="T_4d3e2_row1_col4" class="data row1 col4" >10,245</td>
+      <td id="T_4d3e2_row1_col5" class="data row1 col5" >144</td>
+    </tr>
+    <tr>
+      <td id="T_4d3e2_row2_col0" class="data row2 col0" >Sample Superstore</td>
+      <td id="T_4d3e2_row2_col1" class="data row2 col1" >mejor referencia</td>
+      <td id="T_4d3e2_row2_col2" class="data row2 col2" >80%</td>
+      <td id="T_4d3e2_row2_col3" class="data row2 col3" >84.0%</td>
+      <td id="T_4d3e2_row2_col4" class="data row2 col4" >8,549</td>
+      <td id="T_4d3e2_row2_col5" class="data row2 col5" >144</td>
+    </tr>
+    <tr>
+      <td id="T_4d3e2_row3_col0" class="data row3 col0" >Sample Superstore</td>
+      <td id="T_4d3e2_row3_col1" class="data row3 col1" >mejor referencia</td>
+      <td id="T_4d3e2_row3_col2" class="data row3 col2" >90%</td>
+      <td id="T_4d3e2_row3_col3" class="data row3 col3" >92.4%</td>
+      <td id="T_4d3e2_row3_col4" class="data row3 col4" >12,123</td>
+      <td id="T_4d3e2_row3_col5" class="data row3 col5" >144</td>
+    </tr>
+    <tr>
+      <td id="T_4d3e2_row4_col0" class="data row4 col0" >Tourism Monthly</td>
+      <td id="T_4d3e2_row4_col1" class="data row4 col1" >original</td>
+      <td id="T_4d3e2_row4_col2" class="data row4 col2" >80%</td>
+      <td id="T_4d3e2_row4_col3" class="data row4 col3" >80.9%</td>
+      <td id="T_4d3e2_row4_col4" class="data row4 col4" >2,951</td>
+      <td id="T_4d3e2_row4_col5" class="data row4 col5" >288</td>
+    </tr>
+    <tr>
+      <td id="T_4d3e2_row5_col0" class="data row5 col0" >Tourism Monthly</td>
+      <td id="T_4d3e2_row5_col1" class="data row5 col1" >original</td>
+      <td id="T_4d3e2_row5_col2" class="data row5 col2" >90%</td>
+      <td id="T_4d3e2_row5_col3" class="data row5 col3" >93.1%</td>
+      <td id="T_4d3e2_row5_col4" class="data row5 col4" >4,442</td>
+      <td id="T_4d3e2_row5_col5" class="data row5 col5" >288</td>
+    </tr>
+    <tr>
+      <td id="T_4d3e2_row6_col0" class="data row6 col0" >Tourism Monthly</td>
+      <td id="T_4d3e2_row6_col1" class="data row6 col1" >mejor referencia</td>
+      <td id="T_4d3e2_row6_col2" class="data row6 col2" >80%</td>
+      <td id="T_4d3e2_row6_col3" class="data row6 col3" >85.1%</td>
+      <td id="T_4d3e2_row6_col4" class="data row6 col4" >3,178</td>
+      <td id="T_4d3e2_row6_col5" class="data row6 col5" >288</td>
+    </tr>
+    <tr>
+      <td id="T_4d3e2_row7_col0" class="data row7 col0" >Tourism Monthly</td>
+      <td id="T_4d3e2_row7_col1" class="data row7 col1" >mejor referencia</td>
+      <td id="T_4d3e2_row7_col2" class="data row7 col2" >90%</td>
+      <td id="T_4d3e2_row7_col3" class="data row7 col3" >94.1%</td>
+      <td id="T_4d3e2_row7_col4" class="data row7 col4" >4,546</td>
+      <td id="T_4d3e2_row7_col5" class="data row7 col5" >288</td>
+    </tr>
+    <tr>
+      <td id="T_4d3e2_row8_col0" class="data row8 col0" >Hospital</td>
+      <td id="T_4d3e2_row8_col1" class="data row8 col1" >original</td>
+      <td id="T_4d3e2_row8_col2" class="data row8 col2" >80%</td>
+      <td id="T_4d3e2_row8_col3" class="data row8 col3" >76.7%</td>
+      <td id="T_4d3e2_row8_col4" class="data row8 col4" >173</td>
+      <td id="T_4d3e2_row8_col5" class="data row8 col5" >288</td>
+    </tr>
+    <tr>
+      <td id="T_4d3e2_row9_col0" class="data row9 col0" >Hospital</td>
+      <td id="T_4d3e2_row9_col1" class="data row9 col1" >original</td>
+      <td id="T_4d3e2_row9_col2" class="data row9 col2" >90%</td>
+      <td id="T_4d3e2_row9_col3" class="data row9 col3" >90.3%</td>
+      <td id="T_4d3e2_row9_col4" class="data row9 col4" >269</td>
+      <td id="T_4d3e2_row9_col5" class="data row9 col5" >288</td>
+    </tr>
+    <tr>
+      <td id="T_4d3e2_row10_col0" class="data row10 col0" >Hospital</td>
+      <td id="T_4d3e2_row10_col1" class="data row10 col1" >mejor referencia</td>
+      <td id="T_4d3e2_row10_col2" class="data row10 col2" >80%</td>
+      <td id="T_4d3e2_row10_col3" class="data row10 col3" >76.0%</td>
+      <td id="T_4d3e2_row10_col4" class="data row10 col4" >177</td>
+      <td id="T_4d3e2_row10_col5" class="data row10 col5" >288</td>
+    </tr>
+    <tr>
+      <td id="T_4d3e2_row11_col0" class="data row11 col0" >Hospital</td>
+      <td id="T_4d3e2_row11_col1" class="data row11 col1" >mejor referencia</td>
+      <td id="T_4d3e2_row11_col2" class="data row11 col2" >90%</td>
+      <td id="T_4d3e2_row11_col3" class="data row11 col3" >89.9%</td>
+      <td id="T_4d3e2_row11_col4" class="data row11 col4" >258</td>
+      <td id="T_4d3e2_row11_col5" class="data row11 col5" >288</td>
+    </tr>
+    <tr>
+      <td id="T_4d3e2_row12_col0" class="data row12 col0" >M3 Monthly</td>
+      <td id="T_4d3e2_row12_col1" class="data row12 col1" >original</td>
+      <td id="T_4d3e2_row12_col2" class="data row12 col2" >80%</td>
+      <td id="T_4d3e2_row12_col3" class="data row12 col3" >83.0%</td>
+      <td id="T_4d3e2_row12_col4" class="data row12 col4" >670</td>
+      <td id="T_4d3e2_row12_col5" class="data row12 col5" >288</td>
+    </tr>
+    <tr>
+      <td id="T_4d3e2_row13_col0" class="data row13 col0" >M3 Monthly</td>
+      <td id="T_4d3e2_row13_col1" class="data row13 col1" >original</td>
+      <td id="T_4d3e2_row13_col2" class="data row13 col2" >90%</td>
+      <td id="T_4d3e2_row13_col3" class="data row13 col3" >92.0%</td>
+      <td id="T_4d3e2_row13_col4" class="data row13 col4" >1,135</td>
+      <td id="T_4d3e2_row13_col5" class="data row13 col5" >288</td>
+    </tr>
+    <tr>
+      <td id="T_4d3e2_row14_col0" class="data row14 col0" >M3 Monthly</td>
+      <td id="T_4d3e2_row14_col1" class="data row14 col1" >mejor referencia</td>
+      <td id="T_4d3e2_row14_col2" class="data row14 col2" >80%</td>
+      <td id="T_4d3e2_row14_col3" class="data row14 col3" >80.9%</td>
+      <td id="T_4d3e2_row14_col4" class="data row14 col4" >377</td>
+      <td id="T_4d3e2_row14_col5" class="data row14 col5" >288</td>
+    </tr>
+    <tr>
+      <td id="T_4d3e2_row15_col0" class="data row15 col0" >M3 Monthly</td>
+      <td id="T_4d3e2_row15_col1" class="data row15 col1" >mejor referencia</td>
+      <td id="T_4d3e2_row15_col2" class="data row15 col2" >90%</td>
+      <td id="T_4d3e2_row15_col3" class="data row15 col3" >88.9%</td>
+      <td id="T_4d3e2_row15_col4" class="data row15 col4" >763</td>
+      <td id="T_4d3e2_row15_col5" class="data row15 col5" >288</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>La cobertura medida queda cerca de la nominal en los cuatro conjuntos (entre 4 puntos por debajo y 5
+por encima). En Superstore el intervalo del modelo original es más angosto que el de la mejor
+referencia con una cobertura similar. Los intervalos son anchos: al 80 %, unos 7.300 USD para una
+venta media de 4.700. Reflejan lo que el capítulo anterior ya mostró: a nivel de una serie y un mes,
+la incertidumbre es alta.</p>
+</section>
+<section id="donde-falla-el-modelo">
+<h2>Dónde falla el modelo<a class="headerlink" href="#donde-falla-el-modelo" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;por_serie.csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;MAE&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">tabla</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Categoría&quot;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">Category</span><span class="p">,</span> <span class="s2">&quot;Región&quot;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">Region</span><span class="p">,</span> <span class="s2">&quot;Venta media (USD)&quot;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">venta_media</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:,.0f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span>
+                    <span class="s2">&quot;MAE del original&quot;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">MAE</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:,.0f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span> <span class="s2">&quot;MAE de la mejor referencia&quot;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">MAE_ref</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:,.0f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span>
+                    <span class="s2">&quot;Error relativo&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">MAE</span> <span class="o">/</span> <span class="n">s</span><span class="o">.</span><span class="n">venta_media</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.0%}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span> <span class="s2">&quot;Sesgo (USD)&quot;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">sesgo</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:+,.0f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">)}))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_45e8f th {
+  padding: 5px 12px;
+  text-align: left;
+}
+#T_45e8f  td {
+  padding: 5px 12px;
+  text-align: left;
+}
+</style>
+<table id="T_45e8f">
+  <thead>
+    <tr>
+      <th id="T_45e8f_level0_col0" class="col_heading level0 col0" >Categoría</th>
+      <th id="T_45e8f_level0_col1" class="col_heading level0 col1" >Región</th>
+      <th id="T_45e8f_level0_col2" class="col_heading level0 col2" >Venta media (USD)</th>
+      <th id="T_45e8f_level0_col3" class="col_heading level0 col3" >MAE del original</th>
+      <th id="T_45e8f_level0_col4" class="col_heading level0 col4" >MAE de la mejor referencia</th>
+      <th id="T_45e8f_level0_col5" class="col_heading level0 col5" >Error relativo</th>
+      <th id="T_45e8f_level0_col6" class="col_heading level0 col6" >Sesgo (USD)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_45e8f_row0_col0" class="data row0 col0" >Technology</td>
+      <td id="T_45e8f_row0_col1" class="data row0 col1" >East</td>
+      <td id="T_45e8f_row0_col2" class="data row0 col2" >6,651</td>
+      <td id="T_45e8f_row0_col3" class="data row0 col3" >4,950</td>
+      <td id="T_45e8f_row0_col4" class="data row0 col4" >4,612</td>
+      <td id="T_45e8f_row0_col5" class="data row0 col5" >74%</td>
+      <td id="T_45e8f_row0_col6" class="data row0 col6" >+543</td>
+    </tr>
+    <tr>
+      <td id="T_45e8f_row1_col0" class="data row1 col0" >Technology</td>
+      <td id="T_45e8f_row1_col1" class="data row1 col1" >West</td>
+      <td id="T_45e8f_row1_col2" class="data row1 col2" >6,748</td>
+      <td id="T_45e8f_row1_col3" class="data row1 col3" >3,666</td>
+      <td id="T_45e8f_row1_col4" class="data row1 col4" >3,491</td>
+      <td id="T_45e8f_row1_col5" class="data row1 col5" >54%</td>
+      <td id="T_45e8f_row1_col6" class="data row1 col6" >+303</td>
+    </tr>
+    <tr>
+      <td id="T_45e8f_row2_col0" class="data row2 col0" >Technology</td>
+      <td id="T_45e8f_row2_col1" class="data row2 col1" >Central</td>
+      <td id="T_45e8f_row2_col2" class="data row2 col2" >3,945</td>
+      <td id="T_45e8f_row2_col3" class="data row2 col3" >2,360</td>
+      <td id="T_45e8f_row2_col4" class="data row2 col4" >1,972</td>
+      <td id="T_45e8f_row2_col5" class="data row2 col5" >60%</td>
+      <td id="T_45e8f_row2_col6" class="data row2 col6" >-438</td>
+    </tr>
+    <tr>
+      <td id="T_45e8f_row3_col0" class="data row3 col0" >Technology</td>
+      <td id="T_45e8f_row3_col1" class="data row3 col1" >South</td>
+      <td id="T_45e8f_row3_col2" class="data row3 col2" >3,410</td>
+      <td id="T_45e8f_row3_col3" class="data row3 col3" >2,342</td>
+      <td id="T_45e8f_row3_col4" class="data row3 col4" >2,368</td>
+      <td id="T_45e8f_row3_col5" class="data row3 col5" >69%</td>
+      <td id="T_45e8f_row3_col6" class="data row3 col6" >+579</td>
+    </tr>
+    <tr>
+      <td id="T_45e8f_row4_col0" class="data row4 col0" >Office Supplies</td>
+      <td id="T_45e8f_row4_col1" class="data row4 col1" >West</td>
+      <td id="T_45e8f_row4_col2" class="data row4 col2" >5,423</td>
+      <td id="T_45e8f_row4_col3" class="data row4 col3" >2,329</td>
+      <td id="T_45e8f_row4_col4" class="data row4 col4" >2,264</td>
+      <td id="T_45e8f_row4_col5" class="data row4 col5" >43%</td>
+      <td id="T_45e8f_row4_col6" class="data row4 col6" >+613</td>
+    </tr>
+    <tr>
+      <td id="T_45e8f_row5_col0" class="data row5 col0" >Office Supplies</td>
+      <td id="T_45e8f_row5_col1" class="data row5 col1" >Central</td>
+      <td id="T_45e8f_row5_col2" class="data row5 col2" >4,357</td>
+      <td id="T_45e8f_row5_col3" class="data row5 col3" >2,175</td>
+      <td id="T_45e8f_row5_col4" class="data row5 col4" >2,257</td>
+      <td id="T_45e8f_row5_col5" class="data row5 col5" >50%</td>
+      <td id="T_45e8f_row5_col6" class="data row5 col6" >+304</td>
+    </tr>
+    <tr>
+      <td id="T_45e8f_row6_col0" class="data row6 col0" >Office Supplies</td>
+      <td id="T_45e8f_row6_col1" class="data row6 col1" >East</td>
+      <td id="T_45e8f_row6_col2" class="data row6 col2" >5,287</td>
+      <td id="T_45e8f_row6_col3" class="data row6 col3" >1,906</td>
+      <td id="T_45e8f_row6_col4" class="data row6 col4" >2,180</td>
+      <td id="T_45e8f_row6_col5" class="data row6 col5" >36%</td>
+      <td id="T_45e8f_row6_col6" class="data row6 col6" >+408</td>
+    </tr>
+    <tr>
+      <td id="T_45e8f_row7_col0" class="data row7 col0" >Furniture</td>
+      <td id="T_45e8f_row7_col1" class="data row7 col1" >West</td>
+      <td id="T_45e8f_row7_col2" class="data row7 col2" >6,064</td>
+      <td id="T_45e8f_row7_col3" class="data row7 col3" >1,893</td>
+      <td id="T_45e8f_row7_col4" class="data row7 col4" >2,413</td>
+      <td id="T_45e8f_row7_col5" class="data row7 col5" >31%</td>
+      <td id="T_45e8f_row7_col6" class="data row7 col6" >+225</td>
+    </tr>
+    <tr>
+      <td id="T_45e8f_row8_col0" class="data row8 col0" >Furniture</td>
+      <td id="T_45e8f_row8_col1" class="data row8 col1" >East</td>
+      <td id="T_45e8f_row8_col2" class="data row8 col2" >4,468</td>
+      <td id="T_45e8f_row8_col3" class="data row8 col3" >1,847</td>
+      <td id="T_45e8f_row8_col4" class="data row8 col4" >1,750</td>
+      <td id="T_45e8f_row8_col5" class="data row8 col5" >41%</td>
+      <td id="T_45e8f_row8_col6" class="data row8 col6" >-110</td>
+    </tr>
+    <tr>
+      <td id="T_45e8f_row9_col0" class="data row9 col0" >Furniture</td>
+      <td id="T_45e8f_row9_col1" class="data row9 col1" >Central</td>
+      <td id="T_45e8f_row9_col2" class="data row9 col2" >3,971</td>
+      <td id="T_45e8f_row9_col3" class="data row9 col3" >1,705</td>
+      <td id="T_45e8f_row9_col4" class="data row9 col4" >1,975</td>
+      <td id="T_45e8f_row9_col5" class="data row9 col5" >43%</td>
+      <td id="T_45e8f_row9_col6" class="data row9 col6" >-74</td>
+    </tr>
+    <tr>
+      <td id="T_45e8f_row10_col0" class="data row10 col0" >Furniture</td>
+      <td id="T_45e8f_row10_col1" class="data row10 col1" >South</td>
+      <td id="T_45e8f_row10_col2" class="data row10 col2" >2,759</td>
+      <td id="T_45e8f_row10_col3" class="data row10 col3" >1,474</td>
+      <td id="T_45e8f_row10_col4" class="data row10 col4" >1,835</td>
+      <td id="T_45e8f_row10_col5" class="data row10 col5" >53%</td>
+      <td id="T_45e8f_row10_col6" class="data row10 col6" >+350</td>
+    </tr>
+    <tr>
+      <td id="T_45e8f_row11_col0" class="data row11 col0" >Office Supplies</td>
+      <td id="T_45e8f_row11_col1" class="data row11 col1" >South</td>
+      <td id="T_45e8f_row11_col2" class="data row11 col2" >2,852</td>
+      <td id="T_45e8f_row11_col3" class="data row11 col3" >1,076</td>
+      <td id="T_45e8f_row11_col4" class="data row11 col4" >1,273</td>
+      <td id="T_45e8f_row11_col5" class="data row11 col5" >38%</td>
+      <td id="T_45e8f_row11_col6" class="data row11 col6" >+164</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;por_tercil.csv&quot;</span><span class="p">)</span>
+<span class="n">tabla</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Tercil de ventas del mes&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">tercil</span><span class="p">,</span> <span class="s2">&quot;Venta media (USD)&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">venta_media</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:,.0f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span>
+                    <span class="s2">&quot;MAE del original&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">MAE</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:,.0f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span> <span class="s2">&quot;MAE de la mejor referencia&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">MAE_ref</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:,.0f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span>
+                    <span class="s2">&quot;Sesgo (USD)&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">sesgo</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:+,.0f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">)}))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_232ac th {
+  padding: 5px 12px;
+  text-align: left;
+}
+#T_232ac  td {
+  padding: 5px 12px;
+  text-align: left;
+}
+</style>
+<table id="T_232ac">
+  <thead>
+    <tr>
+      <th id="T_232ac_level0_col0" class="col_heading level0 col0" >Tercil de ventas del mes</th>
+      <th id="T_232ac_level0_col1" class="col_heading level0 col1" >Venta media (USD)</th>
+      <th id="T_232ac_level0_col2" class="col_heading level0 col2" >MAE del original</th>
+      <th id="T_232ac_level0_col3" class="col_heading level0 col3" >MAE de la mejor referencia</th>
+      <th id="T_232ac_level0_col4" class="col_heading level0 col4" >Sesgo (USD)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_232ac_row0_col0" class="data row0 col0" >bajo</td>
+      <td id="T_232ac_row0_col1" class="data row0 col1" >1,363</td>
+      <td id="T_232ac_row0_col2" class="data row0 col2" >1,418</td>
+      <td id="T_232ac_row0_col3" class="data row0 col3" >1,430</td>
+      <td id="T_232ac_row0_col4" class="data row0 col4" >-1,344</td>
+    </tr>
+    <tr>
+      <td id="T_232ac_row1_col0" class="data row1 col0" >medio</td>
+      <td id="T_232ac_row1_col1" class="data row1 col1" >3,754</td>
+      <td id="T_232ac_row1_col2" class="data row1 col2" >1,598</td>
+      <td id="T_232ac_row1_col3" class="data row1 col3" >1,498</td>
+      <td id="T_232ac_row1_col4" class="data row1 col4" >-336</td>
+    </tr>
+    <tr>
+      <td id="T_232ac_row2_col0" class="data row2 col0" >alto</td>
+      <td id="T_232ac_row2_col1" class="data row2 col1" >8,867</td>
+      <td id="T_232ac_row2_col2" class="data row2 col2" >3,915</td>
+      <td id="T_232ac_row2_col3" class="data row2 col3" >4,169</td>
+      <td id="T_232ac_row2_col4" class="data row2 col4" >+2,397</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;por_mes.csv&quot;</span><span class="p">)</span>
+<span class="n">MES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ene&quot;</span><span class="p">,</span> <span class="s2">&quot;feb&quot;</span><span class="p">,</span> <span class="s2">&quot;mar&quot;</span><span class="p">,</span> <span class="s2">&quot;abr&quot;</span><span class="p">,</span> <span class="s2">&quot;may&quot;</span><span class="p">,</span> <span class="s2">&quot;jun&quot;</span><span class="p">,</span> <span class="s2">&quot;jul&quot;</span><span class="p">,</span> <span class="s2">&quot;ago&quot;</span><span class="p">,</span> <span class="s2">&quot;sep&quot;</span><span class="p">,</span> <span class="s2">&quot;oct&quot;</span><span class="p">,</span> <span class="s2">&quot;nov&quot;</span><span class="p">,</span> <span class="s2">&quot;dic&quot;</span><span class="p">]</span>
+<span class="n">show</span><span class="p">(</span><span class="n">lineas</span><span class="p">([</span><span class="n">MES</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pm</span><span class="o">.</span><span class="n">mes</span><span class="p">],</span> <span class="p">{</span><span class="s2">&quot;Modelo original&quot;</span><span class="p">:</span> <span class="n">pm</span><span class="o">.</span><span class="n">MAE</span><span class="p">,</span> <span class="s2">&quot;Mejor referencia&quot;</span><span class="p">:</span> <span class="n">pm</span><span class="o">.</span><span class="n">MAE_ref</span><span class="p">},</span>
+            <span class="s2">&quot;MAE por mes del año en Sample Superstore&quot;</span><span class="p">,</span> <span class="s2">&quot;Mes&quot;</span><span class="p">,</span> <span class="s2">&quot;MAE (USD)&quot;</span><span class="p">))</span>
+<span class="n">md</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;El modelo original es mejor que la mejor referencia en </span><span class="si">{</span><span class="n">n</span><span class="p">[</span><span class="s1">&#39;errores&#39;</span><span class="p">][</span><span class="s1">&#39;series_mejor_que_ref&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> de las &quot;</span>
+   <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="p">[</span><span class="s1">&#39;errores&#39;</span><span class="p">][</span><span class="s1">&#39;series&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> series.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>                            <div id="56c03e8e-a67e-4f68-8f24-e31c3ec13a05" class="plotly-graph-div" style="height:340px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("56c03e8e-a67e-4f68-8f24-e31c3ec13a05")) {                    Plotly.newPlot(                        "56c03e8e-a67e-4f68-8f24-e31c3ec13a05",                        [{"mode":"lines+markers","name":"Modelo original","x":["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"],"y":[1630.7900499999998,1335.1275541666666,2774.3865375,1993.5352083333332,2392.064375,1497.1157500000002,1586.6112416666667,2127.592620833333,2868.302625,3056.8470791666664,3320.9841375,3140.031429166667],"type":"scatter"},{"mode":"lines+markers","name":"Mejor referencia","x":["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"],"y":[2095.1247,1441.4719916666666,2635.809420833333,2026.6353875,2186.8480125,1854.7270625,1836.3490208333333,2140.8540041666665,3393.5291041666665,3049.2515375000003,3124.94235,2603.3062041666667],"type":"scatter"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"xaxis":{"title":{"text":"Mes"},"type":"linear","gridcolor":"#EEF0F6","zeroline":false},"yaxis":{"title":{"text":"MAE (USD)"},"gridcolor":"#EEF0F6","zeroline":false},"title":{"font":{"size":15,"color":"#2f3247"},"text":"MAE por mes del a\u00f1o en Sample Superstore"},"font":{"family":"Nunito, Segoe UI, sans-serif","color":"#2f3247"},"margin":{"l":40,"r":20,"t":50,"b":40},"legend":{"orientation":"h","y":-0.2},"height":340,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","colorway":["#2E6F95","#2CA58D","#8E6CD8","#E0962B","#63A0BC","#D1574A"]},                        {"displayModeBar": false, "responsive": true}                    )                };                            </script>        </div></div><p>El modelo original es mejor que la mejor referencia en 7 de las 12 series.</p>
+</div>
+</div>
+<ul class="simple">
+<li><p><strong>Por serie.</strong> El error en dólares lo dominan las series grandes, sobre todo las de Technology. En
+términos relativos, las series pequeñas son las peores: su error ronda la mitad de su venta media.</p></li>
+<li><p><strong>Por nivel de ventas.</strong> En los meses de ventas altas el modelo subestima con fuerza (sesgo
+positivo): son pedidos excepcionales que ninguna variable anuncia. En los meses bajos sobreestima.</p></li>
+<li><p><strong>Por mes del año.</strong> El error es mayor en los meses de temporada alta, donde también es mayor la
+venta.</p></li>
+</ul>
+<p><strong>Causa probable.</strong> El modelo pronostica el valor típico del mes; no puede anticipar un pedido
+extraordinario. Para eso harían falta variables que el conjunto no tiene, como promociones o
+contratos. La misma limitación afecta a todas las referencias.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="06_validacion.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Protocolo y validación estadística</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="08_dashboard.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Dashboard y despliegue</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conjuntos-de-datos-adicionales">Conjuntos de datos adicionales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aporte-de-los-componentes-en-cada-conjunto">Aporte de los componentes en cada conjunto</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensibilidad-al-hiperparametro">Sensibilidad al hiperparámetro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estabilidad-por-semilla">Estabilidad por semilla</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ruido-y-valores-atipicos">Ruido y valores atípicos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menos-datos">Menos datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cambio-en-el-tiempo">Cambio en el tiempo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incertidumbre-intervalos-de-prediccion">Incertidumbre: intervalos de predicción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#donde-falla-el-modelo">Dónde falla el modelo</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Alex Teran y David Estrada
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

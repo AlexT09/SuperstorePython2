@@ -1,0 +1,1226 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Modelos de referencia &#8212; Pronóstico de ventas Sample Superstore</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03_benchmarks';</script>
+    <script src="https://cdn.plot.ly/plotly-4.1.1.min.js"></script>
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Revisión de literatura y novedad" href="04_literatura.html" />
+    <link rel="prev" title="EDA" href="eda.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Pronóstico de ventas Sample Superstore</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Búsqueda</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introducción
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Planteamiento</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="problema.html">Problema y objetivos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="marco_teorico.html">Marco teórico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metodologia.html">Metodología</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Datos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="etl.html">ETL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eda.html">EDA</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3–7. Modelos y evaluación</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Modelos de referencia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_literatura.html">Revisión de literatura y novedad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_modelo_original.html">Modelo original</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_validacion.html">Protocolo y validación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_evaluacion_ampliada.html">Evaluación ampliada y robustez</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8–10. Producto y cierre</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="08_dashboard.html">Dashboard y despliegue</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="proyeccion.html">Proyección 2018</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="09_conclusiones.html">Conclusiones y limitaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_reproducibilidad.html">Reproducibilidad y bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AlexT09/SuperstorePython2" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Repositorio de origen"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/03_benchmarks.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="claro/oscuro" aria-label="claro/oscuro" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Modelos de referencia</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos">Modelos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-anidada">Validación anidada</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-de-optimizacion">Métodos de optimización</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados-de-las-28-combinaciones">Resultados de las 28 combinaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-los-metodos-de-optimizacion">Comparación de los métodos de optimización</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-y-costo">Complejidad y costo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residuos">Residuos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretabilidad">Interpretabilidad</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="modelos-de-referencia">
+<h1>Modelos de referencia<a class="headerlink" href="#modelos-de-referencia" title="Link to this heading">#</a></h1>
+<p><em>Siete modelos, cuatro métodos de optimización y una validación que no mira el futuro</em></p>
+<p>Este capítulo reporta las 28 combinaciones de modelo y método de optimización, cómo se eligió la mejor
+de cada modelo y qué tan confiables son. El código que las produce está en <code class="docutils literal notranslate"><span class="pre">experiments/ejecutar.py</span></code>
+(cómputo) y <code class="docutils literal notranslate"><span class="pre">experiments/analizar.py</span></code> (tablas); aquí se leen sus resultados guardados, porque
+repetirlos tarda unas dos horas.</p>
+<section id="modelos">
+<h2>Modelos<a class="headerlink" href="#modelos" title="Link to this heading">#</a></h2>
+<p>Los siete modelos predicen el índice de ventas con las mismas siete variables, dentro de un <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code>
+con codificación one-hot de la categoría y la región y estandarización de las numéricas.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>Idea</p></th>
+<th class="head"><p>Hiperparámetros que se ajustan</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>KNN</p></td>
+<td><p>Promedia los meses más parecidos del historial</p></td>
+<td><p>número de vecinos (3 a 30), pesos</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ridge</p></td>
+<td><p>Regresión lineal con penalización L2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code> (0,01 a 100, escala log)</p></td>
+</tr>
+<tr class="row-even"><td><p>Lasso</p></td>
+<td><p>Regresión lineal con penalización L1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code> (0,0001 a 0,1, escala log)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Árbol de decisión</p></td>
+<td><p>Reglas sí/no sobre las variables</p></td>
+<td><p>profundidad (2 a 6), hojas mínimas (1 a 20)</p></td>
+</tr>
+<tr class="row-even"><td><p>Random Forest</p></td>
+<td><p>Promedio de 300 árboles</p></td>
+<td><p>profundidad, hojas mínimas, fracción de variables</p></td>
+</tr>
+<tr class="row-odd"><td><p>XGBoost</p></td>
+<td><p>300 árboles que corrigen el error del anterior</p></td>
+<td><p>profundidad, tasa de aprendizaje, submuestra, peso mínimo</p></td>
+</tr>
+<tr class="row-even"><td><p>SVR</p></td>
+<td><p>Margen de tolerancia ε con kernel RBF</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">C</span></code>, <code class="docutils literal notranslate"><span class="pre">epsilon</span></code>, <code class="docutils literal notranslate"><span class="pre">gamma</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Como referencias adicionales se incluyen el <strong>ingenuo estacional</strong> (repetir el mismo mes del año
+anterior), el <strong>método Theta</strong>, que es la referencia estándar de las competencias de pronóstico, y
+<strong>HistGradientBoosting</strong>, el boosting por histogramas de la familia de LightGBM.</p>
+<p>Los rangos se definieron alrededor de los valores habituales de cada modelo y en escala logarítmica
+donde el efecto es multiplicativo (<code class="docutils literal notranslate"><span class="pre">alpha</span></code>, <code class="docutils literal notranslate"><span class="pre">C</span></code>, <code class="docutils literal notranslate"><span class="pre">gamma</span></code>, tasa de aprendizaje). Con 144 a 420 filas
+de entrenamiento no tiene sentido explorar árboles profundos ni cientos de vecinos.</p>
+</section>
+<section id="validacion-anidada">
+<h2>Validación anidada<a class="headerlink" href="#validacion-anidada" title="Link to this heading">#</a></h2>
+<p>El error que se reporta nunca sale de los mismos datos con los que se eligieron los hiperparámetros.</p>
+<ul class="simple">
+<li><p><strong>Bucle externo (estima el error).</strong> Origen móvil: cada uno de los 24 meses de 2016 y 2017 se
+pronostica entrenando con todos los meses anteriores. Son 288 pronósticos por modelo.</p></li>
+<li><p><strong>Bucle interno (elige hiperparámetros).</strong> Dentro de cada entrenamiento, validación cruzada temporal
+con pliegues de 3 meses, hasta 4 pliegues. El preprocesamiento se ajusta en cada pliegue.</p></li>
+</ul>
+<p>Con series de tiempo no se pueden barajar los meses: un pliegue aleatorio entrenaría con el futuro.
+Por eso los dos bucles respetan el orden temporal.</p>
+</section>
+<section id="metodos-de-optimizacion">
+<h2>Métodos de optimización<a class="headerlink" href="#metodos-de-optimizacion" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Método</p></th>
+<th class="head"><p>Cómo busca</p></th>
+<th class="head"><p>Configuración</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Grid Search</p></td>
+<td><p>Todas las combinaciones de una rejilla</p></td>
+<td><p>entre 4 y 24 combinaciones según el modelo</p></td>
+</tr>
+<tr class="row-odd"><td><p>Random Search</p></td>
+<td><p>Puntos al azar del espacio</p></td>
+<td><p>16 evaluaciones</p></td>
+</tr>
+<tr class="row-even"><td><p>Bayesiana (Optuna)</p></td>
+<td><p>Modelo sustituto <strong>TPE</strong>: estima la densidad de las configuraciones buenas, <em>l(x)</em>, y de las malas, <em>g(x)</em>. Función de adquisición: <strong>mejora esperada</strong>, que en TPE equivale a elegir el punto con mayor <em>l(x)/g(x)</em></p></td>
+<td><p>16 evaluaciones, las 6 primeras al azar (exploración)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Genética (DEAP)</p></td>
+<td><p>Población que evoluciona. Selección por <strong>torneo</strong> de tamaño 2; cruce por mezcla con probabilidad 0,7; mutación gaussiana (σ = 0,2) con probabilidad 0,3; <strong>elitismo</strong> de 1 individuo</p></td>
+<td><p>población de 4, 4 generaciones: 16 evaluaciones</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Todos los modelos reciben el mismo presupuesto en los tres métodos de 16 evaluaciones; Grid Search
+recorre su rejilla completa. La implementación está en <code class="docutils literal notranslate"><span class="pre">src/optimizacion.py</span></code>: los cuatro métodos
+comparten una misma función objetivo, el MAE medio de validación cruzada del <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> completo.</p>
+</section>
+<section id="resultados-de-las-28-combinaciones">
+<h2>Resultados de las 28 combinaciones<a class="headerlink" href="#resultados-de-las-28-combinaciones" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">common</span><span class="w"> </span><span class="kn">import</span> <span class="n">CONJUNTOS</span><span class="p">,</span> <span class="n">OPT</span><span class="p">,</span> <span class="n">ORIGINAL</span><span class="p">,</span> <span class="n">md</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">show</span><span class="p">,</span> <span class="n">tabla</span><span class="p">,</span> <span class="n">usd</span><span class="p">,</span> <span class="n">lineas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">lid</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;lideres.csv&quot;</span><span class="p">)</span>
+<span class="n">lid</span> <span class="o">=</span> <span class="n">lid</span><span class="p">[</span><span class="n">lid</span><span class="o">.</span><span class="n">conjunto</span> <span class="o">==</span> <span class="s2">&quot;superstore&quot;</span><span class="p">]</span>
+<span class="n">base</span> <span class="o">=</span> <span class="n">lid</span><span class="p">[</span><span class="o">~</span><span class="n">lid</span><span class="o">.</span><span class="n">modelo</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="n">ORIGINAL</span><span class="p">,</span> <span class="s2">&quot;Ingenuo estacional&quot;</span><span class="p">,</span> <span class="s2">&quot;Theta&quot;</span><span class="p">,</span> <span class="s2">&quot;HistGradientBoosting&quot;</span><span class="p">])]</span>
+<span class="c1"># MAE del bucle externo: una fila por modelo, una columna por método de optimización</span>
+<span class="n">piv</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;modelo&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;optimizador&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;MAE&quot;</span><span class="p">)[[</span><span class="s2">&quot;grid&quot;</span><span class="p">,</span> <span class="s2">&quot;random&quot;</span><span class="p">,</span> <span class="s2">&quot;bayes&quot;</span><span class="p">,</span> <span class="s2">&quot;genetico&quot;</span><span class="p">]]</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">piv</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">OPT</span><span class="p">)</span>
+<span class="n">t</span><span class="p">[</span><span class="s2">&quot;Mejor método&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">piv</span><span class="o">.</span><span class="n">idxmin</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">OPT</span><span class="p">)</span>
+<span class="n">tabla</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;modelo&quot;</span><span class="p">:</span> <span class="s2">&quot;Modelo&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_7374a th {
+  padding: 5px 12px;
+  text-align: left;
+}
+#T_7374a  td {
+  padding: 5px 12px;
+  text-align: left;
+}
+</style>
+<table id="T_7374a">
+  <thead>
+    <tr>
+      <th id="T_7374a_level0_col0" class="col_heading level0 col0" >Modelo</th>
+      <th id="T_7374a_level0_col1" class="col_heading level0 col1" >Grid Search</th>
+      <th id="T_7374a_level0_col2" class="col_heading level0 col2" >Random Search</th>
+      <th id="T_7374a_level0_col3" class="col_heading level0 col3" >Bayesiana (Optuna)</th>
+      <th id="T_7374a_level0_col4" class="col_heading level0 col4" >Genética (DEAP)</th>
+      <th id="T_7374a_level0_col5" class="col_heading level0 col5" >Mejor método</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_7374a_row0_col0" class="data row0 col0" >SVR</td>
+      <td id="T_7374a_row0_col1" class="data row0 col1" >2366</td>
+      <td id="T_7374a_row0_col2" class="data row0 col2" >2373</td>
+      <td id="T_7374a_row0_col3" class="data row0 col3" >2416</td>
+      <td id="T_7374a_row0_col4" class="data row0 col4" >2433</td>
+      <td id="T_7374a_row0_col5" class="data row0 col5" >Grid Search</td>
+    </tr>
+    <tr>
+      <td id="T_7374a_row1_col0" class="data row1 col0" >Random Forest</td>
+      <td id="T_7374a_row1_col1" class="data row1 col1" >2423</td>
+      <td id="T_7374a_row1_col2" class="data row1 col2" >2390</td>
+      <td id="T_7374a_row1_col3" class="data row1 col3" >2407</td>
+      <td id="T_7374a_row1_col4" class="data row1 col4" >2393</td>
+      <td id="T_7374a_row1_col5" class="data row1 col5" >Random Search</td>
+    </tr>
+    <tr>
+      <td id="T_7374a_row2_col0" class="data row2 col0" >KNN</td>
+      <td id="T_7374a_row2_col1" class="data row2 col1" >2453</td>
+      <td id="T_7374a_row2_col2" class="data row2 col2" >2436</td>
+      <td id="T_7374a_row2_col3" class="data row2 col3" >2490</td>
+      <td id="T_7374a_row2_col4" class="data row2 col4" >2450</td>
+      <td id="T_7374a_row2_col5" class="data row2 col5" >Random Search</td>
+    </tr>
+    <tr>
+      <td id="T_7374a_row3_col0" class="data row3 col0" >Ridge</td>
+      <td id="T_7374a_row3_col1" class="data row3 col1" >2517</td>
+      <td id="T_7374a_row3_col2" class="data row3 col2" >2514</td>
+      <td id="T_7374a_row3_col3" class="data row3 col3" >2515</td>
+      <td id="T_7374a_row3_col4" class="data row3 col4" >2516</td>
+      <td id="T_7374a_row3_col5" class="data row3 col5" >Random Search</td>
+    </tr>
+    <tr>
+      <td id="T_7374a_row4_col0" class="data row4 col0" >XGBoost</td>
+      <td id="T_7374a_row4_col1" class="data row4 col1" >2523</td>
+      <td id="T_7374a_row4_col2" class="data row4 col2" >2562</td>
+      <td id="T_7374a_row4_col3" class="data row4 col3" >2481</td>
+      <td id="T_7374a_row4_col4" class="data row4 col4" >2548</td>
+      <td id="T_7374a_row4_col5" class="data row4 col5" >Bayesiana (Optuna)</td>
+    </tr>
+    <tr>
+      <td id="T_7374a_row5_col0" class="data row5 col0" >Lasso</td>
+      <td id="T_7374a_row5_col1" class="data row5 col1" >2528</td>
+      <td id="T_7374a_row5_col2" class="data row5 col2" >2513</td>
+      <td id="T_7374a_row5_col3" class="data row5 col3" >2515</td>
+      <td id="T_7374a_row5_col4" class="data row5 col4" >2501</td>
+      <td id="T_7374a_row5_col5" class="data row5 col5" >Genética (DEAP)</td>
+    </tr>
+    <tr>
+      <td id="T_7374a_row6_col0" class="data row6 col0" >Árbol de decisión</td>
+      <td id="T_7374a_row6_col1" class="data row6 col1" >2529</td>
+      <td id="T_7374a_row6_col2" class="data row6 col2" >2613</td>
+      <td id="T_7374a_row6_col3" class="data row6 col3" >2480</td>
+      <td id="T_7374a_row6_col4" class="data row6 col4" >2520</td>
+      <td id="T_7374a_row6_col5" class="data row6 col5" >Bayesiana (Optuna)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>MAE en dólares por serie y mes, promedio de los 24 meses evaluados. La diferencia entre métodos dentro
+de un mismo modelo es pequeña, casi siempre menor que la diferencia entre modelos.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mej</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;mejores.csv&quot;</span><span class="p">)</span>
+<span class="n">ms</span> <span class="o">=</span> <span class="n">mej</span><span class="p">[(</span><span class="n">mej</span><span class="o">.</span><span class="n">conjunto</span> <span class="o">==</span> <span class="s2">&quot;superstore&quot;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">mej</span><span class="o">.</span><span class="n">modelo</span> <span class="o">!=</span> <span class="n">ORIGINAL</span><span class="p">)]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;MAE&quot;</span><span class="p">)</span>
+<span class="n">tabla</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Modelo&quot;</span><span class="p">:</span> <span class="n">ms</span><span class="o">.</span><span class="n">modelo</span><span class="p">,</span> <span class="s2">&quot;Método&quot;</span><span class="p">:</span> <span class="n">ms</span><span class="o">.</span><span class="n">optimizador</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">OPT</span><span class="p">),</span>
+    <span class="s2">&quot;MAE (USD), media ± sd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">b</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">MAE</span><span class="p">,</span> <span class="n">ms</span><span class="o">.</span><span class="n">MAE_sd</span><span class="p">)],</span>
+    <span class="s2">&quot;IC 95 %&quot;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">a</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">b</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">]&quot;</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">MAE_ic_lo</span><span class="p">,</span> <span class="n">ms</span><span class="o">.</span><span class="n">MAE_ic_hi</span><span class="p">)],</span>
+    <span class="s2">&quot;RMSE (USD)&quot;</span><span class="p">:</span> <span class="n">ms</span><span class="o">.</span><span class="n">RMSE</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:,.0f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span> <span class="s2">&quot;MASE&quot;</span><span class="p">:</span> <span class="n">ms</span><span class="o">.</span><span class="n">MASE</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span>
+    <span class="s2">&quot;Desvío del total&quot;</span><span class="p">:</span> <span class="n">ms</span><span class="o">.</span><span class="n">desvio_total_pct</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:+.1f}</span><span class="s2"> %&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span>
+    <span class="s2">&quot;Ajuste (ms)&quot;</span><span class="p">:</span> <span class="n">ms</span><span class="o">.</span><span class="n">ajuste_ms</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="s2">&quot;—&quot;</span> <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Inferencia (ms)&quot;</span><span class="p">:</span> <span class="n">ms</span><span class="o">.</span><span class="n">inferencia_ms</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="s2">&quot;—&quot;</span> <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)}))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_e67d4 th {
+  padding: 5px 12px;
+  text-align: left;
+}
+#T_e67d4  td {
+  padding: 5px 12px;
+  text-align: left;
+}
+</style>
+<table id="T_e67d4">
+  <thead>
+    <tr>
+      <th id="T_e67d4_level0_col0" class="col_heading level0 col0" >Modelo</th>
+      <th id="T_e67d4_level0_col1" class="col_heading level0 col1" >Método</th>
+      <th id="T_e67d4_level0_col2" class="col_heading level0 col2" >MAE (USD), media ± sd</th>
+      <th id="T_e67d4_level0_col3" class="col_heading level0 col3" >IC 95 %</th>
+      <th id="T_e67d4_level0_col4" class="col_heading level0 col4" >RMSE (USD)</th>
+      <th id="T_e67d4_level0_col5" class="col_heading level0 col5" >MASE</th>
+      <th id="T_e67d4_level0_col6" class="col_heading level0 col6" >Desvío del total</th>
+      <th id="T_e67d4_level0_col7" class="col_heading level0 col7" >Ajuste (ms)</th>
+      <th id="T_e67d4_level0_col8" class="col_heading level0 col8" >Inferencia (ms)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_e67d4_row0_col0" class="data row0 col0" >SVR</td>
+      <td id="T_e67d4_row0_col1" class="data row0 col1" >Grid Search</td>
+      <td id="T_e67d4_row0_col2" class="data row0 col2" >2,366 ± 913</td>
+      <td id="T_e67d4_row0_col3" class="data row0 col3" >[2,045, 2,711]</td>
+      <td id="T_e67d4_row0_col4" class="data row0 col4" >3,531</td>
+      <td id="T_e67d4_row0_col5" class="data row0 col5" >1.020</td>
+      <td id="T_e67d4_row0_col6" class="data row0 col6" >-18.2 %</td>
+      <td id="T_e67d4_row0_col7" class="data row0 col7" >22.0</td>
+      <td id="T_e67d4_row0_col8" class="data row0 col8" >9.06</td>
+    </tr>
+    <tr>
+      <td id="T_e67d4_row1_col0" class="data row1 col0" >Random Forest</td>
+      <td id="T_e67d4_row1_col1" class="data row1 col1" >Random Search</td>
+      <td id="T_e67d4_row1_col2" class="data row1 col2" >2,390 ± 774</td>
+      <td id="T_e67d4_row1_col3" class="data row1 col3" >[2,082, 2,720]</td>
+      <td id="T_e67d4_row1_col4" class="data row1 col4" >3,441</td>
+      <td id="T_e67d4_row1_col5" class="data row1 col5" >1.030</td>
+      <td id="T_e67d4_row1_col6" class="data row1 col6" >-4.9 %</td>
+      <td id="T_e67d4_row1_col7" class="data row1 col7" >741.3</td>
+      <td id="T_e67d4_row1_col8" class="data row1 col8" >32.36</td>
+    </tr>
+    <tr>
+      <td id="T_e67d4_row2_col0" class="data row2 col0" >KNN</td>
+      <td id="T_e67d4_row2_col1" class="data row2 col1" >Random Search</td>
+      <td id="T_e67d4_row2_col2" class="data row2 col2" >2,436 ± 916</td>
+      <td id="T_e67d4_row2_col3" class="data row2 col3" >[2,060, 2,848]</td>
+      <td id="T_e67d4_row2_col4" class="data row2 col4" >3,466</td>
+      <td id="T_e67d4_row2_col5" class="data row2 col5" >1.050</td>
+      <td id="T_e67d4_row2_col6" class="data row2 col6" >-5.5 %</td>
+      <td id="T_e67d4_row2_col7" class="data row2 col7" >14.7</td>
+      <td id="T_e67d4_row2_col8" class="data row2 col8" >8.61</td>
+    </tr>
+    <tr>
+      <td id="T_e67d4_row3_col0" class="data row3 col0" >HistGradientBoosting</td>
+      <td id="T_e67d4_row3_col1" class="data row3 col1" >Bayesiana (Optuna)</td>
+      <td id="T_e67d4_row3_col2" class="data row3 col2" >2,439 ± 777</td>
+      <td id="T_e67d4_row3_col3" class="data row3 col3" >[2,116, 2,799]</td>
+      <td id="T_e67d4_row3_col4" class="data row3 col4" >3,486</td>
+      <td id="T_e67d4_row3_col5" class="data row3 col5" >1.051</td>
+      <td id="T_e67d4_row3_col6" class="data row3 col6" >-4.1 %</td>
+      <td id="T_e67d4_row3_col7" class="data row3 col7" >244.5</td>
+      <td id="T_e67d4_row3_col8" class="data row3 col8" >10.56</td>
+    </tr>
+    <tr>
+      <td id="T_e67d4_row4_col0" class="data row4 col0" >Árbol de decisión</td>
+      <td id="T_e67d4_row4_col1" class="data row4 col1" >Bayesiana (Optuna)</td>
+      <td id="T_e67d4_row4_col2" class="data row4 col2" >2,480 ± 837</td>
+      <td id="T_e67d4_row4_col3" class="data row4 col3" >[2,139, 2,829]</td>
+      <td id="T_e67d4_row4_col4" class="data row4 col4" >3,586</td>
+      <td id="T_e67d4_row4_col5" class="data row4 col5" >1.069</td>
+      <td id="T_e67d4_row4_col6" class="data row4 col6" >-6.8 %</td>
+      <td id="T_e67d4_row4_col7" class="data row4 col7" >14.3</td>
+      <td id="T_e67d4_row4_col8" class="data row4 col8" >7.31</td>
+    </tr>
+    <tr>
+      <td id="T_e67d4_row5_col0" class="data row5 col0" >XGBoost</td>
+      <td id="T_e67d4_row5_col1" class="data row5 col1" >Bayesiana (Optuna)</td>
+      <td id="T_e67d4_row5_col2" class="data row5 col2" >2,481 ± 796</td>
+      <td id="T_e67d4_row5_col3" class="data row5 col3" >[2,151, 2,837]</td>
+      <td id="T_e67d4_row5_col4" class="data row5 col4" >3,560</td>
+      <td id="T_e67d4_row5_col5" class="data row5 col5" >1.070</td>
+      <td id="T_e67d4_row5_col6" class="data row5 col6" >-4.8 %</td>
+      <td id="T_e67d4_row5_col7" class="data row5 col7" >156.0</td>
+      <td id="T_e67d4_row5_col8" class="data row5 col8" >8.98</td>
+    </tr>
+    <tr>
+      <td id="T_e67d4_row6_col0" class="data row6 col0" >Lasso</td>
+      <td id="T_e67d4_row6_col1" class="data row6 col1" >Genética (DEAP)</td>
+      <td id="T_e67d4_row6_col2" class="data row6 col2" >2,501 ± 858</td>
+      <td id="T_e67d4_row6_col3" class="data row6 col3" >[2,147, 2,875]</td>
+      <td id="T_e67d4_row6_col4" class="data row6 col4" >3,474</td>
+      <td id="T_e67d4_row6_col5" class="data row6 col5" >1.078</td>
+      <td id="T_e67d4_row6_col6" class="data row6 col6" >-6.1 %</td>
+      <td id="T_e67d4_row6_col7" class="data row6 col7" >14.9</td>
+      <td id="T_e67d4_row6_col8" class="data row6 col8" >7.88</td>
+    </tr>
+    <tr>
+      <td id="T_e67d4_row7_col0" class="data row7 col0" >Ridge</td>
+      <td id="T_e67d4_row7_col1" class="data row7 col1" >Random Search</td>
+      <td id="T_e67d4_row7_col2" class="data row7 col2" >2,514 ± 874</td>
+      <td id="T_e67d4_row7_col3" class="data row7 col3" >[2,163, 2,892]</td>
+      <td id="T_e67d4_row7_col4" class="data row7 col4" >3,509</td>
+      <td id="T_e67d4_row7_col5" class="data row7 col5" >1.084</td>
+      <td id="T_e67d4_row7_col6" class="data row7 col6" >-6.4 %</td>
+      <td id="T_e67d4_row7_col7" class="data row7 col7" >14.2</td>
+      <td id="T_e67d4_row7_col8" class="data row7 col8" >7.11</td>
+    </tr>
+    <tr>
+      <td id="T_e67d4_row8_col0" class="data row8 col0" >Ingenuo estacional</td>
+      <td id="T_e67d4_row8_col1" class="data row8 col1" >sin ajuste</td>
+      <td id="T_e67d4_row8_col2" class="data row8 col2" >2,728 ± 928</td>
+      <td id="T_e67d4_row8_col3" class="data row8 col3" >[2,370, 3,127]</td>
+      <td id="T_e67d4_row8_col4" class="data row8 col4" >4,050</td>
+      <td id="T_e67d4_row8_col5" class="data row8 col5" >1.176</td>
+      <td id="T_e67d4_row8_col6" class="data row8 col6" >-19.6 %</td>
+      <td id="T_e67d4_row8_col7" class="data row8 col7" >—</td>
+      <td id="T_e67d4_row8_col8" class="data row8 col8" >—</td>
+    </tr>
+    <tr>
+      <td id="T_e67d4_row9_col0" class="data row9 col0" >Theta</td>
+      <td id="T_e67d4_row9_col1" class="data row9 col1" >sin ajuste</td>
+      <td id="T_e67d4_row9_col2" class="data row9 col2" >2,756 ± 752</td>
+      <td id="T_e67d4_row9_col3" class="data row9 col3" >[2,422, 3,090]</td>
+      <td id="T_e67d4_row9_col4" class="data row9 col4" >3,959</td>
+      <td id="T_e67d4_row9_col5" class="data row9 col5" >1.188</td>
+      <td id="T_e67d4_row9_col6" class="data row9 col6" >-0.2 %</td>
+      <td id="T_e67d4_row9_col7" class="data row9 col7" >—</td>
+      <td id="T_e67d4_row9_col8" class="data row9 col8" >—</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>La tabla muestra la mejor combinación de cada modelo, elegida por su MAE medio en el bucle externo.
+La desviación estándar es la del MAE entre los 24 meses y el intervalo sale de un bootstrap
+estacionario. <strong>SVR con Grid Search es la mejor referencia</strong>, pero subestima el total en 18 %: acierta
+más meses corrientes a costa de quedarse corto en los picos. Random Forest es casi igual de preciso y
+mantiene el total.</p>
+</section>
+<section id="comparacion-de-los-metodos-de-optimizacion">
+<h2>Comparación de los métodos de optimización<a class="headerlink" href="#comparacion-de-los-metodos-de-optimizacion" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">o</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;optimizadores.csv&quot;</span><span class="p">)</span>
+<span class="n">tabla</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Método&quot;</span><span class="p">:</span> <span class="n">o</span><span class="o">.</span><span class="n">optimizador</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">OPT</span><span class="p">),</span> <span class="s2">&quot;MAE medio de los 8 modelos (USD)&quot;</span><span class="p">:</span> <span class="n">o</span><span class="o">.</span><span class="n">MAE_medio</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
+                    <span class="s2">&quot;Evaluaciones por búsqueda&quot;</span><span class="p">:</span> <span class="n">o</span><span class="o">.</span><span class="n">evaluaciones</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;Segundos por búsqueda&quot;</span><span class="p">:</span> <span class="n">o</span><span class="o">.</span><span class="n">busqueda_s</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+                    <span class="s2">&quot;Modelos en que fue el mejor&quot;</span><span class="p">:</span> <span class="n">o</span><span class="o">.</span><span class="n">veces_mejor</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)}))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_12a3c th {
+  padding: 5px 12px;
+  text-align: left;
+}
+#T_12a3c  td {
+  padding: 5px 12px;
+  text-align: left;
+}
+</style>
+<table id="T_12a3c">
+  <thead>
+    <tr>
+      <th id="T_12a3c_level0_col0" class="col_heading level0 col0" >Método</th>
+      <th id="T_12a3c_level0_col1" class="col_heading level0 col1" >MAE medio de los 8 modelos (USD)</th>
+      <th id="T_12a3c_level0_col2" class="col_heading level0 col2" >Evaluaciones por búsqueda</th>
+      <th id="T_12a3c_level0_col3" class="col_heading level0 col3" >Segundos por búsqueda</th>
+      <th id="T_12a3c_level0_col4" class="col_heading level0 col4" >Modelos en que fue el mejor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_12a3c_row0_col0" class="data row0 col0" >Bayesiana (Optuna)</td>
+      <td id="T_12a3c_row0_col1" class="data row0 col1" >2452</td>
+      <td id="T_12a3c_row0_col2" class="data row0 col2" >16.000000</td>
+      <td id="T_12a3c_row0_col3" class="data row0 col3" >8.500000</td>
+      <td id="T_12a3c_row0_col4" class="data row0 col4" >2</td>
+    </tr>
+    <tr>
+      <td id="T_12a3c_row1_col0" class="data row1 col0" >Genética (DEAP)</td>
+      <td id="T_12a3c_row1_col1" class="data row1 col1" >2459</td>
+      <td id="T_12a3c_row1_col2" class="data row1 col2" >16.000000</td>
+      <td id="T_12a3c_row1_col3" class="data row1 col3" >67.600000</td>
+      <td id="T_12a3c_row1_col4" class="data row1 col4" >1</td>
+    </tr>
+    <tr>
+      <td id="T_12a3c_row2_col0" class="data row2 col0" >Grid Search</td>
+      <td id="T_12a3c_row2_col1" class="data row2 col1" >2456</td>
+      <td id="T_12a3c_row2_col2" class="data row2 col2" >14.400000</td>
+      <td id="T_12a3c_row2_col3" class="data row2 col3" >12.200000</td>
+      <td id="T_12a3c_row2_col4" class="data row2 col4" >2</td>
+    </tr>
+    <tr>
+      <td id="T_12a3c_row3_col0" class="data row3 col0" >Random Search</td>
+      <td id="T_12a3c_row3_col1" class="data row3 col1" >2464</td>
+      <td id="T_12a3c_row3_col2" class="data row3 col2" >16.000000</td>
+      <td id="T_12a3c_row3_col3" class="data row3 col3" >8.500000</td>
+      <td id="T_12a3c_row3_col4" class="data row3 col4" >3</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Los cuatro métodos llegan a errores casi iguales: entre el mejor y el peor hay menos de 13 dólares de
+MAE medio, frente a una desviación entre meses de unos 850. La búsqueda bayesiana obtiene el menor
+error medio con el mismo costo que la aleatoria. La genética tarda ocho veces más por búsqueda, por
+el costo fijo de la librería con poblaciones tan pequeñas, sin mejorar el resultado. Con espacios de
+uno a cuatro hiperparámetros y 16 evaluaciones, ningún método tiene margen para destacar: <strong>no hay
+evidencia de que los métodos guiados sean más eficientes en este problema</strong>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;anytime.csv&quot;</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">modelo</span> <span class="o">==</span> <span class="s2">&quot;Random Forest&quot;</span><span class="p">]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;optimizador&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">evaluacion</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<span class="n">show</span><span class="p">(</span><span class="n">lineas</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="p">{</span><span class="n">OPT</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span> <span class="n">g</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;evaluacion&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mejor_MAE_interno</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()[:</span><span class="n">n</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;optimizador&quot;</span><span class="p">)},</span>
+            <span class="s2">&quot;Convergencia de la búsqueda en Random Forest&quot;</span><span class="p">,</span> <span class="s2">&quot;Evaluación&quot;</span><span class="p">,</span> <span class="s2">&quot;Mejor MAE interno hasta el momento (índice)&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>                            <div id="e923a970-8d6a-4f99-a94c-c6a69bf34021" class="plotly-graph-div" style="height:340px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("e923a970-8d6a-4f99-a94c-c6a69bf34021")) {                    Plotly.newPlot(                        "e923a970-8d6a-4f99-a94c-c6a69bf34021",                        [{"mode":"lines+markers","name":"Bayesiana (Optuna)","x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],"y":[0.6640449583333331,0.6602984583333333,0.6599670416666666,0.6591693333333334,0.65857025,0.6578472916666667,0.6577399166666668,0.6577032500000001,0.6573202499999999,0.6567884166666665,0.656289875,0.6561648333333333,0.6555752499999999,0.65504825,0.65504825,0.6548365000000002],"type":"scatter"},{"mode":"lines+markers","name":"Gen\u00e9tica (DEAP)","x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],"y":[0.6676178333333334,0.6652008333333334,0.6604958333333335,0.6593599166666668,0.6593527083333335,0.6593527083333335,0.6593527083333335,0.6593527083333335,0.65895925,0.65895925,0.658740375,0.658740375,0.6584021666666667,0.6584021666666667,0.6584021666666667,0.6584021666666667],"type":"scatter"},{"mode":"lines+markers","name":"Grid Search","x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],"y":[0.6666793333333333,0.6635806666666667,0.6626980416666666,0.6602181666666667,0.6595822916666668,0.6592738333333333,0.6582481666666666,0.6579925,0.6579925,0.657204625,0.6569509583333334,0.6554044583333333,0.6553980833333332,0.6553617499999999,0.6553617499999999,0.6552950833333332],"type":"scatter"},{"mode":"lines+markers","name":"Random Search","x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],"y":[0.6676178333333334,0.6652008333333334,0.6604958333333335,0.6593599166666668,0.6587935000000001,0.6587134583333335,0.6586468333333334,0.6586413333333334,0.6586413333333334,0.6586413333333334,0.6581398333333334,0.6564016666666667,0.6561853333333333,0.6561853333333333,0.6561775416666666,0.6561339583333333],"type":"scatter"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"xaxis":{"title":{"text":"Evaluaci\u00f3n"},"type":"linear","gridcolor":"#EEF0F6","zeroline":false},"yaxis":{"title":{"text":"Mejor MAE interno hasta el momento (\u00edndice)"},"gridcolor":"#EEF0F6","zeroline":false},"title":{"font":{"size":15,"color":"#2f3247"},"text":"Convergencia de la b\u00fasqueda en Random Forest"},"font":{"family":"Nunito, Segoe UI, sans-serif","color":"#2f3247"},"margin":{"l":40,"r":20,"t":50,"b":40},"legend":{"orientation":"h","y":-0.2},"height":340,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","colorway":["#2E6F95","#2CA58D","#8E6CD8","#E0962B","#63A0BC","#D1574A"]},                        {"displayModeBar": false, "responsive": true}                    )                };                            </script>        </div></div></div>
+</div>
+<p>La curva muestra el mejor valor encontrado hasta cada evaluación, promediado sobre los 24 orígenes.
+Entre la primera y la última evaluación el error interno mejora menos de 2 % en los cuatro métodos;
+la búsqueda bayesiana termina con el menor valor, pero por un margen muy pequeño.</p>
+</section>
+<section id="complejidad-y-costo">
+<h2>Complejidad y costo<a class="headerlink" href="#complejidad-y-costo" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>Entrenamiento</p></th>
+<th class="head"><p>Inferencia (por fila)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>KNN</p></td>
+<td><p>O(1): guarda los datos</p></td>
+<td><p>O(n·p)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ridge</p></td>
+<td><p>O(n·p² + p³)</p></td>
+<td><p>O(p)</p></td>
+</tr>
+<tr class="row-even"><td><p>Lasso</p></td>
+<td><p>O(n·p) por iteración</p></td>
+<td><p>O(p)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Árbol de decisión</p></td>
+<td><p>O(n·p·log n)</p></td>
+<td><p>O(profundidad)</p></td>
+</tr>
+<tr class="row-even"><td><p>Random Forest</p></td>
+<td><p>O(B·n·p·log n), B = 300 árboles</p></td>
+<td><p>O(B·profundidad)</p></td>
+</tr>
+<tr class="row-odd"><td><p>XGBoost (histogramas)</p></td>
+<td><p>O(B·n·p)</p></td>
+<td><p>O(B·profundidad)</p></td>
+</tr>
+<tr class="row-even"><td><p>SVR</p></td>
+<td><p>entre O(n²·p) y O(n³)</p></td>
+<td><p>O(vectores de soporte · p)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Modelo original (capítulo 5)</p></td>
+<td><p>O(n) + O(S) por iteración</p></td>
+<td><p>O(1)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>n</em> filas, <em>p</em> variables, <em>S</em> series. Los tiempos medidos (tabla anterior) siguen ese orden: los
+modelos lineales y el árbol se ajustan en pocos milisegundos y Random Forest en cientos. XGBoost usa
+el método de histogramas (<code class="docutils literal notranslate"><span class="pre">tree_method=&quot;hist&quot;</span></code>). Los orígenes del bucle externo se ejecutan en
+paralelo con <code class="docutils literal notranslate"><span class="pre">joblib</span></code> (8 procesos).</p>
+</section>
+<section id="residuos">
+<h2>Residuos<a class="headerlink" href="#residuos" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;residuos.csv&quot;</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">conjunto</span> <span class="o">==</span> <span class="s2">&quot;superstore&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">ms</span><span class="p">[[</span><span class="s2">&quot;modelo&quot;</span><span class="p">,</span> <span class="s2">&quot;MAE&quot;</span><span class="p">]],</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;modelo&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;MAE&quot;</span><span class="p">)</span>
+<span class="n">tabla</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Modelo&quot;</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">modelo</span><span class="p">,</span> <span class="s2">&quot;White (p)&quot;</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">p_white</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span> <span class="s2">&quot;Ljung–Box (p)&quot;</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">p_ljung_box</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span>
+                    <span class="s2">&quot;BDS (p)&quot;</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">p_bds</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="s2">&quot;—&quot;</span> <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">),</span> <span class="s2">&quot;Shapiro–Wilk (p)&quot;</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">p_shapiro</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span>
+                    <span class="s2">&quot;Sesgo medio (USD)&quot;</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">sesgo_medio</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:+,.0f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">),</span> <span class="s2">&quot;Asimetría&quot;</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">asimetria</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">)}))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_da14c th {
+  padding: 5px 12px;
+  text-align: left;
+}
+#T_da14c  td {
+  padding: 5px 12px;
+  text-align: left;
+}
+</style>
+<table id="T_da14c">
+  <thead>
+    <tr>
+      <th id="T_da14c_level0_col0" class="col_heading level0 col0" >Modelo</th>
+      <th id="T_da14c_level0_col1" class="col_heading level0 col1" >White (p)</th>
+      <th id="T_da14c_level0_col2" class="col_heading level0 col2" >Ljung–Box (p)</th>
+      <th id="T_da14c_level0_col3" class="col_heading level0 col3" >BDS (p)</th>
+      <th id="T_da14c_level0_col4" class="col_heading level0 col4" >Shapiro–Wilk (p)</th>
+      <th id="T_da14c_level0_col5" class="col_heading level0 col5" >Sesgo medio (USD)</th>
+      <th id="T_da14c_level0_col6" class="col_heading level0 col6" >Asimetría</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_da14c_row0_col0" class="data row0 col0" >SVR</td>
+      <td id="T_da14c_row0_col1" class="data row0 col1" >0.354</td>
+      <td id="T_da14c_row0_col2" class="data row0 col2" >0.106</td>
+      <td id="T_da14c_row0_col3" class="data row0 col3" >0.027</td>
+      <td id="T_da14c_row0_col4" class="data row0 col4" >0.788</td>
+      <td id="T_da14c_row0_col5" class="data row0 col5" >+849</td>
+      <td id="T_da14c_row0_col6" class="data row0 col6" >1.72</td>
+    </tr>
+    <tr>
+      <td id="T_da14c_row1_col0" class="data row1 col0" >Random Forest</td>
+      <td id="T_da14c_row1_col1" class="data row1 col1" >0.002</td>
+      <td id="T_da14c_row1_col2" class="data row1 col2" >0.383</td>
+      <td id="T_da14c_row1_col3" class="data row1 col3" >0.000</td>
+      <td id="T_da14c_row1_col4" class="data row1 col4" >0.939</td>
+      <td id="T_da14c_row1_col5" class="data row1 col5" >+229</td>
+      <td id="T_da14c_row1_col6" class="data row1 col6" >1.46</td>
+    </tr>
+    <tr>
+      <td id="T_da14c_row2_col0" class="data row2 col0" >KNN</td>
+      <td id="T_da14c_row2_col1" class="data row2 col1" >0.041</td>
+      <td id="T_da14c_row2_col2" class="data row2 col2" >0.117</td>
+      <td id="T_da14c_row2_col3" class="data row2 col3" >0.000</td>
+      <td id="T_da14c_row2_col4" class="data row2 col4" >0.891</td>
+      <td id="T_da14c_row2_col5" class="data row2 col5" >+258</td>
+      <td id="T_da14c_row2_col6" class="data row2 col6" >1.55</td>
+    </tr>
+    <tr>
+      <td id="T_da14c_row3_col0" class="data row3 col0" >HistGradientBoosting</td>
+      <td id="T_da14c_row3_col1" class="data row3 col1" >0.012</td>
+      <td id="T_da14c_row3_col2" class="data row3 col2" >0.501</td>
+      <td id="T_da14c_row3_col3" class="data row3 col3" >0.001</td>
+      <td id="T_da14c_row3_col4" class="data row3 col4" >0.918</td>
+      <td id="T_da14c_row3_col5" class="data row3 col5" >+192</td>
+      <td id="T_da14c_row3_col6" class="data row3 col6" >1.41</td>
+    </tr>
+    <tr>
+      <td id="T_da14c_row4_col0" class="data row4 col0" >Árbol de decisión</td>
+      <td id="T_da14c_row4_col1" class="data row4 col1" >0.011</td>
+      <td id="T_da14c_row4_col2" class="data row4 col2" >0.231</td>
+      <td id="T_da14c_row4_col3" class="data row4 col3" >0.107</td>
+      <td id="T_da14c_row4_col4" class="data row4 col4" >0.389</td>
+      <td id="T_da14c_row4_col5" class="data row4 col5" >+319</td>
+      <td id="T_da14c_row4_col6" class="data row4 col6" >1.40</td>
+    </tr>
+    <tr>
+      <td id="T_da14c_row5_col0" class="data row5 col0" >XGBoost</td>
+      <td id="T_da14c_row5_col1" class="data row5 col1" >0.001</td>
+      <td id="T_da14c_row5_col2" class="data row5 col2" >0.373</td>
+      <td id="T_da14c_row5_col3" class="data row5 col3" >0.000</td>
+      <td id="T_da14c_row5_col4" class="data row5 col4" >0.975</td>
+      <td id="T_da14c_row5_col5" class="data row5 col5" >+225</td>
+      <td id="T_da14c_row5_col6" class="data row5 col6" >1.22</td>
+    </tr>
+    <tr>
+      <td id="T_da14c_row6_col0" class="data row6 col0" >Lasso</td>
+      <td id="T_da14c_row6_col1" class="data row6 col1" >0.028</td>
+      <td id="T_da14c_row6_col2" class="data row6 col2" >0.337</td>
+      <td id="T_da14c_row6_col3" class="data row6 col3" >0.356</td>
+      <td id="T_da14c_row6_col4" class="data row6 col4" >0.812</td>
+      <td id="T_da14c_row6_col5" class="data row6 col5" >+282</td>
+      <td id="T_da14c_row6_col6" class="data row6 col6" >1.60</td>
+    </tr>
+    <tr>
+      <td id="T_da14c_row7_col0" class="data row7 col0" >Ridge</td>
+      <td id="T_da14c_row7_col1" class="data row7 col1" >0.024</td>
+      <td id="T_da14c_row7_col2" class="data row7 col2" >0.207</td>
+      <td id="T_da14c_row7_col3" class="data row7 col3" >0.040</td>
+      <td id="T_da14c_row7_col4" class="data row7 col4" >0.894</td>
+      <td id="T_da14c_row7_col5" class="data row7 col5" >+296</td>
+      <td id="T_da14c_row7_col6" class="data row7 col6" >1.52</td>
+    </tr>
+    <tr>
+      <td id="T_da14c_row8_col0" class="data row8 col0" >Ingenuo estacional</td>
+      <td id="T_da14c_row8_col1" class="data row8 col1" >0.000</td>
+      <td id="T_da14c_row8_col2" class="data row8 col2" >0.140</td>
+      <td id="T_da14c_row8_col3" class="data row8 col3" >0.021</td>
+      <td id="T_da14c_row8_col4" class="data row8 col4" >0.968</td>
+      <td id="T_da14c_row8_col5" class="data row8 col5" >+912</td>
+      <td id="T_da14c_row8_col6" class="data row8 col6" >0.28</td>
+    </tr>
+    <tr>
+      <td id="T_da14c_row9_col0" class="data row9 col0" >Theta</td>
+      <td id="T_da14c_row9_col1" class="data row9 col1" >0.000</td>
+      <td id="T_da14c_row9_col2" class="data row9 col2" >0.434</td>
+      <td id="T_da14c_row9_col3" class="data row9 col3" >0.012</td>
+      <td id="T_da14c_row9_col4" class="data row9 col4" >0.989</td>
+      <td id="T_da14c_row9_col5" class="data row9 col5" >+9</td>
+      <td id="T_da14c_row9_col6" class="data row9 col6" >0.67</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<ul class="simple">
+<li><p><strong>White (homocedasticidad):</strong> se rechaza en casi todos los modelos. El error crece con el tamaño de
+la venta, lo esperable cuando las series tienen escalas distintas.</p></li>
+<li><p><strong>Ljung–Box (autocorrelación, 6 rezagos):</strong> no se rechaza en ninguno. No queda estructura lineal en
+el tiempo sin explicar.</p></li>
+<li><p><strong>BDS (independencia):</strong> se rechaza en la mayoría: queda dependencia no lineal, asociada a los
+meses de ventas excepcionales.</p></li>
+<li><p><strong>Sesgo:</strong> todos los modelos subestiman (sesgo positivo). SVR y el ingenuo estacional, mucho más.</p></li>
+</ul>
+</section>
+<section id="interpretabilidad">
+<h2>Interpretabilidad<a class="headerlink" href="#interpretabilidad" title="Link to this heading">#</a></h2>
+<p>Con siete variables hay 128 coaliciones posibles, así que los valores de Shapley se calculan de forma
+exacta por enumeración (<code class="docutils literal notranslate"><span class="pre">src/explicacion.py</span></code>), sin la aproximación por muestreo.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">common</span><span class="w"> </span><span class="kn">import</span> <span class="n">barras</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">model.features</span><span class="w"> </span><span class="kn">import</span> <span class="n">NOMBRES</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">res</span><span class="p">(</span><span class="s2">&quot;shapley_global.csv&quot;</span><span class="p">)</span>
+<span class="n">mejor_ref</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">modelo</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">modelo</span> <span class="o">==</span> <span class="n">mejor_ref</span><span class="p">]</span>
+<span class="n">show</span><span class="p">(</span><span class="n">barras</span><span class="p">([</span><span class="n">NOMBRES</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">variable</span><span class="p">],</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">importancia</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Importancia global en </span><span class="si">{</span><span class="n">mejor_ref</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Media del valor absoluto de Shapley (índice)&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>                            <div id="3611ccdd-7f22-4806-83bb-2e5934b67a5a" class="plotly-graph-div" style="height:320px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("3611ccdd-7f22-4806-83bb-2e5934b67a5a")) {                    Plotly.newPlot(                        "3611ccdd-7f22-4806-83bb-2e5934b67a5a",                        [{"marker":{"color":"#2E6F95"},"orientation":"h","x":[0.0237698968840763,0.025680697772363,0.0293329501138975,0.0399052331775546,0.0777289859238144,0.1110737919436539,0.128306757610664],"y":["Regi\u00f3n","Categor\u00eda","Promedio de los \u00faltimos 3 meses (relativo)","Ventas del mes anterior (relativas)","Mes del a\u00f1o (coseno)","Ventas del mismo mes del a\u00f1o anterior (relativas)","Mes del a\u00f1o (seno)"],"type":"bar"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"xaxis":{"title":{"text":"Media del valor absoluto de Shapley (\u00edndice)"},"gridcolor":"#EEF0F6","zeroline":false},"title":{"font":{"size":15,"color":"#2f3247"},"text":"Importancia global en SVR"},"font":{"family":"Nunito, Segoe UI, sans-serif","color":"#2f3247"},"margin":{"l":220,"r":20,"t":50,"b":40},"legend":{"orientation":"h","y":-0.2},"height":320,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","colorway":["#2E6F95","#2CA58D","#8E6CD8","#E0962B","#63A0BC","#D1574A"],"yaxis":{"gridcolor":"#EEF0F6","zeroline":false}},                        {"displayModeBar": false, "responsive": true}                    )                };                            </script>        </div></div></div>
+</div>
+<p>En la mejor referencia, igual que en los demás modelos, la predicción depende sobre todo del mes del
+año y de las ventas del mismo mes del año anterior. La categoría, la región y el mes previo aportan
+poco. Esa observación es el punto de partida del modelo original.</p>
+<p><strong>Shapley frente a LIME.</strong> Shapley reparte la diferencia entre la predicción y la predicción media
+entre las variables, y los aportes suman exactamente esa diferencia. LIME ajusta una regresión lineal
+ponderada sobre perturbaciones de la fila: es más rápido, pero sus coeficientes dependen del ancho
+del núcleo y del muestreo, y no tienen por qué sumar la predicción. Las dos explicaciones divergen
+cuando las variables interactúan o están correlacionadas, como aquí el rezago de un mes y el promedio
+de tres meses. <code class="docutils literal notranslate"><span class="pre">src/explicacion.py</span></code> incluye las dos; el tablero usa Shapley.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="eda.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">EDA</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="04_literatura.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Revisión de literatura y novedad</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos">Modelos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-anidada">Validación anidada</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-de-optimizacion">Métodos de optimización</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados-de-las-28-combinaciones">Resultados de las 28 combinaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-los-metodos-de-optimizacion">Comparación de los métodos de optimización</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-y-costo">Complejidad y costo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residuos">Residuos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretabilidad">Interpretabilidad</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Alex Teran y David Estrada
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,893 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Revisión de literatura y novedad &#8212; Pronóstico de ventas Sample Superstore</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '04_literatura';</script>
+    <script src="https://cdn.plot.ly/plotly-4.1.1.min.js"></script>
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Modelo original" href="05_modelo_original.html" />
+    <link rel="prev" title="Modelos de referencia" href="03_benchmarks.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Pronóstico de ventas Sample Superstore</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Búsqueda</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introducción
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Planteamiento</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="problema.html">Problema y objetivos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="marco_teorico.html">Marco teórico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metodologia.html">Metodología</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Datos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="etl.html">ETL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eda.html">EDA</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3–7. Modelos y evaluación</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="03_benchmarks.html">Modelos de referencia</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Revisión de literatura y novedad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_modelo_original.html">Modelo original</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_validacion.html">Protocolo y validación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_evaluacion_ampliada.html">Evaluación ampliada y robustez</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8–10. Producto y cierre</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="08_dashboard.html">Dashboard y despliegue</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="proyeccion.html">Proyección 2018</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="09_conclusiones.html">Conclusiones y limitaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_reproducibilidad.html">Reproducibilidad y bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/AlexT09/SuperstorePython2" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Repositorio de origen"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/04_literatura.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="claro/oscuro" aria-label="claro/oscuro" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Revisión de literatura y novedad</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#protocolo-de-busqueda">Protocolo de búsqueda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matriz-de-novedad">Matriz de novedad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trabajos-mas-cercanos">Trabajos más cercanos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diferencia-con-los-modelos-del-curso">Diferencia con los modelos del curso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaracion-de-novedad">Declaración de novedad</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="revision-de-literatura-y-novedad">
+<h1>Revisión de literatura y novedad<a class="headerlink" href="#revision-de-literatura-y-novedad" title="Link to this heading">#</a></h1>
+<p><em>Qué existía antes y en qué se diferencia el modelo propuesto</em></p>
+<p>La novedad no se declara: se documenta. Este capítulo registra la búsqueda, los trabajos más cercanos
+y una declaración que dice solo lo que la búsqueda permite decir.</p>
+<section id="protocolo-de-busqueda">
+<h2>Protocolo de búsqueda<a class="headerlink" href="#protocolo-de-busqueda" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Bases consultadas:</strong> OpenAlex, Crossref y arXiv, a través de sus interfaces públicas. Son bases
+abiertas; OpenAlex indexa las revistas de pronóstico donde está la literatura relevante
+(<em>International Journal of Forecasting</em>, <em>Journal of Forecasting</em>, <em>Journal of the Operational
+Research Society</em>).</p></li>
+<li><p><strong>Fecha de la consulta:</strong> 15 de noviembre de 2026.</p></li>
+<li><p><strong>Cadenas:</strong> ocho, que combinan la familia del modelo (índices estacionales de grupo, contracción,
+agrupamiento parcial, combinación de pronósticos), el problema (ventas minoristas, Superstore) y
+términos en inglés y en español.</p></li>
+<li><p><strong>Reproducible:</strong> <code class="docutils literal notranslate"><span class="pre">experiments/literatura/buscar.py</span></code> repite la búsqueda y guarda los resultados
+crudos en <code class="docutils literal notranslate"><span class="pre">experiments/literatura/busqueda.json</span></code>.</p></li>
+<li><p><strong>Búsqueda por citación:</strong> se revisaron los artículos que citan a los dos trabajos más cercanos
+(Chen y Boylan, 2008; Zhang y otros, 2013). Hacia atrás, los trabajos cercanos se citan entre sí y
+forman una sola línea de investigación, que es la que recoge la tabla de más abajo.</p></li>
+</ul>
+<p><strong>Límites de la búsqueda.</strong> Crossref y arXiv no buscan frases exactas: cuentan los documentos que
+contienen cualquiera de los términos, por lo que sus totales son muy grandes y poco informativos; de
+ellos se revisaron los primeros resultados por relevancia. No se consultaron bases de pago.</p>
+</section>
+<section id="matriz-de-novedad">
+<h2>Matriz de novedad<a class="headerlink" href="#matriz-de-novedad" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar código</p>
+<p class="expanded admonition-title">Ocultar código</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">common</span><span class="w"> </span><span class="kn">import</span> <span class="n">ROOT</span><span class="p">,</span> <span class="n">md</span><span class="p">,</span> <span class="n">tabla</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">ROOT</span> <span class="o">/</span> <span class="s2">&quot;experiments&quot;</span> <span class="o">/</span> <span class="s2">&quot;literatura&quot;</span> <span class="o">/</span> <span class="s2">&quot;busqueda.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+<span class="c1"># Cadenas con algún resultado directamente relacionado, tras leer título y resumen de los primeros resultados</span>
+<span class="n">RELEVANTES</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;&quot;group seasonal indices&quot; forecasting&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;Antecedentes directos: índices de grupo y su contracción&quot;</span><span class="p">),</span>
+              <span class="s1">&#39;&quot;seasonal indices&quot; shrinkage forecasting&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;Los mismos trabajos, más la contracción de Miller y Williams&quot;</span><span class="p">),</span>
+              <span class="s1">&#39;&quot;seasonal index&quot; &quot;partial pooling&quot; sales forecasting&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Una tesis sobre demanda estacional por producto; sin esta regla&quot;</span><span class="p">),</span>
+              <span class="s1">&#39;hierarchical shrinkage combination weights &quot;seasonal naive&quot; retail sales&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Reconciliación jerárquica y redes; otro problema&quot;</span><span class="p">),</span>
+              <span class="s1">&#39;&quot;forecast combination&quot; series-specific weights shrinkage seasonal profile&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Combinación de pronósticos en energía y finanzas&quot;</span><span class="p">),</span>
+              <span class="s1">&#39;&quot;Superstore&quot; sales forecasting seasonal&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Otros conjuntos llamados superstore (frutas y verduras); ARIMA y LSTM&quot;</span><span class="p">),</span>
+              <span class="s1">&#39;&quot;índices estacionales&quot; pronóstico ventas minoristas&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Trabajos de grado sobre inventarios; sin modelo afín&quot;</span><span class="p">),</span>
+              <span class="s1">&#39;cross-learning seasonality pooled seasonal profile short time series retail&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Resultados dispersos; el trabajo afín apareció en arXiv (1908.05339)&quot;</span><span class="p">)}</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">b</span><span class="p">[</span><span class="s2">&quot;consultas&quot;</span><span class="p">]:</span>
+    <span class="n">rel</span><span class="p">,</span> <span class="n">obs</span> <span class="o">=</span> <span class="n">RELEVANTES</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="s2">&quot;cadena&quot;</span><span class="p">]]</span> <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;base&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;OpenAlex&quot;</span> <span class="k">else</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;Base&quot;</span><span class="p">:</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;base&quot;</span><span class="p">],</span> <span class="s2">&quot;Cadena de búsqueda&quot;</span><span class="p">:</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;cadena&quot;</span><span class="p">],</span>
+                  <span class="s2">&quot;Resultados&quot;</span><span class="p">:</span> <span class="s2">&quot;sin respuesta&quot;</span> <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;resultados&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;resultados&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">),</span>
+                  <span class="s2">&quot;Revisados&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s2">&quot;primeros&quot;</span><span class="p">]),</span> <span class="s2">&quot;Relevantes&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">rel</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">rel</span><span class="p">,</span>
+                  <span class="s2">&quot;Observación&quot;</span><span class="p">:</span> <span class="n">obs</span> <span class="ow">or</span> <span class="s2">&quot;No busca por frase; se revisaron los primeros por relevancia&quot;</span><span class="p">})</span>
+<span class="n">md</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fecha de la consulta: **</span><span class="si">{</span><span class="n">b</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">**.&quot;</span><span class="p">)</span>
+<span class="n">tabla</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<p>Fecha de la consulta: <strong>2026-11-15</strong>.</p>
+<div class="output text_html"><style type="text/css">
+#T_b0737 th {
+  padding: 5px 12px;
+  text-align: left;
+}
+#T_b0737  td {
+  padding: 5px 12px;
+  text-align: left;
+}
+</style>
+<table id="T_b0737">
+  <thead>
+    <tr>
+      <th id="T_b0737_level0_col0" class="col_heading level0 col0" >Base</th>
+      <th id="T_b0737_level0_col1" class="col_heading level0 col1" >Cadena de búsqueda</th>
+      <th id="T_b0737_level0_col2" class="col_heading level0 col2" >Resultados</th>
+      <th id="T_b0737_level0_col3" class="col_heading level0 col3" >Revisados</th>
+      <th id="T_b0737_level0_col4" class="col_heading level0 col4" >Relevantes</th>
+      <th id="T_b0737_level0_col5" class="col_heading level0 col5" >Observación</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_b0737_row0_col0" class="data row0 col0" >OpenAlex</td>
+      <td id="T_b0737_row0_col1" class="data row0 col1" >"group seasonal indices" forecasting</td>
+      <td id="T_b0737_row0_col2" class="data row0 col2" >23</td>
+      <td id="T_b0737_row0_col3" class="data row0 col3" >8</td>
+      <td id="T_b0737_row0_col4" class="data row0 col4" >6</td>
+      <td id="T_b0737_row0_col5" class="data row0 col5" >Antecedentes directos: índices de grupo y su contracción</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row1_col0" class="data row1 col0" >Crossref</td>
+      <td id="T_b0737_row1_col1" class="data row1 col1" >"group seasonal indices" forecasting</td>
+      <td id="T_b0737_row1_col2" class="data row1 col2" >1.502.655</td>
+      <td id="T_b0737_row1_col3" class="data row1 col3" >8</td>
+      <td id="T_b0737_row1_col4" class="data row1 col4" ></td>
+      <td id="T_b0737_row1_col5" class="data row1 col5" >No busca por frase; se revisaron los primeros por relevancia</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row2_col0" class="data row2 col0" >arXiv</td>
+      <td id="T_b0737_row2_col1" class="data row2 col1" >"group seasonal indices" forecasting</td>
+      <td id="T_b0737_row2_col2" class="data row2 col2" >25.471</td>
+      <td id="T_b0737_row2_col3" class="data row2 col3" >8</td>
+      <td id="T_b0737_row2_col4" class="data row2 col4" ></td>
+      <td id="T_b0737_row2_col5" class="data row2 col5" >No busca por frase; se revisaron los primeros por relevancia</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row3_col0" class="data row3 col0" >OpenAlex</td>
+      <td id="T_b0737_row3_col1" class="data row3 col1" >"seasonal indices" shrinkage forecasting</td>
+      <td id="T_b0737_row3_col2" class="data row3 col2" >60</td>
+      <td id="T_b0737_row3_col3" class="data row3 col3" >8</td>
+      <td id="T_b0737_row3_col4" class="data row3 col4" >4</td>
+      <td id="T_b0737_row3_col5" class="data row3 col5" >Los mismos trabajos, más la contracción de Miller y Williams</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row4_col0" class="data row4 col0" >Crossref</td>
+      <td id="T_b0737_row4_col1" class="data row4 col1" >"seasonal indices" shrinkage forecasting</td>
+      <td id="T_b0737_row4_col2" class="data row4 col2" >450.466</td>
+      <td id="T_b0737_row4_col3" class="data row4 col3" >8</td>
+      <td id="T_b0737_row4_col4" class="data row4 col4" ></td>
+      <td id="T_b0737_row4_col5" class="data row4 col5" >No busca por frase; se revisaron los primeros por relevancia</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row5_col0" class="data row5 col0" >arXiv</td>
+      <td id="T_b0737_row5_col1" class="data row5 col1" >"seasonal indices" shrinkage forecasting</td>
+      <td id="T_b0737_row5_col2" class="data row5 col2" >28.403</td>
+      <td id="T_b0737_row5_col3" class="data row5 col3" >8</td>
+      <td id="T_b0737_row5_col4" class="data row5 col4" ></td>
+      <td id="T_b0737_row5_col5" class="data row5 col5" >No busca por frase; se revisaron los primeros por relevancia</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row6_col0" class="data row6 col0" >OpenAlex</td>
+      <td id="T_b0737_row6_col1" class="data row6 col1" >"seasonal index" "partial pooling" sales forecasting</td>
+      <td id="T_b0737_row6_col2" class="data row6 col2" >3</td>
+      <td id="T_b0737_row6_col3" class="data row6 col3" >3</td>
+      <td id="T_b0737_row6_col4" class="data row6 col4" >1</td>
+      <td id="T_b0737_row6_col5" class="data row6 col5" >Una tesis sobre demanda estacional por producto; sin esta regla</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row7_col0" class="data row7 col0" >Crossref</td>
+      <td id="T_b0737_row7_col1" class="data row7 col1" >"seasonal index" "partial pooling" sales forecasting</td>
+      <td id="T_b0737_row7_col2" class="data row7 col2" >1.957.448</td>
+      <td id="T_b0737_row7_col3" class="data row7 col3" >8</td>
+      <td id="T_b0737_row7_col4" class="data row7 col4" ></td>
+      <td id="T_b0737_row7_col5" class="data row7 col5" >No busca por frase; se revisaron los primeros por relevancia</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row8_col0" class="data row8 col0" >arXiv</td>
+      <td id="T_b0737_row8_col1" class="data row8 col1" >"seasonal index" "partial pooling" sales forecasting</td>
+      <td id="T_b0737_row8_col2" class="data row8 col2" >27.884</td>
+      <td id="T_b0737_row8_col3" class="data row8 col3" >8</td>
+      <td id="T_b0737_row8_col4" class="data row8 col4" ></td>
+      <td id="T_b0737_row8_col5" class="data row8 col5" >No busca por frase; se revisaron los primeros por relevancia</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row9_col0" class="data row9 col0" >OpenAlex</td>
+      <td id="T_b0737_row9_col1" class="data row9 col1" >hierarchical shrinkage combination weights "seasonal naive" retail sales</td>
+      <td id="T_b0737_row9_col2" class="data row9 col2" >27</td>
+      <td id="T_b0737_row9_col3" class="data row9 col3" >8</td>
+      <td id="T_b0737_row9_col4" class="data row9 col4" >0</td>
+      <td id="T_b0737_row9_col5" class="data row9 col5" >Reconciliación jerárquica y redes; otro problema</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row10_col0" class="data row10 col0" >Crossref</td>
+      <td id="T_b0737_row10_col1" class="data row10 col1" >hierarchical shrinkage combination weights "seasonal naive" retail sales</td>
+      <td id="T_b0737_row10_col2" class="data row10 col2" >875.012</td>
+      <td id="T_b0737_row10_col3" class="data row10 col3" >8</td>
+      <td id="T_b0737_row10_col4" class="data row10 col4" ></td>
+      <td id="T_b0737_row10_col5" class="data row10 col5" >No busca por frase; se revisaron los primeros por relevancia</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row11_col0" class="data row11 col0" >arXiv</td>
+      <td id="T_b0737_row11_col1" class="data row11 col1" >hierarchical shrinkage combination weights "seasonal naive" retail sales</td>
+      <td id="T_b0737_row11_col2" class="data row11 col2" >438.398</td>
+      <td id="T_b0737_row11_col3" class="data row11 col3" >8</td>
+      <td id="T_b0737_row11_col4" class="data row11 col4" ></td>
+      <td id="T_b0737_row11_col5" class="data row11 col5" >No busca por frase; se revisaron los primeros por relevancia</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row12_col0" class="data row12 col0" >OpenAlex</td>
+      <td id="T_b0737_row12_col1" class="data row12 col1" >"forecast combination" series-specific weights shrinkage seasonal profile</td>
+      <td id="T_b0737_row12_col2" class="data row12 col2" >82</td>
+      <td id="T_b0737_row12_col3" class="data row12 col3" >8</td>
+      <td id="T_b0737_row12_col4" class="data row12 col4" >0</td>
+      <td id="T_b0737_row12_col5" class="data row12 col5" >Combinación de pronósticos en energía y finanzas</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row13_col0" class="data row13 col0" >Crossref</td>
+      <td id="T_b0737_row13_col1" class="data row13 col1" >"forecast combination" series-specific weights shrinkage seasonal profile</td>
+      <td id="T_b0737_row13_col2" class="data row13 col2" >3.547.631</td>
+      <td id="T_b0737_row13_col3" class="data row13 col3" >8</td>
+      <td id="T_b0737_row13_col4" class="data row13 col4" ></td>
+      <td id="T_b0737_row13_col5" class="data row13 col5" >No busca por frase; se revisaron los primeros por relevancia</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row14_col0" class="data row14 col0" >arXiv</td>
+      <td id="T_b0737_row14_col1" class="data row14 col1" >"forecast combination" series-specific weights shrinkage seasonal profile</td>
+      <td id="T_b0737_row14_col2" class="data row14 col2" >222.002</td>
+      <td id="T_b0737_row14_col3" class="data row14 col3" >8</td>
+      <td id="T_b0737_row14_col4" class="data row14 col4" ></td>
+      <td id="T_b0737_row14_col5" class="data row14 col5" >No busca por frase; se revisaron los primeros por relevancia</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row15_col0" class="data row15 col0" >OpenAlex</td>
+      <td id="T_b0737_row15_col1" class="data row15 col1" >"Superstore" sales forecasting seasonal</td>
+      <td id="T_b0737_row15_col2" class="data row15 col2" >348</td>
+      <td id="T_b0737_row15_col3" class="data row15 col3" >8</td>
+      <td id="T_b0737_row15_col4" class="data row15 col4" >0</td>
+      <td id="T_b0737_row15_col5" class="data row15 col5" >Otros conjuntos llamados superstore (frutas y verduras); ARIMA y LSTM</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row16_col0" class="data row16 col0" >Crossref</td>
+      <td id="T_b0737_row16_col1" class="data row16 col1" >"Superstore" sales forecasting seasonal</td>
+      <td id="T_b0737_row16_col2" class="data row16 col2" >494.243</td>
+      <td id="T_b0737_row16_col3" class="data row16 col3" >8</td>
+      <td id="T_b0737_row16_col4" class="data row16 col4" ></td>
+      <td id="T_b0737_row16_col5" class="data row16 col5" >No busca por frase; se revisaron los primeros por relevancia</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row17_col0" class="data row17 col0" >arXiv</td>
+      <td id="T_b0737_row17_col1" class="data row17 col1" >"Superstore" sales forecasting seasonal</td>
+      <td id="T_b0737_row17_col2" class="data row17 col2" >32.892</td>
+      <td id="T_b0737_row17_col3" class="data row17 col3" >8</td>
+      <td id="T_b0737_row17_col4" class="data row17 col4" ></td>
+      <td id="T_b0737_row17_col5" class="data row17 col5" >No busca por frase; se revisaron los primeros por relevancia</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row18_col0" class="data row18 col0" >OpenAlex</td>
+      <td id="T_b0737_row18_col1" class="data row18 col1" >"índices estacionales" pronóstico ventas minoristas</td>
+      <td id="T_b0737_row18_col2" class="data row18 col2" >9</td>
+      <td id="T_b0737_row18_col3" class="data row18 col3" >8</td>
+      <td id="T_b0737_row18_col4" class="data row18 col4" >0</td>
+      <td id="T_b0737_row18_col5" class="data row18 col5" >Trabajos de grado sobre inventarios; sin modelo afín</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row19_col0" class="data row19 col0" >Crossref</td>
+      <td id="T_b0737_row19_col1" class="data row19 col1" >"índices estacionales" pronóstico ventas minoristas</td>
+      <td id="T_b0737_row19_col2" class="data row19 col2" >9.365</td>
+      <td id="T_b0737_row19_col3" class="data row19 col3" >8</td>
+      <td id="T_b0737_row19_col4" class="data row19 col4" ></td>
+      <td id="T_b0737_row19_col5" class="data row19 col5" >No busca por frase; se revisaron los primeros por relevancia</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row20_col0" class="data row20 col0" >arXiv</td>
+      <td id="T_b0737_row20_col1" class="data row20 col1" >"índices estacionales" pronóstico ventas minoristas</td>
+      <td id="T_b0737_row20_col2" class="data row20 col2" >3</td>
+      <td id="T_b0737_row20_col3" class="data row20 col3" >3</td>
+      <td id="T_b0737_row20_col4" class="data row20 col4" ></td>
+      <td id="T_b0737_row20_col5" class="data row20 col5" >No busca por frase; se revisaron los primeros por relevancia</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row21_col0" class="data row21 col0" >OpenAlex</td>
+      <td id="T_b0737_row21_col1" class="data row21 col1" >cross-learning seasonality pooled seasonal profile short time series retail</td>
+      <td id="T_b0737_row21_col2" class="data row21 col2" >4.403</td>
+      <td id="T_b0737_row21_col3" class="data row21 col3" >8</td>
+      <td id="T_b0737_row21_col4" class="data row21 col4" >0</td>
+      <td id="T_b0737_row21_col5" class="data row21 col5" >Resultados dispersos; el trabajo afín apareció en arXiv (1908.05339)</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row22_col0" class="data row22 col0" >Crossref</td>
+      <td id="T_b0737_row22_col1" class="data row22 col1" >cross-learning seasonality pooled seasonal profile short time series retail</td>
+      <td id="T_b0737_row22_col2" class="data row22 col2" >313.828</td>
+      <td id="T_b0737_row22_col3" class="data row22 col3" >8</td>
+      <td id="T_b0737_row22_col4" class="data row22 col4" ></td>
+      <td id="T_b0737_row22_col5" class="data row22 col5" >No busca por frase; se revisaron los primeros por relevancia</td>
+    </tr>
+    <tr>
+      <td id="T_b0737_row23_col0" class="data row23 col0" >arXiv</td>
+      <td id="T_b0737_row23_col1" class="data row23 col1" >cross-learning seasonality pooled seasonal profile short time series retail</td>
+      <td id="T_b0737_row23_col2" class="data row23 col2" >960.703</td>
+      <td id="T_b0737_row23_col3" class="data row23 col3" >8</td>
+      <td id="T_b0737_row23_col4" class="data row23 col4" ></td>
+      <td id="T_b0737_row23_col5" class="data row23 col5" >No busca por frase; se revisaron los primeros por relevancia</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>«Relevantes» cuenta, entre los resultados revisados de OpenAlex, los que tratan de la misma familia de
+métodos. Para Crossref y arXiv se leyeron los títulos de los primeros resultados sin encontrar
+trabajos distintos de los ya identificados, salvo el de agrupamiento mixto en arXiv.</p>
+</section>
+<section id="trabajos-mas-cercanos">
+<h2>Trabajos más cercanos<a class="headerlink" href="#trabajos-mas-cercanos" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Trabajo</p></th>
+<th class="head"><p>Qué propone</p></th>
+<th class="head"><p>Qué se conserva</p></th>
+<th class="head"><p>Qué cambia en este proyecto</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Bunn y Vassilopoulos (1993, 1999) <span class="bibtex-citation" id="id1">[<a class="reference internal" href="10_reproducibilidad.html#id2" title="Derek W. Bunn and Angelos I. Vassilopoulos. Using group seasonal indices in multi-item short-term forecasting. International Journal of Forecasting, 9(4):517–526, 1993. doi:10.1016/0169-2070(93)90078-2.">BV93</a>, <a class="reference internal" href="10_reproducibilidad.html#id3" title="Derek W. Bunn and Angelos I. Vassilopoulos. Comparison of seasonal estimation methods in multi-item short-term forecasting. International Journal of Forecasting, 15(4):431–443, 1999. doi:10.1016/S0169-2070(99)00005-9.">BV99</a>]</span></p></td>
+<td><p>Índices estacionales de grupo para pronosticar muchos productos a corto plazo</p></td>
+<td><p>La idea central: estimar la estacionalidad con varias series juntas</p></td>
+<td><p>Usan el índice del grupo para todas las series; aquí cada serie puede apartarse de él</p></td>
+</tr>
+<tr class="row-odd"><td><p>Miller y Williams (2003) <span class="bibtex-citation" id="id2">[<a class="reference internal" href="10_reproducibilidad.html#id4" title="Don M. Miller and Daniel W. Williams. Shrinkage estimators of time series seasonal factors and their effect on forecasting accuracy. International Journal of Forecasting, 19(4):669–684, 2003. doi:10.1016/S0169-2070(02)00077-8.">MW03</a>]</span></p></td>
+<td><p>Contraer los índices estacionales de una serie hacia 1 (tipo James–Stein)</p></td>
+<td><p>La contracción como remedio al ruido</p></td>
+<td><p>Contraen hacia «sin estacionalidad», no hacia un perfil común</p></td>
+</tr>
+<tr class="row-even"><td><p>Chen y Boylan (2007, 2008) <span class="bibtex-citation" id="id3">[<a class="reference internal" href="10_reproducibilidad.html#id5" title="Huijing Chen and John E. Boylan. Use of individual and group seasonal indices in subaggregate demand forecasting. Journal of the Operational Research Society, 58(12):1660–1671, 2007. doi:10.1057/palgrave.jors.2602310.">CB07</a>, <a class="reference internal" href="10_reproducibilidad.html#id6" title="Huijing Chen and John E. Boylan. Empirical evidence on individual, group and shrinkage seasonal indices. International Journal of Forecasting, 24(3):525–534, 2008. doi:10.1016/j.ijforecast.2008.02.005.">CB08</a>]</span></p></td>
+<td><p>Reglas teóricas y evidencia para elegir entre índice individual, de grupo o contraído</p></td>
+<td><p>El diagnóstico: con poca historia, el índice individual es ruidoso</p></td>
+<td><p>Eligen una opción por serie; aquí se mezclan con un peso continuo</p></td>
+</tr>
+<tr class="row-odd"><td><p>Zhang, Chen, Boylan y Scarf (2013) <span class="bibtex-citation" id="id4">[<a class="reference internal" href="10_reproducibilidad.html#id7" title="Kui Zhang, Huijing Chen, John E. Boylan, and Phil Scarf. Generalised estimators for seasonal forecasting by combining grouping with shrinkage approaches. Journal of Forecasting, 32(2):137–150, 2013. doi:10.1002/for.1254.">ZCBS13</a>]</span></p></td>
+<td><p>Estimador general que combina agrupamiento y contracción</p></td>
+<td><p>Combinar el índice del grupo con información individual</p></td>
+<td><p><strong>Es el antecedente más cercano.</strong> Sus pesos salen de fórmulas de error cuadrático de los índices; aquí se aprenden minimizando el error de pronóstico, y los pesos de las distintas series se agrupan entre sí</p></td>
+</tr>
+<tr class="row-even"><td><p>Boylan, Chen, Mohammadipour y Syntetos (2014) <span class="bibtex-citation" id="id5">[<a class="reference internal" href="10_reproducibilidad.html#id8" title="John E. Boylan, Huijing Chen, Maryam Mohammadipour, and Aris A. Syntetos. Formation of seasonal groups and application of seasonal indices. Journal of the Operational Research Society, 65(2):227–241, 2014. doi:10.1057/jors.2012.126.">BCMS14</a>]</span></p></td>
+<td><p>Cómo formar los grupos de series</p></td>
+<td><p>—</p></td>
+<td><p>Aquí el grupo es todo el panel; no se forman subgrupos</p></td>
+</tr>
+<tr class="row-odd"><td><p>Agrupamiento mixto de la estacionalidad (arXiv:1908.05339)</p></td>
+<td><p>Modelo mixto que comparte la estacionalidad entre series</p></td>
+<td><p>Agrupamiento parcial de la estacionalidad</p></td>
+<td><p>Agrupa el componente estacional dentro de un modelo estadístico completo; aquí se agrupan los pesos de combinación</p></td>
+</tr>
+<tr class="row-even"><td><p>Montero-Manso y Hyndman (2021) <span class="bibtex-citation" id="id6">[<a class="reference internal" href="10_reproducibilidad.html#id9" title="Pablo Montero-Manso and Rob J. Hyndman. Principles and algorithms for forecasting groups of time series: locality and globality. International Journal of Forecasting, 37(4):1632–1653, 2021. doi:10.1016/j.ijforecast.2021.03.004.">MMH21</a>]</span></p></td>
+<td><p>Principio de los modelos globales: un modelo para todas las series</p></td>
+<td><p>El marco conceptual</p></td>
+<td><p>No proponen esta regla</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>La búsqueda por citación confirma el cuadro: los 21 trabajos que citan a Chen y Boylan (2008) son
+revisiones de pronóstico de demanda, modelos de aprendizaje profundo (DeepAR) y aplicaciones; ninguno
+propone aprender por serie el peso entre el perfil del grupo y el rezago propio.</p>
+</section>
+<section id="diferencia-con-los-modelos-del-curso">
+<h2>Diferencia con los modelos del curso<a class="headerlink" href="#diferencia-con-los-modelos-del-curso" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Familia</p></th>
+<th class="head"><p>Por qué no resuelve la limitación</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Modelos lineales (Ridge, Lasso)</p></td>
+<td><p>Un solo coeficiente para el rezago en todas las series, y la estacionalidad entra como seno y coseno: no pueden representar un perfil de doce valores libres</p></td>
+</tr>
+<tr class="row-odd"><td><p>Vecinos (KNN)</p></td>
+<td><p>Promedia meses parecidos sin distinguir entre patrón común y particular</p></td>
+</tr>
+<tr class="row-even"><td><p>Árboles y ensambles (árbol, Random Forest, XGBoost)</p></td>
+<td><p>Pueden aprender el perfil, pero con cientos de parámetros y mucha varianza para 144 a 420 filas</p></td>
+</tr>
+<tr class="row-odd"><td><p>SVR</p></td>
+<td><p>Minimiza un error insensible a los picos: acierta en los meses corrientes y subestima el total</p></td>
+</tr>
+<tr class="row-even"><td><p>Ensambles estándar (promedio, <em>stacking</em> lineal)</p></td>
+<td><p>Pesos iguales para todas las series</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="declaracion-de-novedad">
+<h2>Declaración de novedad<a class="headerlink" href="#declaracion-de-novedad" title="Link to this heading">#</a></h2>
+<p>Al mejor de nuestro conocimiento, y según la búsqueda descrita, <strong>no se encontraron estudios que
+apliquen a Sample Superstore un modelo de perfil estacional común con pesos por serie aprendidos por
+agrupamiento parcial</strong>, ni que propongan esa regla de actualización en otra aplicación.</p>
+<p>Lo que <strong>no</strong> es nuevo debe quedar igual de claro: estimar índices estacionales con un grupo de
+series y contraerlos son ideas conocidas en el pronóstico de demanda desde los años noventa, y el
+trabajo de Zhang, Chen, Boylan y Scarf ya combina las dos. La contribución de este proyecto es
+acotada: (i) la regla de combinación con un peso por serie, aprendido junto con un peso común por
+descenso por bloques sobre un objetivo cuadrático, con su prueba de convergencia; y (ii) su
+evaluación frente a siete modelos de aprendizaje automático en un panel minorista. Como se verá, la
+evaluación muestra que el mecanismo (i) aporta poco frente a un peso único: el valor está en el
+perfil común, que es la parte conocida.</p>
+<p>La búsqueda cubre bases abiertas en una fecha concreta. No descarta antecedentes en bases no
+consultadas o en literatura no indexada.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03_benchmarks.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Modelos de referencia</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="05_modelo_original.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Modelo original</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#protocolo-de-busqueda">Protocolo de búsqueda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matriz-de-novedad">Matriz de novedad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trabajos-mas-cercanos">Trabajos más cercanos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diferencia-con-los-modelos-del-curso">Diferencia con los modelos del curso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaracion-de-novedad">Declaración de novedad</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Alex Teran y David Estrada
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
