@@ -173,6 +173,17 @@ tabla(pd.DataFrame({"Modelo": r.modelo, "White (p)": r.p_white.map("{:.3f}".form
   meses de ventas excepcionales.
 - **Sesgo:** todos los modelos subestiman (sesgo positivo). SVR y el ingenuo estacional, mucho más.
 
+### Diagnóstico gráfico de la mejor referencia
+
+Además de las pruebas, los supuestos de un modelo de regresión se revisan con gráficos. Aquí, para la
+mejor referencia por MAE; el del modelo original está en el capítulo 5.
+
+```{code-cell} ipython3
+:tags: [hide-input]
+from common import diagnostico_regresion
+diagnostico_regresion(ms.iloc[0].modelo, ms.iloc[0].optimizador)
+```
+
 ## Interpretabilidad
 
 Con siete variables hay 128 coaliciones posibles, así que los valores de Shapley se calculan de forma

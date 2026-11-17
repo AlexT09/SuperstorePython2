@@ -1,14 +1,16 @@
 """tabs/eda.py — Análisis exploratorio: univariado, bivariado y ventas en el tiempo."""
 import dash_bootstrap_components as dbc
 import numpy as np
+import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from dash import dcc, html
 
 from common import (CATEGORY_COLORS, DIV_SCALE, INK, MARK, NEG, REAL, SEQ_SCALE,
                     insight, load_data,
-                    load_mensual, page_header, soft_card, style_fig, usd)
+                    load_mensual, page_header, soft_card, style_fig, tabla_datos, usd)
 from model.features import agregar_variables
+from src.estadistica import formato_p, prueba_normalidad
 
 CFG = {"displayModeBar": False}
 MESES = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
@@ -48,16 +50,20 @@ TEXTOS = {
         "Furniture es la que tiene la caja más ancha/dispersa (2.225).",
     ],
     "box_region": [
-        "Las cajas de las cuatro regiones son casi iguales; lo que cambia son los valores atípicos, con "
-        "pedidos puntuales muy grandes en South y Central. A diferencia de Category, las diferencias "
-        "entre regiones son menos marcadas.",
+        "Con el zoom se ven las cajas: en todas las regiones el 50 % central va de unos $15–19 a unos $200–216, y "
+        "las medianas están entre $46 (Central) y $61 (West). Central es la región más baja (mediana $46, "
+        "Q3 $200) y West la más alta (mediana $61, Q1 $19), pero la diferencia es de pocos dólares frente a la "
+        "dispersión de cada región.",
+        "Las medias (puntos) quedan muy por encima de las medianas en todas ($216 a $242): es la cola derecha de "
+        "pedidos grandes que el zoom deja fuera, sobre todo en South, que tiene el pedido más grande (22.638).",
     ],
     "box_segmento": [
-        "Medianas: Consumer 53.72, Corporate 56.54, Home Office 52.44, ningun segmento sobresale.",
-        "Medias: Consumer 223.73, Corporate 233.82, Home Office 240.9, aquí Home Office tiene la media "
-        "más alta.",
-        "Consumer tiene 5191 pedidos, casi el triple que Home Office (1783). Consumer genera más ventas "
-        "totales por tener más pedidos.",
+        "Medianas: Consumer 53.7, Corporate 56.5, Home Office 52.4; las cajas casi coinciden, así que ningún "
+        "segmento sobresale en el valor típico de una línea.",
+        "Medias: Consumer 223.7, Corporate 233.8, Home Office 241.0; Home Office tiene la media más alta por unos "
+        "pocos pedidos muy grandes (el máximo, 22.638).",
+        "Consumer tiene 5.191 líneas, casi el triple que Home Office (1.783): genera más ventas totales por tener "
+        "más pedidos, no por pedidos más grandes.",
     ],
     "mensual": [
         "Los puntos muestran un patrón que se repite cada año: las ventas son más bajas a comienzos de "
@@ -81,6 +87,65 @@ TEXTOS = {
         "antes: menos pedidos pero de mayor valor. Office Supplies es la que más acelera en 2017.",
     ],
 }
+
+
+# Qué muestra cada gráfico y cómo se calcula; va ANTES del gráfico. TEXTOS (arriba) es la lectura, después.
+DESCRIPCIONES = {
+    "resumen": "Estadísticos de Sales, el valor de cada línea de pedido (9.994 líneas). Media = suma ÷ n; mediana = "
+               "valor central; Q1 y Q3 = cuartiles 25 % y 75 %; RIC = Q3 − Q1 (rango intercuantil, el ancho del 50 % "
+               "central); ds = desviación estándar.",
+    "histograma": "Cuántas líneas de pedido caen en cada tramo de venta (40 tramos de igual ancho). Se muestran solo "
+                  "las líneas de hasta $1.000 (el 95 % de los datos) para que la cola extrema no aplaste el gráfico.",
+    "densidad_log": "Mismo histograma pero sobre log(Sales), el logaritmo natural de cada venta. La altura es "
+                    "densidad (el área total vale 1), no número de pedidos. El logaritmo comprime los pedidos "
+                    "grandes y deja ver la forma de la distribución.",
+    "barras_categoria": "Número de líneas de pedido de cada categoría. Cada barra rotula n y su porcentaje = n ÷ "
+                        "9.994 × 100.",
+    "barras_region": "Número de líneas de pedido de cada región. Cada barra rotula n y su porcentaje = n ÷ 9.994 × 100.",
+    "box_log_categoria": "Una caja por categoría sobre log(Sales). La caja va de Q1 a Q3 (el 50 % central), la línea "
+                         "interior es la mediana, los bigotes llegan hasta 1.5 × RIC desde la caja, los puntos "
+                         "sueltos son atípicos y el punto sólido es la media del grupo. Se usa log porque Technology "
+                         "tiene pedidos mucho más grandes.",
+    "box_region": "Una caja por región sobre Sales en dólares (caja = Q1 a Q3, línea = mediana, bigotes = 1.5 × RIC, "
+                  "punto = media). Las cajas se calculan con todos los datos; el eje se recorta en el percentil 95 de "
+                  "cada región para poder comparar los grupos sin que los atípicos aplasten el gráfico.",
+    "box_segmento": "Una caja por segmento de cliente sobre Sales en dólares (caja = Q1 a Q3, línea = mediana, "
+                    "bigotes = 1.5 × RIC, punto = media). Cajas con todos los datos; eje recortado en el percentil "
+                    "95 para comparar los grupos.",
+    "mensual": "Cada punto es el total de ventas de un mes: suma de Sales de todos los pedidos con fecha en ese mes "
+               "(48 meses, 2014–2017).",
+    "tendencia": "Los puntos son las ventas de cada mes; la línea punteada es el promedio móvil de 12 meses: el "
+                 "promedio de las ventas de ese mes y los 11 anteriores. Al promediar un año completo cancela la "
+                 "estacionalidad y deja la tendencia; por eso empieza en diciembre de 2014.",
+    "estacionalidad": "Cada celda es el porcentaje de las ventas de un año que se vendió en ese mes. Así se compara "
+                      "la forma del año sin que influya el crecimiento entre años.",
+    "tendencia_categoria": "Los puntos son las ventas de cada mes en cada categoría; la línea punteada es el "
+                           "promedio móvil de 12 meses de esa categoría (el promedio de ese mes y los 11 anteriores), "
+                           "que quita la estacionalidad y muestra la tendencia. Empieza en diciembre de 2014 porque "
+                           "necesita 12 meses.",
+    "atipicos": "Una línea de pedido es atípica si su venta supera Q3 + 1.5 × RIC (la regla del diagrama de caja). "
+                "Las barras comparan qué porcentaje de los pedidos y qué porcentaje de las ventas en dólares "
+                "corresponde a atípicos y a normales.",
+    "dispersion": "Cada punto es una categoría en una región durante un mes. Eje X = índice del mismo mes del año "
+                  "anterior; eje Y = índice del mes. Índice = ventas del mes ÷ promedio de los 12 meses anteriores "
+                  "(1 = un mes normal). La línea punteada es la recta de mínimos cuadrados, solo como guía visual.",
+    "mapa_total": "Cada estado se pinta según la suma de Sales de todas sus líneas de pedido; más oscuro = más ventas.",
+    "mapa_mediana": "Cada estado se pinta según la mediana de Sales de sus líneas de pedido (el valor central, que "
+                    "los pedidos grandes no distorsionan). Solo se pintan los estados con 30 líneas o más.",
+    "normalidad": "Prueba de normalidad de cada variable (D'Agostino–Pearson, basada en asimetría y curtosis; "
+                  "Shapiro–Wilk cuando n ≤ 5.000). H₀: la variable es normal; se rechaza si p < 0.05. Pearson "
+                  "exige normalidad: si se rechaza, se usa Spearman.",
+    "correlacion": "Coeficiente de Spearman ρ entre cada par de variables: la correlación de Pearson calculada sobre "
+                   "los rangos (posiciones ordenadas) de los datos, entre −1 y 1. No exige normalidad ni se deja "
+                   "arrastrar por los valores extremos.",
+    "burbujas": "Cada burbuja es una subcategoría. Eje X = número de líneas de pedido; eje Y = venta mediana por "
+                "línea (escala logarítmica); tamaño = ventas totales (suma de Sales); color = categoría.",
+}
+
+
+def _descripcion(key):
+    """Recuadro previo al gráfico: qué muestra y cómo se calcula."""
+    return html.P(DESCRIPCIONES[key], className="insight-text descripcion")
 
 
 def _texto(key):
@@ -151,26 +216,31 @@ def _univariado(df):
         html.H4("1 · Análisis univariado", className="section-title"),
         dbc.Row([
             dbc.Col(soft_card("Resumen estadístico de Sales", [
+                _descripcion("resumen"),
                 _resumen_tabla(df),
                 _texto("resumen"),
             ], "blue"), md=12, className="mb-3"),
         ]),
         dbc.Row([
             dbc.Col(soft_card("Histograma de Sales", [
+                _descripcion("histograma"),
                 _graph(_hist_sales(df)),
                 _texto("histograma"),
             ], "peach"), lg=6, className="mb-3"),
             dbc.Col(soft_card("Densidad de log(Sales)", [
+                _descripcion("densidad_log"),
                 _graph(_hist_log(df)),
                 _texto("densidad_log"),
             ], "pink"), lg=6, className="mb-3"),
         ]),
         dbc.Row([
             dbc.Col(soft_card("Barras: pedidos por categoría", [
+                _descripcion("barras_categoria"),
                 _graph(_barras(df, "Category", "Categoría")),
                 _texto("barras_categoria"),
             ], "blue"), lg=6, className="mb-3"),
             dbc.Col(soft_card("Barras: pedidos por región", [
+                _descripcion("barras_region"),
                 _graph(_barras(df, "Region", "Región")),
                 _texto("barras_region"),
             ], "green"), lg=6, className="mb-3"),
@@ -179,13 +249,20 @@ def _univariado(df):
 
 
 # ------------------------------------------------------------- análisis bivariado
-def _box_raw(df, col, xlabel):
+def _box_raw(df, col, xlabel, zoom=0.95):
+    """Boxplot de Sales por grupo. Las cajas usan todos los datos; el eje se recorta en el percentil `zoom` más alto
+    de los grupos para poder compararlos sin que los atípicos aplasten las cajas."""
     cmap, seq = (CATEGORY_COLORS, None) if col == "Category" else ({}, [REAL])
     fig = px.box(df, x=col, y="Sales", color=col, color_discrete_map=cmap, color_discrete_sequence=seq)
     fig.add_traces(_mean_markers(df, col))
+    tope = float(df.groupby(col).Sales.quantile(zoom).max()) * 1.08
+    fuera = int((df.Sales > tope).sum())
     fig.update_layout(showlegend=False)
     fig.update_xaxes(title=xlabel)
-    fig.update_yaxes(title="Ventas")
+    fig.update_yaxes(title="Ventas (USD)", range=[0, tope], tickprefix="$", tickformat=",.0f")
+    fig.add_annotation(xref="paper", yref="paper", x=0.99, y=0.99, xanchor="right", yanchor="top", showarrow=False,
+                       align="right", font=dict(size=11), text=f"Eje recortado en el percentil 95 de cada grupo:<br>"
+                       f"{fuera:,} pedidos ({fuera / len(df) * 100:.1f} %) quedan por encima de ${tope:,.0f}")
     return style_fig(fig, 340)
 
 
@@ -219,7 +296,7 @@ def _tendencia_movil(t):
         go.Scatter(x=t.mes, y=t.Sales, mode="markers", name="Ventas del mes",
                    marker=dict(size=8, color=REAL, line=dict(width=1, color="rgba(4,18,27,.85)"))),
         go.Scatter(x=t.mes, y=t.movil, mode="lines", name="Promedio móvil de 12 meses",
-                   line=dict(width=3, color=INK)),
+                   line=dict(width=3, color=INK, dash="dash")),
     ])
     fig.update_yaxes(title="Ventas", tickprefix="$", tickformat=",.0f")
     return style_fig(fig, 340)
@@ -235,7 +312,13 @@ def _estacionalidad(df):
                                hovertemplate="%{y} · %{x}: %{z:.1f} % del año<extra></extra>",
                                colorbar=dict(title="% del año")))
     fig.update_yaxes(autorange="reversed")
-    return style_fig(fig, 340)
+    fig = style_fig(fig, 380)
+    fig.update_layout(margin=dict(l=40, r=20, t=70, b=40))
+    fig.add_annotation(xref="paper", yref="paper", x=0, y=1.02, xanchor="left", yanchor="bottom", showarrow=False,
+                       align="left", font=dict(size=12),
+                       text="<b>% del mes = ventas del mes ÷ ventas totales del año × 100</b><br>"
+                            "Cada fila (año) suma 100 %. Más oscuro = mes de mayor peso en el año.")
+    return fig
 
 
 def _tendencia_categoria(df):
@@ -244,13 +327,14 @@ def _tendencia_categoria(df):
     fig = go.Figure()
     for cat in t.columns:
         color = CATEGORY_COLORS[cat]
-        fig.add_trace(go.Scatter(x=t.index, y=t[cat], mode="markers", marker=dict(size=6, color=color, opacity=.5),
-                                 showlegend=False, hovertemplate="%{y:$,.0f}<extra>" + cat + "</extra>"))
-        fig.add_trace(go.Scatter(x=t.index, y=t[cat].rolling(12).mean(), mode="lines", name=cat,
-                                 line=dict(width=3, color=color),
+        fig.add_trace(go.Scatter(x=t.index, y=t[cat], mode="markers", name=f"{cat}: ventas del mes",
+                                 marker=dict(size=7, color=color, opacity=.55),
+                                 hovertemplate="%{y:$,.0f}<extra>" + cat + " (ventas del mes)</extra>"))
+        fig.add_trace(go.Scatter(x=t.index, y=t[cat].rolling(12).mean(), mode="lines",
+                                 name=f"{cat}: promedio móvil 12 meses", line=dict(width=3, color=color, dash="dash"),
                                  hovertemplate="%{y:$,.0f}<extra>" + cat + " (promedio móvil)</extra>"))
     fig.update_yaxes(title="Ventas", tickprefix="$", tickformat=",.0f")
-    return style_fig(fig, 340)
+    return style_fig(fig, 400)
 
 
 def _bivariado(df):
@@ -258,14 +342,17 @@ def _bivariado(df):
         html.H4("2 · Análisis bivariado", className="section-title"),
         dbc.Row([
             dbc.Col(soft_card("Boxplot: log(Sales) por categoría", [
+                _descripcion("box_log_categoria"),
                 _graph(_box_log(df, "Category", "Categoría")),
                 _texto("box_log_categoria"),
             ], "lavender"), lg=4, className="mb-3"),
             dbc.Col(soft_card("Boxplot: Sales por región", [
+                _descripcion("box_region"),
                 _graph(_box_raw(df, "Region", "Región")),
                 _texto("box_region"),
             ], "peach"), lg=4, className="mb-3"),
             dbc.Col(soft_card("Boxplot: Sales por segmento", [
+                _descripcion("box_segmento"),
                 _graph(_box_raw(df, "Segment", "Segmento")),
                 _texto("box_segmento"),
             ], "green"), lg=4, className="mb-3"),
@@ -279,20 +366,24 @@ def _tiempo(df):
         html.H4("3 · Ventas en el tiempo", className="section-title"),
         dbc.Row([
             dbc.Col(soft_card("Evolución mensual de ventas", [
+                _descripcion("mensual"),
                 _graph(fig_mensual),
                 _texto("mensual"),
             ], "pink"), lg=6, className="mb-3"),
             dbc.Col(soft_card("Tendencia: promedio móvil de 12 meses", [
+                _descripcion("tendencia"),
                 _graph(_tendencia_movil(t_mensual)),
                 _texto("tendencia"),
             ], "blue"), lg=6, className="mb-3"),
         ]),
         dbc.Row([
             dbc.Col(soft_card("Estacionalidad: % de las ventas del año por mes", [
+                _descripcion("estacionalidad"),
                 _graph(_estacionalidad(df)),
                 _texto("estacionalidad"),
             ], "yellow"), lg=6, className="mb-3"),
             dbc.Col(soft_card("Tendencia de ventas por categoría", [
+                _descripcion("tendencia_categoria"),
                 _graph(_tendencia_categoria(df)),
                 _texto("tendencia_categoria"),
             ], "lavender"), lg=6, className="mb-3"),
@@ -328,7 +419,8 @@ def _atipicos(df):
 def _dispersion_rezago():
     """Índice del mes vs. índice del mismo mes del año anterior, con recta de mínimos cuadrados."""
     m = agregar_variables(load_mensual()).dropna(subset=["indice", "r_lag_12", "r_lag_1"])
-    r12, r1 = m.indice.corr(m.r_lag_12), m.indice.corr(m.r_lag_1)
+    norm, _ = prueba_normalidad(m, ["indice", "r_lag_12", "r_lag_1"])
+    r12, r1 = m.indice.corr(m.r_lag_12, method="spearman"), m.indice.corr(m.r_lag_1, method="spearman")
     pend, inter = np.polyfit(m.r_lag_12, m.indice, 1)
     xs = np.array([m.r_lag_12.min(), m.r_lag_12.max()])
     fig = go.Figure([go.Scatter(x=g.r_lag_12, y=g.indice, mode="markers", name=cat,
@@ -336,16 +428,17 @@ def _dispersion_rezago():
                                             line=dict(width=1, color="rgba(4,18,27,.85)")),
                                 hovertemplate="%{x:.2f} → %{y:.2f}<extra>" + cat + "</extra>")
                      for cat, g in m.groupby("Category")])
-    fig.add_trace(go.Scatter(x=xs, y=inter + pend * xs, mode="lines", name="Tendencia (mínimos cuadrados)",
-                             line=dict(color=INK, width=3)))
+    fig.add_trace(go.Scatter(x=xs, y=inter + pend * xs, mode="lines", name="Recta de mínimos cuadrados (guía)",
+                             line=dict(color=INK, width=3, dash="dash")))
     fig.update_xaxes(title="Índice del mismo mes del año anterior")
     fig.update_yaxes(title="Índice del mes")
-    texto = (f"Cada punto es una categoría en una región durante un mes (2015–2017), en índice: ventas del mes "
-             f"÷ promedio de los 12 meses anteriores. La línea sube: un mes que vendió por encima de lo normal "
-             f"el año pasado tiende a repetirlo (correlación {r12:.2f}). Con el mes anterior la correlación es "
-             f"casi nula ({r1:.2f}). Es la relación que usa el modelo, y anticipa lo que muestra su importancia "
-             f"de variables: pesa el mismo mes del año anterior, no el mes anterior. La nube es ancha, por eso "
-             f"el error por serie es alto.")
+    pmax = norm["Shapiro–Wilk (p)"].max()
+    texto = (f"La línea sube: un mes que vendió por encima de lo normal el año pasado tiende a repetirlo "
+             f"(correlación de Spearman {r12:.2f}). Con el mes anterior la correlación es casi nula ({r1:.2f}). "
+             f"Es la relación que usa el modelo, y anticipa lo que muestra su importancia de variables: pesa el "
+             f"mismo mes del año anterior, no el mes anterior. La nube es ancha, por eso el error por serie es alto. "
+             f"Se usa Spearman y no Pearson porque ninguno de los índices es normal (Shapiro–Wilk, p {formato_p(pmax)} "
+             f"en todos); Pearson daría {m.indice.corr(m.r_lag_12):.2f}.")
     return style_fig(fig, 340), texto
 
 
@@ -356,10 +449,10 @@ def _atipicos_modelo(df):
         html.H4("4 · Atípicos y relación con el modelo", className="section-title"),
         dbc.Row([
             dbc.Col(soft_card("Atípicos: su peso en pedidos y en ventas", [
-                _graph(fig_a), insight(txt_a),
+                _descripcion("atipicos"), _graph(fig_a), insight(txt_a),
             ], "yellow"), lg=6, className="mb-3"),
             dbc.Col(soft_card("Dispersión: el mes contra el mismo mes del año anterior", [
-                _graph(fig_d), insight(txt_d),
+                _descripcion("dispersion"), _graph(fig_d), insight(txt_d),
             ], "blue"), lg=6, className="mb-3"),
         ]),
     ])
@@ -421,43 +514,38 @@ def _mapas(df):
     return (fig_total, txt_total), (fig_med, txt_med)
 
 
-def _correlacion(df):
+def _normalidad(df):
+    """Tabla de normalidad de las variables numéricas; decide entre Pearson y Spearman."""
     cols = {"Sales": "Ventas", "Quantity": "Cantidad", "Discount": "Descuento"}
-    c = df[list(cols)].corr().rename(index=cols, columns=cols)
+    t, metodo = prueba_normalidad(df, list(cols))
+    t = t.assign(Variable=t.Variable.map(cols))
+    tabla = pd.DataFrame({"Variable": t.Variable, "Asimetría": t["Asimetría"].map("{:.2f}".format),
+                          "Curtosis": t["Curtosis"].map("{:.1f}".format),
+                          "D'Agostino–Pearson (p)": t["D'Agostino–Pearson (p)"].map(formato_p),
+                          "Shapiro–Wilk (p)": t["Shapiro–Wilk (p)"].map(formato_p), "¿Normal?": t["¿Normal?"]})
+    n_filas = f"{len(df):,}".replace(",", ".")
+    texto = (f"Ninguna variable es normal: las tres tienen asimetría positiva (Ventas {t['Asimetría'].iloc[0]:.1f}) y "
+             f"colas pesadas, y la prueba rechaza la normalidad con n = {n_filas}. Como Pearson supone normalidad y "
+             f"es sensible a los valores extremos, se usa Spearman." if metodo == "spearman" else
+             "Todas las variables son normales: se usa Pearson.")
+    return tabla, texto, metodo
+
+
+def _correlacion(df, metodo="spearman"):
+    cols = {"Sales": "Ventas", "Quantity": "Cantidad", "Discount": "Descuento"}
+    c = df[list(cols)].corr(method=metodo).rename(index=cols, columns=cols)
     fig = go.Figure(go.Heatmap(z=c.values, x=c.columns, y=c.index, colorscale=DIV_SCALE, zmin=-1, zmax=1,
                                text=c.round(2).values, texttemplate="%{text}", textfont=dict(size=14),
-                               hovertemplate="%{y} vs. %{x}: %{z:.2f}<extra></extra>", colorbar=dict(thickness=12)))
+                               hovertemplate="%{y} vs. %{x}: %{z:.2f}<extra></extra>",
+                               colorbar=dict(title="ρ" if metodo == "spearman" else "r", thickness=12)))
     fig.update_yaxes(autorange="reversed")
     med = df.groupby("Quantity").Sales.median()
-    texto = (f"Correlación de Pearson de Sales con las otras variables numéricas de cada línea de pedido. Con la "
-             f"cantidad es positiva pero débil ({c.loc['Ventas', 'Cantidad']:.2f}): la venta mediana sube de "
-             f"${med.loc[1]:.0f} con 1 unidad a ${med.loc[5]:.0f} con 5, pero el precio del producto pesa más "
-             f"que las unidades. Con el descuento es prácticamente nula ({c.loc['Ventas', 'Descuento']:.2f}). "
-             f"Profit no se incluye porque es una consecuencia de la venta, no un factor que la explique.")
-    return style_fig(fig, 340), texto
-
-
-def _bins_descuento(df):
-    """Contenedores 2D: descuento vs. ventas por línea, contando líneas por celda (sin que los puntos se tapen).
-    Las ventas van en escala log y el color en log10 del conteo: si no, unas pocas celdas tapan al resto."""
-    xb = np.arange(0, 0.851, 0.05)          # descuento en tramos de 5 puntos
-    yb = np.logspace(-0.5, 4.5, 26)         # ventas de ~$0.3 a ~$32,000 en tramos logarítmicos
-    conteo, xe, ye = np.histogram2d(df.Discount, df.Sales, bins=[xb, yb])
-    fig = go.Figure(go.Heatmap(
-        x=(xe[:-1] + xe[1:]) / 2 * 100, y=np.sqrt(ye[:-1] * ye[1:]), z=np.log10(np.where(conteo > 0, conteo, np.nan)).T,
-        customdata=conteo.T, colorscale=SEQ_SCALE, zmin=0,
-        colorbar=dict(title="Líneas", thickness=12, tickvals=[0, 1, 2, 3], ticktext=["1", "10", "100", "1.000"]),
-        hovertemplate="Descuento ≈ %{x:.0f} %<br>Ventas ≈ $%{y:,.0f}<br>%{customdata:,.0f} líneas<extra></extra>"))
-    fig.update_xaxes(title="Descuento aplicado (%)", ticksuffix=" %")
-    fig.update_yaxes(title="Ventas por línea (USD, escala log)", type="log", tickprefix="$",
-                     tickvals=[1, 10, 100, 1000, 10000], ticktext=["1", "10", "100", "1,000", "10,000"])
-    bajo = df.Discount <= 0.2
-    texto = (f"Cada celda cuenta las líneas de pedido con ese descuento y ese valor de venta; las ventas van en "
-             f"escala logarítmica para ver todo el rango. El {bajo.mean() * 100:.0f} % de las líneas tiene "
-             f"descuentos de 0 a 20 %, donde están las celdas más claras, y en cada columna de descuento las "
-             f"ventas cubren casi el mismo rango. La venta mediana es ${df[bajo].Sales.median():.0f} con descuento "
-             f"bajo y ${df[~bajo].Sales.median():.0f} con descuento alto: el descuento no hace que se venda más "
-             f"por línea.")
+    p = df[list(cols)].corr()
+    texto = (f"Con la cantidad la correlación es positiva pero moderada-débil (ρ = {c.loc['Ventas', 'Cantidad']:.2f}; "
+             f"Pearson daría {p.loc['Sales', 'Quantity']:.2f}): la venta mediana sube de ${med.loc[1]:.0f} con 1 "
+             f"unidad a ${med.loc[5]:.0f} con 5, pero el precio del producto pesa más que las unidades. Con el "
+             f"descuento es prácticamente nula (ρ = {c.loc['Ventas', 'Descuento']:.2f}). Profit no se incluye porque "
+             f"es una consecuencia de la venta, no un factor que la explique.")
     return style_fig(fig, 340), texto
 
 
@@ -490,24 +578,28 @@ def _subcategorias(df):
 
 def _otros_factores(df):
     (fig_t, txt_t), (fig_m, txt_m) = _mapas(df)
-    fig_c, txt_c = _correlacion(df)
-    fig_b, txt_b = _bins_descuento(df)
+    tabla_n, txt_n, metodo = _normalidad(df)
+    fig_c, txt_c = _correlacion(df, metodo)
     fig_s, txt_s = _subcategorias(df)
     return html.Div([
         html.H4("5 · Geografía y otros factores de las ventas", className="section-title"),
         dbc.Row([
-            dbc.Col(soft_card("Mapa: ventas totales por estado", [_graph(fig_t), insight(txt_t)], "blue"),
+            dbc.Col(soft_card("Mapa: ventas totales por estado",
+                              [_descripcion("mapa_total"), _graph(fig_t), insight(txt_t)], "blue"),
                     lg=6, className="mb-3"),
-            dbc.Col(soft_card("Mapa: venta mediana por línea de pedido", [_graph(fig_m), insight(txt_m)], "blue"),
+            dbc.Col(soft_card("Mapa: venta mediana por línea de pedido",
+                              [_descripcion("mapa_mediana"), _graph(fig_m), insight(txt_m)], "blue"),
                     lg=6, className="mb-3"),
         ]),
         dbc.Row([
-            dbc.Col(soft_card("Mapa de calor: correlación de Sales con cantidad y descuento",
-                              [_graph(fig_c), insight(txt_c)], "lavender"), lg=5, className="mb-3"),
-            dbc.Col(soft_card("Contenedores 2D: descuento vs. ventas por línea", [_graph(fig_b), insight(txt_b)],
-                              "lavender"), lg=7, className="mb-3"),
+            dbc.Col(soft_card("Normalidad de las variables numéricas", [
+                _descripcion("normalidad"), tabla_datos(tabla_n), insight(txt_n)], "lavender"), lg=7, className="mb-3"),
+            dbc.Col(soft_card("Mapa de calor: correlación de Spearman de Sales con cantidad y descuento",
+                              [_descripcion("correlacion"), _graph(fig_c), insight(txt_c)], "lavender"),
+                    lg=5, className="mb-3"),
         ]),
-        soft_card("Burbujas: volumen y valor de las ventas por subcategoría", [_graph(fig_s), insight(txt_s)],
+        soft_card("Burbujas: volumen y valor de las ventas por subcategoría",
+                  [_descripcion("burbujas"), _graph(fig_s), insight(txt_s)],
                   "green", height_full=False),
     ])
 
@@ -522,7 +614,7 @@ def hallazgos(df):
 
     alto = df.Discount > 0.2
     margen_bajo = df[~alto].Profit.sum() / df[~alto].Sales.sum() * 100
-    corr = df.Sales.corr(df.Discount)
+    corr = df.Sales.corr(df.Discount, method="spearman")   # Sales no es normal: se usa Spearman
 
     sub = df.groupby("Sub-Category").agg(p=("Profit", "sum"), d=("Discount", "mean")).sort_values("p")
     neg = sub[sub.p < 0]
@@ -554,7 +646,7 @@ def hallazgos(df):
          "recomendacion": "Fijar las metas de 2018 con la proyección como base, que ya incluye el crecimiento, y "
                           "revisarlas cada mes con las ventas reales."},
         {"factor": "Descuento",
-         "hallazgo": f"El descuento casi no se relaciona con las ventas (correlación {corr:.2f}), pero las líneas "
+         "hallazgo": f"El descuento casi no se relaciona con las ventas (correlación de Spearman {corr:.2f}), pero las líneas "
                      f"con más de 20 % de descuento perdieron {usd(-df[alto].Profit.sum())}. Con 20 % o menos, el "
                      f"margen es de {margen_bajo:.0f} %.",
          "recomendacion": "Poner un tope de 20 % al descuento y pedir aprobación por encima de ese valor: es la "

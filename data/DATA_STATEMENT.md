@@ -5,11 +5,12 @@
 | | |
 |---|---|
 | **Qué es** | Líneas de pedido de una tienda minorista de Estados Unidos (muebles, artículos de oficina y tecnología). |
-| **Procedencia** | Conjunto de ejemplo que Tableau distribuye con su software. Archivo: `data/raw/Sample - Superstore.csv`. |
+| **Procedencia** | Sample Superstore, conjunto público descargado de [Kaggle](https://www.kaggle.com/datasets/bravehart101/sample-supermarket-dataset). Archivo: `data/raw/Sample - Superstore.csv`. |
+| **Acceso** | [Archivo CSV en el repositorio](https://github.com/AlexT09/SuperstorePython2/blob/main/data/raw/Sample%20-%20Superstore.csv) · [Descarga en Kaggle](https://www.kaggle.com/datasets/bravehart101/sample-supermarket-dataset). |
 | **Naturaleza** | Datos de demostración. No corresponden a una empresa identificada y no se conoce cómo se generaron. |
 | **Periodo** | 3 de enero de 2014 a 30 de diciembre de 2017. |
 | **Tamaño** | 9.994 líneas de pedido y 21 variables. |
-| **Licencia** | Tableau no publica una licencia abierta para este archivo. Se usa aquí con fines académicos. |
+| **Licencia** | La que indique la página de Kaggle del conjunto; se usa aquí con fines académicos. |
 | **Datos personales** | Incluye nombres de clientes ficticios. El proyecto no los usa: solo agrega ventas por categoría, región y mes. |
 
 ### Variables que usa el proyecto

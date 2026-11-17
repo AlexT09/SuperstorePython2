@@ -28,7 +28,7 @@ DICCIONARIO = [
     ("Profit", "Numérica (USD)", "Ganancia de la línea de pedido."),
 ]
 REFERENCIAS = [
-    "Tableau. Sample Superstore (conjunto de datos de ejemplo).",
+    "Sample Superstore Dataset. Kaggle, bravehart101.",
     "Fildes, R., Ma, S. y Kolassa, S. (2022). Retail forecasting: research and practice. International Journal of Forecasting, 38(4).",
     "Godahewa, R., Bergmeir, C., Webb, G., Hyndman, R. y Montero-Manso, P. (2021). Monash Time Series Forecasting Archive. NeurIPS Datasets and Benchmarks.",
     "Hansen, P., Lunde, A. y Nason, J. (2011). The model confidence set. Econometrica, 79(2).",
@@ -43,11 +43,13 @@ def _datos():
     return html.Div([
         dbc.Row([
             dbc.Col(soft_card("Fuente y alcance", html.Ul([
-                html.Li("Sample Superstore: conjunto de ejemplo que Tableau distribuye con su software."),
+                html.Li("Sample Superstore: conjunto público descargado de Kaggle."),
                 html.Li(f"Periodo: {d.Order_Date.min():%d/%m/%Y} a {d.Order_Date.max():%d/%m/%Y}."),
                 html.Li(f"{len(d):,} líneas de pedido y 21 variables en el archivo original.".replace(",", ".")),
-                html.Li("Licencia: Tableau no publica una licencia abierta; se usa con fines académicos."),
+                html.Li("Licencia: la que indique la página de Kaggle del conjunto; se usa con fines académicos."),
                 html.Li("Son datos de demostración: no corresponden a una empresa identificada."),
+                html.Li(["Acceso: ", html.A("archivo CSV", href=introduccion.URL_DATOS_REPO, target="_blank"), " · ",
+                         html.A("descarga en Kaggle", href=introduccion.URL_DATOS_ORIGEN, target="_blank"), "."]),
             ], className="mb-0")), md=6, className="mb-3"),
             dbc.Col(soft_card("Tarea y variable objetivo", html.Ul([
                 html.Li([html.B("Tarea: "), "regresión sobre series de tiempo (pronóstico del mes siguiente)."]),

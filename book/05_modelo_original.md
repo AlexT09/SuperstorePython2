@@ -256,3 +256,16 @@ tabla(pd.DataFrame({
 La conclusión es incómoda y se reporta tal cual: lo que funciona es la parte conocida del modelo, el
 perfil estacional común, y no la regla nueva de los pesos. El capítulo 7 muestra que en otros
 conjuntos la regla sí aporta.
+
+## Diagnóstico de regresión
+
+Las mismas métricas y gráficos de regresión que en el capítulo 3, ahora para el modelo original con su mejor
+método de optimización.
+
+```{code-cell} ipython3
+:tags: [hide-input]
+from common import diagnostico_regresion
+mo = res("mejores.csv")
+mo = mo[(mo.conjunto == "superstore") & (mo.modelo == ORIGINAL)].iloc[0]
+diagnostico_regresion(ORIGINAL, mo.optimizador)
+```

@@ -187,6 +187,11 @@ def insight(children):
 
 
 
+def descripcion(children):
+    """Recuadro que va ANTES de un gráfico: qué muestra y cómo se calcula (la lectura va después, con insight)."""
+    return html.P(children, className="insight-text descripcion")
+
+
 def tabla_datos(df, id_=None, filtro=False, pagina=None, condicional=None):
     """Tabla ordenable (dash_table.DataTable) con el estilo de la app. `df` ya viene con el texto final."""
     from dash import dash_table

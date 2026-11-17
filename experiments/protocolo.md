@@ -45,7 +45,7 @@ secundarias, comparación de los métodos de optimización.
 
 | Conjunto | Fuente | Series | Naturaleza |
 |---|---|---|---|
-| Sample Superstore (principal) | Tableau, `data/raw/` | 12 (3 categorías × 4 regiones) | ventas minoristas, estacionalidad fuerte |
+| Sample Superstore (principal) | Kaggle (Sample Superstore Dataset), `data/raw/` | 12 (3 categorías × 4 regiones) | ventas minoristas, estacionalidad fuerte |
 | Tourism Monthly | Monash / Zenodo, doi:10.5281/zenodo.4656096 | 24 de 366 | demanda turística, estacionalidad muy fuerte |
 | Hospital | Monash / Zenodo, doi:10.5281/zenodo.4656014 | 24 de 767 | conteos de pacientes, estacionalidad débil |
 | M3 Monthly | Monash / Zenodo, doi:10.5281/zenodo.4656298 | 24 de 1428 | series heterogéneas de seis dominios |

@@ -24,6 +24,28 @@ modelo del curso (SVR), con un modelo de un kilobyte; pero la diferencia **no es
 significativa** y el resultado **no se repite** en los conjuntos adicionales. El veredicto, tal como
 lo fija el protocolo, es que el modelo no es superior. Para 2018 se proyectan 886.866 USD.
 
+## El conjunto de datos
+
+**Sample Superstore** es un conjunto público descargado de Kaggle: datos ficticios de una
+cadena minorista de Estados Unidos.
+
+- **Tamaño:** 9.994 líneas de pedido × 21 columnas, del 3 de enero de 2014 al 30 de diciembre de 2017.
+- **Cada fila:** un producto dentro de un pedido, con su venta (`Sales`), cantidad, descuento y ganancia.
+- **Lo que se pronostica:** las ventas mensuales de 3 categorías × 4 regiones, es decir, 12 series de 48 meses.
+- **Acceso:** [archivo CSV en el repositorio](https://github.com/AlexT09/SuperstorePython2/blob/main/data/raw/Sample%20-%20Superstore.csv) ·
+  [descarga en Kaggle](https://www.kaggle.com/datasets/bravehart101/sample-supermarket-dataset) ·
+  [declaración de datos](https://github.com/AlexT09/SuperstorePython2/blob/main/data/DATA_STATEMENT.md).
+
+Primeras 5 filas del archivo original (11 de las 21 columnas; se omite el nombre del cliente, que el proyecto no usa):
+
+| Order ID | Order Date | Segment | State | Region | Category | Sub-Category | Sales | Quantity | Discount | Profit |
+|---|---|---|---|---|---|---|---|---|---|---|
+| CA-2016-152156 | 11/8/2016 | Consumer | Kentucky | South | Furniture | Bookcases | 261.96 | 2 | 0.0 | 41.91 |
+| CA-2016-152156 | 11/8/2016 | Consumer | Kentucky | South | Furniture | Chairs | 731.94 | 3 | 0.0 | 219.58 |
+| CA-2016-138688 | 6/12/2016 | Corporate | California | West | Office Supplies | Labels | 14.62 | 2 | 0.0 | 6.87 |
+| US-2015-108966 | 10/11/2015 | Consumer | Florida | South | Furniture | Tables | 957.58 | 5 | 0.45 | -383.03 |
+| US-2015-108966 | 10/11/2015 | Consumer | Florida | South | Office Supplies | Storage | 22.37 | 2 | 0.2 | 2.52 |
+
 ## Contribuciones
 
 1. Una evaluación de las 28 combinaciones de siete modelos y cuatro métodos de optimización con

@@ -93,7 +93,7 @@ def hallazgos(df) -> pd.DataFrame:
     # Descuentos de más de 20 %: su pérdida y el margen del resto
     alto = df.Discount > 0.2
     margen_bajo = df[~alto].Profit.sum() / df[~alto].Sales.sum() * 100
-    corr = df.Sales.corr(df.Discount)
+    corr = df.Sales.corr(df.Discount, method="spearman")   # Sales no es normal: se usa Spearman
     # Subcategorías con pérdida y margen por categoría
     sub = df.groupby("Sub-Category").agg(p=("Profit", "sum"), d=("Discount", "mean")).sort_values("p")
     neg = sub[sub.p < 0]
@@ -125,7 +125,7 @@ def hallazgos(df) -> pd.DataFrame:
          "Fijar las metas de 2018 con la proyección como base, que ya incluye el crecimiento, y revisarlas cada mes "
          "con las ventas reales."),
         ("Descuento",
-         f"El descuento casi no se relaciona con las ventas (correlación {corr:.2f}), pero las líneas con más de "
+         f"El descuento casi no se relaciona con las ventas (correlación de Spearman {corr:.2f}), pero las líneas con más de "
          f"20 % de descuento perdieron {usd(-df[alto].Profit.sum())}. Con 20 % o menos, el margen es de "
          f"{margen_bajo:.0f} %.",
          "Poner un tope de 20 % al descuento y pedir aprobación por encima de ese valor: es la acción con mayor "
@@ -255,3 +255,84 @@ def barras(nombres, valores, titulo, eje, alto=320, horizontal=True):
     fig = go.Figure(go.Bar(x=v, y=n, orientation="h", marker_color=REAL) if horizontal else go.Bar(x=n, y=v, marker_color=REAL))
     (fig.update_xaxes if horizontal else fig.update_yaxes)(title=eje)
     return style_fig(fig, alto, titulo).update_layout(margin=dict(l=220 if horizontal else 40))
+
+
+def diagnostico_regresion(modelo: str, optimizador: str):
+    """Métricas y gráficos de un problema de regresión para los pronósticos del bucle externo en Sample Superstore:
+    real frente a predicho, residuos frente a predicho, ACF de los residuos e histograma. Cada gráfico lleva
+    antes su descripción (qué muestra y cómo se calcula) y después su lectura."""
+    import numpy as np
+    import plotly.graph_objects as go
+    p = res("pred_superstore.csv")
+    y, yh = p.Sales.to_numpy(), p[f"{modelo}|{optimizador}"].to_numpy()
+    e = y - yh
+    mae, rmse = np.abs(e).mean(), np.sqrt((e ** 2).mean())
+    r2 = 1 - (e ** 2).sum() / ((y - y.mean()) ** 2).sum()
+    wape = np.abs(e).sum() / y.sum() * 100
+    kpis([("MAE", f"{mae:,.0f} USD", "error absoluto medio por serie y mes"), ("RMSE", f"{rmse:,.0f} USD", "castiga más los errores grandes"),
+          ("R²", f"{r2:.3f}", "parte de la variación mensual que explica"), ("WAPE", f"{wape:.1f} %", "Σ|error| ÷ Σ ventas")])
+    md(f"*Métricas sobre los {len(p)} pronósticos del bucle externo (12 series × 24 meses), con e = real − pronóstico: "
+       f"MAE = promedio de |e|; RMSE = √(promedio de e²); R² = 1 − Σe² ÷ Σ(real − promedio real)²; WAPE = Σ|e| ÷ Σ real × 100.*")
+
+    # 1. real frente a predicho
+    md("**Valores reales frente a predichos.** *Cada punto es una serie en un mes: eje X = ventas reales, eje Y = pronóstico. "
+       "La línea punteada es y = x: un pronóstico perfecto cae sobre ella.*")
+    lim = [0, float(max(y.max(), yh.max())) * 1.05]
+    fig = go.Figure(go.Scatter(x=y, y=yh, mode="markers", marker=dict(color=REAL, size=6, opacity=.6),
+                               hovertemplate="real %{x:$,.0f}<br>pronóstico %{y:$,.0f}<extra></extra>"))
+    fig.add_trace(go.Scatter(x=lim, y=lim, mode="lines", line=dict(color=REF, dash="dot")))
+    fig.update_xaxes(title="Ventas reales del mes (USD)", tickprefix="$", tickformat=",.0f")
+    fig.update_yaxes(title="Pronóstico (USD)", tickprefix="$", tickformat=",.0f")
+    show(style_fig(fig, 340).update_layout(showlegend=False))
+    md(f"El error medio es de {mae:,.0f} USD y R² = {r2:.2f}. Los meses de ventas muy altas quedan por debajo de la "
+       f"diagonal: el modelo se queda corto en los picos.")
+
+    # 2. residuos frente a predichos
+    md("**Residuos frente a predichos.** *Eje X = pronóstico; eje Y = residuo e = real − pronóstico. Si el modelo es adecuado "
+       "la nube se reparte alrededor de 0 sin forma; un abanico indica que el error crece con el tamaño de la venta.*")
+    fig = go.Figure(go.Scatter(x=yh, y=e, mode="markers", marker=dict(color=REAL, size=6, opacity=.6),
+                               hovertemplate="pronóstico %{x:$,.0f}<br>residuo %{y:$,.0f}<extra></extra>"))
+    fig.add_hline(y=0, line_dash="dot", line_color=REF)
+    fig.update_xaxes(title="Pronóstico (USD)", tickprefix="$", tickformat=",.0f")
+    fig.update_yaxes(title="Residuo = real − pronóstico (USD)", tickprefix="$", tickformat=",.0f")
+    show(style_fig(fig, 340).update_layout(showlegend=False))
+    rho = pd.Series(yh).rank().corr(pd.Series(np.abs(e)).rank())
+    md(f"La correlación de Spearman entre el pronóstico y el tamaño del error (|e|) es {rho:.2f}: "
+       + ("el error crece con la escala de la serie, lo que coincide con el rechazo de la prueba de White." if rho > 0.2 else
+          "no se ve un abanico: el error casi no depende del tamaño del pronóstico."))
+
+    # 3. ACF de los residuos del total mensual
+    md("**Autocorrelación de los residuos (ACF).** *Se suman los residuos de las 12 series de cada mes y se calcula "
+       "ρ(k) = Σ(eₜ − ē)(eₜ₋ₖ − ē) ÷ Σ(eₜ − ē)² para los rezagos k = 1…12. Las líneas punteadas son la banda ±1.96/√n: una "
+       "barra fuera indica que el error se parece al de meses anteriores.*")
+    tot = pd.Series(e).groupby(p.Mes.to_numpy()).sum().to_numpy()
+    d = tot - tot.mean()
+    k = np.arange(1, 13)
+    acf = np.array([np.sum(d[i:] * d[:-i]) / np.sum(d * d) for i in k])
+    banda = 1.96 / np.sqrt(len(tot))
+    fig = go.Figure(go.Bar(x=k, y=acf, marker_color=[PROY if abs(v) > banda else REAL for v in acf],
+                           hovertemplate="rezago %{x}: %{y:.2f}<extra></extra>"))
+    fig.add_hline(y=banda, line_dash="dot", line_color=REF)
+    fig.add_hline(y=-banda, line_dash="dot", line_color=REF)
+    fig.update_xaxes(title="Rezago (meses)", dtick=1)
+    fig.update_yaxes(title="Correlación", range=[-1, 1])
+    show(style_fig(fig, 300))
+    fuera = [int(i) for i, v in zip(k, acf) if abs(v) > banda]
+    md(("Hay barras fuera de la banda (en ámbar) en los rezagos " + ", ".join(map(str, fuera)) + ": queda estructura temporal sin explicar."
+        if fuera else f"Ninguna barra sale de la banda (±{banda:.2f}): los residuos no tienen autocorrelación visible."))
+
+    # 4. histograma de residuos con la normal de igual media y desviación
+    md("**Distribución de los residuos.** *Histograma de los residuos (eje recortado al 98 % central). La curva punteada es la "
+       "normal con la misma media y desviación: si el histograma la sigue, los errores son aproximadamente normales.*")
+    lo, hi = np.quantile(e, [.01, .99])
+    xs = np.linspace(lo, hi, 200)
+    mu, sd = e.mean(), e.std(ddof=1)
+    fig = go.Figure(go.Histogram(x=e[(e >= lo) & (e <= hi)], nbinsx=30, histnorm="probability density", marker_color=REAL, name="Residuos"))
+    fig.add_trace(go.Scatter(x=xs, y=np.exp(-.5 * ((xs - mu) / sd) ** 2) / (sd * np.sqrt(2 * np.pi)), mode="lines",
+                             line=dict(color=PROY, dash="dash", width=2), name="Normal (misma media y sd)"))
+    fig.update_xaxes(title="Residuo = real − pronóstico (USD)", tickprefix="$", tickformat=",.0f")
+    fig.update_yaxes(title="Densidad")
+    show(style_fig(fig, 340))
+    from scipy import stats
+    md(f"Asimetría de {stats.skew(e):.2f} y sesgo medio de {mu:+,.0f} USD (positivo: el modelo subestima). La cola derecha son los "
+       f"meses de ventas excepcionales que ningún modelo anticipa.")

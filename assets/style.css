@@ -377,6 +377,12 @@ body.sidebar-mini .main { margin-left: var(--sidebar-mini); }
   background: var(--grad-brand);
 }
 
+/* descripción previa a un gráfico: qué muestra y cómo se calcula (sin el acento ámbar de la lectura) */
+.insight-text.descripcion {
+  margin: 0 0 12px; background: rgba(255,255,255,.04); border: 1px solid var(--line);
+}
+.insight-text.descripcion::before { background: var(--ink-2); opacity: .55; }
+
 /* -------- tablas -------- */
 .table {
   --bs-table-bg: transparent; --bs-table-color: var(--ink-2); --bs-table-border-color: var(--line);

@@ -101,7 +101,9 @@ def actualizar(cats, regs, inicio, fin, desc, x, y, color):
             dbc.Col(soft_card("Correlación entre variables numéricas", [
                 dcc.Graph(figure=P.fig_correlacion(d[NUMERICAS]), config=CFG),
                 insight(f"El descuento se asocia con menor ganancia (ρ = {corr.loc['Discount', 'Profit']:.2f}) y casi no "
-                        f"cambia el valor de la venta (ρ = {corr.loc['Discount', 'Sales']:.2f})."),
+                        f"cambia el valor de la venta (ρ = {corr.loc['Discount', 'Sales']:.2f}). Se usa Spearman porque estas "
+                        "variables no son normales (prueba en Análisis completo): mide si una sube cuando la otra sube, "
+                        "sin depender de los valores extremos."),
             ]), lg=6, className="mb-3"),
         ]),
         dbc.Row([

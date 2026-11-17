@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 from dash import Input, Output, callback, dcc, html
 
-from common import ROOT, insight, kpi, page_header, soft_card, tabla_datos, usd
+from common import ROOT, descripcion, insight, kpi, page_header, soft_card, tabla_datos, usd
 from model.features import FEATURES, NOMBRES
 from src import data as D
 from src import plots as P
@@ -272,42 +272,76 @@ def diagnosticar(nombre):
          "no calculable" if pd.isna(r.p_bds) else lectura(r.p_bds, "se rechaza", "no se rechaza")),
         ("Shapiro–Wilk", "residuos normales", f"{r.p_shapiro:.3f}", lectura(r.p_shapiro, "se rechaza", "no se rechaza")),
     ], columns=["Prueba", "Hipótesis nula", "p-valor", "Lectura (α = 0.05)"])
-    mae = float(e.abs().mean())
+    mae, rmse = float(e.abs().mean()), float(np.sqrt((e ** 2).mean()))
+    r2 = 1 - float((e ** 2).sum() / ((p.Sales - p.Sales.mean()) ** 2).sum())
+    wape = float(e.abs().sum() / p.Sales.sum() * 100)
     return html.Div([
         dbc.Row([
-            dbc.Col(soft_card("Real frente a pronóstico", [
+            dbc.Col(kpi("MAE", usd(mae), "error absoluto medio por serie y mes"), md=3, className="mb-3"),
+            dbc.Col(kpi("RMSE", usd(rmse), "castiga más los errores grandes"), md=3, className="mb-3"),
+            dbc.Col(kpi("R²", f"{r2:.3f}", "parte de la variación mensual que explica"), md=3, className="mb-3"),
+            dbc.Col(kpi("Error relativo (WAPE)", f"{wape:.1f} %", "suma de |error| ÷ suma de ventas"), md=3, className="mb-3"),
+        ]),
+        descripcion(["Las métricas se calculan sobre los 288 pronósticos del bucle externo (12 series × 24 meses), con "
+                     "e = real − pronóstico. ", html.B("MAE"), " = promedio de |e|. ", html.B("RMSE"), " = √(promedio de e²). ",
+                     html.B("R²"), " = 1 − Σe² ÷ Σ(real − promedio real)². ", html.B("WAPE"), " = Σ|e| ÷ Σ real × 100."]),
+        dbc.Row([
+            dbc.Col(soft_card("Valores reales frente a predichos", [
+                descripcion("Cada punto es una serie en un mes: eje X = ventas reales, eje Y = pronóstico. La línea "
+                            "punteada es y = x: un pronóstico perfecto cae sobre ella."),
                 dcc.Graph(figure=P.fig_real_vs_pred(p.Sales, p[col], None), config=CFG),
-                insight(f"288 pronósticos del bucle externo. Los puntos sobre la diagonal son aciertos; el error medio "
-                        f"es de {usd(mae)}. Los meses de ventas muy altas quedan por debajo de la diagonal: el modelo "
-                        "se queda corto en los picos."),
+                insight(f"El error medio es de {usd(mae)} y R² = {r2:.2f}. Los meses de ventas muy altas quedan por "
+                        "debajo de la diagonal: el modelo se queda corto en los picos."),
             ]), lg=6, className="mb-3"),
+            dbc.Col(soft_card("Residuos frente a predichos", [
+                descripcion("Eje X = pronóstico; eje Y = residuo e = real − pronóstico. Si el modelo es adecuado la "
+                            "nube se reparte alrededor de 0 sin forma; un abanico indica que el error crece con el "
+                            "tamaño de la venta."),
+                dcc.Graph(figure=P.fig_residuos_vs_pred(p[col], e), config=CFG),
+                insight("Los residuos se abren hacia la derecha cuando el pronóstico es grande: el error absoluto crece "
+                        "con la escala de la serie (por eso White rechaza varianza constante)."
+                        if r.p_white < 0.05 else "No se ve un abanico: el error no depende del tamaño del pronóstico."),
+            ]), lg=6, className="mb-3"),
+        ]),
+        dbc.Row([
             dbc.Col(soft_card("Residuos en el tiempo", [
+                descripcion("Para cada mes, suma de los residuos de las 12 series (real − pronóstico). Barras verdes: el "
+                            "modelo subestimó el mes; rojas: lo sobreestimó."),
                 dcc.Graph(figure=P.fig_residuos(total.index, total.values), config=CFG),
-                insight(f"Suma de las 12 series por mes. El sesgo medio por pronóstico es de {usd(r.sesgo_medio)} "
-                        "(positivo: el modelo subestima)."),
+                insight(f"El sesgo medio por pronóstico es de {usd(r.sesgo_medio)} (positivo: el modelo subestima)."),
             ]), lg=6, className="mb-3"),
-        ]),
-        dbc.Row([
-            dbc.Col(soft_card("Autocorrelación de los residuos", [
+            dbc.Col(soft_card("Autocorrelación de los residuos (ACF)", [
+                descripcion("Correlación entre el residuo total de un mes y el de k meses antes, ρ(k) = Σ(eₜ − ē)(eₜ₋ₖ − ē) "
+                            "÷ Σ(eₜ − ē)². Las líneas punteadas son la banda ±1.96/√n: una barra fuera indica que el "
+                            "error se parece al de meses anteriores."),
                 dcc.Graph(figure=P.fig_acf(total.values, None), config=CFG),
-                insight("Barras fuera de la banda punteada (en ámbar) indican meses cuyo error se parece al de meses anteriores."),
-            ]), lg=6, className="mb-3"),
-            dbc.Col(soft_card("Distribución de los residuos", [
-                dcc.Graph(figure=P.fig_distribucion(e, None, "Real − pronóstico (USD)", "$"), config=CFG),
-                insight(f"Asimetría de {r.asimetria:.2f}: la cola derecha son los meses de ventas excepcionales que ningún modelo anticipa."),
+                insight(("Hay barras fuera de la banda (en ámbar): queda estructura temporal sin explicar."
+                         if np.any(np.abs(P.acf(total.values)) > 1.96 / np.sqrt(len(total))) else
+                         "Ninguna barra sale de la banda: los residuos no tienen autocorrelación visible, "
+                         f"coherente con Ljung–Box (p = {r.p_ljung_box:.2f}).")),
             ]), lg=6, className="mb-3"),
         ]),
         dbc.Row([
-            dbc.Col(soft_card("Supuestos de los residuos", [tabla_datos(pruebas),
-                    insight("Pruebas sobre los residuos del bucle externo. No invalidan el pronóstico puntual, pero "
-                            "indican qué tan fiables son los intervalos que suponen errores homogéneos.")]),
-                    lg=6, className="mb-3"),
+            dbc.Col(soft_card("Distribución de los residuos", [
+                descripcion("Histograma de los 288 residuos (eje recortado al 98 % central). La curva punteada es la "
+                            "normal con la misma media y desviación: si el histograma la sigue, los errores son "
+                            "aproximadamente normales."),
+                dcc.Graph(figure=P.fig_histograma_residuos(e), config=CFG),
+                insight(f"Asimetría de {r.asimetria:.2f}: la cola derecha son los meses de ventas excepcionales que "
+                        f"ningún modelo anticipa. Shapiro–Wilk p = {r.p_shapiro:.3f}."),
+            ]), lg=6, className="mb-3"),
             dbc.Col(soft_card("Importancia global de las variables", [
+                descripcion("Promedio del valor absoluto del aporte de Shapley de cada variable, sobre los pronósticos del "
+                            "último año: cuánto mueve esa variable la predicción (en unidades del índice)."),
                 dcc.Graph(figure=P.fig_barras_h([NOMBRES[v] for v in sg.variable], sg.importancia.to_numpy(), None,
                                                 "Media del valor absoluto de Shapley (índice)"), config=CFG),
-                insight("Promedio, sobre los pronósticos del último año, de cuánto mueve cada variable la predicción."),
+                insight("Mandan el mes del año y las ventas del mismo mes del año anterior."),
             ]), lg=6, className="mb-3"),
         ]),
+        soft_card("Supuestos de los residuos", [tabla_datos(pruebas),
+                  insight("Pruebas sobre los residuos del bucle externo. No invalidan el pronóstico puntual, pero "
+                          "indican qué tan fiables son los intervalos que suponen errores homogéneos.")],
+                  height_full=False),
     ])
 
 

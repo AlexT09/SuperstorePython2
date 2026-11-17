@@ -148,6 +148,6 @@ cd ..\SuperstorePython; git worktree remove ..\gh-pages
 
 ## Datos
 
-Sample Superstore es un conjunto de ejemplo que Tableau distribuye con su software; se usa con fines
+Sample Superstore es un conjunto público descargado de [Kaggle](https://www.kaggle.com/datasets/bravehart101/sample-supermarket-dataset); se usa con fines
 académicos. Los conjuntos adicionales provienen del Monash Time Series Forecasting Repository
 (licencia CC BY 4.0). Procedencia, licencias y sesgos en `data/DATA_STATEMENT.md`.

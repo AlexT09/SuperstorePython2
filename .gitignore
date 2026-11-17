@@ -7,6 +7,7 @@ logs/
 book/_build/
 
 # material privado de la sustentación
-paper/guion_presentacion.txt
+guion_presentacion.txt
+mapa_guion_presentacion.html
 .mcp.json
 revisar/

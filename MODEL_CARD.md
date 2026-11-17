@@ -35,7 +35,7 @@ cada serie a un peso común. El pronóstico en dólares es el índice multiplica
 
 ## Datos de entrenamiento
 
-Sample Superstore (conjunto de ejemplo de Tableau): 9.994 líneas de pedido de 2014 a 2017, sumadas en
+Sample Superstore (conjunto público descargado de Kaggle): 9.994 líneas de pedido de 2014 a 2017, sumadas en
 12 series mensuales (3 categorías × 4 regiones). El primer año solo aporta historia; el modelo final
 se entrenó con 432 filas (enero de 2015 a diciembre de 2017). Detalle en `data/DATA_STATEMENT.md`.
 

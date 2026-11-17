@@ -3,11 +3,12 @@
 from functools import lru_cache
 
 import dash_bootstrap_components as dbc
+import pandas as pd
 import plotly.graph_objects as go
 from dash import Input, Output, callback, dcc, html
 
-from common import (CATEGORY_COLORS, PROY, REAL, insight, kpi, load_artifact, load_data,
-                    modelo_listo, soft_card, style_fig, usd)
+from common import (CATEGORY_COLORS, PROY, REAL, ROOT, insight, kpi, load_artifact, load_data,
+                    modelo_listo, soft_card, style_fig, tabla_datos, usd)
 
 TODAS = "Todas"
 MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]
@@ -18,6 +19,49 @@ ACCESOS = [
     ("/modelos", "bi-cpu", "Comparar modelos", "7 modelos, 4 optimizadores y un modelo propio.", "#b89cf0"),
     ("/modelos", "bi-graph-up-arrow", "Predecir y proyectar 2018", "Predicción en vivo y proyección mes a mes.", "#f0b851"),
 ]
+
+
+# Enlaces de acceso al conjunto de datos (se repiten en Contexto › Datos y en el libro)
+URL_DATOS_REPO = "https://github.com/AlexT09/SuperstorePython2/blob/main/data/raw/Sample%20-%20Superstore.csv"
+URL_DATOS_ORIGEN = "https://www.kaggle.com/datasets/bravehart101/sample-supermarket-dataset"
+
+
+@lru_cache(maxsize=1)
+def _vista_previa():
+    """Primeras 5 filas del archivo original, sin el nombre del cliente (el proyecto no lo usa)."""
+    crudo = pd.read_csv(ROOT / "data" / "raw" / "Sample - Superstore.csv", encoding="latin-1")
+    cols = ["Order ID", "Order Date", "Segment", "State", "Region", "Category", "Sub-Category", "Sales", "Quantity",
+            "Discount", "Profit"]
+    return crudo[cols].head(5), crudo.shape
+
+
+def _dataset():
+    """Ficha del conjunto de datos para abrir la presentación: fuente, tamaño, unidad, vista previa y enlaces."""
+    df = load_data()
+    muestra, (filas, columnas) = _vista_previa()
+    return soft_card("El conjunto de datos: Sample Superstore", [
+        dbc.Row([
+            dbc.Col(html.Ul([
+                html.Li([html.B("Fuente: "), "Sample Superstore, un conjunto público descargado de Kaggle; datos "
+                         "ficticios de una cadena minorista de Estados Unidos."]),
+                html.Li([html.B("Tamaño: "), f"{filas:,} líneas de pedido × {columnas} columnas".replace(",", ".")
+                         + f", del {df.Order_Date.min():%d/%m/%Y} al {df.Order_Date.max():%d/%m/%Y}."]),
+                html.Li([html.B("Cada fila: "), "un producto dentro de un pedido, con su venta (Sales), cantidad, "
+                         "descuento y ganancia."]),
+                html.Li([html.B("Lo que se pronostica: "), "las ventas mensuales de 3 categorías × 4 regiones = "
+                         "12 series de 48 meses."]),
+            ], className="mb-0"), lg=7),
+            dbc.Col(html.Ul([
+                html.Li(html.A("Archivo CSV en el repositorio del proyecto", href=URL_DATOS_REPO, target="_blank")),
+                html.Li(html.A("Fuente de descarga: Kaggle, Sample Superstore Dataset", href=URL_DATOS_ORIGEN, target="_blank")),
+                html.Li(html.A("Declaración de datos (procedencia, licencia, limpieza)", href=URL_DATOS_REPO.replace(
+                    "raw/Sample%20-%20Superstore.csv", "DATA_STATEMENT.md"), target="_blank")),
+            ], className="mb-0"), lg=5),
+        ], className="mb-3"),
+        tabla_datos(muestra),
+        insight("Primeras 5 filas del archivo original (11 de las 21 columnas; se omite el nombre del cliente). "
+                "Variables completas en Contexto › Datos."),
+    ], "blue", height_full=False)
 
 
 @lru_cache(maxsize=1)
@@ -114,6 +158,8 @@ def layout():
     return html.Div([
         _hero(),
         _kpis(),
+        _dataset(),
+        html.Div(className="mb-3"),
 
         dbc.Row([
             dbc.Col(soft_card("Ventas mensuales: real y proyección", [

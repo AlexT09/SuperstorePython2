@@ -134,3 +134,32 @@ def comparar(perd_a, perd_b, rng):
             "GW": gw, "p_GW": p_gw, "p_wilcoxon": float(stats.wilcoxon(d).pvalue),
             "d_cohen": d_cohen(d), "delta_cliff": delta_cliff(perd_a, perd_b),
             "meses_mejor": int((d < 0).sum()), "shapiro_p": float(stats.shapiro(d).pvalue)}
+
+
+# ------------------------------------------------------------ normalidad y método de correlación
+def prueba_normalidad(df, cols, alfa=0.05):
+    """Tabla de normalidad por variable: asimetría, curtosis y pruebas de D'Agostino–Pearson y Shapiro–Wilk.
+
+    Shapiro–Wilk pierde fiabilidad con más de 5.000 datos; en ese caso se deja vacío y decide D'Agostino–Pearson.
+    Devuelve (tabla, método): método es "pearson" solo si ninguna variable rechaza la normalidad; si no, "spearman".
+    """
+    import pandas as pd
+    filas = []
+    for c in cols:
+        x = df[c].dropna().to_numpy(float)
+        k2, p_dp = stats.normaltest(x)
+        p_sw = stats.shapiro(x)[1] if len(x) <= 5000 else np.nan
+        normal = p_dp >= alfa and (np.isnan(p_sw) or p_sw >= alfa)
+        filas.append({"Variable": c, "n": len(x), "Asimetría": stats.skew(x), "Curtosis": stats.kurtosis(x),
+                      "D'Agostino–Pearson (p)": p_dp, "Shapiro–Wilk (p)": p_sw, "¿Normal?": "Sí" if normal else "No"})
+    tabla = pd.DataFrame(filas)
+    metodo = "pearson" if (tabla["¿Normal?"] == "Sí").all() else "spearman"
+    return tabla, metodo
+
+
+def formato_p(p):
+    """p-valor legible: '< 0.001' para los muy pequeños, '—' si no se calculó."""
+    import math
+    if p is None or (isinstance(p, float) and math.isnan(p)):
+        return "—"
+    return "< 0.001" if p < 0.001 else f"{p:.3f}"

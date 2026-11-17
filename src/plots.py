@@ -110,6 +110,31 @@ def fig_real_vs_pred(real, pred, titulo):
     return style_fig(fig, 340, titulo).update_layout(showlegend=False)
 
 
+def fig_residuos_vs_pred(pred, residuo):
+    """Residuo (real − pronóstico) contra el pronóstico: una nube sin forma indica varianza constante."""
+    fig = go.Figure(go.Scatter(x=pred, y=residuo, mode="markers", marker=dict(color=REAL, size=6, opacity=0.6),
+                               hovertemplate="pronóstico %{x:$,.0f}<br>residuo %{y:$,.0f}<extra></extra>"))
+    fig.add_hline(y=0, line_dash="dot", line_color=REF)
+    fig.update_xaxes(title="Pronóstico (USD)", **USD)
+    fig.update_yaxes(title="Residuo = real − pronóstico (USD)", **USD)
+    return style_fig(fig, 340, None).update_layout(showlegend=False)
+
+
+def fig_histograma_residuos(residuo, rango=0.98):
+    """Histograma de residuos con la normal de igual media y desviación; el eje se acota a los percentiles centrales."""
+    r = np.asarray(residuo, float)
+    lo, hi = np.quantile(r, [(1 - rango) / 2, 1 - (1 - rango) / 2])
+    mu, sd = r.mean(), r.std(ddof=1)
+    xs = np.linspace(lo, hi, 200)
+    fig = go.Figure(go.Histogram(x=r[(r >= lo) & (r <= hi)], nbinsx=30, histnorm="probability density",
+                                 marker_color=REAL, name="Residuos"))
+    fig.add_trace(go.Scatter(x=xs, y=np.exp(-0.5 * ((xs - mu) / sd) ** 2) / (sd * np.sqrt(2 * np.pi)), mode="lines",
+                             line=dict(color=PROY, dash="dash", width=2), name="Normal (misma media y sd)"))
+    fig.update_xaxes(title="Residuo = real − pronóstico (USD)", **USD)
+    fig.update_yaxes(title="Densidad")
+    return style_fig(fig, 340, None)
+
+
 def fig_residuos(meses, residuo_total):
     fig = go.Figure(go.Bar(x=meses, y=residuo_total, marker_color=[NEG if v < 0 else POS for v in residuo_total],
                            hovertemplate="%{x|%b %Y}: %{y:$,.0f}<extra></extra>"))
