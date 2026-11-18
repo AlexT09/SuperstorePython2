@@ -370,6 +370,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen">Resumen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-conjunto-de-datos">El conjunto de datos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contribuciones">Contribuciones</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos">Objetivos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapa-del-libro">Mapa del libro</a></li>
@@ -389,7 +390,7 @@ document.write(`
 <h1>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h1>
 <p><em>Pronóstico mensual de ventas de Sample Superstore: siete modelos, un modelo propio y una evaluación
 honesta</em></p>
-<p><strong>Alex Teran y David Estrada</strong></p>
+<p><strong>Alex Teran</strong></p>
 <p>Tablero interactivo: <strong><a class="reference external" href="https://superstorepython2.onrender.com">https://superstorepython2.onrender.com</a></strong> ·
 Código: <strong><a class="github reference external" href="https://github.com/AlexT09/SuperstorePython2">AlexT09/SuperstorePython2</a></strong></p>
 <section id="resumen">
@@ -406,6 +407,99 @@ propio obtuvo el menor error en Sample Superstore, 2.310 USD por serie y mes fre
 modelo del curso (SVR), con un modelo de un kilobyte; pero la diferencia <strong>no es estadísticamente
 significativa</strong> y el resultado <strong>no se repite</strong> en los conjuntos adicionales. El veredicto, tal como
 lo fija el protocolo, es que el modelo no es superior. Para 2018 se proyectan 886.866 USD.</p>
+</section>
+<section id="el-conjunto-de-datos">
+<h2>El conjunto de datos<a class="headerlink" href="#el-conjunto-de-datos" title="Link to this heading">#</a></h2>
+<p><strong>Sample Superstore</strong> es un conjunto público descargado de Kaggle: datos ficticios de una
+cadena minorista de Estados Unidos.</p>
+<ul class="simple">
+<li><p><strong>Tamaño:</strong> 9.994 líneas de pedido × 21 columnas, del 3 de enero de 2014 al 30 de diciembre de 2017.</p></li>
+<li><p><strong>Cada fila:</strong> un producto dentro de un pedido, con su venta (<code class="docutils literal notranslate"><span class="pre">Sales</span></code>), cantidad, descuento y ganancia.</p></li>
+<li><p><strong>Lo que se pronostica:</strong> las ventas mensuales de 3 categorías × 4 regiones, es decir, 12 series de 48 meses.</p></li>
+<li><p><strong>Acceso:</strong> <a class="reference external" href="https://github.com/AlexT09/SuperstorePython2/blob/main/data/raw/Sample%20-%20Superstore.csv">archivo CSV en el repositorio</a> ·
+<a class="reference external" href="https://www.kaggle.com/datasets/bravehart101/sample-supermarket-dataset">descarga en Kaggle</a> ·
+<a class="reference external" href="https://github.com/AlexT09/SuperstorePython2/blob/main/data/DATA_STATEMENT.md">declaración de datos</a>.</p></li>
+</ul>
+<p>Primeras 5 filas del archivo original (11 de las 21 columnas; se omite el nombre del cliente, que el proyecto no usa):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Order ID</p></th>
+<th class="head"><p>Order Date</p></th>
+<th class="head"><p>Segment</p></th>
+<th class="head"><p>State</p></th>
+<th class="head"><p>Region</p></th>
+<th class="head"><p>Category</p></th>
+<th class="head"><p>Sub-Category</p></th>
+<th class="head"><p>Sales</p></th>
+<th class="head"><p>Quantity</p></th>
+<th class="head"><p>Discount</p></th>
+<th class="head"><p>Profit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CA-2016-152156</p></td>
+<td><p>11/8/2016</p></td>
+<td><p>Consumer</p></td>
+<td><p>Kentucky</p></td>
+<td><p>South</p></td>
+<td><p>Furniture</p></td>
+<td><p>Bookcases</p></td>
+<td><p>261.96</p></td>
+<td><p>2</p></td>
+<td><p>0.0</p></td>
+<td><p>41.91</p></td>
+</tr>
+<tr class="row-odd"><td><p>CA-2016-152156</p></td>
+<td><p>11/8/2016</p></td>
+<td><p>Consumer</p></td>
+<td><p>Kentucky</p></td>
+<td><p>South</p></td>
+<td><p>Furniture</p></td>
+<td><p>Chairs</p></td>
+<td><p>731.94</p></td>
+<td><p>3</p></td>
+<td><p>0.0</p></td>
+<td><p>219.58</p></td>
+</tr>
+<tr class="row-even"><td><p>CA-2016-138688</p></td>
+<td><p>6/12/2016</p></td>
+<td><p>Corporate</p></td>
+<td><p>California</p></td>
+<td><p>West</p></td>
+<td><p>Office Supplies</p></td>
+<td><p>Labels</p></td>
+<td><p>14.62</p></td>
+<td><p>2</p></td>
+<td><p>0.0</p></td>
+<td><p>6.87</p></td>
+</tr>
+<tr class="row-odd"><td><p>US-2015-108966</p></td>
+<td><p>10/11/2015</p></td>
+<td><p>Consumer</p></td>
+<td><p>Florida</p></td>
+<td><p>South</p></td>
+<td><p>Furniture</p></td>
+<td><p>Tables</p></td>
+<td><p>957.58</p></td>
+<td><p>5</p></td>
+<td><p>0.45</p></td>
+<td><p>-383.03</p></td>
+</tr>
+<tr class="row-even"><td><p>US-2015-108966</p></td>
+<td><p>10/11/2015</p></td>
+<td><p>Consumer</p></td>
+<td><p>Florida</p></td>
+<td><p>South</p></td>
+<td><p>Office Supplies</p></td>
+<td><p>Storage</p></td>
+<td><p>22.37</p></td>
+<td><p>2</p></td>
+<td><p>0.2</p></td>
+<td><p>2.52</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <section id="contribuciones">
 <h2>Contribuciones<a class="headerlink" href="#contribuciones" title="Link to this heading">#</a></h2>
@@ -542,6 +636,7 @@ mensuales por categoría y región, comparándolo con rigor con los modelos estu
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen">Resumen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-conjunto-de-datos">El conjunto de datos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contribuciones">Contribuciones</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos">Objetivos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapa-del-libro">Mapa del libro</a></li>
@@ -560,7 +655,7 @@ mensuales por categoría y región, comparándolo con rigor con los modelos estu
   <div class="footer-item">
     
 <p class="component-author">
-Por Alex Teran y David Estrada
+Por Alex Teran
 </p>
 
   </div>

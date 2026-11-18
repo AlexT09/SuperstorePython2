@@ -368,6 +368,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura">Arquitectura</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido-de-cada-seccion">Contenido de cada sección</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capturas-de-pantalla">Capturas de pantalla</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediccion-en-vivo">Predicción en vivo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decisiones-de-diseno">Decisiones de diseño</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ficha-del-modelo">Ficha del modelo</a></li>
@@ -422,7 +423,7 @@ están separados. Cada página carga lo que necesita la primera vez que se abre 
 <tbody>
 <tr class="row-even"><td><p><strong>Contexto</strong></p></td>
 <td><p>¿Qué problema se resuelve, con qué datos y cómo?</p></td>
-<td><p>Resumen con cifras clave, problema y objetivos, descripción y diccionario de los datos, metodología, marco teórico, limitaciones y consideraciones éticas, autores, versión y conclusiones</p></td>
+<td><p>Resumen con cifras clave, problema y objetivos, descripción y diccionario de los datos, metodología, marco teórico, limitaciones y consideraciones éticas, autor, versión y conclusiones</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>EDA</strong></p></td>
 <td><p>¿Qué muestran los datos antes de modelar?</p></td>
@@ -436,6 +437,73 @@ están separados. Cada página carga lo que necesita la primera vez que se abre 
 </table>
 </div>
 <p>Cada gráfico va acompañado de una frase que lo interpreta.</p>
+</section>
+<section id="capturas-de-pantalla">
+<h2>Capturas de pantalla<a class="headerlink" href="#capturas-de-pantalla" title="Link to this heading">#</a></h2>
+<p>Las capturas se tomaron del tablero en ejecución, a 1440 × 900 píxeles. La
+<a class="reference internal" href="#fig-dash-contexto"><span class="std std-numref">Figura 1</span></a> muestra la portada de la sección Contexto: el menú lateral fijo con las
+tres secciones, las pestañas internas y las cifras clave del conjunto de datos.</p>
+<figure class="align-default" id="fig-dash-contexto">
+<a class="reference internal image-reference" href="_images/contexto.png"><img alt="Sección Contexto del tablero, con el menú lateral, las pestañas y cuatro tarjetas de cifras clave." src="_images/contexto.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figura 1 </span><span class="caption-text">Sección Contexto. La portada resume el problema y la proyección para 2018; debajo, las ventas, la
+ganancia, los pedidos y el margen de 2014–2017, con su variación de 2017 frente a 2016.</span><a class="headerlink" href="#fig-dash-contexto" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>En la sección EDA (<a class="reference internal" href="#fig-dash-eda"><span class="std std-numref">Figura 2</span></a>), los filtros de categoría, región, fechas y descuento
+actualizan a la vez todos los gráficos de la pestaña.</p>
+<figure class="align-default" id="fig-dash-eda">
+<a class="reference internal image-reference" href="_images/eda_explorador.png"><img alt="Pestaña Explorador del EDA, con filtros globales, selectores de ejes y color, tarjetas y gráficos." src="_images/eda_explorador.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figura 2 </span><span class="caption-text">EDA → Explorador. Arriba, los filtros globales; después, los selectores del explorador bivariado
+(eje X, eje Y y color), las cifras que responden a los filtros, la distribución de la variable
+objetivo y la matriz de correlación de Spearman.</span><a class="headerlink" href="#fig-dash-eda" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>La sección Modelos abre con la tabla de líderes (<a class="reference internal" href="#fig-dash-lideres"><span class="std std-numref">Figura 3</span></a>), que se puede ordenar y
+filtrar por cualquier columna.</p>
+<figure class="align-default" id="fig-dash-lideres">
+<a class="reference internal image-reference" href="_images/modelos_lideres.png"><img alt="Tabla de líderes con la mejor combinación de cada modelo, su MAE, intervalo de confianza, RMSE, MASE y tiempo de inferencia." src="_images/modelos_lideres.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figura 3 </span><span class="caption-text">Modelos → Líderes. La mejor combinación de cada modelo con su MAE (media ± desviación estándar), el
+intervalo de confianza al 95 %, el RMSE, el MASE, el desvío del total y el tiempo de inferencia. El
+modelo original encabeza la tabla, pero su intervalo se solapa con el de SVR y Random Forest.</span><a class="headerlink" href="#fig-dash-lideres" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>La predicción en vivo (<a class="reference internal" href="#fig-dash-prediccion"><span class="std std-numref">Figura 4</span></a>) se llena con la historia real de la serie
+elegida y devuelve el pronóstico, el intervalo conforme y la explicación local.</p>
+<figure class="align-default" id="fig-dash-prediccion">
+<a class="reference internal image-reference" href="_images/modelos_prediccion.png"><img alt="Formulario de predicción en vivo con el pronóstico del mes, el intervalo al 80 % y un gráfico de barras que descompone la predicción." src="_images/modelos_prediccion.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figura 4 </span><span class="caption-text">Modelos → Predicción en vivo, para Technology en West, enero de 2018, con el modelo original. El
+intervalo al 80 % tiene una cobertura medida del 81 %; el gráfico descompone la predicción en la
+base, el aporte del mes del año y el del rezago propio de la serie.</span><a class="headerlink" href="#fig-dash-prediccion" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>La comparación estadística (<a class="reference internal" href="#fig-dash-comparacion"><span class="std std-numref">Figura 5</span></a>) presenta el Model Confidence Set con el
+modelo original incluido.</p>
+<figure class="align-default" id="fig-dash-comparacion">
+<a class="reference internal image-reference" href="_images/modelos_comparacion.png"><img alt="Tabla del Model Confidence Set con el MAE, el p-valor y la pertenencia al conjunto de cada combinación." src="_images/modelos_comparacion.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figura 5 </span><span class="caption-text">Modelos → Comparación estadística. De las 35 combinaciones, 30 quedan en el conjunto de confianza
+al 10 %: con 24 meses de evaluación los datos no alcanzan para separar a la mayoría de los modelos.</span><a class="headerlink" href="#fig-dash-comparacion" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Por último, la subsección del modelo original (<a class="reference internal" href="#fig-dash-original"><span class="std std-numref">Figura 6</span></a>) empieza por el veredicto
+y sigue con la idea, la formulación, el algoritmo y la curva de convergencia.</p>
+<figure class="align-default" id="fig-dash-original">
+<a class="reference internal image-reference" href="_images/modelos_original.png"><img alt="Subsección del modelo original con el veredicto no superior, la idea, la formulación matemática, el pseudocódigo y la curva de convergencia." src="_images/modelos_original.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Figura 6 </span><span class="caption-text">Modelos → Modelo original. El veredicto explícito («no superior») aparece antes que cualquier otro
+contenido, seguido de la formulación, el pseudocódigo y la convergencia del objetivo.</span><a class="headerlink" href="#fig-dash-original" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="prediccion-en-vivo">
 <h2>Predicción en vivo<a class="headerlink" href="#prediccion-en-vivo" title="Link to this heading">#</a></h2>
@@ -557,6 +625,7 @@ primera visita puede tardar cerca de un minuto.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura">Arquitectura</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido-de-cada-seccion">Contenido de cada sección</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capturas-de-pantalla">Capturas de pantalla</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediccion-en-vivo">Predicción en vivo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decisiones-de-diseno">Decisiones de diseño</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ficha-del-modelo">Ficha del modelo</a></li>
@@ -575,7 +644,7 @@ primera visita puede tardar cerca de un minuto.</p>
   <div class="footer-item">
     
 <p class="component-author">
-Por Alex Teran y David Estrada
+Por Alex Teran
 </p>
 
   </div>

@@ -17,7 +17,7 @@ kernelspec:
 
 - **Repositorio:** https://github.com/AlexT09/SuperstorePython2 (licencia MIT; forma de citarlo en
   `CITATION.cff`).
-- **Datos:** `data/raw/Sample - Superstore.csv` (conjunto de ejemplo de Tableau) y los tres conjuntos
+- **Datos:** `data/raw/Sample - Superstore.csv` (conjunto público descargado de Kaggle) y los tres conjuntos
   adicionales en `data/adicionales/`, descargados de Zenodo por `experiments/datos_adicionales.py`.
   Detalle en `data/DATA_STATEMENT.md`.
 - **Protocolo:** `experiments/protocolo.md`, etiqueta de Git `protocolo-v1`.
