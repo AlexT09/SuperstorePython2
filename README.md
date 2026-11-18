@@ -4,7 +4,7 @@ Pronóstico mensual de ventas por categoría y región con el conjunto **Sample 
 siete modelos de aprendizaje automático, cuatro métodos de optimización de hiperparámetros y un
 modelo propio, comparados con validación anidada y pruebas de hipótesis registradas de antemano.
 
-**Autores:** Alex Teran y David Estrada · **Licencia:** MIT · **Cómo citarlo:** `CITATION.cff`
+**Autor:** Alex Teran · **Licencia:** MIT · **Cómo citarlo:** `CITATION.cff`
 
 - **Tablero (Dash):** https://superstorepython2.onrender.com
 - **Informe (Jupyter Book):** https://alext09.github.io/SuperstorePython2/
@@ -110,10 +110,10 @@ archivo `.nojekyll`:
 git worktree add ..\gh-pages gh-pages
 cd ..\gh-pages
 git rm -r -q .
-Copy-Item -Recurse ..\SuperstorePython\book\_build\html\* .
+Copy-Item -Recurse ..\SuperstorePython2\book\_build\html\* .
 New-Item .nojekyll -ItemType File -Force
 git add -A; git commit -m "Publica el libro"; git push origin gh-pages
-cd ..\SuperstorePython; git worktree remove ..\gh-pages
+cd ..\SuperstorePython2; git worktree remove ..\gh-pages
 ```
 
 ## Estructura

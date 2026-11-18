@@ -5,8 +5,6 @@ type: software
 authors:
   - family-names: Teran
     given-names: Alex
-  - family-names: Estrada
-    given-names: David
 repository-code: "https://github.com/AlexT09/SuperstorePython2"
 url: "https://superstorepython2.onrender.com"
 license: MIT

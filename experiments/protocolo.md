@@ -1,7 +1,7 @@
 # Protocolo experimental pre-registrado
 
 **Proyecto:** pronóstico mensual de ventas por categoría y región (Sample Superstore).
-**Autores:** Alex Teran y David Estrada.
+**Autor:** Alex Teran.
 **Fecha de congelamiento:** 2026-11-15. **Etiqueta de Git:** `protocolo-v1`.
 
 Este documento se registró antes de ejecutar `experiments/ejecutar.py`. Todo lo que aparece aquí como

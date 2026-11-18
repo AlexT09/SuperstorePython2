@@ -39,7 +39,7 @@ kernelspec:
 | Pregunta | Respuesta | Evidencia |
 |---|---|---|
 | ¿Es nuevo para este problema? | **Parcialmente.** No se encontró la regla de pesos por serie con agrupamiento parcial ni su uso en Sample Superstore; pero los índices estacionales de grupo y su contracción son conocidos | Capítulo 4 |
-| ¿Está implementado por los autores? | **Sí.** Clase propia con `numpy`, reglas de actualización derivadas, demostración de convergencia y 11 pruebas unitarias | Capítulo 5 |
+| ¿Está implementado por el autor? | **Sí.** Clase propia con `numpy`, reglas de actualización derivadas, demostración de convergencia y 11 pruebas unitarias | Capítulo 5 |
 | ¿Es superior a las referencias? | **No.** Menor error en el conjunto principal, pero sin significancia estadística, con un efecto despreciable y sin repetirse en los conjuntos adicionales | Capítulos 6 y 7 |
 
 ## Proyección 2018
@@ -93,7 +93,7 @@ Salen de los hallazgos del análisis exploratorio, donde está el dato que respa
 
 ## Declaración de autoría y uso de herramientas
 
-Este trabajo fue realizado por Alex Teran y David Estrada. Se usaron las siguientes herramientas:
+Este trabajo fue realizado por Alex Teran. Se usaron las siguientes herramientas:
 
 - **Python** y las librerías listadas en el capítulo de reproducibilidad, como herramientas de cálculo.
 - **Un asistente de inteligencia artificial (Claude, de Anthropic)**, usado para: proponer y programar
@@ -101,12 +101,11 @@ Este trabajo fue realizado por Alex Teran y David Estrada. Se usaron las siguien
   los métodos de optimización; construir las páginas nuevas del tablero; hacer la búsqueda
   bibliográfica en bases abiertas; y redactar borradores de este libro, del artículo y de la ficha
   del modelo.
-- Los autores revisaron el código y los resultados, y son responsables de comprender y defender cada
+- El autor revisó el código y los resultados, y es responsable de comprender y defender cada
   parte del trabajo entregado.
 
-Firmas:
+Firma:
 
 | Nombre | Firma | Fecha |
 |---|---|---|
 | Alex Teran | | |
-| David Estrada | | |

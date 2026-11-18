@@ -13,7 +13,7 @@ import pandas as pd
 
 from common import REFERENCIA, load_artifact, load_data, load_mensual
 
-AUTORES = "Alex Teran y David Estrada"
+AUTORES = "Alex Teran"
 
 # Umbrales para traducir el error de la proyección (prueba 2017) a un nivel de confianza
 CONFIANZA_ALTA, CONFIANZA_MEDIA = 20, 35
@@ -61,7 +61,7 @@ equivalente por categoría o región.
 ganancia, margen, rentabilidad o descuentos, y aclara que son históricos y que el modelo no los proyecta. No \
 los metas en respuestas de metas, inventario, alertas ni presupuesto.
 - Tus recomendaciones son apoyo a la decisión, no asesoría financiera: la decisión final es de la persona.
-- Si piden hablar con una persona o reportar un problema, indica que pueden contactar al equipo del \
+- Si piden hablar con una persona o reportar un problema, indica que pueden contactar al autor del \
 proyecto: {AUTORES}.
 - Si preguntan algo ajeno al proyecto, explica en una frase que solo ayudas con las ventas de Superstore y \
 sugiere una pregunta útil.

@@ -43,10 +43,9 @@ def sidebar() -> html.Div:
                  className="sidebar-brand"),
         dbc.Nav([html.Div("Secciones", className="sidebar-grupo"), *enlaces], vertical=True, pills=True,
                 className="sidebar-nav"),
-        html.Div([html.Div([html.Span("AT", className="avatar", style={"background": "#f0b851"}),
-                            html.Span("DE", className="avatar", style={"background": "#5fc4b8"})],
+        html.Div([html.Div([html.Span("AT", className="avatar", style={"background": "#f0b851"})],
                            className="avatares"),
-                  html.Span("Alex Teran · David Estrada", className="nombres")], className="sidebar-pie"),
+                  html.Span("Alex Teran", className="nombres")], className="sidebar-pie"),
     ], className="sidebar")
 
 

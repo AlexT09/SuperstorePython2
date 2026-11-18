@@ -1,6 +1,6 @@
 # Ficha del modelo: Perfil Estacional con Pesos Jerárquicos
 
-**Versión 1.0.0 · 15 de noviembre de 2026 · Alex Teran y David Estrada · Licencia MIT**
+**Versión 1.0.0 · 15 de noviembre de 2026 · Alex Teran · Licencia MIT**
 
 ## Qué es
 

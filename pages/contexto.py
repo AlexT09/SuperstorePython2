@@ -90,8 +90,8 @@ def _limitaciones():
             ], className="mb-0")), md=6, className="mb-3"),
         ]),
         dbc.Row([
-            dbc.Col(soft_card("Autores y versión", html.Ul([
-                html.Li("Alex Teran y David Estrada."),
+            dbc.Col(soft_card("Autor y versión", html.Ul([
+                html.Li("Alex Teran."),
                 html.Li(f"Versión {VERSION}. Última actualización: {ACTUALIZADO}."),
                 html.Li(["Código: ", html.A("github.com/AlexT09/SuperstorePython2", href="https://github.com/AlexT09/SuperstorePython2",
                                             target="_blank")]),

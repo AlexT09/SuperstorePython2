@@ -3,7 +3,7 @@
 *Pronóstico mensual de ventas de Sample Superstore: siete modelos, un modelo propio y una evaluación
 honesta*
 
-**Alex Teran y David Estrada**
+**Alex Teran**
 
 Tablero interactivo: **https://superstorepython2.onrender.com** ·
 Código: **https://github.com/AlexT09/SuperstorePython2**

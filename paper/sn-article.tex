@@ -26,8 +26,6 @@
 
 \author[1]{\fnm{Alex} \sur{Teran}}
 
-\author[1]{\fnm{David} \sur{Estrada}}
-
 \affil[1]{\orgname{Universidad del Norte}, \orgaddress{\city{Barranquilla}, \country{Colombia}}}
 
 \abstract{La planificación comercial de una cadena minorista requiere pronósticos mensuales de ventas por categoría y región, pero a ese nivel las series son cortas, ruidosas y de escalas distintas. Sobre el conjunto público Sample Superstore (9{,}994 líneas de pedido, 2014--2017), agregado en 12 series de 48 meses, se propone un perfil estacional con pesos jerárquicos: un modelo que predice un índice de ventas libre de escala combinando un perfil estacional común, estimado con todas las series, con el rezago anual de cada serie mediante un peso por serie que se aprende por descenso por bloques con agrupamiento parcial. Se demuestra que el algoritmo converge al mínimo de su objetivo. Antes de experimentar se registró un protocolo que fija hipótesis, métricas, pruebas y regla de decisión. El modelo se comparó con siete regresores (KNN, Ridge, Lasso, árbol de decisión, Random Forest, XGBoost y SVR), cada uno ajustado con cuatro métodos de optimización, y con el ingenuo estacional, Theta y HistGradientBoosting, pronosticando 24 meses con validación anidada. Obtuvo el menor error absoluto medio, 2{,}310 USD por serie y mes frente a 2{,}366 de SVR, con un modelo de un kilobyte; pero la diferencia no es significativa (Diebold--Mariano $p=0.63$, $d=-0.10$), su ventaja proviene de 2016 y no se repite en tres conjuntos adicionales del repositorio de Monash, donde queda tercero, noveno y décimo. Según la regla registrada, el modelo no es superior.}
@@ -427,9 +425,9 @@ Como trabajo futuro se propone formar grupos de series con estacionalidad pareci
 \begin{itemize}
 \item \textbf{Disponibilidad de datos:} Sample Superstore es un conjunto de datos público de demostración, descargado de Kaggle \cite{superstore}. Los conjuntos adicionales provienen del repositorio de Monash \cite{godahewa2021}, con licencia CC BY 4.0. Las copias utilizadas y los datos procesados están en el repositorio del proyecto.
 \item \textbf{Disponibilidad de código:} el código completo está en \url{https://github.com/AlexT09/SuperstorePython2}. El modelo propuesto está en \texttt{src/original\_model.py}; el protocolo registrado, en \texttt{experiments/protocolo.md}; los experimentos se reproducen con los scripts de \texttt{experiments/} y las figuras de este artículo con \texttt{paper/figuras.py}. La semilla aleatoria es 42. El tablero interactivo (\url{https://superstorepython2.onrender.com}) y el informe técnico (\url{https://alext09.github.io/SuperstorePython2/}) usan el mismo modelo y los mismos resultados.
-\item \textbf{Uso de herramientas de inteligencia artificial:} se usó un asistente de inteligencia artificial para programar el modelo, los experimentos y las pruebas, y para redactar borradores de este artículo; los autores revisaron el código y los resultados y son responsables del contenido.
-\item \textbf{Contribución de los autores:} ambos autores participaron en el diseño del estudio, la implementación, el análisis de resultados y la redacción, y aprobaron la versión final.
-\item \textbf{Conflicto de intereses:} los autores declaran no tener conflictos de interés.
+\item \textbf{Uso de herramientas de inteligencia artificial:} se usó un asistente de inteligencia artificial para programar el modelo, los experimentos y las pruebas, y para redactar borradores de este artículo; el autor revisó el código y los resultados y es responsable del contenido.
+\item \textbf{Contribución del autor:} el autor realizó el diseño del estudio, la implementación, el análisis de resultados y la redacción, y aprobó la versión final.
+\item \textbf{Conflicto de intereses:} el autor declara no tener conflictos de interés.
 \end{itemize}
 
 \bibliography{sn-bibliography}

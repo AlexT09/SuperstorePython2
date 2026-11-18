@@ -96,7 +96,7 @@ def _mensaje_error(e: Exception) -> str:
     if isinstance(e, RateLimitError):
         return "Se alcanzó el límite de consultas gratuitas por minuto. Espera un momento y vuelve a intentarlo. 🙏"
     if isinstance(e, (AuthenticationError, PermissionDeniedError)):
-        return f"Hay un problema con la clave de la IA (archivo .env). Avísale al equipo del proyecto: {AUTORES}."
+        return f"Hay un problema con la clave de la IA (archivo .env). Avísale al autor del proyecto: {AUTORES}."
     if isinstance(e, APIConnectionError):
         return "No pude conectarme con el servicio de IA (sin internet o tardó demasiado). Intenta de nuevo."
     if isinstance(e, APIStatusError) and e.status_code >= 500:
