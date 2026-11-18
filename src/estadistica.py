@@ -124,6 +124,23 @@ def friedman_iman_davenport(tabla):
             "p": float(stats.f.sf(F, k - 1, (k - 1) * (N - 1)))}
 
 
+def bayes_rope(d, rope, rho=0.0):
+    """Prueba t bayesiana correlacionada con región de equivalencia práctica (Corani y Benavoli, 2015).
+
+    d: diferencias de pérdida A − B (negativo = A es mejor). Con previa no informativa, la posterior de la
+    diferencia media es una t de Student con n − 1 grados de libertad, centrada en la media de d y con
+    escala sqrt((1/n + rho/(1 − rho)) · var(d)); rho es la correlación entre las diferencias (0 si los
+    bloques de evaluación no se solapan). Devuelve P(A mejor), P(equivalentes) y P(A peor), es decir,
+    la probabilidad posterior de que la diferencia media caiga por debajo, dentro o por encima de ±rope.
+    """
+    d = np.asarray(d, float)
+    n = d.size
+    escala = np.sqrt((1 / n + rho / (1 - rho)) * d.var(ddof=1))
+    post = stats.t(df=n - 1, loc=d.mean(), scale=escala)
+    p_mejor, p_peor = float(post.cdf(-rope)), float(post.sf(rope))
+    return {"p_bayes_mejor": p_mejor, "p_bayes_rope": 1 - p_mejor - p_peor, "p_bayes_peor": p_peor}
+
+
 def comparar(perd_a, perd_b, rng):
     """Batería de pruebas por pares sobre pérdidas mensuales (A = modelo original, B = referencia)."""
     d = np.asarray(perd_a, float) - np.asarray(perd_b, float)

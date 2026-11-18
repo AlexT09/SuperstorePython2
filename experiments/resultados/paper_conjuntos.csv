@@ -1,0 +1,5 @@
+conjunto,posicion_original,modelos,MASE_original,mejor_referencia,MASE_mejor_referencia,posicion_bayesiana,MASE_bayesiana,mcs_tamano,mcs_total,p_mcs_original,mcs_fuera
+superstore,1,12,0.9959700932344461,SVR,1.019876927076142,9,1.0801952942333122,34,39,0.475,"['Ingenuo estacional|-', 'Theta|-', 'Árbol de decisión|grid', 'XGBoost|grid', 'XGBoost|genetico']"
+turismo,3,12,0.813520697573238,KNN,0.8004157824132264,7,1.0120669627606433,5,12,0.966,"['Ridge|bayes', 'Lasso|bayes', 'Árbol de decisión|bayes', 'Random Forest|bayes', 'XGBoost|bayes', 'HistGradientBoosting|bayes', 'Regresión bayesiana|bayes']"
+hospital,10,12,0.5368208308575956,SVR,0.4800420726876609,7,0.5095418449197862,12,12,0.884,[]
+m3,11,12,0.8687190801365737,Theta,0.4855303405070528,7,0.631397185100499,1,12,0.0,"['Ingenuo estacional|-', 'KNN|bayes', 'Ridge|bayes', 'Lasso|bayes', 'Árbol de decisión|bayes', 'Random Forest|bayes', 'XGBoost|bayes', 'SVR|bayes', 'Perfil jerárquico (original)|bayes', 'HistGradientBoosting|bayes', 'Regresión bayesiana|bayes']"

@@ -1,5 +1,8 @@
 \documentclass[pdflatex,sn-mathphys-num]{sn-jnl}
 
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage{graphicx}
 \usepackage{multirow}
 \usepackage{amsmath,amssymb,amsfonts}
@@ -22,13 +25,13 @@
 
 \begin{document}
 
-\title[Perfil estacional con pesos jerárquicos para el pronóstico de ventas minoristas]{Pronóstico mensual de ventas minoristas por categoría y región con un perfil estacional de pesos jerárquicos: una comparación registrada frente a siete modelos de aprendizaje automático en Sample Superstore y tres conjuntos adicionales}
+\title[Perfil estacional con pesos jerárquicos para el pronóstico de ventas minoristas]{Pronóstico mensual de ventas minoristas por categoría y región con un perfil estacional de pesos jerárquicos: una comparación registrada frente a ocho modelos de aprendizaje automático en Sample Superstore y tres conjuntos adicionales}
 
 \author[1]{\fnm{Alex} \sur{Teran}}
 
 \affil[1]{\orgname{Universidad del Norte}, \orgaddress{\city{Barranquilla}, \country{Colombia}}}
 
-\abstract{La planificación comercial de una cadena minorista requiere pronósticos mensuales de ventas por categoría y región, pero a ese nivel las series son cortas, ruidosas y de escalas distintas. Sobre el conjunto público Sample Superstore (9{,}994 líneas de pedido, 2014--2017), agregado en 12 series de 48 meses, se propone un perfil estacional con pesos jerárquicos: un modelo que predice un índice de ventas libre de escala combinando un perfil estacional común, estimado con todas las series, con el rezago anual de cada serie mediante un peso por serie que se aprende por descenso por bloques con agrupamiento parcial. Se demuestra que el algoritmo converge al mínimo de su objetivo. Antes de experimentar se registró un protocolo que fija hipótesis, métricas, pruebas y regla de decisión. El modelo se comparó con siete regresores (KNN, Ridge, Lasso, árbol de decisión, Random Forest, XGBoost y SVR), cada uno ajustado con cuatro métodos de optimización, y con el ingenuo estacional, Theta y HistGradientBoosting, pronosticando 24 meses con validación anidada. Obtuvo el menor error absoluto medio, 2{,}310 USD por serie y mes frente a 2{,}366 de SVR, con un modelo de un kilobyte; pero la diferencia no es significativa (Diebold--Mariano $p=0.63$, $d=-0.10$), su ventaja proviene de 2016 y no se repite en tres conjuntos adicionales del repositorio de Monash, donde queda tercero, noveno y décimo. Según la regla registrada, el modelo no es superior.}
+\abstract{La planificación comercial de una cadena minorista requiere pronósticos mensuales de ventas por categoría y región, pero a ese nivel las series son cortas, ruidosas y de escalas distintas. Sobre el conjunto público Sample Superstore (9{,}994 líneas de pedido, 2014--2017), agregado en 12 series de 48 meses, se propone un perfil estacional con pesos jerárquicos: un modelo que predice un índice de ventas libre de escala combinando un perfil estacional común, estimado con todas las series, con el rezago anual de cada serie mediante un peso por serie que se aprende por descenso por bloques con agrupamiento parcial. Se demuestra que el algoritmo converge al mínimo de su objetivo. Antes de experimentar se registró un protocolo que fija hipótesis, métricas, pruebas y regla de decisión. El modelo se comparó con ocho regresores (KNN, Ridge, Lasso, regresión bayesiana, árbol de decisión, Random Forest, XGBoost y SVR), cada uno ajustado con cuatro métodos de optimización, y con el ingenuo estacional, Theta y HistGradientBoosting, pronosticando 24 meses con validación anidada. Obtuvo el menor error absoluto medio, 2{,}310 USD por serie y mes frente a 2{,}366 de SVR, con un modelo de 25 parámetros y un kilobyte; pero la diferencia no es significativa (Diebold--Mariano $p=0.63$, $d=-0.10$; probabilidad posterior de ser mejor, 0.53), su ventaja proviene de 2016 y no se repite en tres conjuntos adicionales del repositorio de Monash, donde queda tercero, décimo y undécimo de doce. Según la regla registrada, el modelo no es superior.}
 
 \keywords{Pronóstico de ventas minoristas, Perfil estacional, Agrupamiento parcial, Validación anidada, Protocolo registrado, Model Confidence Set}
 
@@ -42,7 +45,7 @@ La práctica habitual en empresas pequeñas y medianas es proyectar ``lo mismo q
 
 Con pocas series y pocos años aparecen tres problemas. Primero, con tres observaciones de cada mes del año por serie, la estacionalidad individual se estima con mucho ruido, y los ensambles tienen que aprenderla con cientos de parámetros \cite{breiman2001,chen2016}. Segundo, la literatura de pronóstico de demanda propone desde hace décadas estimar la estacionalidad con grupos de series \cite{bunn1993,bunn1999} y contraer los índices individuales \cite{miller2003,chen2007,chen2008,zhang2013}, pero esos métodos eligen una opción por serie o derivan los pesos de fórmulas del error de los índices, no del error de pronóstico. Tercero, con pocos meses de evaluación las diferencias entre modelos suelen ser menores que su variabilidad, y sin pruebas de capacidad predictiva \cite{diebold1995,giacomini2006,hansen2011} ni un protocolo fijado de antemano es fácil atribuir al modelo lo que es azar de la partición \cite{cerqueira2020}.
 
-Este trabajo aborda el problema sobre el conjunto público Sample Superstore \cite{superstore}, que registra las ventas de una cadena minorista de Estados Unidos entre 2014 y 2017 en tres categorías y cuatro regiones. Las contribuciones son cuatro. (i) Un \emph{perfil estacional con pesos jerárquicos}: un perfil común de doce valores, estimado con todas las series sobre un índice libre de escala, que cada serie corrige con su propio rezago anual mediante un peso que se aprende con agrupamiento parcial; se derivan sus reglas de actualización y se demuestra su convergencia. (ii) Una comparación con siete modelos del aprendizaje supervisado, cada uno ajustado con cuatro métodos de optimización de hiperparámetros (28 combinaciones), y con tres referencias adicionales, mediante validación anidada de origen móvil. (iii) Una validación estadística registrada antes de experimentar: Model Confidence Set, Giacomini--White, Diebold--Mariano y Wilcoxon con corrección de Holm, tamaños de efecto y tres conjuntos de datos adicionales. (iv) Una evaluación de robustez frente a ruido, menos datos, semillas e incertidumbre de predicción.
+Este trabajo aborda el problema sobre el conjunto público Sample Superstore \cite{superstore}, que registra las ventas de una cadena minorista de Estados Unidos entre 2014 y 2017 en tres categorías y cuatro regiones. Las contribuciones son cuatro. (i) Un \emph{perfil estacional con pesos jerárquicos}: un perfil común de doce valores, estimado con todas las series sobre un índice libre de escala, que cada serie corrige con su propio rezago anual mediante un peso que se aprende con agrupamiento parcial; se derivan sus reglas de actualización y se demuestra su convergencia. (ii) Una comparación con ocho modelos del aprendizaje supervisado, cada uno ajustado con cuatro métodos de optimización de hiperparámetros (32 combinaciones), y con tres referencias adicionales, mediante validación anidada de origen móvil. (iii) Una validación estadística registrada antes de experimentar: Model Confidence Set, Giacomini--White, Diebold--Mariano y Wilcoxon con corrección de Holm, tamaños de efecto y tres conjuntos de datos adicionales, complementada con una prueba bayesiana con región de equivalencia práctica. (iv) Una evaluación de robustez frente a ruido, menos datos, semillas e incertidumbre de predicción.
 
 La hipótesis registrada es que el modelo propuesto tiene menor error absoluto medio que todas las referencias en Sample Superstore y que lo mantiene en al menos dos de tres conjuntos adicionales. El resultado es mixto y así se reporta: el modelo obtiene el menor error en el conjunto principal, con una fracción del costo de los ensambles, pero la ventaja no es estadísticamente significativa y no se repite fuera de él.
 
@@ -139,11 +142,17 @@ El descuento casi no se relaciona con el valor de la venta, pero sí con la util
 
 \subsection{Modelos de referencia (baselines)}\label{subsec:sota}
 
-El modelo propuesto se compara con diez referencias. Siete son regresores que predicen el índice $z$ con las variables de la Ecuación~\eqref{eq:x}, dentro de un \texttt{Pipeline} con codificación \emph{one-hot} y estandarización; sea $\mathcal{D}=\{(\mathbf{x}_i,z_i)\}_{i=1}^{n}$ la muestra de entrenamiento ya codificada. \textbf{Ridge} y \textbf{Lasso} ajustan un modelo lineal por mínimos cuadrados con penalización $\ell_2$ y $\ell_1$ \cite{hoerl1970,tibshirani1996}:
+El modelo propuesto se compara con once referencias. Ocho son regresores que predicen el índice $z$ con las variables de la Ecuación~\eqref{eq:x}, dentro de un \texttt{Pipeline} con codificación \emph{one-hot} y estandarización; sea $\mathcal{D}=\{(\mathbf{x}_i,z_i)\}_{i=1}^{n}$ la muestra de entrenamiento ya codificada. \textbf{Ridge} y \textbf{Lasso} ajustan un modelo lineal por mínimos cuadrados con penalización $\ell_2$ y $\ell_1$ \cite{hoerl1970,tibshirani1996}:
 \begin{equation}
 \hat{\boldsymbol{\beta}}=\arg\min_{\beta_0,\boldsymbol{\beta}}\sum_{i=1}^{n}\bigl(z_i-\beta_0-\mathbf{x}_i^{\top}\boldsymbol{\beta}\bigr)^2+\alpha R(\boldsymbol{\beta}),\qquad R(\boldsymbol{\beta})=\lVert\boldsymbol{\beta}\rVert_2^2\ \text{o}\ \lVert\boldsymbol{\beta}\rVert_1.
 \label{eq:ridge}
 \end{equation}
+La \textbf{regresión bayesiana} \cite{mackay1992} trata los coeficientes como aleatorios, con ruido gaussiano de precisión $\alpha_\varepsilon$ y una previa gaussiana de precisión $\alpha_\beta$ sobre los pesos,
+\begin{equation}
+z_i\mid\mathbf{x}_i,\boldsymbol{\beta}\sim\mathcal{N}\bigl(\beta_0+\mathbf{x}_i^{\top}\boldsymbol{\beta},\,\alpha_\varepsilon^{-1}\bigr),\qquad \boldsymbol{\beta}\sim\mathcal{N}\bigl(\mathbf{0},\,\alpha_\beta^{-1}\mathbf{I}\bigr),
+\label{eq:bayes}
+\end{equation}
+con previas Gamma sobre $\alpha_\varepsilon$ y $\alpha_\beta$; ambas precisiones se estiman maximizando la evidencia marginal y la predicción es la media posterior, de modo que la penalización de Ridge se aprende de los datos en lugar de fijarse.
 \textbf{KNN} promedia el índice de los $k$ vecinos más cercanos, $\hat{f}(\mathbf{x})=\frac{1}{k}\sum_{i\in\mathcal{N}_k(\mathbf{x})}z_i$ \cite{cover1967}. El \textbf{árbol de decisión} particiona el espacio eligiendo en cada nodo la variable $j$ y el umbral $u$ que minimizan la suma de cuadrados de las dos regiones \cite{breiman1984}:
 \begin{equation}
 \min_{j,u}\Bigl[\sum_{i:\,x_{ij}\le u}\bigl(z_i-\bar{z}_{R_1}\bigr)^2+\sum_{i:\,x_{ij}>u}\bigl(z_i-\bar{z}_{R_2}\bigr)^2\Bigr].
@@ -210,16 +219,16 @@ Si $\lambda>0$ y alguna serie tiene $S_{bb,s}>0$, la sucesión de valores de $J$
 
 \emph{Demostración.} Con $w_0$ fijo, $J$ es una suma de cuadráticas de una variable con coeficiente principal $S_{bb,s}+\lambda>0$; su mínimo en $[0,1]$ es el mínimo libre recortado, que es la primera regla. Con los $w_s$ fijos, $J$ es cuadrática convexa en $w_0$ y su mínimo es el promedio. Cada paso minimiza $J$ en un bloque, de modo que $J$ no aumenta. La parte cuadrática $\sum_sS_{bb,s}w_s^2+\lambda\sum_s(w_s-w_0)^2$ solo se anula en el origen cuando algún $S_{bb,s}>0$, luego $J$ es estrictamente convexa y tiene un único mínimo; el descenso por bloques con minimización exacta y restricciones separables converge a él \cite{tseng2001}. $\square$
 
-Cuando $\lambda\to\infty$ todas las series comparten un peso, y con $\lambda=0$ cada una usa su peso de mínimos cuadrados. El ajuste cuesta $\mathcal{O}(n+S\,I)$ con $I$ iteraciones, la memoria $\mathcal{O}(S+12)$ y la predicción $\mathcal{O}(1)$ por fila. La implementación es una clase propia compatible con scikit-learn que solo usa NumPy, con once pruebas unitarias que verifican, entre otras propiedades, el descenso monótono de $J$ y la coincidencia con la solución exacta del sistema lineal de primer orden.
+Cuando $\lambda\to\infty$ todas las series comparten un peso, y con $\lambda=0$ cada una usa su peso de mínimos cuadrados. El ajuste cuesta $\mathcal{O}(n+S\,I)$ con $I$ iteraciones, la memoria $\mathcal{O}(S+12)$ y la predicción $\mathcal{O}(1)$ por fila; el modelo entrenado tiene $12+S+1=25$ parámetros y un único hiperparámetro, $\lambda$. La implementación es una clase propia compatible con scikit-learn que solo usa NumPy, con once pruebas unitarias que verifican, entre otras propiedades, el descenso monótono de $J$ y la coincidencia con la solución exacta del sistema lineal de primer orden.
 
 \textbf{Qué es nuevo y qué no.} Estimar la estacionalidad con grupos de series y contraer los índices son ideas conocidas \cite{bunn1993,bunn1999,miller2003,chen2007,chen2008}; el antecedente más cercano combina ambas con pesos derivados de fórmulas del error cuadrático de los índices \cite{zhang2013}. La búsqueda documentada (OpenAlex, Crossref y arXiv, ocho cadenas, noviembre de 2026, con búsqueda por citación) no encontró la regla de la Ecuación~\eqref{eq:reglas}, que aprende un peso por serie a partir del error de pronóstico y agrupa esos pesos, ni su aplicación a este conjunto de datos.
 
 \subsection{Entrenamiento y optimización}\label{subsec:entrenamiento}
 
-Cada uno de los siete regresores se ajusta con cuatro métodos de optimización de hiperparámetros, 28 combinaciones: búsqueda exhaustiva en rejilla (\emph{grid}), búsqueda aleatoria, optimización bayesiana con Optuna \cite{akiba2019} (modelo sustituto TPE y mejora esperada como función de adquisición \cite{bergstra2011}) y un algoritmo genético con DEAP \cite{fortin2012} (selección por torneo, cruce por mezcla con probabilidad 0.7, mutación gaussiana con probabilidad 0.3 y elitismo de un individuo). Los tres últimos reciben 16 evaluaciones; la rejilla se recorre completa (Tabla~\ref{tab:rejillas}). El modelo propuesto se ajusta igual, con $\lambda\in[0.01,1000]$ en escala logarítmica. El criterio es el error absoluto medio del índice en validación cruzada temporal. El preprocesamiento vive dentro del \texttt{Pipeline} y se ajusta en cada pliegue, y la semilla es 42.
+Cada uno de los ocho regresores se ajusta con cuatro métodos de optimización de hiperparámetros, 32 combinaciones: búsqueda exhaustiva en rejilla (\emph{grid}), búsqueda aleatoria, optimización bayesiana con Optuna \cite{akiba2019} (modelo sustituto TPE y mejora esperada como función de adquisición \cite{bergstra2011}) y un algoritmo genético con DEAP \cite{fortin2012} (selección por torneo, cruce por mezcla con probabilidad 0.7, mutación gaussiana con probabilidad 0.3 y elitismo de un individuo). Los tres últimos reciben 16 evaluaciones; la rejilla se recorre completa (Tabla~\ref{tab:rejillas}). El modelo propuesto se ajusta igual, con $\lambda\in[0.01,1000]$ en escala logarítmica. El criterio es el error absoluto medio del índice en validación cruzada temporal. El preprocesamiento vive dentro del \texttt{Pipeline} y se ajusta en cada pliegue, y la semilla es 42.
 
 \begin{table}[!htb]
-\caption{Espacios de búsqueda. La rejilla se recorre completa; las búsquedas aleatoria, bayesiana y genética exploran los rangos indicados con 16 evaluaciones (escala logarítmica para $\alpha$, $C$, $\gamma$, tasa de aprendizaje y $\lambda$).}\label{tab:rejillas}
+\caption{Espacios de búsqueda. La rejilla se recorre completa; las búsquedas aleatoria, bayesiana y genética exploran los rangos indicados con 16 evaluaciones (escala logarítmica para $\alpha$, $C$, $\gamma$, las previas de la regresión bayesiana, la tasa de aprendizaje y $\lambda$). En la regresión bayesiana la rejilla varía la forma de ambas previas.}\label{tab:rejillas}
 \footnotesize
 \begin{tabular*}{\textwidth}{@{\extracolsep\fill}p{0.20\textwidth}p{0.60\textwidth}c}
 \toprule
@@ -228,6 +237,7 @@ Modelo & Hiperparámetros y rangos & Rejilla \\
 KNN & $k\in[3,30]$; pesos uniformes o por distancia & 12 \\
 Ridge & $\alpha\in[0.01,100]$ & 5 \\
 Lasso & $\alpha\in[10^{-4},10^{-1}]$ & 4 \\
+Regresión bayesiana & forma y tasa de las previas Gamma de $\alpha_\varepsilon$ y $\alpha_\beta$, $\in[10^{-7},10^{-1}]$ & 9 \\
 Árbol de decisión & profundidad $\in[2,6]$; mínimo por hoja $\in[1,20]$ & 16 \\
 Random Forest & profundidad $\in[2,8]$; mínimo por hoja $\in[1,10]$; fracción de variables $\in[0.4,1]$ & 24 \\
 XGBoost & profundidad $\in[2,4]$; tasa $\in[0.02,0.2]$; submuestra $\in[0.7,1]$; peso mínimo de hijo $\in[1,5]$ & 24 \\
@@ -240,60 +250,63 @@ Modelo propuesto & $\lambda\in[0.01,1000]$ & 12 \\
 
 \subsection{Protocolo de evaluación}\label{subsec:evaluacion}
 
-\textbf{Protocolo registrado.} Antes de los experimentos definitivos se congeló un documento con las hipótesis, las métricas, los conjuntos adicionales, las particiones, las pruebas, el presupuesto de ajuste y la regla de decisión, marcado con una etiqueta en el repositorio. El conjunto principal ya se había usado para diseñar el modelo en dos iteraciones previas, lo que se declara como limitación; los conjuntos adicionales no se habían usado.
+\textbf{Protocolo registrado.} Antes de los experimentos definitivos se congeló un documento con las hipótesis, las métricas, los conjuntos adicionales, las particiones, las pruebas, el presupuesto de ajuste y la regla de decisión, marcado con una etiqueta en el repositorio. El conjunto principal ya se había usado para diseñar el modelo en dos iteraciones previas, lo que se declara como limitación; los conjuntos adicionales no se habían usado. \emph{Desviaciones declaradas:} la regresión bayesiana no figuraba en el protocolo; se añadió después, por estar entre los modelos del curso, con exactamente el mismo procedimiento que las demás referencias, y todas las correcciones por multiplicidad y el Model Confidence Set se calculan con ella incluida. El $R^2$, los estadísticos de las pruebas y la prueba bayesiana tampoco estaban registrados: son análisis exploratorios que no entran en la regla de decisión.
 
 \textbf{Validación anidada de origen móvil.} En el bucle externo, cada uno de los 24 meses de 2016 y 2017 se pronostica entrenando con todos los meses anteriores (ventana creciente desde 2015): 288 pronósticos por modelo en 24 bloques mensuales \cite{cerqueira2020}. En el bucle interno, una validación cruzada temporal con pliegues de tres meses (hasta cuatro) elige los hiperparámetros dentro de cada ventana de entrenamiento. Todos los modelos usan las mismas filas y los mismos pliegues. De cada regresor se compara su mejor combinación según el error del bucle externo, lo que favorece a las referencias; del modelo propuesto, la búsqueda bayesiana, fijada en el protocolo.
 
 \textbf{Conjuntos adicionales.} Tres paneles mensuales del repositorio de Monash \cite{godahewa2021}, de naturaleza distinta: turismo (estacionalidad fuerte), hospital (estacionalidad débil) y M3 mensual (series de seis dominios sin estacionalidad común, incluido como caso adverso). De cada uno se tomaron 24 series al azar con los últimos 48 meses completos y se aplicó el mismo protocolo con búsqueda bayesiana.
 
-\textbf{Métricas.} La primaria es el error absoluto medio (MAE) en unidades originales. Las secundarias son la raíz del error cuadrático medio (RMSE), el error porcentual absoluto ponderado (WAPE), el MASE \cite{hyndman2006}, escalado con el error del ingenuo estacional antes del primer origen, y el desvío del total:
+\textbf{Métricas.} La primaria es el error absoluto medio (MAE) en unidades originales. Las secundarias son la raíz del error cuadrático medio (RMSE), el error porcentual absoluto ponderado (WAPE), el MASE \cite{hyndman2006}, escalado con el error del ingenuo estacional antes del primer origen, el coeficiente de determinación y el desvío del total:
 \begin{equation}
 \mathrm{WAPE}=\frac{\sum_{s,t}\lvert e_{s,t}\rvert}{\sum_{s,t}y_{s,t}},\qquad
+R^2=1-\frac{\sum_{s,t}e_{s,t}^2}{\sum_{s,t}(y_{s,t}-\bar{y})^2},\qquad
 \Delta_{\mathrm{total}}=\frac{\sum_{s,t}\hat{y}_{s,t}}{\sum_{s,t}y_{s,t}}-1.
 \label{eq:metricas}
 \end{equation}
+El WAPE sustituye al error porcentual absoluto medio (MAPE) porque hay meses con venta cero, en los que el error porcentual no está definido, y porque el MAPE da el mismo peso a una serie pequeña que a una grande.
 
 \textbf{Pruebas de hipótesis.} Las pruebas usan el diferencial mensual de pérdida absoluta frente a cada referencia $b$, promediado sobre las series para absorber la dependencia entre series de un mismo mes:
 \begin{equation}
 d_t=\frac{1}{S}\sum_{s=1}^{S}\bigl(\lvert e^{\mathrm{prop}}_{s,t}\rvert-\lvert e^{b}_{s,t}\rvert\bigr),\qquad t=1,\dots,24.
 \label{eq:dt}
 \end{equation}
-(1) El \emph{Model Confidence Set} \cite{hansen2011} parte de todas las combinaciones y elimina las significativamente peores ($\alpha=0.10$, estadístico de rango, \emph{bootstrap} estacionario). (2) La prueba de Giacomini--White \cite{giacomini2006}, válida con modelos reestimados en cada origen, con instrumentos $(1,d_{t-1})$. (3) Diebold--Mariano \cite{diebold1995} con la corrección de Harvey--Leybourne--Newbold \cite{harvey1997}. (4) Wilcoxon de rangos con signo, que no supone normalidad. Las pruebas 2 a 4 comparan el modelo propuesto con las diez referencias y se ajustan con Holm \cite{holm1979}, $\alpha=0.05$. Cada contraste lleva un intervalo de confianza del 95\% por \emph{bootstrap} estacionario \cite{politis1994} (10{,}000 réplicas, bloque medio de tres meses), la $d$ de Cohen y la delta de Cliff \cite{cliff1993}. Entre conjuntos se aplica Friedman con la corrección de Iman--Davenport. El modelo se declara superior solo si tiene menor MAE que las diez referencias, al menos tres pruebas rechazan la igualdad frente a la mejor, el efecto no es despreciable ($|d|\ge0.2$ o $|\delta|\ge0.147$) y gana en al menos dos de los tres conjuntos adicionales sin ser significativamente peor en ninguno.
+(1) El \emph{Model Confidence Set} \cite{hansen2011} parte de todas las combinaciones y elimina las significativamente peores ($\alpha=0.10$, estadístico de rango, \emph{bootstrap} estacionario). (2) La prueba de Giacomini--White \cite{giacomini2006}, válida con modelos reestimados en cada origen, con instrumentos $(1,d_{t-1})$. (3) Diebold--Mariano \cite{diebold1995} con la corrección de Harvey--Leybourne--Newbold \cite{harvey1997}. (4) Wilcoxon de rangos con signo, que no supone normalidad. (5) La prueba $t$ bayesiana correlacionada \cite{corani2015,benavoli2017}, que con una previa no informativa da como posterior de la diferencia media una $t$ de Student con 23 grados de libertad, centrada en $\bar{d}$ y con escala $\sqrt{(1/T+\rho/(1-\rho))\,\widehat{\mathrm{var}}(d_t)}$; se usa $\rho=0$ porque los meses evaluados no se solapan y $d_t$ no muestra autocorrelación, y se interpreta con cautela por la dependencia temporal. Con una región de equivalencia práctica (ROPE) de $\pm1\%$ de la venta media por serie y mes ($\pm47$ USD en Sample Superstore) informa la probabilidad posterior de que el modelo propuesto sea mejor, equivalente o peor. Las pruebas 2 a 4 comparan el modelo propuesto con las once referencias y se ajustan con Holm \cite{holm1979} ($m=11$, $\alpha=0.05$); la prueba 5 no requiere corrección. Cada contraste lleva un intervalo de confianza del 95\% por \emph{bootstrap} estacionario \cite{politis1994} (10{,}000 réplicas, bloque medio de tres meses), la $d$ de Cohen y la delta de Cliff \cite{cliff1993}. Entre conjuntos se aplica Friedman con la corrección de Iman--Davenport. El modelo se declara superior solo si tiene menor MAE que todas las referencias, al menos tres pruebas rechazan la igualdad frente a la mejor, el efecto no es despreciable ($|d|\ge0.2$ o $|\delta|\ge0.147$) y gana en al menos dos de los tres conjuntos adicionales sin ser significativamente peor en ninguno.
 
 \textbf{Robustez e incertidumbre.} Se mide la sensibilidad a $\lambda$, la estabilidad por semilla (diez semillas para Random Forest y XGBoost), el efecto de contaminar la variable objetivo con ruido y atípicos, y el de entrenar con menos meses o menos series. Se construyen intervalos de predicción conformes \cite{angelopoulos2023}, calibrados solo con meses evaluados anteriores, y se verifica su cobertura.
 
 \subsection{Configuración experimental y disponibilidad}\label{subsec:config}
 
-Los experimentos se ejecutaron en un portátil con AMD Ryzen 5 7520U (4 núcleos, 8 hilos), 8 GB de RAM y Windows 11, sin GPU, con Python 3.10.11, scikit-learn 1.7.2, XGBoost 3.2.0, Optuna 5.0.0, DEAP 1.4.4, pandas 2.3.3, NumPy 2.2.6 y statsmodels 0.15.0. Los orígenes se procesaron en paralelo con \texttt{joblib}; la corrida del conjunto principal tardó 115 minutos. Los tiempos de ajuste e inferencia se reportan como mediana sobre los 24 orígenes, en un hilo.
+Los experimentos se ejecutaron en un portátil con AMD Ryzen 5 7520U (4 núcleos, 8 hilos), 8 GB de RAM y Windows 11, sin GPU, con Python 3.10.11, scikit-learn 1.7.2, XGBoost 3.2.0, Optuna 5.0.0, DEAP 1.4.4, pandas 2.3.3, NumPy 2.2.6 y statsmodels 0.15.0. Los orígenes se procesaron en paralelo con \texttt{joblib}; la corrida del conjunto principal tardó 115 minutos, y la de la regresión bayesiana en los cuatro conjuntos, menos de un minuto. Los tiempos de ajuste e inferencia se reportan como mediana sobre los 24 orígenes, en un hilo.
 
 \section{Resultados}\label{sec:resultados}
 
 \subsection{Resumen del montaje experimental}\label{subsec:montaje}
 
-Se evalúan el modelo propuesto, las 28 combinaciones de los siete regresores y tres referencias adicionales sobre 288 pronósticos a un paso en Sample Superstore, y once modelos sobre 576 pronósticos en cada conjunto adicional. La métrica primaria es el MAE; la incertidumbre se mide sobre los 24 bloques mensuales.
+Se evalúan el modelo propuesto, las 32 combinaciones de los ocho regresores y tres referencias adicionales sobre 288 pronósticos a un paso en Sample Superstore, y doce modelos sobre 576 pronósticos en cada conjunto adicional, con la semilla 42. La métrica primaria es el MAE; las secundarias, RMSE, WAPE, MASE, $R^2$ y desvío del total. La incertidumbre se mide sobre los 24 bloques mensuales.
 
 \subsection{Desempeño predictivo global}\label{subsec:global}
 
-La Tabla~\ref{tab:resultados} resume el desempeño de la mejor combinación de cada modelo. El modelo propuesto tiene el menor MAE (2{,}310 USD), WAPE y MASE; es el único con MASE inferior a 1 y el segundo en RMSE, a 4 USD de Random Forest. Su ventaja sobre SVR es de 55 USD (2.3\%), sobre Random Forest de 79 USD (3.3\%) y sobre el ingenuo estacional de 417 USD (15.3\%). La ventaja procede de 2016: ese año su MAE es el menor por 126 USD, pero en 2017 SVR lo supera (2{,}444 frente a 2{,}567 USD). En el desvío del total queda en un grupo de modelos entre $-4\%$ y $-7\%$, mientras SVR y el ingenuo estacional subestiman cerca de una quinta parte. La Figura~\ref{fig:box} muestra que la variabilidad entre meses es mucho mayor que las diferencias entre modelos.
+La Tabla~\ref{tab:resultados} resume el desempeño de la mejor combinación de cada modelo. El modelo propuesto tiene el menor MAE (2{,}310 USD), WAPE y MASE; es el único con MASE inferior a 1, y es segundo en RMSE, a 4 USD de Random Forest, y en $R^2$ (0.205 frente a 0.207). De las seis métricas, gana en tres, es segundo en dos y quinto en el desvío del total. El $R^2$ es bajo en todos los modelos: a nivel de serie y mes las ventas son muy ruidosas, y el error ronda la mitad de la venta. Su ventaja sobre SVR es de 55 USD (2.3\%), sobre Random Forest de 79 USD (3.3\%) y sobre el ingenuo estacional de 417 USD (15.3\%). La ventaja procede de 2016: ese año su MAE es el menor por 126 USD, pero en 2017 SVR lo supera (2{,}444 frente a 2{,}567 USD). En el desvío del total queda en un grupo de modelos entre $-4\%$ y $-7\%$, mientras SVR y el ingenuo estacional subestiman cerca de una quinta parte. La Figura~\ref{fig:box} muestra que la variabilidad entre meses es mucho mayor que las diferencias entre modelos.
 
 \begin{table}[!htb]
-\caption{Desempeño en la validación anidada de origen móvil en Sample Superstore (288 pronósticos). Mejor combinación de cada modelo según el MAE. MAE: media $\pm$ desviación estándar sobre los 24 meses. $\Delta_{\mathrm{total}}$: desvío del total del periodo. En negrita el mejor valor de cada columna.}\label{tab:resultados}
-\footnotesize
-\begin{tabular*}{\textwidth}{@{\extracolsep\fill}llrrrrrrr}
+\caption{Desempeño en la validación anidada de origen móvil en Sample Superstore (288 pronósticos). Mejor combinación de cada modelo según el MAE. MAE: media $\pm$ desviación estándar sobre los 24 meses. $\Delta_{\mathrm{total}}$: desvío del total del periodo. En negrita el mejor valor de cada columna y subrayado el segundo. $^{\dagger}$ y $^{\ddagger}$: el modelo propuesto es significativamente mejor según Diebold--Mariano y según Wilcoxon, respectivamente, tras la corrección de Holm ($m=11$, $\alpha=0.05$).}\label{tab:resultados}
+\scriptsize
+\begin{tabular*}{\textwidth}{@{\extracolsep\fill}llrrrrrrrr}
 \toprule
-Modelo & Optimizador & MAE (USD) & RMSE & WAPE (\%) & MASE & $\Delta_{\mathrm{total}}$ (\%) & MAE$_{2016}$ & MAE$_{2017}$ \\
+Modelo & Optimizador & MAE (USD) & RMSE & WAPE (\%) & MASE & $R^2$ & $\Delta_{\mathrm{total}}$ (\%) & MAE$_{2016}$ & MAE$_{2017}$ \\
 \midrule
-Modelo propuesto & Bayesiana & \textbf{2{,}310} $\pm$ 852 & 3{,}445 & \textbf{49.6} & \textbf{0.996} & $-5.1$ & \textbf{2{,}053} & 2{,}567 \\
-SVR & Rejilla & 2{,}366 $\pm$ 913 & 3{,}531 & 50.8 & 1.020 & $-18.2$ & 2{,}288 & \textbf{2{,}444} \\
-Random Forest & Aleatoria & 2{,}390 $\pm$ 774 & \textbf{3{,}441} & 51.3 & 1.030 & $-4.9$ & 2{,}179 & 2{,}600 \\
-KNN & Aleatoria & 2{,}436 $\pm$ 916 & 3{,}466 & 52.3 & 1.050 & $-5.5$ & 2{,}237 & 2{,}636 \\
-HistGradientBoosting & Bayesiana & 2{,}439 $\pm$ 777 & 3{,}486 & 52.3 & 1.051 & $-4.1$ & 2{,}259 & 2{,}619 \\
-Árbol de decisión & Bayesiana & 2{,}480 $\pm$ 837 & 3{,}586 & 53.2 & 1.069 & $-6.8$ & 2{,}251 & 2{,}709 \\
-XGBoost & Bayesiana & 2{,}481 $\pm$ 796 & 3{,}560 & 53.2 & 1.070 & $-4.8$ & 2{,}249 & 2{,}713 \\
-Lasso & Genética & 2{,}501 $\pm$ 858 & 3{,}474 & 53.7 & 1.078 & $-6.1$ & 2{,}306 & 2{,}696 \\
-Ridge & Aleatoria & 2{,}514 $\pm$ 874 & 3{,}509 & 53.9 & 1.084 & $-6.4$ & 2{,}324 & 2{,}705 \\
-Ingenuo estacional & -- & 2{,}728 $\pm$ 928 & 4{,}050 & 58.5 & 1.176 & $-19.6$ & 2{,}543 & 2{,}912 \\
-Theta & -- & 2{,}756 $\pm$ 752 & 3{,}959 & 59.1 & 1.188 & $\mathbf{-0.2}$ & 2{,}743 & 2{,}768 \\
+Modelo propuesto & Bayesiana & \textbf{2{,}310} $\pm$ 852 & \underline{3{,}445} & \textbf{49.6} & \textbf{0.996} & \underline{0.205} & $-5.1$ & \textbf{2{,}053} & \underline{2{,}567} \\
+SVR & Rejilla & \underline{2{,}366} $\pm$ 913 & 3{,}531 & \underline{50.8} & \underline{1.020} & 0.166 & $-18.2$ & 2{,}288 & \textbf{2{,}444} \\
+Random Forest & Aleatoria & 2{,}390 $\pm$ 774 & \textbf{3{,}441} & 51.3 & 1.030 & \textbf{0.207} & $-4.9$ & \underline{2{,}179} & 2{,}600 \\
+KNN & Aleatoria & 2{,}436 $\pm$ 916 & 3{,}466 & 52.3 & 1.050 & 0.196 & $-5.5$ & 2{,}237 & 2{,}636 \\
+HistGradientBoosting & Bayesiana & 2{,}439 $\pm$ 777 & 3{,}486 & 52.3 & 1.051 & 0.187 & \underline{$-4.1$} & 2{,}259 & 2{,}619 \\
+Árbol de decisión & Bayesiana & 2{,}480 $\pm$ 837 & 3{,}586 & 53.2 & 1.069 & 0.139 & $-6.8$ & 2{,}251 & 2{,}709 \\
+XGBoost & Bayesiana & 2{,}481 $\pm$ 796 & 3{,}560 & 53.2 & 1.070 & 0.151 & $-4.8$ & 2{,}249 & 2{,}713 \\
+Lasso & Genética & 2{,}501 $\pm$ 858 & 3{,}474 & 53.7 & 1.078 & 0.192 & $-6.1$ & 2{,}306 & 2{,}696 \\
+Regresión bayesiana & Rejilla & 2{,}506 $\pm$ 864 & 3{,}507 & 53.8 & 1.080 & 0.177 & $-7.3$ & 2{,}321 & 2{,}690 \\
+Ridge & Aleatoria & 2{,}514 $\pm$ 874 & 3{,}509 & 53.9 & 1.084 & 0.176 & $-6.4$ & 2{,}324 & 2{,}705 \\
+Ingenuo estacional$^{\dagger\ddagger}$ & -- & 2{,}728 $\pm$ 928 & 4{,}050 & 58.5 & 1.176 & $-0.098$ & $-19.6$ & 2{,}543 & 2{,}912 \\
+Theta$^{\dagger\ddagger}$ & -- & 2{,}756 $\pm$ 752 & 3{,}959 & 59.1 & 1.188 & $-0.049$ & $\mathbf{-0.2}$ & 2{,}743 & 2{,}768 \\
 \botrule
 \end{tabular*}
 \end{table}
@@ -305,7 +318,7 @@ Theta & -- & 2{,}756 $\pm$ 752 & 3{,}959 & 59.1 & 1.188 & $\mathbf{-0.2}$ & 2{,}
 \label{fig:box}
 \end{figure}
 
-\textbf{Métodos de optimización.} Los cuatro métodos llegan a errores casi iguales: el MAE medio de los ocho modelos ajustados es 2{,}452 USD con la búsqueda bayesiana, 2{,}456 con la rejilla, 2{,}459 con la genética y 2{,}464 con la aleatoria, diferencias mucho menores que la desviación entre meses. La búsqueda genética tarda en promedio 68 s por búsqueda frente a 8.5 s de la bayesiana y la aleatoria, sin mejorar. Con uno a cuatro hiperparámetros y 16 evaluaciones no hay margen para que los métodos guiados se distingan; el modelo propuesto da prácticamente el mismo error con los cuatro (2{,}309 a 2{,}313 USD).
+\textbf{Métodos de optimización.} Los cuatro métodos llegan a errores casi iguales: el MAE medio de los nueve modelos ajustados es 2{,}457 USD con la búsqueda bayesiana, 2{,}462 con la rejilla, 2{,}465 con la genética y 2{,}470 con la aleatoria, diferencias mucho menores que la desviación entre meses. La búsqueda genética tarda en promedio 60 s por búsqueda frente a 8.5 s de la bayesiana y 7.8 s de la aleatoria, sin mejorar. Con uno a cuatro hiperparámetros y 16 evaluaciones no hay margen para que los métodos guiados se distingan; el modelo propuesto da prácticamente el mismo error con los cuatro (2{,}309 a 2{,}313 USD).
 
 \begin{figure}[!htb]
 \centering
@@ -318,25 +331,52 @@ Al agregar las series el error se compensa: proyectando 2017 completo solo con d
 
 \subsection{Resultados de las pruebas de significancia}\label{subsec:pruebas}
 
-El Model Confidence Set retiene 30 de las 35 combinaciones, entre ellas el modelo propuesto ($p_{\mathrm{MCS}}=0.43$) y SVR, y solo elimina al ingenuo estacional, a Theta y a tres combinaciones de XGBoost y del árbol de decisión. Con 24 meses, los datos no distinguen a la mayoría de los modelos. La Tabla~\ref{tab:pruebas} y la Figura~\ref{fig:dif} presentan los contrastes por pares.
+El Model Confidence Set retiene 34 de las 39 combinaciones, entre ellas el modelo propuesto ($p_{\mathrm{MCS}}=0.48$), SVR y las cuatro de la regresión bayesiana, y solo elimina al ingenuo estacional, a Theta y a tres combinaciones de XGBoost y del árbol de decisión. Con 24 meses, los datos no distinguen a la mayoría de los modelos. Las Tablas~\ref{tab:pruebas} y~\ref{tab:efectos} y la Figura~\ref{fig:dif} presentan los contrastes por pares.
 
 \begin{table}[!htb]
-\caption{Modelo propuesto frente a cada referencia ($T=24$ meses). $\Delta$MAE: diferencia media propuesto menos referencia, en USD, con intervalo del 95\% por \emph{bootstrap} estacionario (negativo favorece al propuesto). $d$: $d$ de Cohen; $\delta$: delta de Cliff. DM, GW y W: valores $p$ de Diebold--Mariano, Giacomini--White y Wilcoxon, sin ajustar y ajustados por Holm ($m=10$). Meses: meses, de 24, en que gana el propuesto.}\label{tab:pruebas}
+\caption{Pruebas de hipótesis del modelo propuesto frente a cada referencia en Sample Superstore ($T=24$ meses; diferencial $d_t$ de la Ecuación~\eqref{eq:dt}). DM: estadístico de Diebold--Mariano con la corrección de Harvey--Leybourne--Newbold ($t$ con 23 grados de libertad; negativo favorece al propuesto). GW: estadístico de Giacomini--White ($\chi^2_2$). W: estadístico de Wilcoxon de rangos con signo. Para cada prueba, valor $p$ sin ajustar y ajustado por Holm ($m=11$).}\label{tab:pruebas}
+\scriptsize
+\begin{tabular*}{\textwidth}{@{\extracolsep\fill}lrrrrrrrrr}
+\toprule
+& \multicolumn{3}{c}{Diebold--Mariano--HLN} & \multicolumn{3}{c}{Giacomini--White} & \multicolumn{3}{c}{Wilcoxon} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-10}
+Referencia & DM & $p$ & $p_{\mathrm{Holm}}$ & GW & $p$ & $p_{\mathrm{Holm}}$ & W & $p$ & $p_{\mathrm{Holm}}$ \\
+\midrule
+SVR & $-$0.49 & 0.627 & 0.767 & 0.23 & 0.892 & 1.000 & 101 & 0.169 & 0.675 \\
+Random Forest & $-$1.29 & 0.211 & 0.767 & 1.29 & 0.526 & 1.000 & 114 & 0.317 & 0.675 \\
+KNN & $-$1.18 & 0.251 & 0.767 & 1.48 & 0.478 & 1.000 & 110 & 0.264 & 0.675 \\
+HistGradientBoosting & $-$1.90 & 0.070 & 0.556 & 2.39 & 0.302 & 1.000 & 94 & 0.114 & 0.570 \\
+Árbol de decisión & $-$1.66 & 0.110 & 0.767 & 2.08 & 0.354 & 1.000 & 103 & 0.188 & 0.675 \\
+XGBoost & $-$2.46 & 0.022 & 0.196 & 4.16 & 0.125 & 1.000 & 75 & 0.031 & 0.233 \\
+Lasso & $-$1.51 & 0.145 & 0.767 & 1.93 & 0.380 & 1.000 & 81 & 0.049 & 0.294 \\
+Regresión bayesiana & $-$1.59 & 0.124 & 0.767 & 2.06 & 0.357 & 1.000 & 74 & 0.029 & 0.233 \\
+Ridge & $-$1.66 & 0.111 & 0.767 & 2.09 & 0.352 & 1.000 & 71 & 0.023 & 0.206 \\
+Ingenuo estacional & $-$3.36 & 0.003 & \textbf{0.030} & 7.40 & 0.025 & 0.273 & 51 & 0.004 & \textbf{0.035} \\
+Theta & $-$3.22 & 0.004 & \textbf{0.037} & 6.72 & 0.035 & 0.347 & 50 & 0.003 & \textbf{0.035} \\
+\botrule
+\end{tabular*}
+\end{table}
+
+\begin{table}[!htb]
+\caption{Tamaño de la diferencia y prueba bayesiana del modelo propuesto frente a cada referencia en Sample Superstore. $\Delta$MAE: diferencia media propuesto menos referencia, en USD, con intervalo del 95\% por \emph{bootstrap} estacionario (negativo favorece al propuesto). $d$: $d$ de Cohen; $\delta$: delta de Cliff. Prueba $t$ bayesiana correlacionada con ROPE de $\pm47$ USD: probabilidad posterior de que el propuesto sea mejor, equivalente o peor. Meses: meses, de 24, en que gana el propuesto.}\label{tab:efectos}
 \scriptsize
 \begin{tabular*}{\textwidth}{@{\extracolsep\fill}lrrrrrrr}
 \toprule
-Referencia & $\Delta$MAE [IC 95\%] & $d$ & $\delta$ & DM ($p$; Holm) & GW ($p$; Holm) & W ($p$; Holm) & Meses \\
+& & & & \multicolumn{3}{c}{Prueba bayesiana} & \\
+\cmidrule(lr){5-7}
+Referencia & $\Delta$MAE [IC 95\%] & $d$ & $\delta$ & P(mejor) & P(ROPE) & P(peor) & Meses \\
 \midrule
-SVR & $-55$ [$-218$, 134] & $-0.10$ & $-0.00$ & 0.627; 0.657 & 0.892; 1.000 & 0.169; 0.675 & 15 \\
-Random Forest & $-79$ [$-167$, 11] & $-0.26$ & $-0.07$ & 0.211; 0.657 & 0.526; 1.000 & 0.317; 0.675 & 14 \\
-KNN & $-126$ [$-289$, 26] & $-0.24$ & $-0.07$ & 0.251; 0.657 & 0.478; 1.000 & 0.264; 0.675 & 15 \\
-HistGradientBoosting & $-129$ [$-237$, $-18$] & $-0.39$ & $-0.10$ & 0.070; 0.487 & 0.302; 1.000 & 0.114; 0.570 & 15 \\
-Árbol de decisión & $-170$ [$-325$, $-14$] & $-0.34$ & $-0.10$ & 0.110; 0.657 & 0.354; 1.000 & 0.188; 0.675 & 13 \\
-XGBoost & $-171$ [$-296$, $-54$] & $-0.50$ & $-0.11$ & 0.022; 0.174 & 0.125; 0.999 & 0.031; 0.220 & 16 \\
-Lasso & $-191$ [$-380$, 3] & $-0.31$ & $-0.12$ & 0.145; 0.657 & 0.380; 1.000 & 0.049; 0.294 & 15 \\
-Ridge & $-204$ [$-385$, $-19$] & $-0.34$ & $-0.13$ & 0.111; 0.657 & 0.352; 1.000 & 0.023; 0.183 & 16 \\
-Ingenuo estacional & $-417$ [$-603$, $-211$] & $-0.69$ & $-0.23$ & 0.003; 0.027 & 0.025; 0.248 & 0.004; 0.032 & 18 \\
-Theta & $-445$ [$-706$, $-194$] & $-0.66$ & $-0.29$ & 0.004; 0.034 & 0.035; 0.312 & 0.003; 0.031 & 19 \\
+SVR & $-$55 [$-$216, 138] & $-$0.10 & 0.00 & 0.53 & 0.28 & 0.19 & 15 \\
+Random Forest & $-$79 [$-$168, 10] & $-$0.26 & $-$0.07 & 0.70 & 0.27 & 0.03 & 14 \\
+KNN & $-$126 [$-$286, 32] & $-$0.24 & $-$0.07 & 0.77 & 0.17 & 0.06 & 15 \\
+HistGradientBoosting & $-$129 [$-$237, $-$18] & $-$0.39 & $-$0.10 & 0.88 & 0.11 & 0.01 & 15 \\
+Árbol de decisión & $-$170 [$-$320, $-$14] & $-$0.34 & $-$0.10 & 0.88 & 0.10 & 0.02 & 13 \\
+XGBoost & $-$171 [$-$297, $-$55] & $-$0.50 & $-$0.11 & 0.96 & 0.04 & $<$0.01 & 16 \\
+Lasso & $-$191 [$-$377, 3] & $-$0.31 & $-$0.12 & 0.87 & 0.10 & 0.04 & 15 \\
+Regresión bayesiana & $-$195 [$-$376, $-$6] & $-$0.33 & $-$0.11 & 0.88 & 0.09 & 0.03 & 16 \\
+Ridge & $-$204 [$-$382, $-$21] & $-$0.34 & $-$0.13 & 0.89 & 0.08 & 0.03 & 16 \\
+Ingenuo estacional & $-$417 [$-$599, $-$211] & $-$0.69 & $-$0.23 & $>$0.99 & $<$0.01 & $<$0.01 & 18 \\
+Theta & $-$445 [$-$700, $-$197] & $-$0.66 & $-$0.29 & $>$0.99 & $<$0.01 & $<$0.01 & 19 \\
 \botrule
 \end{tabular*}
 \end{table}
@@ -348,20 +388,22 @@ Theta & $-445$ [$-706$, $-194$] & $-0.66$ & $-0.29$ & 0.004; 0.034 & 0.035; 0.31
 \label{fig:dif}
 \end{figure}
 
-La diferencia favorece al modelo propuesto en los diez contrastes, pero tras la corrección de Holm solo Diebold--Mariano y Wilcoxon rechazan la igualdad, y solo frente al ingenuo estacional y a Theta, con efectos medianos ($d\approx-0.7$). Giacomini--White no rechaza en ningún caso tras el ajuste. Frente a XGBoost, HistGradientBoosting, Ridge y el árbol los intervalos excluyen el cero, pero los valores $p$ no sobreviven a diez comparaciones. Frente a la mejor referencia, SVR, la diferencia es de 55 USD con un intervalo que contiene al cero, ninguna prueba rechaza y el efecto es despreciable. En términos prácticos, la ventaja sobre SVR equivale al 1\% de la venta media por serie y mes (4{,}661 USD). Las diferencias mensuales no muestran autocorrelación apreciable (Ljung--Box, $p>0.05$ en nueve de diez casos), lo que respalda la estacionariedad que supone Diebold--Mariano; la normalidad se rechaza en algunos casos, de ahí la prueba de Wilcoxon.
+La diferencia favorece al modelo propuesto en los once contrastes, pero tras la corrección de Holm solo Diebold--Mariano y Wilcoxon rechazan la igualdad, y solo frente al ingenuo estacional y a Theta, con efectos medianos ($d\approx-0.7$): el modelo propuesto supera significativamente a 2 de las 11 referencias y es estadísticamente indistinguible de las otras 9. Giacomini--White no rechaza en ningún caso tras el ajuste. Frente a XGBoost, HistGradientBoosting, Ridge, la regresión bayesiana y el árbol los intervalos excluyen el cero, pero los valores $p$ no sobreviven a once comparaciones. Frente a la mejor referencia, SVR, la diferencia es de 55 USD con un intervalo que contiene al cero, ninguna prueba rechaza y el efecto es despreciable; la prueba bayesiana lo confirma, con probabilidades de 0.53 de que el propuesto sea mejor, 0.28 de equivalencia práctica y 0.19 de que sea peor, es decir, sin evidencia en ningún sentido.
+
+Las pruebas discrepan en un caso. La prueba bayesiana da una probabilidad de 0.96 de que el propuesto supere a XGBoost, mientras Diebold--Mariano y Wilcoxon no rechazan tras Holm; la diferencia se explica porque la probabilidad posterior no se corrige por multiplicidad y porque, con $\rho=0$, no descuenta la dependencia entre meses, que es justamente apreciable en el contraste con XGBoost. Por la misma razón, sus probabilidades de 0.87 a 0.89 frente a los modelos lineales y al árbol son evidencia débil. En términos prácticos, la ventaja sobre SVR equivale al 1.2\% de la venta media por serie y mes (4{,}661 USD), apenas por encima del borde de la región de equivalencia. Las diferencias mensuales no muestran autocorrelación apreciable (Ljung--Box, $p>0.05$ en diez de once casos; la excepción es XGBoost), lo que respalda la estacionariedad que supone Diebold--Mariano y el uso de $\rho=0$; la normalidad se rechaza en seis de once casos (Shapiro--Wilk), de ahí la prueba de Wilcoxon.
 
 \subsection{Conjuntos de datos adicionales}\label{subsec:adicionales}
 
-La Figura~\ref{fig:datasets} resume los cuatro conjuntos. En turismo, de estacionalidad fuerte, el modelo propuesto queda tercero de once (MASE 0.814), a 5.6 unidades de KNN y sin diferencia significativa (Diebold--Mariano $p_{\mathrm{Holm}}=1.00$); el conjunto de confianza retiene cinco modelos, incluido el propuesto, y descarta a los ensambles de árboles y a los modelos lineales. En hospital, de estacionalidad débil, queda noveno (MASE 0.537 frente a 0.480 de SVR) y los once modelos son indistinguibles. En M3, cuyas series no comparten estacionalidad, queda décimo (MASE 0.869) y es significativamente peor que Theta (MASE 0.486; $p_{\mathrm{Holm}}<0.001$). La prueba de Friedman con la corrección de Iman--Davenport no rechaza que los once modelos rindan igual en los cuatro conjuntos ($F=0.74$, $p=0.68$); el rango medio del propuesto es 5.75 y el mejor, XGBoost, 4.25. Con cuatro conjuntos la prueba tiene poca potencia.
+La Figura~\ref{fig:datasets} resume los cuatro conjuntos. En turismo, de estacionalidad fuerte, el modelo propuesto queda tercero de doce (MASE 0.814), a 5.6 unidades de KNN y sin diferencia significativa (Diebold--Mariano $p_{\mathrm{Holm}}=1.00$); el conjunto de confianza retiene cinco modelos, incluido el propuesto, y descarta a los ensambles de árboles y a los modelos lineales, entre ellos la regresión bayesiana. En hospital, de estacionalidad débil, queda décimo (MASE 0.537 frente a 0.480 de SVR) y los doce modelos son indistinguibles. En M3, cuyas series no comparten estacionalidad, queda undécimo (MASE 0.869) y es significativamente peor que Theta (MASE 0.486; $p_{\mathrm{Holm}}<0.001$). La regresión bayesiana queda séptima en los tres conjuntos adicionales. La prueba de Friedman con la corrección de Iman--Davenport no rechaza que los doce modelos rindan igual en los cuatro conjuntos ($F=0.78$, $p=0.66$); el rango medio del propuesto es 6.25 y el mejor, XGBoost, 4.50. Con cuatro conjuntos la prueba tiene poca potencia, de modo que los resultados por conjunto pesan más que la prueba global.
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=\linewidth]{figures/datasets.pdf}
-\caption{MASE de los once modelos en cada conjunto de datos (búsqueda bayesiana o sin ajuste). El rombo es el modelo propuesto; la línea punteada marca el error del ingenuo estacional de referencia.}
+\caption{MASE de los doce modelos en cada conjunto de datos (búsqueda bayesiana o sin ajuste). El rombo es el modelo propuesto; la línea punteada marca el error del ingenuo estacional de referencia.}
 \label{fig:datasets}
 \end{figure}
 
-\textbf{Veredicto.} De las cuatro condiciones registradas, el modelo cumple solo la primera: tiene menor MAE que las diez referencias en Sample Superstore, pero ninguna prueba rechaza la igualdad frente a SVR, el efecto es despreciable ($d=-0.10$, $\delta=-0.003$) y no gana en ningún conjunto adicional. \textbf{El modelo no es superior.}
+\textbf{Veredicto.} De las cuatro condiciones registradas, el modelo cumple solo la primera: tiene menor MAE que las once referencias en Sample Superstore, pero ninguna prueba rechaza la igualdad frente a SVR, el efecto es despreciable ($d=-0.10$, $\delta=-0.003$) y no gana en ningún conjunto adicional. \textbf{El modelo no es superior.}
 
 \subsection{Sensibilidad y robustez}\label{subsec:sensibilidad}
 
@@ -384,7 +426,28 @@ La Figura~\ref{fig:datasets} resume los cuatro conjuntos. En turismo, de estacio
 
 \subsection{Costo computacional}\label{subsec:costo}
 
-El modelo propuesto se ajusta en 4.1 ms y predice el mes en 2.2 ms, frente a 14--22 ms de ajuste de los modelos lineales, KNN, el árbol y SVR, 156 ms de XGBoost y 741 ms de Random Forest; serializado ocupa 1.0 kB, frente a 297 kB de Random Forest y 31 kB de XGBoost. Su tiempo de ajuste crece de forma sublineal con el número de filas en el rango medido (exponente empírico 0.75 al replicar los datos hasta 64 veces), consistente con el costo $\mathcal{O}(n)$. Con todos los datos, el algoritmo converge en 21 iteraciones.
+La Tabla~\ref{tab:costo} reúne el costo de cada modelo en el equipo descrito en la Sección~\ref{subsec:config}. El modelo propuesto se ajusta en 4.1 ms y predice el mes en 2.2 ms, frente a 14--22 ms de ajuste de los modelos lineales, KNN, el árbol y SVR, 156 ms de XGBoost, 244 ms de HistGradientBoosting y 741 ms de Random Forest. Guarda 25 números (12 del perfil, 12 pesos y el peso común) y serializado ocupa 1.0 kB, frente a 12{,}016 nodos y 297 kB de Random Forest. Su tiempo de ajuste crece de forma sublineal con el número de filas en el rango medido (exponente empírico 0.75 al replicar los datos hasta 64 veces), consistente con el costo $\mathcal{O}(n)$. Con todos los datos, el algoritmo converge en 21 iteraciones. La mejora en error es pequeña y no significativa frente a SVR o Random Forest, pero llega con uno o dos órdenes de magnitud menos de cómputo y de memoria, y con parámetros que se leen directamente.
+
+\begin{table}[!htb]
+\caption{Costo computacional en Sample Superstore, para la mejor combinación de cada modelo. Búsqueda: tiempo medio de la optimización de hiperparámetros por origen. Ajuste e inferencia: mediana sobre los 24 orígenes, en un hilo. Tamaño: modelo final serializado con \texttt{joblib}, usado como medida de la memoria que ocupa. Parámetros: números que el modelo ajustado guarda para predecir (coeficientes, nodos de los árboles, vectores de soporte o, en KNN, el conjunto de entrenamiento). El ingenuo estacional y Theta no se ajustan con búsqueda y no se incluyen.}\label{tab:costo}
+\footnotesize
+\begin{tabular*}{\textwidth}{@{\extracolsep\fill}lrrrrr}
+\toprule
+Modelo & Búsqueda (s) & Ajuste (ms) & Inferencia (ms) & Tamaño (kB) & Parámetros \\
+\midrule
+Modelo propuesto & \textbf{0.8} & \textbf{4.1} & \textbf{2.2} & \textbf{1.0} & 25 \\
+SVR & 2.6 & 22.0 & 9.1 & 12.7 & 4{,}265 \\
+Random Forest & 48.0 & 741.3 & 32.4 & 296.9 & 12{,}016 \\
+KNN & 1.6 & 14.7 & 8.6 & 31.7 & 5{,}616 \\
+HistGradientBoosting & 15.5 & 244.5 & 10.6 & 196.4 & 2{,}644 \\
+Árbol de decisión & 1.7 & 14.3 & 7.3 & 2.1 & \textbf{7} \\
+XGBoost & 9.3 & 156.1 & 9.0 & 30.7 & 1{,}928 \\
+Lasso & 1.0 & 14.9 & 7.9 & 1.7 & 13 \\
+Regresión bayesiana & 1.1 & 17.6 & 8.8 & 5.2 & 15 \\
+Ridge & 1.8 & 14.2 & 7.1 & 1.7 & 13 \\
+\botrule
+\end{tabular*}
+\end{table}
 
 \subsection{Interpretabilidad y análisis de errores}\label{subsec:errores}
 
@@ -410,11 +473,11 @@ El modelo propuesto se ajusta en 4.1 ms y predice el mes en 2.2 ms, frente a 14-
 
 \textbf{Discusión.} El resultado dialoga con la literatura en tres puntos. Primero, en un panel de 12 series y 36 meses, la ventaja de los ensambles reportada con miles de series \cite{makridakis2022} no aparece: un modelo de un kilobyte es tan preciso como Random Forest o SVR. Segundo, lo que funciona es compartir la estacionalidad entre series, en línea con el principio de globalidad \cite{monteromanso2021} y con la literatura de índices de grupo \cite{bunn1993,chen2008}; el mecanismo nuevo, el peso por serie, no mejora a un peso único en el conjunto principal, aunque sí en turismo, donde las series difieren más. Tercero, el mismo supuesto que da la ventaja explica el fallo en M3: sin estacionalidad común, el perfil promedia patrones distintos.
 
-\textbf{Limitaciones y amenazas a la validez.} (i) \emph{Diseño informado por los datos:} el modelo se diseñó tras dos iteraciones evaluadas en el conjunto principal; los conjuntos adicionales son la evidencia independiente, y no es favorable. (ii) \emph{Potencia:} 24 meses no permiten detectar diferencias del 1--2\%; la ausencia de significancia no demuestra equivalencia. (iii) \emph{Dependencia del periodo:} la ventaja proviene de 2016. (iv) \emph{Datos de demostración} y muestras de 24 series en los conjuntos adicionales. (v) \emph{Variables:} sin promociones, precios ni calendario comercial, ningún modelo anticipa los pedidos excepcionales. (vi) \emph{Presupuesto desigual en la rejilla:} entre 4 y 24 configuraciones según el modelo, aunque los otros tres métodos usan 16 para todos. (vii) \emph{Fuga de información:} todas las variables usan meses anteriores y toda estimación ocurre dentro de la ventana de entrenamiento.
+\textbf{Limitaciones y amenazas a la validez.} (i) \emph{Diseño informado por los datos:} el modelo se diseñó tras dos iteraciones evaluadas en el conjunto principal; los conjuntos adicionales son la evidencia independiente, y no es favorable. (ii) \emph{Potencia:} 24 meses no permiten detectar diferencias del 1--2\%; la ausencia de significancia no demuestra equivalencia. (iii) \emph{Dependencia del periodo:} la ventaja proviene de 2016. (iv) \emph{Datos de demostración} y muestras de 24 series en los conjuntos adicionales. (v) \emph{Variables:} sin promociones, precios ni calendario comercial, ningún modelo anticipa los pedidos excepcionales. (vi) \emph{Presupuesto desigual en la rejilla:} entre 4 y 24 configuraciones según el modelo, aunque los otros tres métodos usan 16 para todos. (vii) \emph{Fuga de información:} todas las variables usan meses anteriores y toda estimación ocurre dentro de la ventana de entrenamiento. (viii) \emph{Desviaciones del protocolo:} la regresión bayesiana, el $R^2$ y la prueba bayesiana se añadieron después del registro; no cambian el veredicto, pero son análisis posteriores. (ix) \emph{Prueba bayesiana:} supone $\rho=0$ y no se corrige por multiplicidad, por lo que sus probabilidades deben leerse junto con las pruebas frecuentistas.
 
 \section{Conclusiones}\label{sec:conclusiones}
 
-Se propuso un perfil estacional con pesos jerárquicos para pronosticar ventas mensuales por categoría y región, con reglas de actualización derivadas y convergencia demostrada, y se evaluó bajo un protocolo registrado frente a siete regresores ajustados con cuatro métodos de optimización y tres referencias adicionales. En Sample Superstore obtuvo el menor error absoluto medio (2{,}310 USD por serie y mes), con un modelo de un kilobyte que se ajusta en milisegundos, y supera con significancia al ingenuo estacional y a Theta. Pero la ventaja frente a la mejor referencia, SVR, no es estadísticamente significativa, proviene de 2016 y no se repite en los conjuntos adicionales; según la regla fijada de antemano, el modelo no es superior. Con todos los datos, el modelo proyecta 886{,}866 USD para 2018, 21\% más que 2017.
+Se propuso un perfil estacional con pesos jerárquicos para pronosticar ventas mensuales por categoría y región, con reglas de actualización derivadas y convergencia demostrada, y se evaluó bajo un protocolo registrado frente a ocho regresores ajustados con cuatro métodos de optimización y tres referencias adicionales. En Sample Superstore obtuvo el menor error absoluto medio (2{,}310 USD por serie y mes), con un modelo de un kilobyte que se ajusta en milisegundos, y supera con significancia al ingenuo estacional y a Theta. Pero la ventaja frente a la mejor referencia, SVR, no es estadísticamente significativa, proviene de 2016 y no se repite en los conjuntos adicionales; según la regla fijada de antemano, el modelo no es superior. Con todos los datos, el modelo proyecta 886{,}866 USD para 2018, 21\% más que 2017.
 
 Como trabajo futuro se propone formar grupos de series con estacionalidad parecida en lugar de un perfil para todo el panel, usar un perfil robusto a los meses atípicos, evaluar con más historia para ganar potencia estadística e incorporar variables de calendario comercial y promociones.
 
@@ -424,7 +487,7 @@ Como trabajo futuro se propone formar grupos de series con estacionalidad pareci
 
 \begin{itemize}
 \item \textbf{Disponibilidad de datos:} Sample Superstore es un conjunto de datos público de demostración, descargado de Kaggle \cite{superstore}. Los conjuntos adicionales provienen del repositorio de Monash \cite{godahewa2021}, con licencia CC BY 4.0. Las copias utilizadas y los datos procesados están en el repositorio del proyecto.
-\item \textbf{Disponibilidad de código:} el código completo está en \url{https://github.com/AlexT09/SuperstorePython2}. El modelo propuesto está en \texttt{src/original\_model.py}; el protocolo registrado, en \texttt{experiments/protocolo.md}; los experimentos se reproducen con los scripts de \texttt{experiments/} y las figuras de este artículo con \texttt{paper/figuras.py}. La semilla aleatoria es 42. El tablero interactivo (\url{https://superstorepython2.onrender.com}) y el informe técnico (\url{https://alext09.github.io/SuperstorePython2/}) usan el mismo modelo y los mismos resultados.
+\item \textbf{Disponibilidad de código:} el código completo está en \url{https://github.com/AlexT09/SuperstorePython2}. El modelo propuesto está en \texttt{src/original\_model.py}; el protocolo registrado, en \texttt{experiments/protocolo.md}; los experimentos se reproducen con los scripts de \texttt{experiments/} (la regresión bayesiana con \texttt{bayesiana.py} y las tablas de este artículo con \texttt{paper\_tablas.py}) y las figuras con \texttt{paper/figuras.py}. La semilla aleatoria es 42. El tablero interactivo (\url{https://superstorepython2.onrender.com}) y el informe técnico (\url{https://alext09.github.io/SuperstorePython2/}) usan el mismo modelo y los mismos resultados.
 \item \textbf{Uso de herramientas de inteligencia artificial:} se usó un asistente de inteligencia artificial para programar el modelo, los experimentos y las pruebas, y para redactar borradores de este artículo; el autor revisó el código y los resultados y es responsable del contenido.
 \item \textbf{Contribución del autor:} el autor realizó el diseño del estudio, la implementación, el análisis de resultados y la redacción, y aprobó la versión final.
 \item \textbf{Conflicto de intereses:} el autor declara no tener conflictos de interés.

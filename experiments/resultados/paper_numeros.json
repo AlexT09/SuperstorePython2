@@ -1,0 +1,41 @@
+{
+  "entre_conjuntos": {
+    "modelos": [
+      "Ingenuo estacional",
+      "Theta",
+      "KNN",
+      "Ridge",
+      "Lasso",
+      "Árbol de decisión",
+      "Random Forest",
+      "XGBoost",
+      "SVR",
+      "Perfil jerárquico (original)",
+      "HistGradientBoosting",
+      "Regresión bayesiana"
+    ],
+    "rango_medio": {
+      "Ingenuo estacional": 9.25,
+      "Theta": 7.0,
+      "KNN": 4.75,
+      "Ridge": 7.75,
+      "Lasso": 8.25,
+      "Árbol de decisión": 8.0,
+      "Random Forest": 4.75,
+      "XGBoost": 4.5,
+      "SVR": 4.75,
+      "Perfil jerárquico (original)": 6.25,
+      "HistGradientBoosting": 5.5,
+      "Regresión bayesiana": 7.25
+    },
+    "F": 0.7797356828193833,
+    "p": 0.6574828756643443
+  },
+  "veredicto": {
+    "c1_menor_MAE_que_todas": true,
+    "rechazos_frente_mejor": 0,
+    "d_cohen": -0.1005511425707169,
+    "delta_cliff": -0.0034722222222222654,
+    "gana_en_adicionales": 0
+  }
+}
