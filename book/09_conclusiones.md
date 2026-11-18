@@ -103,9 +103,3 @@ Este trabajo fue realizado por Alex Teran. Se usaron las siguientes herramientas
   del modelo.
 - El autor revisó el código y los resultados, y es responsable de comprender y defender cada
   parte del trabajo entregado.
-
-Firma:
-
-| Nombre | Firma | Fecha |
-|---|---|---|
-| Alex Teran | | |

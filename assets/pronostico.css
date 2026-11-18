@@ -1,10 +1,7 @@
-/* Pronóstico animado (tabs/pronostico.py + assets/pronostico.js): una sola pantalla, estilo holograma. */
-.contenido:has(.pron-vista) { padding-bottom: 14px; max-width: none; }
+/* Pronóstico animado (tabs/pronostico.py + assets/pronostico.js): una pantalla de alto, estilo holograma.
+   Va debajo de la proyección 2018 en Modelos, así que la página debe poder desplazarse hasta él. */
 /* en esta vista el saludo del asistente taparía las barras de 2018 */
 body:has(.pron-vista) .chat-teaser { display: none !important; }
-/* el alto lo da la vista (no 100vh + margen de la barra), así la página no se desplaza */
-body:has(.pron-vista) .main { min-height: 0; }
-@media (min-width: 992px) and (min-height: 560px) { html:has(.pron-vista) { overflow: hidden; } }
 .pron-vista {
   height: calc(100vh - 132px); min-height: 520px;
   display: flex; flex-direction: column; gap: 12px;
