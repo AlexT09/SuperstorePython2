@@ -80,7 +80,7 @@ copy .env.example .env       # opcional, para el Asistente IA
 python app.py
 ```
 
-Después abre **http://127.0.0.1:8060**. En producción (Render): `gunicorn app:server`, con la
+Después abre **http://127.0.0.1:8061**. En producción (Render): `gunicorn app:server`, con la
 configuración de `render.yaml`.
 
 ## Cómo repetir los experimentos

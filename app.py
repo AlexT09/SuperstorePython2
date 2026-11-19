@@ -5,7 +5,7 @@ Tres secciones, una por archivo de pages/: Contexto ("/"), EDA ("/eda") y Modelo
 El tablero no entrena nada: lee los datos procesados (data/), los resultados de los experimentos
 (experiments/resultados/) y los modelos guardados (artifacts/).
 
-Ejecutar:  python app.py   ->   http://127.0.0.1:8060        Producción:  gunicorn app:server
+Ejecutar:  python app.py   ->   http://127.0.0.1:8061        Producción:  gunicorn app:server
 """
 import os
 from pathlib import Path
@@ -83,6 +83,6 @@ def actualizar_ruta(pathname):
 
 if __name__ == "__main__":
     # Puerto propio para no chocar con otros dashboards que usan el 8050
-    port = int(os.environ.get("SUPERSTORE_PORT", 8060))
+    port = int(os.environ.get("SUPERSTORE_PORT", 8061))
     print(f"Superstore Dash -> http://127.0.0.1:{port}/")
     app.run(debug=True, port=port)
