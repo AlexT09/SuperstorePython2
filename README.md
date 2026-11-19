@@ -1,13 +1,20 @@
 # Pronóstico de ventas Sample Superstore
 
 Pronóstico mensual de ventas por categoría y región con el conjunto **Sample Superstore** (2014–2017):
-siete modelos de aprendizaje automático, cuatro métodos de optimización de hiperparámetros y un
+ocho modelos de aprendizaje automático, cuatro métodos de optimización de hiperparámetros y un
 modelo propio, comparados con validación anidada y pruebas de hipótesis registradas de antemano.
 
 **Autor:** Alex Teran · **Licencia:** MIT · **Cómo citarlo:** `CITATION.cff`
 
 - **Tablero (Dash):** https://superstorepython2.onrender.com
 - **Informe (Jupyter Book):** https://alext09.github.io/SuperstorePython2/
+- **Artículo (PDF):** [`paper/Perfil_estacional_pesos_jerarquicos.pdf`](paper/Perfil_estacional_pesos_jerarquicos.pdf) · fuente LaTeX en `paper/sn-article.tex`
+
+> **Dos versiones del análisis.** El tablero y el informe presentan el análisis registrado en el
+> protocolo (`protocolo-v1`): el modelo propio frente a 10 referencias. El artículo y esta página lo
+> amplían con una undécima referencia, la **regresión bayesiana**, añadida después del registro con el
+> mismo procedimiento (`experiments/bayesiana.py` y `experiments/paper_tablas.py`). Por eso algunas
+> cifras de los contrastes y posiciones difieren ligeramente; el veredicto es el mismo.
 
 ## Resultados en una tabla
 
@@ -23,14 +30,15 @@ modelo propio, comparados con validación anidada y pruebas de hipótesis regist
 | Árbol de decisión (bayesiana) | 2.480 | −6,8 % |
 | XGBoost (bayesiana) | 2.481 | −4,8 % |
 | Lasso (genética) | 2.501 | −6,1 % |
+| Regresión bayesiana (Grid Search) | 2.506 | −7,3 % |
 | Ridge (Random Search) | 2.514 | −6,4 % |
 | Ingenuo estacional (repetir el año anterior) | 2.728 | −19,6 % |
 | Theta | 2.756 | −0,2 % |
 
 **Veredicto: el modelo propio no es superior.** Tiene el menor error, pero la diferencia frente a SVR
-(−55 USD, intervalo del 95 % [−218, +134]) no es estadísticamente significativa, su ventaja viene
-toda de 2016 y no se repite en los tres conjuntos adicionales (tercero en turismo, noveno en
-hospital, décimo en M3). Es significativamente mejor que repetir el año anterior. Detalle en el
+(−55 USD, intervalo del 95 % [−216, +138]) no es estadísticamente significativa, su ventaja viene
+toda de 2016 y no se repite en los tres conjuntos adicionales (tercero de 12 en turismo, décimo en
+hospital, undécimo en M3). Es significativamente mejor que repetir el año anterior. Detalle en el
 informe y en `MODEL_CARD.md`.
 
 **Proyección 2018:** 886.866 USD (+21 % frente a 2017).
@@ -84,7 +92,9 @@ pip install -r requirements-dev.txt
 python data/generate_data.py              # CSV crudo -> tabla mensual
 python experiments/datos_adicionales.py   # descarga los tres conjuntos adicionales (Zenodo)
 python experiments/ejecutar.py            # validación anidada de todos los modelos (~2 h)
-python experiments/analizar.py            # tablas, pruebas y veredicto
+python experiments/analizar.py            # tablas, pruebas y veredicto (análisis registrado)
+python experiments/bayesiana.py           # regresión bayesiana en los cuatro conjuntos
+python experiments/paper_tablas.py        # tablas y cifras del artículo (12 modelos)
 python experiments/robustez.py            # ruido, menos datos, semillas, escalabilidad
 python experiments/artefactos.py          # modelos finales, metadata.json y proyección 2018
 python -m pytest -q tests                 # pruebas del modelo propio (también en GitHub Actions)

@@ -26,7 +26,7 @@ cada serie a un peso común. El pronóstico en dólares es el índice multiplica
 ## Usos no recomendados
 
 - **Series que no comparten estacionalidad.** El modelo impone un patrón común. En M3, con series de
-  seis dominios distintos, quedó en el puesto 10 de 11.
+  seis dominios distintos, quedó en el puesto 11 de 12.
 - Decisiones sobre una sola serie y un solo mes sin mirar el intervalo: el error individual es alto.
 - Series con ceros frecuentes o demanda intermitente: el índice divide por el promedio de 12 meses.
 - Horizontes largos, productos nuevos (menos de 24 meses de historia) o periodos con cambios de
@@ -44,7 +44,10 @@ se entrenó con 432 filas (enero de 2015 a diciembre de 2017). Detalle en `data/
 Origen móvil: cada uno de los 24 meses de 2016 y 2017 se pronosticó entrenando solo con los meses
 anteriores, con los hiperparámetros elegidos dentro de cada entrenamiento (validación anidada).
 Son 288 pronósticos por modelo. El protocolo se registró antes de experimentar
-(`experiments/protocolo.md`, etiqueta `protocolo-v1`).
+(`experiments/protocolo.md`, etiqueta `protocolo-v1`). Las cifras de esta ficha son las del artículo
+(`paper/`), que compara el modelo con 11 referencias: las 10 registradas más la regresión bayesiana,
+añadida después del registro con el mismo procedimiento (`experiments/bayesiana.py`,
+`experiments/paper_tablas.py`).
 
 ## Resultados
 
@@ -56,13 +59,13 @@ Son 288 pronósticos por modelo. El protocolo se registró antes de experimentar
 | Cobertura del intervalo al 80 % / 90 % | 80,6 % / 88,2 % | 84,0 % / 92,4 % | — |
 
 - **Frente a la mejor referencia la diferencia no es significativa**: −55 USD, intervalo del 95 %
-  [−218, +134]; Diebold–Mariano p = 0,63; d de Cohen = −0,10. El modelo pertenece al conjunto de
-  confianza (Model Confidence Set), junto con otras 29 de 35 combinaciones.
-- Sí es significativamente mejor que el ingenuo estacional (p ajustado = 0,027) y que Theta (0,034).
+  [−216, +138]; Diebold–Mariano p = 0,63; d de Cohen = −0,10. El modelo pertenece al conjunto de
+  confianza (Model Confidence Set), junto con otras 33 de 39 combinaciones.
+- Sí es significativamente mejor que el ingenuo estacional (p ajustado = 0,030) y que Theta (0,037).
 - **La ventaja depende del periodo**: en 2016 su MAE es 2.053 frente a 2.288 de SVR; en 2017, 2.567
   frente a 2.444. En el último año evaluado, SVR es mejor.
-- **En otros conjuntos no gana**: tercero de 11 en turismo (sin diferencia significativa con el
-  primero), noveno en hospital y décimo en M3, donde es significativamente peor que Theta.
+- **En otros conjuntos no gana**: tercero de 12 en turismo (sin diferencia significativa con el
+  primero), décimo en hospital y undécimo en M3, donde es significativamente peor que Theta.
 - **Veredicto del protocolo: no superior.** Es tan preciso como los mejores modelos en el conjunto
   principal, con una fracción de su costo, y no generaliza a paneles sin estacionalidad común.
 
