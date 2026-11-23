@@ -26,8 +26,7 @@ lo fija el protocolo, es que el modelo no es superior. Para 2018 se proyectan 88
 
 ## El conjunto de datos
 
-**Sample Superstore** es un conjunto público descargado de Kaggle: datos ficticios de una
-cadena minorista de Estados Unidos.
+**Sample Superstore** es un conjunto público descargado de Kaggle.
 
 - **Tamaño:** 9.994 líneas de pedido × 21 columnas, del 3 de enero de 2014 al 30 de diciembre de 2017.
 - **Cada fila:** un producto dentro de un pedido, con su venta (`Sales`), cantidad, descuento y ganancia.

@@ -42,8 +42,7 @@ def _dataset():
     return soft_card("El conjunto de datos: Sample Superstore", [
         dbc.Row([
             dbc.Col(html.Ul([
-                html.Li([html.B("Fuente: "), "Sample Superstore, un conjunto público descargado de Kaggle; datos "
-                         "ficticios de una cadena minorista de Estados Unidos."]),
+                html.Li([html.B("Fuente: "), "Sample Superstore, un conjunto público descargado de Kaggle."]),
                 html.Li([html.B("Tamaño: "), f"{filas:,} líneas de pedido × {columnas} columnas".replace(",", ".")
                          + f", del {df.Order_Date.min():%d/%m/%Y} al {df.Order_Date.max():%d/%m/%Y}."]),
                 html.Li([html.B("Cada fila: "), "un producto dentro de un pedido, con su venta (Sales), cantidad, "

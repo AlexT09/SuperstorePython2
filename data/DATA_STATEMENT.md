@@ -11,7 +11,7 @@
 | **Periodo** | 3 de enero de 2014 a 30 de diciembre de 2017. |
 | **Tamaño** | 9.994 líneas de pedido y 21 variables. |
 | **Licencia** | La que indique la página de Kaggle del conjunto; se usa aquí con fines académicos. |
-| **Datos personales** | Incluye nombres de clientes ficticios. El proyecto no los usa: solo agrega ventas por categoría, región y mes. |
+| **Datos personales** | Incluye nombres de clientes. El proyecto no los usa: solo agrega ventas por categoría, región y mes. |
 
 ### Variables que usa el proyecto
 

@@ -80,7 +80,7 @@ def _limitaciones():
                 html.Li("El modelo propio supone que las series comparten el patrón estacional. Donde no sea así, pierde."),
             ], className="mb-0")), md=6, className="mb-3"),
             dbc.Col(soft_card("Consideraciones éticas y de sesgo", html.Ul([
-                html.Li("El archivo incluye nombres de clientes ficticios; el proyecto no los usa: solo agrega ventas."),
+                html.Li("El archivo incluye nombres de clientes; el proyecto no los usa: solo agrega ventas."),
                 html.Li("Las series grandes dominan el error en dólares: un modelo puede verse bien y fallar en las "
                         "series pequeñas. Por eso se reporta también el error por serie."),
                 html.Li("Un pronóstico usado para fijar metas afecta a personas. Debe leerse con su intervalo y no "
